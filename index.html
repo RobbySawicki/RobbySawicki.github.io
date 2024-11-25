@@ -16,23 +16,30 @@
     <!-- End Google Tag Manager -->
     <style>
         body {
-            background-color: #005726; /* Green background */
-            color: white; /* White text for better contrast */
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center; /* Centers the green section horizontally */
+            background-color: black; /* Black sides */
+        }
+
+        .content {
+            background-color: #005726; /* Green center */
+            color: white;
+            width: 70%; /* Width of the green center */
+            min-height: 100vh; /* Ensures it covers the entire viewport height */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .site-header {
             text-align: center;
-            padding: 20px 0;
+            margin-bottom: 20px;
         }
 
         .navigation-bar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
+            justify-content: flex-end;
             gap: 15px;
         }
 
@@ -61,21 +68,23 @@
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <header class="site-header">
-        <h1>Robby Sawicki</h1>
-    </header>
+    <div class="content">
+        <header class="site-header">
+            <h1>Robby Sawicki</h1>
+        </header>
 
-    <div class="navigation-bar">
-        <div class="navigation-bar-item">
-            <a class="navigation-link-item" href="projects.html">Projects</a>
+        <div class="navigation-bar">
+            <div class="navigation-bar-item">
+                <a class="navigation-link-item" href="projects.html">Projects</a>
+            </div>
+            <div class="navigation-bar-item">
+                <a class="navigation-link-item" href="Robby Sawicki Resume.pdf">Resume</a>
+            </div>
         </div>
-        <div class="navigation-bar-item">
-            <a class="navigation-link-item" href="Robby Sawicki Resume.pdf">Resume</a>
-        </div>
-    </div>
 
-    <div id="main-content" class="centered">
-        <p>My first paragraph.</p>
+        <div id="main-content" class="centered">
+            <p>My first paragraph.</p>
+        </div>
     </div>
 </body>
 </html>
