@@ -19,29 +19,63 @@
             background-color: #005726; /* Green background */
             color: white; /* White text for better contrast */
             font-family: Arial, sans-serif;
-        }
-
-        .centered {
-            text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
         .site-header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 20px 0;
         }
 
         .navigation-bar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             display: flex;
-            justify-content: center;
             gap: 15px;
-            margin-top: 10px;
         }
 
         .navigation-bar-item a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: 16px;
         }
 
         .navigation-bar-item a:hover {
-           
+            text-decoration: underline;
+        }
+
+        .centered {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+    <title>Robby</title>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PRZJ866" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header class="site-header">
+        <h1>Robby Sawicki</h1>
+    </header>
+
+    <div class="navigation-bar">
+        <div class="navigation-bar-item">
+            <a class="navigation-link-item" href="projects.html">Projects</a>
+        </div>
+        <div class="navigation-bar-item">
+            <a class="navigation-link-item" href="Robby Sawicki Resume.pdf">Resume</a>
+        </div>
+    </div>
+
+    <div id="main-content" class="centered">
+        <p>My first paragraph.</p>
+    </div>
+</body>
+</html>
