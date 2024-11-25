@@ -14,33 +14,28 @@
         })(window, document, 'script', 'dataLayer', 'GTM-PRZJ866');
     </script>
     <!-- End Google Tag Manager -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center; /* Centers the green section horizontally */
-            background-color: black; /* Black sides */
-        }
-
-        .content {
-            background-color: #005726; /* Green center */
+            background-color: #658B6F; /* Green background */
             color: white;
-            width: 70%; /* Width of the green center */
-            min-height: 100vh; /* Ensures it covers the entire viewport height */
-            padding: 20px;
-            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         .site-header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 20px 0;
+            margin: 0;
         }
 
         .navigation-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 15px;
+            margin: 20px 0;
         }
 
         .navigation-bar-item a {
@@ -48,15 +43,21 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
+            padding: 10px 15px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .navigation-bar-item a:hover {
-            text-decoration: underline;
+            background-color: white;
+            color: #658B6F; /* Matches background for hover effect */
         }
 
         .centered {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 30px;
+            padding: 20px;
         }
     </style>
     <title>Robby</title>
@@ -68,23 +69,24 @@
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="content">
-        <header class="site-header">
-            <h1>Robby Sawicki</h1>
-        </header>
+    <header class="site-header">
+        <h1>Robby Sawicki</h1>
+    </header>
 
-        <div class="navigation-bar">
-            <div class="navigation-bar-item">
-                <a class="navigation-link-item" href="projects.html">Projects</a>
-            </div>
-            <div class="navigation-bar-item">
-                <a class="navigation-link-item" href="Robby Sawicki Resume.pdf">Resume</a>
-            </div>
+    <div class="navigation-bar">
+        <div class="navigation-bar-item">
+            <a class="navigation-link-item" href="projects.html">Projects</a>
         </div>
+        <div class="navigation-bar-item">
+            <a class="navigation-link-item" href="https://www.linkedin.com/in/robbysawicki" target="_blank">LinkedIn</a>
+        </div>
+        <div class="navigation-bar-item">
+            <a class="navigation-link-item" href="Robby Sawicki Resume.pdf">Resume</a>
+        </div>
+    </div>
 
-        <div id="main-content" class="centered">
-            <p>My first paragraph.</p>
-        </div>
+    <div id="main-content" class="centered">
+        <p>Welcome to my website! Feel free to explore my projects, view my resume, or connect with me on LinkedIn.</p>
     </div>
 </body>
 </html>
