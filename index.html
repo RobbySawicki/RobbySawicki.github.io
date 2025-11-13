@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robby Sawicki - Portfolio</title>
+
+<!-- Import Orbitron font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
 <style>
     body {
         background-color: #ffffff; /* white background */
@@ -15,22 +19,22 @@
 
     /* Header */
     .site-header {
-        padding: 40px 20px 20px; /* moved closer to top */
+        padding: 40px 20px 20px; /* closer to top */
     }
 
     .site-header h1 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Orbitron', sans-serif; /* bold, techy font for neon effect */
         font-size: 4rem;
-        font-weight: 900;
-        color: #000; /* main name color */
+        font-weight: 700;
+        color: #000; /* black main text */
     }
 
-    /* First letters effect */
+    /* Initial letters effect */
     .initial {
         position: relative;
         display: inline-block;
-        font-weight: 900;
-        color: #000; /* black main letter stationary */
+        font-weight: 700;
+        color: #000; /* black stationary letter */
     }
 
     .initial::before,
@@ -42,35 +46,35 @@
         z-index: -1;
     }
 
-    /* 10% darker than original pastels */
+    /* Darker green & purple, same offset distance as before (±3px) */
     .initial::before {
-        color: #91d898; /* pastel green darker */
-        transform: translate(-10px, -10px); /* final position top-left */
-        text-shadow: 0 0 3px #91d898;
+        color: #7ebf7b; /* darkened pastel green (~20% darker than original) */
+        transform: translate(-3px, 0); /* top-left offset */
+        text-shadow: 0 0 3px #7ebf7b;
         animation: settleGreen 2s forwards;
     }
 
     .initial::after {
-        color: #bf8ae6; /* pastel purple darker */
-        transform: translate(10px, 10px); /* final position bottom-right */
-        text-shadow: 0 0 3px #bf8ae6;
+        color: #a36fd0; /* darkened pastel purple (~20% darker) */
+        transform: translate(3px, 0); /* bottom-right offset */
+        text-shadow: 0 0 3px #a36fd0;
         animation: settlePurple 2s forwards;
     }
 
-    /* Green animation: starts slightly offset, then settles top-left */
+    /* Green animation: subtle jitter then settle */
     @keyframes settleGreen {
-        0% { transform: translate(-5px, -5px); }
-        30% { transform: translate(-12px, -8px); }
-        60% { transform: translate(-8px, -12px); }
-        100% { transform: translate(-10px, -10px); }
+        0% { transform: translate(-1px, 0); }
+        30% { transform: translate(-4px, 1px); }
+        60% { transform: translate(-2px, -2px); }
+        100% { transform: translate(-3px, 0); }
     }
 
-    /* Purple animation: starts slightly offset, then settles bottom-right */
+    /* Purple animation: subtle jitter then settle */
     @keyframes settlePurple {
-        0% { transform: translate(5px, 5px); }
-        30% { transform: translate(12px, 8px); }
-        60% { transform: translate(8px, 12px); }
-        100% { transform: translate(10px, 10px); }
+        0% { transform: translate(1px, 0); }
+        30% { transform: translate(4px, -1px); }
+        60% { transform: translate(2px, 2px); }
+        100% { transform: translate(3px, 0); }
     }
 
     .site-header p {
@@ -99,7 +103,7 @@
         display: block;
         height: 2px;
         width: 0;
-        background: #91d898; /* pastel green underline darker */
+        background: #7ebf7b; /* darkened pastel green underline */
         transition: width 0.3s;
         position: absolute;
         bottom: -5px;
@@ -107,7 +111,7 @@
     }
 
     .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover { color: #bf8ae6; } /* pastel purple on hover */
+    .navigation-bar a:hover { color: #a36fd0; } /* darkened pastel purple hover */
 
     #main-content {
         max-width: 700px;
@@ -121,7 +125,7 @@
         padding: 12px 25px;
         margin-top: 20px;
         color: #fff;
-        background: linear-gradient(90deg, #91d898, #bf8ae6); /* darker pastel gradient */
+        background: linear-gradient(90deg, #7ebf7b, #a36fd0); /* darkened pastel gradient */
         border: none;
         border-radius: 5px;
         font-weight: 600;
@@ -131,13 +135,13 @@
 
     .btn:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 15px #91d898, 0 0 15px #bf8ae6;
+        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
     }
 
     .site-footer {
         text-align: center;
         padding: 20px;
-        background: #f1f1f1; /* subtle light gray footer */
+        background: #f1f1f1; /* light gray footer */
         color: #555;
         margin-top: 50px;
         font-size: 0.9rem;
@@ -177,3 +181,4 @@
 
 </body>
 </html>
+
