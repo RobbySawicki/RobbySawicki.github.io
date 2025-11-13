@@ -97,11 +97,11 @@
         font-weight: 400;
         text-decoration: none;
         padding: 12px 25px;
-        background: linear-gradient(90deg, #7ebf7b, #a36fd0);
-        color: #fff;
+        color: #000; /* changed to black */
         border-radius: 8px;
         border: none;
         cursor: pointer;
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0); /* top-left green, bottom-right purple */
         transition: all 0.3s ease;
     }
 
@@ -114,7 +114,7 @@
     .neon-button span.first-letter {
         position: relative;
         display: inline-block;
-        color: #fff;
+        color: #000;
     }
 
     .neon-button span.first-letter::before,
@@ -140,8 +140,8 @@
 
     /* LinkedIn logo */
     .linkedin-link img {
-        width: 3rem; /* enlarge by ~35% */
-        height: auto;
+        height: 56px; /* match roughly button height */
+        width: auto;
         transition: transform 0.3s ease;
     }
 
@@ -169,7 +169,7 @@
         .site-header h1 { font-size: 3rem; }
         .navigation-bar { flex-direction: column; gap: 15px; }
         .neon-button { font-size: 1.8rem; padding: 10px 20px; }
-        .linkedin-link img { width: 2.3rem; }
+        .linkedin-link img { height: 45px; }
     }
 </style>
 </head>
@@ -188,6 +188,7 @@
     <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
     <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
     <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+        <!-- Blue LinkedIn logo -->
         <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn Logo">
     </a>
 </nav>
