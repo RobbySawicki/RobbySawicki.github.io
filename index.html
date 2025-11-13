@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robby Sawicki - Portfolio</title>
 
-<!-- Import Pacifico font -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
 <style>
     body {
         background-color: #ffffff;
@@ -19,13 +16,14 @@
 
     /* Header */
     .site-header {
-        padding: 40px 20px 20px;
+        padding: 20px 20px 10px; /* moved closer to top */
     }
 
     .site-header h1 {
-        font-family: 'Pacifico', cursive; /* playful script font */
+        font-family: 'Snell Roundhand', cursive; /* elegant script */
         font-size: 4rem;
         color: #000; /* black main text */
+        margin: 0;
     }
 
     /* Initial letters effect */
@@ -44,22 +42,21 @@
         z-index: -1;
     }
 
-    /* Darkened pastel colors with diagonal offsets */
+    /* Green & purple diagonal offsets */
     .initial::before {
-        color: #7ebf7b; /* green */
-        transform: translate(-3px, -3px); /* final top-left diagonal */
+        color: #7ebf7b; /* darker green */
+        transform: translate(-3px, -3px); /* final top-left */
         text-shadow: 0 0 3px #7ebf7b;
         animation: settleGreen 2s forwards;
     }
 
     .initial::after {
-        color: #a36fd0; /* purple */
-        transform: translate(3px, 3px); /* final bottom-right diagonal */
+        color: #a36fd0; /* darker purple */
+        transform: translate(3px, 3px); /* final bottom-right */
         text-shadow: 0 0 3px #a36fd0;
         animation: settlePurple 2s forwards;
     }
 
-    /* Green animation: subtle jitter then settle top-left */
     @keyframes settleGreen {
         0% { transform: translate(-1px, -1px); }
         30% { transform: translate(-4px, -2px); }
@@ -67,7 +64,6 @@
         100% { transform: translate(-3px, -3px); }
     }
 
-    /* Purple animation: subtle jitter then settle bottom-right */
     @keyframes settlePurple {
         0% { transform: translate(1px, 1px); }
         30% { transform: translate(4px, 2px); }
@@ -77,7 +73,7 @@
 
     .site-header p {
         font-size: 1.3rem;
-        margin-top: 10px;
+        margin-top: 5px;
         color: #333;
     }
 
@@ -85,7 +81,7 @@
         display: flex;
         justify-content: center;
         gap: 30px;
-        margin: 20px 0;
+        margin: 15px 0;
     }
 
     .navigation-bar a {
@@ -113,7 +109,7 @@
 
     #main-content {
         max-width: 700px;
-        margin: 40px auto;
+        margin: 30px auto;
         font-size: 1.1rem;
         color: #333;
     }
