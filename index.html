@@ -1,46 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-PRZJ866');
-    </script>
-    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robby Sawicki - Portfolio</title> <link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robby Sawicki - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Open Sans', sans-serif; }
+        body {
+            background-color: #0d0d0d;
+            color: #fff;
+            line-height: 1.6;
+        }
 
+        /* Neon Gradient Header */
+        .site-header {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+        .site-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(90deg, #39ff14, #9b30ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        .site-header p {
+            color: #9b30ff;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Navigation Bar */
+        .navigation-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .navigation-bar a {
+            text-decoration: none;
+            color: #39ff14;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .navigation-bar a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 0;
+            background: #9b30ff;
+            transition: width 0.3s;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .navigation-bar a:hover::after { width: 100%; }
+        .navigation-bar a:hover { color: #9b30ff; }
+
+        /* Main Content */
+        #main-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        #main-content h2 {
+            color: #39ff14;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        #main-content p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        /* Neon Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            color: #0d0d0d;
+            background: linear-gradient(90deg, #39ff14, #9b30ff);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px #39ff14, 0 0 20px #9b30ff;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #777;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* Neon flicker animation */
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 10px #39ff14, 0 0 20px #9b30ff; }
+            20%, 22%, 24%, 55% { text-shadow: none; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .site-header h1 { font-size: 2.2rem; }
+            .navigation-bar { flex-direction: column; gap: 15px; }
+        }
+    </style>
 </head>
 <body>
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PRZJ866" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
+
     <header class="site-header">
         <h1>Robby Sawicki</h1>
-        </header>
+        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+        <a href="Robby Sawicki Resume.pdf" class="btn" target="_blank">View Resume</a>
+    </header>
 
     <nav class="navigation-bar">
-        <ul>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li> <li><a href="Robby Sawicki Resume.pdf" target="_blank">Resume</a></li> </ul>
+        <a href="#about">About Me</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank">LinkedIn</a>
     </nav>
 
-    <main id="main-content" class="content-area">
-        <h2>Welcome</h2> <p>Welcome to my professional space. Feel free to explore my projects, view my resume, or connect with me on LinkedIn.</p>
-        </main>
+    <main id="main-content">
+        <h2>Welcome</h2>
+        <p>Welcome to my professional space. Feel free to explore my projects, view my resume, or connect with me on LinkedIn. I specialize in high-impact Out-Of-Home campaigns and creative wildposting that grabs attention and builds community presence.</p>
+    </main>
 
     <footer class="site-footer">
         <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
-        </footer>
+    </footer>
 
 </body>
 </html>
+
