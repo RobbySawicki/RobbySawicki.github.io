@@ -29,7 +29,6 @@
         font-style: italic;
     }
 
-    /* Initial letters effect */
     .initial {
         position: relative;
         display: inline-block;
@@ -87,7 +86,6 @@
         margin: 25px 0;
     }
 
-    /* Neon button links */
     .neon-button {
         position: relative;
         display: inline-block;
@@ -97,11 +95,11 @@
         font-weight: 400;
         text-decoration: none;
         padding: 12px 25px;
-        color: #000; /* changed to black */
+        color: #fff; /* back to white */
         border-radius: 8px;
         border: none;
         cursor: pointer;
-        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0); /* top-left green, bottom-right purple */
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
         transition: all 0.3s ease;
     }
 
@@ -110,11 +108,10 @@
         box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
     }
 
-    /* First letter 3D effect for buttons */
     .neon-button span.first-letter {
         position: relative;
         display: inline-block;
-        color: #000;
+        color: #fff;
     }
 
     .neon-button span.first-letter::before,
@@ -138,9 +135,8 @@
         text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
     }
 
-    /* LinkedIn logo */
     .linkedin-link img {
-        height: 56px; /* match roughly button height */
+        height: 56px; /* match button height */
         width: auto;
         transition: transform 0.3s ease;
     }
@@ -189,7 +185,7 @@
     <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
     <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
         <!-- Blue LinkedIn logo -->
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
     </a>
 </nav>
 
