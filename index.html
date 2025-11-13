@@ -8,9 +8,6 @@
 <!-- Import Lobster Two font -->
 <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
 
-<!-- Import LinkedIn logo from font-awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Ho3k4tfa0yB1/1PnBHBk3c6rZPh5pNscu4Q+KKF+1HX4bXosNqWcCkM9o4n/HhzlMnmvQFvSZh6Sn2xYzUnbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <style>
     body {
         background-color: #ffffff;
@@ -91,7 +88,7 @@
         margin: 20px 0;
     }
 
-    /* Neon glow effect for links */
+    /* Neon glow effect for first letters */
     .neon-link {
         font-family: 'Lobster Two', cursive;
         text-decoration: none;
@@ -101,27 +98,32 @@
         font-style: italic;
         position: relative;
         transition: all 0.3s ease;
-        text-shadow: 0 0 2px #7ebf7b, 0 0 4px #7ebf7b, 0 0 6px #a36fd0, 0 0 8px #a36fd0;
     }
 
-    .neon-link:hover {
+    .neon-link span.first-letter {
+        text-shadow: 0 0 3px #7ebf7b, 0 0 6px #7ebf7b, 0 0 3px #a36fd0, 0 0 6px #a36fd0;
+    }
+
+    .neon-link:hover span.first-letter {
         text-shadow: 0 0 8px #7ebf7b, 0 0 15px #7ebf7b, 0 0 8px #a36fd0, 0 0 15px #a36fd0;
-        color: #000;
     }
 
-    /* LinkedIn icon */
+    /* LinkedIn SVG icon */
     .linkedin-link {
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 600;
-        font-size: 1.8rem;
-        color: #0077b5;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
     }
 
-    .linkedin-link i {
-        font-size: 2rem;
+    .linkedin-link svg {
+        width: 2rem;
+        height: 2rem;
+        fill: #0077b5;
+        transition: transform 0.3s ease;
+    }
+
+    .linkedin-link:hover svg {
+        transform: scale(1.1);
     }
 
     #main-content {
@@ -161,8 +163,8 @@
     @media (max-width: 600px) {
         .site-header h1 { font-size: 3rem; }
         .navigation-bar { flex-direction: column; gap: 20px; }
-        .navigation-bar a { font-size: 1.5rem; }
-        .linkedin-link i { font-size: 1.5rem; }
+        .neon-link { font-size: 1.5rem; }
+        .linkedin-link svg { width: 1.5rem; height: 1.5rem; }
     }
 </style>
 </head>
@@ -178,10 +180,13 @@
 </header>
 
 <nav class="navigation-bar">
-    <a href="#about" class="neon-link">About Me</a>
-    <a href="projects.html" class="neon-link">Projects</a>
+    <a href="#about" class="neon-link"><span class="first-letter">A</span>bout Me</a>
+    <a href="projects.html" class="neon-link"><span class="first-letter">P</span>rojects</a>
     <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-        <i class="fab fa-linkedin"></i>
+        <!-- LinkedIn SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
+            <path d="M34,34H0V0H34V34ZM10.06,13.14H5.12v15.6h4.94V13.14ZM7.58,11.04a2.87,2.87,0,1,1,2.87-2.87A2.87,2.87,0,0,1,7.58,11.04ZM28.88,28.74h-4.92V21.38c0-1.78-.03-4.08-2.48-4.08-2.48,0-2.86,1.94-2.86,3.95v8.49h-4.94V13.14h4.74v2.13h.07a5.18,5.18,0,0,1,4.67-2.57c5,0,5.92,3.29,5.92,7.57Z"/>
+        </svg>
     </a>
 </nav>
 
