@@ -23,11 +23,11 @@
     }
 
     .site-header h1 {
-        font-family: 'Lobster Two', cursive; /* Lobster Two font */
+        font-family: 'Lobster Two', cursive;
         font-size: 4rem;
-        color: #000; /* black main text */
+        color: #000;
         margin: 0;
-        font-style: italic; /* italicized header */
+        font-style: italic;
     }
 
     /* Initial letters effect */
@@ -46,17 +46,17 @@
         z-index: -1;
     }
 
-    /* Green & purple diagonal offsets */
+    /* Green & purple diagonal offsets for initials */
     .initial::before {
-        color: #7ebf7b; /* darker green */
-        transform: translate(-3px, -3px); /* top-left */
+        color: #7ebf7b;
+        transform: translate(-3px, -3px);
         text-shadow: 0 0 8px #7ebf7b, 0 0 15px #7ebf7b;
         animation: settleGreen 2s forwards;
     }
 
     .initial::after {
-        color: #a36fd0; /* darker purple */
-        transform: translate(3px, 3px); /* bottom-right */
+        color: #a36fd0;
+        transform: translate(3px, 3px);
         text-shadow: 0 0 8px #a36fd0, 0 0 15px #a36fd0;
         animation: settlePurple 2s forwards;
     }
@@ -88,7 +88,7 @@
         margin: 20px 0;
     }
 
-    /* Neon glow effect for first letters */
+    /* Neon 3D effect on first letters of links */
     .neon-link {
         font-family: 'Lobster Two', cursive;
         text-decoration: none;
@@ -97,15 +97,33 @@
         font-weight: 400;
         font-style: italic;
         position: relative;
-        transition: all 0.3s ease;
     }
 
     .neon-link span.first-letter {
-        text-shadow: 0 0 3px #7ebf7b, 0 0 6px #7ebf7b, 0 0 3px #a36fd0, 0 0 6px #a36fd0;
+        position: relative;
+        display: inline-block;
+        color: #000;
     }
 
-    .neon-link:hover span.first-letter {
-        text-shadow: 0 0 8px #7ebf7b, 0 0 15px #7ebf7b, 0 0 8px #a36fd0, 0 0 15px #a36fd0;
+    .neon-link span.first-letter::before,
+    .neon-link span.first-letter::after {
+        content: attr(data-letter);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .neon-link span.first-letter::before {
+        color: #7ebf7b; /* green top-left */
+        transform: translate(-3px, -3px);
+        text-shadow: 0 0 6px #7ebf7b, 0 0 12px #7ebf7b;
+    }
+
+    .neon-link span.first-letter::after {
+        color: #a36fd0; /* purple bottom-right */
+        transform: translate(3px, 3px);
+        text-shadow: 0 0 6px #a36fd0, 0 0 12px #a36fd0;
     }
 
     /* LinkedIn SVG icon */
@@ -180,8 +198,12 @@
 </header>
 
 <nav class="navigation-bar">
-    <a href="#about" class="neon-link"><span class="first-letter">A</span>bout Me</a>
-    <a href="projects.html" class="neon-link"><span class="first-letter">P</span>rojects</a>
+    <a href="#about" class="neon-link">
+        <span class="first-letter" data-letter="A">A</span>bout Me
+    </a>
+    <a href="projects.html" class="neon-link">
+        <span class="first-letter" data-letter="P">P</span>rojects
+    </a>
     <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
         <!-- LinkedIn SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
