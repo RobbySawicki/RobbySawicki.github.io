@@ -8,6 +8,9 @@
 <!-- Import Lobster Two font -->
 <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
 
+<!-- Import LinkedIn logo from font-awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Ho3k4tfa0yB1/1PnBHBk3c6rZPh5pNscu4Q+KKF+1HX4bXosNqWcCkM9o4n/HhzlMnmvQFvSZh6Sn2xYzUnbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
     body {
         background-color: #ffffff;
@@ -50,14 +53,14 @@
     .initial::before {
         color: #7ebf7b; /* darker green */
         transform: translate(-3px, -3px); /* top-left */
-        text-shadow: 0 0 3px #7ebf7b;
+        text-shadow: 0 0 8px #7ebf7b, 0 0 15px #7ebf7b;
         animation: settleGreen 2s forwards;
     }
 
     .initial::after {
         color: #a36fd0; /* darker purple */
         transform: translate(3px, 3px); /* bottom-right */
-        text-shadow: 0 0 3px #a36fd0;
+        text-shadow: 0 0 8px #a36fd0, 0 0 15px #a36fd0;
         animation: settlePurple 2s forwards;
     }
 
@@ -88,39 +91,38 @@
         margin: 20px 0;
     }
 
-    .navigation-bar a {
-        font-family: 'Lobster Two', cursive; /* Lobster Two font for nav links */
+    /* Neon glow effect for links */
+    .neon-link {
+        font-family: 'Lobster Two', cursive;
         text-decoration: none;
         color: #000;
-        font-size: 1.8rem; /* larger links */
+        font-size: 1.8rem;
         font-weight: 400;
+        font-style: italic;
         position: relative;
         transition: all 0.3s ease;
-        font-style: italic; /* italicized nav links */
+        text-shadow: 0 0 2px #7ebf7b, 0 0 4px #7ebf7b, 0 0 6px #a36fd0, 0 0 8px #a36fd0;
     }
 
-    /* Keep LinkedIn in standard sans-serif font for recognizability */
-    .navigation-bar a.linkedin-link {
+    .neon-link:hover {
+        text-shadow: 0 0 8px #7ebf7b, 0 0 15px #7ebf7b, 0 0 8px #a36fd0, 0 0 15px #a36fd0;
+        color: #000;
+    }
+
+    /* LinkedIn icon */
+    .linkedin-link {
         font-family: 'Open Sans', sans-serif;
         font-weight: 600;
         font-size: 1.8rem;
-        font-style: normal; /* keep LinkedIn non-italic */
+        color: #0077b5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .navigation-bar a::after {
-        content: '';
-        display: block;
-        height: 2px;
-        width: 0;
-        background: #7ebf7b;
-        transition: width 0.3s;
-        position: absolute;
-        bottom: -5px;
-        left: 0;
+    .linkedin-link i {
+        font-size: 2rem;
     }
-
-    .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover:not(.linkedin-link) { color: #a36fd0; }
 
     #main-content {
         max-width: 700px;
@@ -160,7 +162,7 @@
         .site-header h1 { font-size: 3rem; }
         .navigation-bar { flex-direction: column; gap: 20px; }
         .navigation-bar a { font-size: 1.5rem; }
-        .navigation-bar a.linkedin-link { font-size: 1.5rem; }
+        .linkedin-link i { font-size: 1.5rem; }
     }
 </style>
 </head>
@@ -176,9 +178,11 @@
 </header>
 
 <nav class="navigation-bar">
-    <a href="#about">About Me</a>
-    <a href="projects.html">Projects</a>
-    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn</a>
+    <a href="#about" class="neon-link">About Me</a>
+    <a href="projects.html" class="neon-link">Projects</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+        <i class="fab fa-linkedin"></i>
+    </a>
 </nav>
 
 <main id="main-content">
