@@ -25,13 +25,12 @@
         color: #000; /* main name color */
     }
 
-    /* First letter 3D effect */
+    /* First letters effect */
     .initial {
         position: relative;
         display: inline-block;
         font-weight: 900;
-        color: #000;
-        animation: flicker 10s forwards; /* 10s animation then stop */
+        color: #000; /* black main letter stationary */
     }
 
     .initial::before,
@@ -43,27 +42,35 @@
         z-index: -1;
     }
 
-    /* Darker green & purple for better contrast */
+    /* 10% darker than original pastels */
     .initial::before {
-        color: #32cc22; /* darker green */
-        transform: translate(-3px, 0);
-        text-shadow: 0 0 3px #32cc22;
+        color: #91d898; /* pastel green darker */
+        transform: translate(-10px, -10px); /* final position top-left */
+        text-shadow: 0 0 3px #91d898;
+        animation: settleGreen 2s forwards;
     }
 
     .initial::after {
-        color: #8a2ed3; /* darker purple */
-        transform: translate(3px, 0);
-        text-shadow: 0 0 3px #8a2ed3;
+        color: #bf8ae6; /* pastel purple darker */
+        transform: translate(10px, 10px); /* final position bottom-right */
+        text-shadow: 0 0 3px #bf8ae6;
+        animation: settlePurple 2s forwards;
     }
 
-    /* Flicker animation */
-    @keyframes flicker {
-        0%, 20%, 40%, 60%, 80%, 100% { transform: translate(0, 0); }
-        10% { transform: translate(-1px, 1px); }
-        30% { transform: translate(1px, -1px); }
-        50% { transform: translate(-1px, -1px); }
-        70% { transform: translate(1px, 1px); }
-        90% { transform: translate(-2px, 1px); }
+    /* Green animation: starts slightly offset, then settles top-left */
+    @keyframes settleGreen {
+        0% { transform: translate(-5px, -5px); }
+        30% { transform: translate(-12px, -8px); }
+        60% { transform: translate(-8px, -12px); }
+        100% { transform: translate(-10px, -10px); }
+    }
+
+    /* Purple animation: starts slightly offset, then settles bottom-right */
+    @keyframes settlePurple {
+        0% { transform: translate(5px, 5px); }
+        30% { transform: translate(12px, 8px); }
+        60% { transform: translate(8px, 12px); }
+        100% { transform: translate(10px, 10px); }
     }
 
     .site-header p {
@@ -92,7 +99,7 @@
         display: block;
         height: 2px;
         width: 0;
-        background: #32cc22; /* darker green underline */
+        background: #91d898; /* pastel green underline darker */
         transition: width 0.3s;
         position: absolute;
         bottom: -5px;
@@ -100,7 +107,7 @@
     }
 
     .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover { color: #8a2ed3; } /* darker purple on hover */
+    .navigation-bar a:hover { color: #bf8ae6; } /* pastel purple on hover */
 
     #main-content {
         max-width: 700px;
@@ -114,7 +121,7 @@
         padding: 12px 25px;
         margin-top: 20px;
         color: #fff;
-        background: linear-gradient(90deg, #32cc22, #8a2ed3); /* darker pastel gradient */
+        background: linear-gradient(90deg, #91d898, #bf8ae6); /* darker pastel gradient */
         border: none;
         border-radius: 5px;
         font-weight: 600;
@@ -124,7 +131,7 @@
 
     .btn:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 15px #32cc22, 0 0 15px #8a2ed3;
+        box-shadow: 0 0 15px #91d898, 0 0 15px #bf8ae6;
     }
 
     .site-footer {
