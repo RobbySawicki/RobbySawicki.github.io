@@ -141,5 +141,51 @@
 
     .btn:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 1
+        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+    }
 
+    .site-footer {
+        text-align: center;
+        padding: 20px;
+        background: #f1f1f1;
+        color: #555;
+        margin-top: 50px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+        .site-header h1 { font-size: 3rem; }
+        .navigation-bar { flex-direction: column; gap: 20px; }
+        .navigation-bar a { font-size: 1.5rem; }
+        .navigation-bar a.linkedin-link { font-size: 1.5rem; }
+    }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+    <h1>
+        <span class="initial" data-initial="R">R</span>obby 
+        <span class="initial" data-initial="S">S</span>awicki
+    </h1>
+    <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+    <a href="Robby Sawicki Resume.pdf" class="btn" target="_blank">View Resume</a>
+</header>
+
+<nav class="navigation-bar">
+    <a href="#about">About Me</a>
+    <a href="projects.html">Projects</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn</a>
+</nav>
+
+<main id="main-content">
+    <h2>Welcome</h2>
+    <p>Welcome to my professional space. Feel free to explore my projects, view my resume, or connect with me on LinkedIn. I specialize in high-impact Out-Of-Home campaigns and creative wildposting that grabs attention and builds community presence.</p>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
