@@ -15,43 +15,43 @@
 
     /* Header */
     .site-header {
-        padding: 80px 20px 40px;
+        padding: 40px 20px 20px; /* moved closer to top */
     }
 
     .site-header h1 {
         font-family: 'Montserrat', sans-serif;
         font-size: 4rem;
         font-weight: 900;
-        color: #000;
+        color: #000; /* main name color */
     }
 
-    /* Initials 3D neon effect */
-    .initials {
+    /* First letter 3D pastel effect */
+    .initial {
         position: relative;
         display: inline-block;
         font-weight: 900;
         color: #000;
     }
 
-    .initials::before,
-    .initials::after {
-        content: attr(data-initials);
+    .initial::before,
+    .initial::after {
+        content: attr(data-initial);
         position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
     }
 
-    .initials::before {
-        color: #39ff14; /* neon green */
-        transform: translate(-4px, 0);
-        text-shadow: 0 0 5px #39ff14;
+    .initial::before {
+        color: #a8ffb0; /* pastel green */
+        transform: translate(-3px, 0);
+        text-shadow: 0 0 3px #a8ffb0;
     }
 
-    .initials::after {
-        color: #9b30ff; /* neon purple */
-        transform: translate(4px, 0);
-        text-shadow: 0 0 5px #9b30ff;
+    .initial::after {
+        color: #d3a8ff; /* pastel purple */
+        transform: translate(3px, 0);
+        text-shadow: 0 0 3px #d3a8ff;
     }
 
     .site-header p {
@@ -80,7 +80,7 @@
         display: block;
         height: 2px;
         width: 0;
-        background: #39ff14;
+        background: #a8ffb0; /* pastel green underline */
         transition: width 0.3s;
         position: absolute;
         bottom: -5px;
@@ -88,7 +88,7 @@
     }
 
     .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover { color: #9b30ff; }
+    .navigation-bar a:hover { color: #d3a8ff; } /* pastel purple on hover */
 
     #main-content {
         max-width: 700px;
@@ -102,7 +102,7 @@
         padding: 12px 25px;
         margin-top: 20px;
         color: #fff;
-        background: linear-gradient(90deg, #39ff14, #9b30ff);
+        background: linear-gradient(90deg, #a8ffb0, #d3a8ff); /* pastel gradient */
         border: none;
         border-radius: 5px;
         font-weight: 600;
@@ -112,7 +112,7 @@
 
     .btn:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 20px #39ff14, 0 0 20px #9b30ff;
+        box-shadow: 0 0 15px #a8ffb0, 0 0 15px #d3a8ff;
     }
 
     .site-footer {
@@ -125,7 +125,7 @@
     }
 
     @media (max-width: 600px) {
-        .site-header h1 { font-size: 2.5rem; }
+        .site-header h1 { font-size: 3rem; }
         .navigation-bar { flex-direction: column; gap: 15px; }
     }
 </style>
@@ -134,7 +134,8 @@
 
 <header class="site-header">
     <h1>
-        <span class="initials" data-initials="RS">RS</span> Sawicki
+        <span class="initial" data-initial="R">R</span>obby 
+        <span class="initial" data-initial="S">S</span>awicki
     </h1>
     <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
     <a href="Robby Sawicki Resume.pdf" class="btn" target="_blank">View Resume</a>
