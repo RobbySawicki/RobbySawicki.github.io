@@ -6,14 +6,14 @@
 <title>Robby Sawicki - Portfolio</title>
 <style>
     body {
-        background-color: #d3d3d3; /* Light grey background */
+        background-color: #ffffff; /* white background */
         margin: 0;
         font-family: 'Open Sans', sans-serif;
         color: #333;
         text-align: center;
     }
 
-    /* Header with TikTok-style 3-layer effect */
+    /* Header */
     .site-header {
         padding: 80px 20px 40px;
     }
@@ -22,28 +22,33 @@
         font-family: 'Montserrat', sans-serif;
         font-size: 4rem;
         font-weight: 900;
-        color: #000; /* Main text black */
-        position: relative;
-        display: inline-block;
+        color: #000;
     }
 
-    /* TikTok 3-layer effect using text-shadow */
-    .site-header h1::before,
-    .site-header h1::after {
-        content: attr(data-text);
+    /* Initials 3D neon effect */
+    .initials {
+        position: relative;
+        display: inline-block;
+        font-weight: 900;
+        color: #000;
+    }
+
+    .initials::before,
+    .initials::after {
+        content: attr(data-initials);
         position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
     }
 
-    .site-header h1::before {
+    .initials::before {
         color: #39ff14; /* neon green */
         transform: translate(-4px, 0);
         text-shadow: 0 0 5px #39ff14;
     }
 
-    .site-header h1::after {
+    .initials::after {
         color: #9b30ff; /* neon purple */
         transform: translate(4px, 0);
         text-shadow: 0 0 5px #9b30ff;
@@ -96,7 +101,7 @@
         display: inline-block;
         padding: 12px 25px;
         margin-top: 20px;
-        color: #d3d3d3; /* grey text for contrast */
+        color: #fff;
         background: linear-gradient(90deg, #39ff14, #9b30ff);
         border: none;
         border-radius: 5px;
@@ -113,7 +118,7 @@
     .site-footer {
         text-align: center;
         padding: 20px;
-        background: #b3b3b3; /* slightly darker grey */
+        background: #f1f1f1; /* subtle light gray footer */
         color: #555;
         margin-top: 50px;
         font-size: 0.9rem;
@@ -128,7 +133,9 @@
 <body>
 
 <header class="site-header">
-    <h1 data-text="Robby Sawicki">Robby Sawicki</h1>
+    <h1>
+        <span class="initials" data-initials="RS">RS</span> Sawicki
+    </h1>
     <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
     <a href="Robby Sawicki Resume.pdf" class="btn" target="_blank">View Resume</a>
 </header>
@@ -150,5 +157,3 @@
 
 </body>
 </html>
-
-
