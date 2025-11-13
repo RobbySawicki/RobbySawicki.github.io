@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robby Sawicki - Portfolio</title>
 
-<!-- Import Great Vibes font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Import Galada font -->
+<link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
 
 <style>
     body {
@@ -23,7 +23,7 @@
     }
 
     .site-header h1 {
-        font-family: 'Great Vibes', cursive; /* elegant, thin script font */
+        font-family: 'Galada', cursive; /* new header font */
         font-size: 4rem;
         color: #000; /* black main text */
         margin: 0;
@@ -83,18 +83,25 @@
     .navigation-bar {
         display: flex;
         justify-content: center;
-        gap: 40px; /* more space between links */
+        gap: 40px;
         margin: 20px 0;
     }
 
     .navigation-bar a {
-        font-family: 'Great Vibes', cursive; /* match header */
+        font-family: 'Galada', cursive; /* Galada font for most links */
         text-decoration: none;
         color: #000;
         font-size: 1.8rem; /* larger links */
         font-weight: 400;
         position: relative;
         transition: all 0.3s ease;
+    }
+
+    /* Keep LinkedIn in standard sans-serif font for recognizability */
+    .navigation-bar a.linkedin-link {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        font-size: 1.8rem;
     }
 
     .navigation-bar a::after {
@@ -110,7 +117,7 @@
     }
 
     .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover { color: #a36fd0; }
+    .navigation-bar a:hover:not(.linkedin-link) { color: #a36fd0; }
 
     #main-content {
         max-width: 700px;
@@ -150,6 +157,7 @@
         .site-header h1 { font-size: 3rem; }
         .navigation-bar { flex-direction: column; gap: 20px; }
         .navigation-bar a { font-size: 1.5rem; }
+        .navigation-bar a.linkedin-link { font-size: 1.5rem; }
     }
 </style>
 </head>
@@ -167,7 +175,7 @@
 <nav class="navigation-bar">
     <a href="#about">About Me</a>
     <a href="projects.html">Projects</a>
-    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">LinkedIn</a>
 </nav>
 
 <main id="main-content">
