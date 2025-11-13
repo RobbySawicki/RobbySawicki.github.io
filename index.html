@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robby Sawicki - Portfolio</title>
 
-<!-- Import Orbitron font -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<!-- Import Anton font -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
 <style>
     body {
@@ -23,9 +23,9 @@
     }
 
     .site-header h1 {
-        font-family: 'Orbitron', sans-serif; /* bold, techy font for neon effect */
+        font-family: 'Anton', sans-serif; /* strong, bold display font */
         font-size: 4rem;
-        font-weight: 700;
+        font-weight: 400; /* Anton has fixed weight */
         color: #000; /* black main text */
     }
 
@@ -33,7 +33,6 @@
     .initial {
         position: relative;
         display: inline-block;
-        font-weight: 700;
         color: #000; /* black stationary letter */
     }
 
@@ -46,22 +45,22 @@
         z-index: -1;
     }
 
-    /* Darker green & purple, same offset distance as before (±3px) */
+    /* Darkened pastel colors, same offset distance as before */
     .initial::before {
-        color: #7ebf7b; /* darkened pastel green (~20% darker than original) */
-        transform: translate(-3px, 0); /* top-left offset */
+        color: #7ebf7b; /* darker green */
+        transform: translate(-3px, 0); /* final offset top-left */
         text-shadow: 0 0 3px #7ebf7b;
         animation: settleGreen 2s forwards;
     }
 
     .initial::after {
-        color: #a36fd0; /* darkened pastel purple (~20% darker) */
-        transform: translate(3px, 0); /* bottom-right offset */
+        color: #a36fd0; /* darker purple */
+        transform: translate(3px, 0); /* final offset bottom-right */
         text-shadow: 0 0 3px #a36fd0;
         animation: settlePurple 2s forwards;
     }
 
-    /* Green animation: subtle jitter then settle */
+    /* Green animation: subtle jitter then settle top-left */
     @keyframes settleGreen {
         0% { transform: translate(-1px, 0); }
         30% { transform: translate(-4px, 1px); }
@@ -69,7 +68,7 @@
         100% { transform: translate(-3px, 0); }
     }
 
-    /* Purple animation: subtle jitter then settle */
+    /* Purple animation: subtle jitter then settle bottom-right */
     @keyframes settlePurple {
         0% { transform: translate(1px, 0); }
         30% { transform: translate(4px, -1px); }
@@ -103,7 +102,7 @@
         display: block;
         height: 2px;
         width: 0;
-        background: #7ebf7b; /* darkened pastel green underline */
+        background: #7ebf7b; /* green underline */
         transition: width 0.3s;
         position: absolute;
         bottom: -5px;
@@ -111,7 +110,7 @@
     }
 
     .navigation-bar a:hover::after { width: 100%; }
-    .navigation-bar a:hover { color: #a36fd0; } /* darkened pastel purple hover */
+    .navigation-bar a:hover { color: #a36fd0; } /* purple hover */
 
     #main-content {
         max-width: 700px;
@@ -125,7 +124,7 @@
         padding: 12px 25px;
         margin-top: 20px;
         color: #fff;
-        background: linear-gradient(90deg, #7ebf7b, #a36fd0); /* darkened pastel gradient */
+        background: linear-gradient(90deg, #7ebf7b, #a36fd0); /* green-purple gradient */
         border: none;
         border-radius: 5px;
         font-weight: 600;
@@ -141,7 +140,7 @@
     .site-footer {
         text-align: center;
         padding: 20px;
-        background: #f1f1f1; /* light gray footer */
+        background: #f1f1f1;
         color: #555;
         margin-top: 50px;
         font-size: 0.9rem;
@@ -181,4 +180,5 @@
 
 </body>
 </html>
+
 
