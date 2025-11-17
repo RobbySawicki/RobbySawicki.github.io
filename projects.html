@@ -1,104 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Robby Sawicki</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects - Robby Sawicki</title>
+
+<!-- Import Lobster Two font -->
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+
+<style>
     body {
-      background: #111;
-      margin: 0;
-      font-family: 'Pattaya', sans-serif;
-      color: white;
-      text-align: center;
+        background-color: #ffffff;
+        margin: 0;
+        font-family: 'Open Sans', sans-serif;
+        color: #333;
+        text-align: center;
     }
 
-    /* Name styling */
-    h1 {
-      font-size: 4rem;
-      margin-top: 70px;
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 22px rgba(255,255,255,0.75);
+    .site-header {
+        padding: 15px 20px 10px;
     }
 
-    /* Navigation buttons */
-    .nav {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
+    .site-header h1 {
+        font-family: 'Lobster Two', cursive;
+        font-size: 4rem;
+        color: #000;
+        margin: 0;
+        font-style: italic;
     }
 
-    .nav button {
-      padding: 14px 28px;
-      background: black;
-      border: 2px solid white;
-      border-radius: 12px;
-      font-size: 1.3rem;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(255,255,255,0.45);
-      transition: 0.25s ease;
+    .initial {
+        position: relative;
+        display: inline-block;
+        color: #000;
     }
 
-    .nav button span.glow {
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 12px rgba(255,255,255,0.65);
+    .initial::before,
+    .initial::after {
+        content: attr(data-initial);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
     }
 
-    /* LinkedIn logo */
-    .linkedin-logo {
-      width: 42px;
-      height: auto;
-      margin-left: 10px;
+    .initial::before {
+        color: #7ebf7b;
+        transform: translate(-1.95px, -1.95px);
+        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+        animation: settleGreen 2s forwards;
     }
 
-    /* Projects section */
-    .projects-section {
-      margin: 80px auto;
-      width: 80%;
-      padding: 40px;
-      border-radius: 24px;
-      background: radial-gradient(circle at top left, rgba(138,255,138,0.25), rgba(0,0,0,0)),
-                  radial-gradient(circle at bottom right, rgba(194,138,255,0.25), rgba(0,0,0,0));
-      box-shadow: 0 0 25px rgba(0,0,0,0.35);
+    .initial::after {
+        color: #a36fd0;
+        transform: translate(1.95px, 1.95px);
+        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+        animation: settlePurple 2s forwards;
     }
 
-    .projects-section h2 {
-      font-size: 2.6rem;
-      margin-bottom: 18px;
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 14px rgba(255,255,255,0.65);
+    @keyframes settleGreen {
+        0% { transform: translate(-1px, -1px); }
+        30% { transform: translate(-2.6px, -1.3px); }
+        60% { transform: translate(-1.3px, -2.6px); }
+        100% { transform: translate(-1.95px, -1.95px); }
     }
 
-    .projects-section p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+    @keyframes settlePurple {
+        0% { transform: translate(1px, 1px); }
+        30% { transform: translate(2.6px, 1.3px); }
+        60% { transform: translate(1.3px, 2.6px); }
+        100% { transform: translate(1.95px, 1.95px); }
     }
-  </style>
+
+    .navigation-bar {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+    }
+
+    .neon-button {
+        position: relative;
+        display: inline-block;
+        font-family: 'Lobster Two', cursive;
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: 400;
+        text-decoration: none;
+        padding: 12px 25px;
+        color: #fff;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+        transition: all 0.3s ease;
+    }
+
+    .neon-button:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+    }
+
+    .neon-button span.first-letter {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+    }
+
+    .neon-button span.first-letter::before,
+    .neon-button span.first-letter::after {
+        content: attr(data-letter);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .neon-button span.first-letter::before {
+        color: #7ebf7b;
+        transform: translate(-1.95px, -1.95px);
+        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+    }
+
+    .neon-button span.first-letter::after {
+        color: #a36fd0;
+        transform: translate(1.95px, 1.95px);
+        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+    }
+
+    .linkedin-link img {
+        height: 56px;
+        width: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .linkedin-link:hover img {
+        transform: scale(1.1);
+    }
+
+    #main-content {
+        max-width: 700px;
+        margin: 30px auto;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .site-footer {
+        text-align: center;
+        padding: 20px;
+        background: #f1f1f1;
+        color: #555;
+        margin-top: 50px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+        .site-header h1 { font-size: 3rem; }
+        .navigation-bar { flex-direction: column; gap: 15px; }
+        .neon-button { font-size: 1.8rem; padding: 10px 20px; }
+        .linkedin-link img { height: 45px; }
+    }
+</style>
 </head>
 <body>
 
-  <h1>Robby Sawicki</h1>
+<header class="site-header">
+    <h1><span class="initial" data-initial="R">R</span>obby <span class="initial" data-initial="S">S</span>awicki</h1>
+    <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+</header>
 
-  <div class="nav">
-    <button><span class="glow">A</span>bout Me</button>
-    <button><span class="glow">P</span>rojects</button>
-    <button><span class="glow">R</span>esume</button>
-    <a href="#"><img class="linkedin-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"></a>
-  </div>
+<nav class="navigation-bar">
+    <a href="About Me.html" class="neon-button"><span class="first-letter" data-letter="A">A</span>bout Me</a>
+    <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
+    <a href="Robby Sawicki Resume.pdf" target="_blank" class="neon-button"><span class="first-letter" data-letter="R">R</span>esume</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+    </a>
+</nav>
 
-  <div class="projects-section">
-    <h2>Projects</h2>
+<main id="main-content">
+    <h2>Projects I've Worked On</h2>
     <p>Project examples and case studies will go here.</p>
-  </div>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
