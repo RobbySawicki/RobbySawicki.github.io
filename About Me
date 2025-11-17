@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - Robby Sawicki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #111;
+      margin: 0;
+      font-family: 'Pattaya', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    /* Page title */
+    h1 {
+      font-size: 4rem;
+      margin-top: 70px;
+      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 22px rgba(255,255,255,0.75);
+    }
+
+    /* Navigation */
+    .nav {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .nav button {
+      padding: 14px 28px;
+      background: black;
+      border: 2px solid white;
+      border-radius: 12px;
+      font-size: 1.3rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255,255,255,0.45);
+      transition: 0.25s ease;
+    }
+
+    .nav button span.glow {
+      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 12px rgba(255,255,255,0.65);
+    }
+
+    .linkedin-logo {
+      width: 42px;
+      height: auto;
+      margin-left: 10px;
+      transition: 0.25s ease;
+    }
+
+    .linkedin-logo:hover {
+      transform: scale(1.1);
+    }
+
+    /* About section */
+    .about-section {
+      margin: 80px auto;
+      width: 80%;
+      padding: 40px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, rgba(138,255,138,0.25), rgba(0,0,0,0)),
+                  radial-gradient(circle at bottom right, rgba(194,138,255,0.25), rgba(0,0,0,0));
+      box-shadow: 0 0 25px rgba(0,0,0,0.35);
+    }
+
+    .about-section h2 {
+      font-size: 2.6rem;
+      margin-bottom: 18px;
+      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 14px rgba(255,255,255,0.65);
+    }
+
+    .about-section p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>About Me</h1>
+
+  <div class="nav">
+    <a href="index.html"><button><span class="glow">H</span>ome</button></a>
+    <a href="projects.html"><button><span class="glow">P</span>rojects</button></a>
+    <a href="Robby Sawicki Resume.pdf" target="_blank"><button><span class="glow">R</span>esume</button></a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank"><img class="linkedin-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"></a>
+  </div>
+
+  <div class="about-section">
+    <h2>Who I Am</h2>
+    <p>
+      I'm Robby Sawicki — a media sales professional specializing in Out-of-Home advertising and creative wildposting campaigns. My work focuses on helping brands make noise in the real world with placements that spark curiosity, build recognition, and get people talking.
+    </p>
+    <p>
+      With a strong background in OOH strategy, location planning, and campaign execution, I bring a creative and analytical approach to every project. Whether it's a high-impact wildposting rollout or a citywide outdoor media strategy, I aim to make every campaign unforgettable.
+    </p>
+    <p>
+      When I'm not working on campaigns, I'm learning new digital tools, refining creative concepts, and exploring new ways brands can show up in public spaces.
+    </p>
+  </div>
+
+</body>
+</html>
