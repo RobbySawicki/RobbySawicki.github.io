@@ -1,118 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me - Robby Sawicki</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me - Robby Sawicki</title>
 
-  <style>
+<!-- Import Lobster Two font -->
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+
+<style>
     body {
-      background: #111;
-      margin: 0;
-      font-family: 'Pattaya', sans-serif;
-      color: white;
-      text-align: center;
+        background-color: #ffffff;
+        margin: 0;
+        font-family: 'Open Sans', sans-serif;
+        color: #333;
+        text-align: center;
     }
 
-    /* Page title */
-    h1 {
-      font-size: 4rem;
-      margin-top: 70px;
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 22px rgba(255,255,255,0.75);
+    .site-header {
+        padding: 15px 20px 10px;
     }
 
-    /* Navigation */
-    .nav {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
+    .site-header h1 {
+        font-family: 'Lobster Two', cursive;
+        font-size: 4rem;
+        color: #000;
+        margin: 0;
+        font-style: italic;
     }
 
-    .nav button {
-      padding: 14px 28px;
-      background: black;
-      border: 2px solid white;
-      border-radius: 12px;
-      font-size: 1.3rem;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(255,255,255,0.45);
-      transition: 0.25s ease;
+    .initial {
+        position: relative;
+        display: inline-block;
+        color: #000;
     }
 
-    .nav button span.glow {
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 12px rgba(255,255,255,0.65);
+    .initial::before,
+    .initial::after {
+        content: attr(data-initial);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
     }
 
-    .linkedin-logo {
-      width: 42px;
-      height: auto;
-      margin-left: 10px;
-      transition: 0.25s ease;
+    .initial::before {
+        color: #7ebf7b;
+        transform: translate(-1.95px, -1.95px);
+        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+        animation: settleGreen 2s forwards;
     }
 
-    .linkedin-logo:hover {
-      transform: scale(1.1);
+    .initial::after {
+        color: #a36fd0;
+        transform: translate(1.95px, 1.95px);
+        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+        animation: settlePurple 2s forwards;
     }
 
-    /* About section */
-    .about-section {
-      margin: 80px auto;
-      width: 80%;
-      padding: 40px;
-      border-radius: 24px;
-      background: radial-gradient(circle at top left, rgba(138,255,138,0.25), rgba(0,0,0,0)),
-                  radial-gradient(circle at bottom right, rgba(194,138,255,0.25), rgba(0,0,0,0));
-      box-shadow: 0 0 25px rgba(0,0,0,0.35);
+    @keyframes settleGreen {
+        0% { transform: translate(-1px, -1px); }
+        30% { transform: translate(-2.6px, -1.3px); }
+        60% { transform: translate(-1.3px, -2.6px); }
+        100% { transform: translate(-1.95px, -1.95px); }
     }
 
-    .about-section h2 {
-      font-size: 2.6rem;
-      margin-bottom: 18px;
-      background: linear-gradient(to bottom right, #8aff8a, #c28aff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 14px rgba(255,255,255,0.65);
+    @keyframes settlePurple {
+        0% { transform: translate(1px, 1px); }
+        30% { transform: translate(2.6px, 1.3px); }
+        60% { transform: translate(1.3px, 2.6px); }
+        100% { transform: translate(1.95px, 1.95px); }
     }
 
-    .about-section p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-      line-height: 1.55;
+    .site-header p {
+        font-size: 1.3rem;
+        margin-top: 5px;
+        color: #333;
     }
-  </style>
+
+    .navigation-bar {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+    }
+
+    .neon-button {
+        position: relative;
+        display: inline-block;
+        font-family: 'Lobster Two', cursive;
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: 400;
+        text-decoration: none;
+        padding: 12px 25px;
+        color: #fff;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+        transition: all 0.3s ease;
+    }
+
+    .neon-button:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+    }
+
+    .neon-button span.first-letter {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+    }
+
+    .neon-button span.first-letter::before,
+    .neon-button span.first-letter::after {
+        content: attr(data-letter);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .neon-button span.first-letter::before {
+        color: #7ebf7b;
+        transform: translate(-1.95px, -1.95px);
+        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+    }
+
+    .neon-button span.first-letter::after {
+        color: #a36fd0;
+        transform: translate(1.95px, 1.95px);
+        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+    }
+
+    .linkedin-link img {
+        height: 56px;
+        width: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .linkedin-link:hover img {
+        transform: scale(1.1);
+    }
+
+    #main-content {
+        max-width: 700px;
+        margin: 30px auto;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .site-footer {
+        text-align: center;
+        padding: 20px;
+        background: #f1f1f1;
+        color: #555;
+        margin-top: 50px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+        .site-header h1 { font-size: 3rem; }
+        .navigation-bar { flex-direction: column; gap: 15px; }
+        .neon-button { font-size: 1.8rem; padding: 10px 20px; }
+        .linkedin-link img { height: 45px; }
+    }
+</style>
 </head>
 <body>
 
-  <h1>About Me</h1>
+<header class="site-header">
+    <h1>
+        <span class="initial" data-initial="R">R</span>obby 
+        <span class="initial" data-initial="S">S</span>awicki
+    </h1>
+    <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+</header>
 
-  <div class="nav">
-    <a href="index.html"><button><span class="glow">H</span>ome</button></a>
-    <a href="projects.html"><button><span class="glow">P</span>rojects</button></a>
-    <a href="Robby Sawicki Resume.pdf" target="_blank"><button><span class="glow">R</span>esume</button></a>
-    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank"><img class="linkedin-logo" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"></a>
-  </div>
+<nav class="navigation-bar">
+    <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>ome</a>
+    <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
+    <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+    </a>
+</nav>
 
-  <div class="about-section">
-    <h2>Who I Am</h2>
-    <p>
-      I'm Robby Sawicki — a media sales professional specializing in Out-of-Home advertising and creative wildposting campaigns. My work focuses on helping brands make noise in the real world with placements that spark curiosity, build recognition, and get people talking.
-    </p>
-    <p>
-      With a strong background in OOH strategy, location planning, and campaign execution, I bring a creative and analytical approach to every project. Whether it's a high-impact wildposting rollout or a citywide outdoor media strategy, I aim to make every campaign unforgettable.
-    </p>
-    <p>
-      When I'm not working on campaigns, I'm learning new digital tools, refining creative concepts, and exploring new ways brands can show up in public spaces.
-    </p>
-  </div>
+<main id="main-content">
+    <h2>About Me</h2>
+    <p>I'm Robby Sawicki — a media sales professional specializing in Out-of-Home advertising and creative wildposting campaigns. My work focuses on helping brands make noise in the real world with placements that spark curiosity, build recognition, and get people talking.</p>
+    <p>With a strong background in OOH strategy, location planning, and campaign execution, I bring a creative and analytical approach to every project. Whether it's a high-impact wildposting rollout or a citywide outdoor media strategy, I aim to make every campaign unforgettable.</p>
+    <p>When I'm not working on campaigns, I'm learning new digital tools, refining creative concepts, and exploring new ways brands can show up in public spaces.</p>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
