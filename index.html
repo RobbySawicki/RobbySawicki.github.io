@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Robby</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='64' cy='64' r='60' fill='black'/><text x='60' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -16,22 +16,24 @@
             margin: 0;
             font-family: 'Open Sans', sans-serif;
             color: #333;
-            /* The overall body text is centered, but we override specific elements */
             text-align: center; 
         }
 
-        /* --- NEW HEADER STYLES --- */
+        /* --- ADJUSTED HEADER STYLES --- */
         .header-container {
-            /* This is the full width container for the top section */
+            /* NEW: Constraints applied to match main content width */
+            max-width: 700px; 
+            margin: 0 auto; /* Centers the 700px wide header */
+            
+            /* Layout for split content */
             display: flex;
-            justify-content: space-between; /* Puts name on left, nav on right */
-            align-items: center; /* Vertically aligns name and nav */
-            padding: 15px 30px; /* Added horizontal padding */
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 15px 10px 15px; /* Added padding to prevent content touching screen edges */
         }
 
         .site-header {
-            /* Now only contains the name and subtitle */
-            text-align: left; /* Aligns h1 and p to the left */
+            text-align: left;
             padding: 0;
         }
 
@@ -45,11 +47,10 @@
         }
 
         .site-header p {
-            /* Left aligns the subtitle as requested */
             margin: 5px 0 0 0;
             font-size: 1.1rem;
         }
-        /* --- END NEW HEADER STYLES --- */
+        /* --- END ADJUSTED HEADER STYLES --- */
 
 
         /* Initial glow letters (NO CHANGE) */
@@ -81,22 +82,18 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* Navigation buttons (ADJUSTED FOR SHORTER HEIGHT) */
+        /* Navigation buttons (NO CHANGE) */
         .navigation-bar {
-            /* Aligned to the right by being a flex item in header-container */
             display: flex;
-            justify-content: flex-end; /* Ensure buttons align right within the nav bar */
-            gap: 15px; /* Slightly reduced gap */
-            flex-wrap: nowrap; /* Prevent wrapping unless screen is very small */
-            margin: 0; /* Remove previous margins */
+            justify-content: flex-end;
+            gap: 15px;
+            flex-wrap: nowrap;
+            margin: 0;
         }
 
         .neon-button {
-            /* Reduced vertical padding (12px to 8px) and font size (2rem to 1.5rem) */
             font-size: 1.5rem; 
             padding: 8px 18px; 
-            
-            /* (Other styles unchanged) */
             position: relative;
             display: flex;
             justify-content: center;
@@ -145,11 +142,11 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* LinkedIn logo (ADJUSTED FOR SHORTER HEIGHT) */
+        /* LinkedIn logo (NO CHANGE) */
         .linkedin-link img {
-            height: 40px; /* Reduced from 72px to 40px */
+            height: 40px; 
             width: auto;
-            margin-top: 0; /* Adjusted margin */
+            margin-top: 0; 
             transition: transform 0.3s ease;
         }
 
@@ -160,7 +157,7 @@
         /* Main content (NO CHANGE) */
         #main-content {
             max-width: 700px;
-            margin: 30px auto;
+            margin: 30px auto; 
             font-size: 1.15rem;
             color: #333;
             line-height: 1.55;
