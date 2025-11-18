@@ -50,7 +50,7 @@
         }
 
 
-        /* Initial glow letters (NO CHANGE) */
+        /* Initial glow letters */
         .initial {
             position: relative;
             display: inline-block;
@@ -79,7 +79,7 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* Navigation buttons (NO CHANGE) */
+        /* Navigation buttons */
         .navigation-bar {
             display: flex;
             justify-content: flex-end;
@@ -103,170 +103,4 @@
             color: #fff;
             border-radius: 8px;
             cursor: pointer;
-            background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
-            transition: all 0.3s ease;
-        }
-
-        .neon-button:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
-        }
-
-        .neon-button span.first-letter {
-            position: relative;
-            display: inline-block;
-            font-weight: 400 !important;
-        }
-
-        .neon-button span.first-letter::before,
-        .neon-button span.first-letter::after {
-            content: attr(data-letter);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .neon-button span.first-letter::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-        }
-
-        .neon-button span.first-letter::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-        }
-
-        /* LinkedIn logo (Vertical Alignment) */
-        .linkedin-link {
-            display: flex;
-            align-items: center;
-            vertical-align: middle; 
-        }
-
-        .linkedin-link img {
-            height: 40px; 
-            width: auto;
-            margin-top: 0; 
-            display: block; 
-            transition: transform 0.3s ease;
-        }
-
-        .linkedin-link:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Main content (Wider) */
-        #main-content {
-            max-width: 1050px;
-            margin: 30px auto; 
-            font-size: 1.15rem;
-            color: #333;
-            line-height: 1.55;
-            padding: 0 15px;
-            text-align: left; /* Setting default text alignment for main content */
-        }
-
-        /* Section headers (NO CHANGE) */
-        .section-title {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 2.6rem;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            color: #000;
-            text-align: center; /* Centering titles */
-        }
-
-        /* Site footer (NO CHANGE) */
-        .site-footer {
-            text-align: center;
-            padding: 20px;
-            background: #f1f1f1;
-            color: #555;
-            margin-top: 50px;
-            font-size: 0.9rem;
-        }
-
-        /*
-        ========================================
-        MOBILE FRIENDLY MEDIA QUERIES
-        ========================================
-        */
-        @media (max-width: 600px) {
-            /* Header Stacking */
-            .header-container {
-                flex-direction: column; /* Stack name/title and navigation vertically */
-                align-items: center; /* Center the stacked items */
-                padding-bottom: 5px;
-            }
-            .site-header {
-                width: 100%;
-                text-align: center; /* Center name and subtitle */
-            }
-            .site-header p {
-                text-align: center; 
-            }
-            .site-header h1 { 
-                font-size: 3rem; /* Reduce name size */
-            }
-            
-            /* Navigation Stacking & Sizing */
-            .navigation-bar { 
-                flex-direction: column; 
-                gap: 10px; 
-                align-items: center;
-                width: 100%;
-                margin: 15px 0;
-            }
-            .neon-button { 
-                font-size: 1.8rem; 
-                padding: 10px 20px; 
-                width: 80%; /* Make buttons full width for easy tapping */
-                text-align: center;
-                justify-content: center;
-            }
-            .linkedin-link {
-                 width: 80%;
-                 justify-content: center;
-            }
-            .linkedin-link img { 
-                height: 45px; /* Slightly increase logo size for tap target */
-            }
-
-            /* Main Content Readability */
-            #main-content {
-                font-size: 1rem;
-                padding: 0 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<div class="header-container">
-    <header class="site-header">
-        <h1>
-            <span class="initial" data-initial="R">R</span>obby
-            <span class="initial" data-initial="S">S</span>awicki
-        </h1>
-        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
-    </header>
-
-    <nav class="navigation-bar">
-        <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
-        <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
-        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
-        </a>
-    </nav>
-</div>
-
-
-<main id="main-content">
-
-    <h2 class="section-title">Welcome</h2>
-    <p>
+            background: linear-gradient(to bottom right, #7ebf7b, #
