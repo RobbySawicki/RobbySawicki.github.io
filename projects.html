@@ -190,4 +190,90 @@
             /* NEW STYLES for H2 */
             font-family: 'Lobster Two', cursive;
             font-style: italic;
-            font-weight: 400 !
+            font-weight: 400 !important;
+            font-size: 2.6rem; /* Using same size as previous .section-title */
+            margin-top: 40px;
+            margin-bottom: 10px;
+            color: #000;
+            text-align: center; 
+        }
+
+
+        /* Site footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            color: #555;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* Media Query Adjustments */
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column; 
+                align-items: flex-start;
+                padding-bottom: 5px;
+            }
+            .site-header {
+                width: 100%;
+                text-align: center; 
+            }
+            .site-header p {
+                text-align: center; 
+            }
+            .site-header h1 { font-size: 3rem; }
+            
+            .navigation-bar { 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: center;
+                width: 100%;
+                margin: 15px 0;
+            }
+            .neon-button { 
+                font-size: 1.8rem; 
+                padding: 10px 20px; 
+                width: 80%; 
+                text-align: center;
+                justify-content: center;
+            }
+            .linkedin-link img { height: 45px; }
+            .linkedin-link {
+                 width: 80%;
+                 justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    <header class="site-header">
+        <h1><span class="initial" data-initial="R">R</span>obby <span class="initial" data-initial="S">S</span>awicki</h1>
+        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+    </header>
+
+    <nav class="navigation-bar">
+        <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>ome</a>
+        
+        <a href="Robby Sawicki Resume.pdf" target="_blank" class="neon-button"><span class="first-letter" data-letter="R">R</span>esume</a>
+        
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+        </a>
+    </nav>
+</div>
+
+<main id="main-content">
+    <h2>Projects I've Worked On</h2>
+    <p>Project examples and case studies will go here.</p>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
