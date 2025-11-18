@@ -19,17 +19,16 @@
             text-align: center; 
         }
 
-        /* --- ADJUSTED HEADER STYLES --- */
+        /* --- ADJUSTED HEADER STYLES (Wider) --- */
         .header-container {
-            /* NEW: Constraints applied to match main content width */
-            max-width: 700px; 
-            margin: 0 auto; /* Centers the 700px wide header */
+            /* NEW MAX-WIDTH: 700px * 1.5 = 1050px */
+            max-width: 1050px; 
+            margin: 0 auto; 
             
-            /* Layout for split content */
             display: flex;
             justify-content: space-between; 
             align-items: center; 
-            padding: 15px 15px 10px 15px; /* Added padding to prevent content touching screen edges */
+            padding: 15px 15px 10px 15px;
         }
 
         .site-header {
@@ -154,9 +153,10 @@
             transform: scale(1.1);
         }
 
-        /* Main content (NO CHANGE) */
+        /* Main content (Wider) */
         #main-content {
-            max-width: 700px;
+            /* NEW MAX-WIDTH: 700px * 1.5 = 1050px */
+            max-width: 1050px;
             margin: 30px auto; 
             font-size: 1.15rem;
             color: #333;
@@ -225,7 +225,7 @@
 </main>
 
 <footer class="site-footer">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.(It really isn't, but it is my name)</p>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved. (It really isn't, but it is my name)</p>
 </footer>
 
 </body>
