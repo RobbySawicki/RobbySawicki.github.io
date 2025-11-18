@@ -103,4 +103,191 @@
             color: #fff;
             border-radius: 8px;
             cursor: pointer;
-            background: linear-gradient(to bottom right, #7ebf7b, #
+            background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+            transition: all 0.3s ease;
+        }
+
+        .neon-button:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+        }
+
+        .neon-button span.first-letter {
+            position: relative;
+            display: inline-block;
+            font-weight: 400 !important;
+        }
+
+        .neon-button span.first-letter::before,
+        .neon-button span.first-letter::after {
+            content: attr(data-letter);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .neon-button span.first-letter::before {
+            color: #7ebf7b;
+            transform: translate(-1.95px, -1.95px);
+            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+        }
+
+        .neon-button span.first-letter::after {
+            color: #a36fd0;
+            transform: translate(1.95px, 1.95px);
+            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+        }
+
+        /* LinkedIn logo (Vertical Alignment) */
+        .linkedin-link {
+            display: flex;
+            align-items: center;
+            vertical-align: middle; 
+        }
+
+        .linkedin-link img {
+            height: 40px; 
+            width: auto;
+            margin-top: 0; 
+            display: block; 
+            transition: transform 0.3s ease;
+        }
+
+        .linkedin-link:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Main content (Wider) */
+        #main-content {
+            max-width: 1050px;
+            margin: 30px auto; 
+            font-size: 1.15rem;
+            color: #333;
+            line-height: 1.55;
+            padding: 0 15px;
+            text-align: left; 
+        }
+
+        /* Section headers */
+        .section-title {
+            font-family: 'Lobster Two', cursive;
+            font-style: italic;
+            font-weight: 400 !important;
+            font-size: 2.6rem;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            color: #000;
+            text-align: center; 
+        }
+
+        /* Site footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            color: #555;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /*
+        ========================================
+        MOBILE FRIENDLY MEDIA QUERIES
+        ========================================
+        */
+        @media (max-width: 600px) {
+            /* Header Stacking */
+            .header-container {
+                flex-direction: column; 
+                align-items: center; 
+                padding-bottom: 5px;
+            }
+            .site-header {
+                width: 100%;
+                text-align: center; 
+            }
+            .site-header p {
+                text-align: center; 
+            }
+            .site-header h1 { 
+                font-size: 3rem; 
+                /* FIX: Prevents "Robby" and "Sawicki" from splitting onto two lines */
+                white-space: nowrap; 
+            }
+            
+            /* Navigation Stacking & Sizing */
+            .navigation-bar { 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: center;
+                width: 100%;
+                margin: 15px 0;
+            }
+            .neon-button { 
+                font-size: 1.8rem; 
+                padding: 10px 20px; 
+                width: 80%; 
+                text-align: center;
+                justify-content: center;
+            }
+            .linkedin-link {
+                 width: 80%;
+                 justify-content: center;
+            }
+            .linkedin-link img { 
+                height: 45px; 
+            }
+
+            /* Main Content Readability */
+            #main-content {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    <header class="site-header">
+        <h1>
+            <span class="initial" data-initial="R">R</span>obby
+            <span class="initial" data-initial="S">S</span>awicki
+        </h1>
+        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+    </header>
+
+    <nav class="navigation-bar">
+        <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
+        <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+        </a>
+    </nav>
+</div>
+
+
+<main id="main-content">
+
+    <h2 class="section-title">Welcome</h2>
+    <p>
+        Welcome to my website. Feel free to explore my projects, view my resume, or connect with me on LinkedIn.
+        I hope this website gives you a better image of who I am.
+    </p>
+
+    <h2 class="section-title">About Me</h2>
+    <p>
+        I’m a Toronto-based marketing professional with a passion for outdoor advertising, bold visuals, and strategic brand amplification.
+        My work focuses on connecting brands with audiences in the real world — through impactful OOH placements, street-level campaigns,
+        and creative wildposting executions.
+    </p>
+    
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved. (It really isn't, but it is my name)</p>
+</footer>
+
+</body>
+</html>
