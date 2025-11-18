@@ -141,7 +141,13 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* LinkedIn logo (NO CHANGE) */
+        /* LinkedIn logo (ADJUSTED PLACEMENT) */
+        .linkedin-link {
+            /* NEW: Adds flex properties to ensure vertical alignment */
+            display: flex;
+            align-items: center;
+        }
+
         .linkedin-link img {
             height: 40px; 
             width: auto;
@@ -155,7 +161,6 @@
 
         /* Main content (Wider) */
         #main-content {
-            /* NEW MAX-WIDTH: 700px * 1.5 = 1050px */
             max-width: 1050px;
             margin: 30px auto; 
             font-size: 1.15rem;
