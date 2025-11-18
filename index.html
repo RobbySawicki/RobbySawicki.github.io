@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Robby Sawicki</title>
+    <title>About Robby</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
 
@@ -19,9 +19,8 @@
             text-align: center; 
         }
 
-        /* --- ADJUSTED HEADER STYLES (Wider) --- */
+        /* --- DESKTOP/WIDE STYLES (Max Width 1050px) --- */
         .header-container {
-            /* NEW MAX-WIDTH: 700px * 1.5 = 1050px */
             max-width: 1050px; 
             margin: 0 auto; 
             
@@ -49,7 +48,6 @@
             margin: 5px 0 0 0;
             font-size: 1.1rem;
         }
-        /* --- END ADJUSTED HEADER STYLES --- */
 
 
         /* Initial glow letters (NO CHANGE) */
@@ -141,13 +139,10 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* LinkedIn logo (FINAL ADJUSTMENT) */
+        /* LinkedIn logo (Vertical Alignment) */
         .linkedin-link {
-            /* Ensures the anchor tag is a flex container */
             display: flex;
-            /* Ensures contents (the image) are vertically centered */
-            align-items: center; 
-            /* Added vertical-align: middle just in case */
+            align-items: center;
             vertical-align: middle; 
         }
 
@@ -155,7 +150,6 @@
             height: 40px; 
             width: auto;
             margin-top: 0; 
-            /* Ensures the image itself doesn't introduce extra spacing */
             display: block; 
             transition: transform 0.3s ease;
         }
@@ -172,6 +166,7 @@
             color: #333;
             line-height: 1.55;
             padding: 0 15px;
+            text-align: left; /* Setting default text alignment for main content */
         }
 
         /* Section headers (NO CHANGE) */
@@ -183,6 +178,7 @@
             margin-top: 40px;
             margin-bottom: 10px;
             color: #000;
+            text-align: center; /* Centering titles */
         }
 
         /* Site footer (NO CHANGE) */
@@ -193,6 +189,59 @@
             color: #555;
             margin-top: 50px;
             font-size: 0.9rem;
+        }
+
+        /*
+        ========================================
+        MOBILE FRIENDLY MEDIA QUERIES
+        ========================================
+        */
+        @media (max-width: 600px) {
+            /* Header Stacking */
+            .header-container {
+                flex-direction: column; /* Stack name/title and navigation vertically */
+                align-items: center; /* Center the stacked items */
+                padding-bottom: 5px;
+            }
+            .site-header {
+                width: 100%;
+                text-align: center; /* Center name and subtitle */
+            }
+            .site-header p {
+                text-align: center; 
+            }
+            .site-header h1 { 
+                font-size: 3rem; /* Reduce name size */
+            }
+            
+            /* Navigation Stacking & Sizing */
+            .navigation-bar { 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: center;
+                width: 100%;
+                margin: 15px 0;
+            }
+            .neon-button { 
+                font-size: 1.8rem; 
+                padding: 10px 20px; 
+                width: 80%; /* Make buttons full width for easy tapping */
+                text-align: center;
+                justify-content: center;
+            }
+            .linkedin-link {
+                 width: 80%;
+                 justify-content: center;
+            }
+            .linkedin-link img { 
+                height: 45px; /* Slightly increase logo size for tap target */
+            }
+
+            /* Main Content Readability */
+            #main-content {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
         }
     </style>
 </head>
@@ -221,22 +270,3 @@
 
     <h2 class="section-title">Welcome</h2>
     <p>
-        Welcome to my website. Feel free to explore my projects, view my resume, or connect with me on LinkedIn.
-        I hope this website gives you a better image of who I am.
-    </p>
-
-    <h2 class="section-title">About Me</h2>
-    <p>
-        I’m a Toronto-based marketing professional with a passion for outdoor advertising, bold visuals, and strategic brand amplification.
-        My work focuses on connecting brands with audiences in the real world — through impactful OOH placements, street-level campaigns,
-        and creative wildposting executions.
-    </p>
-    
-</main>
-
-<footer class="site-footer">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved. (It really isn't, but it is my name)</p>
-</footer>
-
-</body>
-</html>
