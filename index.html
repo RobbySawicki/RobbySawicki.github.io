@@ -193,7 +193,7 @@
 
         /*
         ========================================
-        MOBILE FRIENDLY MEDIA QUERIES (FIX APPLIED)
+        MOBILE FRIENDLY MEDIA QUERIES
         ========================================
         */
         @media (max-width: 600px) {
@@ -215,12 +215,17 @@
                 font-size: 3rem; 
             }
             
+            /* FIX: Force the entire name to stay on one line, preventing the wrap visible in the screenshot. */
+            .site-header h1 .full-name {
+                display: block; 
+                white-space: nowrap;
+            }
+            
             /* Navigation Stacking & Sizing */
             .navigation-bar { 
                 flex-direction: column; 
                 gap: 10px; 
                 align-items: center;
-                /* 🔑 FIX: Center the buttons horizontally beneath the header */
                 justify-content: center; 
                 width: 100%;
                 margin: 15px 0;
@@ -253,8 +258,10 @@
 <div class="header-container">
     <header class="site-header">
         <h1>
-            <span class="initial" data-initial="R">R</span>obby
-            <span class="initial" data-initial="S">S</span>awicki
+            <span class="full-name">
+                <span class="initial" data-initial="R">R</span>obby
+                <span class="initial" data-initial="S">S</span>awicki
+            </span>
         </h1>
         <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
     </header>
