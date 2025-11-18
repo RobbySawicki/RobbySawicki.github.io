@@ -141,17 +141,22 @@
             text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
         }
 
-        /* LinkedIn logo (ADJUSTED PLACEMENT) */
+        /* LinkedIn logo (FINAL ADJUSTMENT) */
         .linkedin-link {
-            /* NEW: Adds flex properties to ensure vertical alignment */
+            /* Ensures the anchor tag is a flex container */
             display: flex;
-            align-items: center;
+            /* Ensures contents (the image) are vertically centered */
+            align-items: center; 
+            /* Added vertical-align: middle just in case */
+            vertical-align: middle; 
         }
 
         .linkedin-link img {
             height: 40px; 
             width: auto;
             margin-top: 0; 
+            /* Ensures the image itself doesn't introduce extra spacing */
+            display: block; 
             transition: transform 0.3s ease;
         }
 
