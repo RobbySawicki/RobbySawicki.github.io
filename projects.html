@@ -1,183 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects - Robby Sawicki</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Robby Sawicki</title>
 
-<!-- Import Lobster Two font -->
-<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
 
-<style>
-    body {
-        background-color: #ffffff;
-        margin: 0;
-        font-family: 'Open Sans', sans-serif;
-        color: #333;
-        text-align: center;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            text-align: center; 
+        }
 
-    .site-header {
-        padding: 15px 20px 10px;
-    }
+        /* --- WIDE, SPLIT HEADER STYLES --- */
+        .header-container {
+            /* Width constraint matching the main content area */
+            max-width: 1050px; 
+            margin: 0 auto; 
+            
+            /* Flexbox for split layout */
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 15px 10px 15px; /* Padding for small screens */
+        }
 
-    .site-header h1 {
-        font-family: 'Lobster Two', cursive;
-        font-size: 4rem;
-        color: #000;
-        margin: 0;
-        font-style: italic;
-    }
+        .site-header {
+            /* Ensures h1 and p align left */
+            text-align: left;
+            padding: 0;
+        }
 
-    .initial {
-        position: relative;
-        display: inline-block;
-        color: #000;
-    }
+        .site-header h1 {
+            font-family: 'Lobster Two', cursive;
+            font-size: 4rem;
+            color: #000;
+            margin: 0;
+            font-style: italic;
+        }
 
-    .initial::before,
-    .initial::after {
-        content: attr(data-initial);
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
+        .site-header p {
+            /* Left aligns the subtitle */
+            margin: 5px 0 0 0;
+            font-size: 1.1rem;
+        }
+        /* --- END WIDE, SPLIT HEADER STYLES --- */
 
-    .initial::before {
-        color: #7ebf7b;
-        transform: translate(-1.95px, -1.95px);
-        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-        animation: settleGreen 2s forwards;
-    }
 
-    .initial::after {
-        color: #a36fd0;
-        transform: translate(1.95px, 1.95px);
-        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-        animation: settlePurple 2s forwards;
-    }
+        /* Initial glow letters (ANIMATION INCLUDED) */
+        .initial {
+            position: relative;
+            display: inline-block;
+            color: #000;
+        }
 
-    @keyframes settleGreen {
-        0% { transform: translate(-1px, -1px); }
-        30% { transform: translate(-2.6px, -1.3px); }
-        60% { transform: translate(-1.3px, -2.6px); }
-        100% { transform: translate(-1.95px, -1.95px); }
-    }
+        .initial::before,
+        .initial::after {
+            content: attr(data-initial);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-    @keyframes settlePurple {
-        0% { transform: translate(1px, 1px); }
-        30% { transform: translate(2.6px, 1.3px); }
-        60% { transform: translate(1.3px, 2.6px); }
-        100% { transform: translate(1.95px, 1.95px); }
-    }
+        .initial::before {
+            color: #7ebf7b;
+            transform: translate(-1.95px, -1.95px);
+            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+            animation: settleGreen 2s forwards;
+        }
 
-    .navigation-bar {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin: 25px 0;
-    }
+        .initial::after {
+            color: #a36fd0;
+            transform: translate(1.95px, 1.95px);
+            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+            animation: settlePurple 2s forwards;
+        }
 
-    .neon-button {
-        position: relative;
-        display: inline-block;
-        font-family: 'Lobster Two', cursive;
-        font-size: 2rem;
-        font-style: italic;
-        font-weight: 400;
-        text-decoration: none;
-        padding: 12px 25px;
-        color: #fff;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
-        transition: all 0.3s ease;
-    }
+        @keyframes settleGreen {
+            0% { transform: translate(-1px, -1px); }
+            30% { transform: translate(-2.6px, -1.3px); }
+            60% { transform: translate(-1.3px, -2.6px); }
+            100% { transform: translate(-1.95px, -1.95px); }
+        }
 
-    .neon-button:hover {
-        filter: brightness(1.2);
-        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
-    }
+        @keyframes settlePurple {
+            0% { transform: translate(1px, 1px); }
+            30% { transform: translate(2.6px, 1.3px); }
+            60% { transform: translate(1.3px, 2.6px); }
+            100% { transform: translate(1.95px, 1.95px); }
+        }
 
-    .neon-button span.first-letter {
-        position: relative;
-        display: inline-block;
-        color: #fff;
-    }
+        /* Navigation Bar (Resized and Aligned Right) */
+        .navigation-bar {
+            display: flex;
+            justify-content: flex-end; /* Aligns links to the right */
+            gap: 15px; /* Adjusted gap to match previous version */
+            flex-wrap: nowrap;
+            margin: 0; /* Removed center margin */
+        }
 
-    .neon-button span.first-letter::before,
-    .neon-button span.first-letter::after {
-        content: attr(data-letter);
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
+        .neon-button {
+            /* Resized for shorter height (from 2rem/12px to 1.5rem/8px) */
+            font-size: 1.5rem;
+            padding: 8px 18px; 
+            
+            position: relative;
+            display: inline-flex; /* Changed to inline-flex for better vertical centering */
+            align-items: center;
+            font-family: 'Lobster Two', cursive;
+            font-style: italic;
+            font-weight: 400;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+            transition: all 0.3s ease;
+        }
 
-    .neon-button span.first-letter::before {
-        color: #7ebf7b;
-        transform: translate(-1.95px, -1.95px);
-        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-    }
+        .neon-button:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+        }
 
-    .neon-button span.first-letter::after {
-        color: #a36fd0;
-        transform: translate(1.95px, 1.95px);
-        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-    }
+        .neon-button span.first-letter {
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
 
-    .linkedin-link img {
-        height: 56px;
-        width: auto;
-        transition: transform 0.3s ease;
-    }
+        .neon-button span.first-letter::before,
+        .neon-button span.first-letter::after {
+            content: attr(data-letter);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-    .linkedin-link:hover img {
-        transform: scale(1.1);
-    }
+        .neon-button span.first-letter::before {
+            color: #7ebf7b;
+            transform: translate(-1.95px, -1.95px);
+            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
+        }
 
-    #main-content {
-        max-width: 700px;
-        margin: 30px auto;
-        font-size: 1.1rem;
-        color: #333;
-    }
+        .neon-button span.first-letter::after {
+            color: #a36fd0;
+            transform: translate(1.95px, 1.95px);
+            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
+        }
 
-    .site-footer {
-        text-align: center;
-        padding: 20px;
-        background: #f1f1f1;
-        color: #555;
-        margin-top: 50px;
-        font-size: 0.9rem;
-    }
+        /* LinkedIn logo (Resized for shorter height) */
+        .linkedin-link img {
+            height: 40px; /* Adjusted from 56px to 40px */
+            width: auto;
+            /* Added margin-top to visually align with buttons */
+            margin-top: 0; 
+            transition: transform 0.3s ease;
+        }
 
-    @media (max-width: 600px) {
-        .site-header h1 { font-size: 3rem; }
-        .navigation-bar { flex-direction: column; gap: 15px; }
-        .neon-button { font-size: 1.8rem; padding: 10px 20px; }
-        .linkedin-link img { height: 45px; }
-    }
-</style>
+        .linkedin-link {
+            /* Ensures logo aligns vertically with buttons */
+            display: flex;
+            align-items: center;
+        }
+
+        .linkedin-link:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Main content (Wider and Centered) */
+        #main-content {
+            max-width: 1050px; /* 1050px wide */
+            margin: 30px auto;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.55;
+            padding: 0 15px;
+            text-align: left; /* Content alignment */
+        }
+        
+        #main-content h2 {
+            text-align: center; /* Center the main title */
+        }
+
+
+        /* Site footer (NO CHANGE) */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            color: #555;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* Media Query Adjustments */
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column; /* Stacks header content vertically */
+                align-items: flex-start;
+                padding-bottom: 5px;
+            }
+            .site-header {
+                width: 100%;
+                text-align: center; /* Center name/subtitle on small screens */
+            }
+            .site-header p {
+                text-align: center; /* Center subtitle on small screens */
+            }
+            .site-header h1 { font-size: 3rem; }
+            
+            .navigation-bar { 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: center;
+                width: 100%;
+                margin: 15px 0;
+            }
+            .neon-button { 
+                font-size: 1.8rem; 
+                padding: 10px 20px; 
+                width: 80%; /* Makes buttons full width for touchability */
+                text-align: center;
+                justify-content: center;
+            }
+            .linkedin-link img { height: 45px; }
+            .linkedin-link {
+                 width: 80%;
+                 justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header class="site-header">
-    <h1><span class="initial" data-initial="R">R</span>obby <span class="initial" data-initial="S">S</span>awicki</h1>
-    <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
-</header>
+<div class="header-container">
+    <header class="site-header">
+        <h1><span class="initial" data-initial="R">R</span>obby <span class="initial" data-initial="S">S</span>awicki</h1>
+        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
+    </header>
 
-<nav class="navigation-bar">
-    <a href="About Me.html" class="neon-button"><span class="first-letter" data-letter="A">A</span>bout Me</a>
-    <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
-    <a href="Robby Sawicki Resume.pdf" target="_blank" class="neon-button"><span class="first-letter" data-letter="R">R</span>esume</a>
-    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
-    </a>
-</nav>
+    <nav class="navigation-bar">
+        <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>ome</a>
+        
+        <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a> 
+        
+        <a href="Robby Sawicki Resume.pdf" target="_blank" class="neon-button"><span class="first-letter" data-letter="R">R</span>esume</a>
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+        </a>
+    </nav>
+</div>
 
 <main id="main-content">
     <h2>Projects I've Worked On</h2>
