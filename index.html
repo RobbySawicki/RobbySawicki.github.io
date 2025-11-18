@@ -82,7 +82,7 @@
         /* Navigation buttons */
         .navigation-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-end; /* Aligns right on desktop */
             gap: 15px;
             flex-wrap: nowrap;
             margin: 0;
@@ -206,7 +206,6 @@
             .site-header {
                 width: 100%;
                 text-align: center; 
-                /* 🔑 FIX: Allows the flex item to shrink below the content size, preventing overflow */
                 min-width: 0; 
             }
             .site-header p {
@@ -214,7 +213,6 @@
             }
             .site-header h1 { 
                 font-size: 3rem; 
-                /* REMOVED: white-space: nowrap; - relying on font-size reduction and min-width: 0 on parent */
             }
             
             /* Navigation Stacking & Sizing */
@@ -222,6 +220,8 @@
                 flex-direction: column; 
                 gap: 10px; 
                 align-items: center;
+                /* 🔑 FIX: Center the buttons horizontally beneath the header */
+                justify-content: center; 
                 width: 100%;
                 margin: 15px 0;
             }
