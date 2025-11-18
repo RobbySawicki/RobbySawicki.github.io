@@ -5,189 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Me - Robby Sawicki</title>
 
-<!-- Import Lobster Two font -->
-<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
+<!-- Lobster Two font -->
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
 
 <style>
     body {
         background-color: #ffffff;
         margin: 0;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Lobster Two', cursive;
         color: #333;
         text-align: center;
     }
 
+    /* --- HEADER NAME WITH FULL GLOW ON EVERY LETTER --- */
     .site-header {
         padding: 15px 20px 10px;
     }
 
     .site-header h1 {
-        font-family: 'Lobster Two', cursive;
         font-size: 4rem;
-        color: #000;
         margin: 0;
+        font-style: italic;
+        letter-spacing: 1px;
+        color: transparent;
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+        -webkit-background-clip: text;
+        text-shadow: 
+            0 0 6px #7ebf7b,
+            0 0 12px #7ebf7b,
+            0 0 6px #a36fd0,
+            0 0 12px #a36fd0;
+    }
+
+    .site-header p {
+        font-size: 1.5rem;
+        margin-top: 5px;
+        color: #333;
         font-style: italic;
     }
 
-    /* Initial glow letters */
-    .initial {
-        position: relative;
-        display: inline-block;
-        color: #000;
-    }
-
-    .initial::before,
-    .initial::after {
-        content: attr(data-initial);
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-
-    .initial::before {
-        color: #7ebf7b;
-        transform: translate(-1.95px, -1.95px);
-        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-    }
-
-    .initial::after {
-        color: #a36fd0;
-        transform: translate(1.95px, 1.95px);
-        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-    }
-
-    /* Navigation buttons */
+    /* --- NAVIGATION --- */
     .navigation-bar {
         display: flex;
         justify-content: center;
         gap: 20px;
-        flex-wrap: wrap;
         margin: 25px 0;
+        flex-wrap: wrap;
     }
 
     .neon-button {
         position: relative;
         display: inline-block;
-        font-family: 'Lobster Two', cursive;
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-style: italic;
-        text-decoration: none;
-        padding: 12px 25px;
+        padding: 10px 22px;
         color: #fff;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
         background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
-        transition: all 0.3s ease;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: 0.3s;
+        border: none;
     }
 
     .neon-button:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
+        box-shadow: 0 0 12px #7ebf7b, 0 0 12px #a36fd0;
     }
 
-    .neon-button span.first-letter {
-        position: relative;
-        display: inline-block;
+    /* 20% smaller buttons */
+    .small-btn {
+        transform: scale(0.8);
     }
 
-    .neon-button span.first-letter::before,
-    .neon-button span.first-letter::after {
-        content: attr(data-letter);
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-
-    .neon-button span.first-letter::before {
-        color: #7ebf7b;
-        transform: translate(-1.95px, -1.95px);
-        text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-    }
-
-    .neon-button span.first-letter::after {
-        color: #a36fd0;
-        transform: translate(1.95px, 1.95px);
-        text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-    }
-
-    /* Larger LinkedIn logo */
+    /* --- LINKEDIN LOGO --- */
     .linkedin-link img {
-        height: 72px; /* Increased height */
+        height: 60px; /* Larger to align bottom with buttons */
         width: auto;
-        margin-top: 4px; /* Helps lower it slightly to align with button bottom */
-        transition: transform 0.3s ease;
+        transform: scale(0.8); /* 20% smaller */
+        transition: 0.3s ease;
+        margin-top: 3px;
     }
-
     .linkedin-link:hover img {
-        transform: scale(1.1);
+        transform: scale(0.9);
     }
 
-    /* Main content */
+    /* --- MAIN CONTENT --- */
     #main-content {
-        max-width: 700px;
-        margin: 30px auto;
-        font-size: 1.15rem;
-        color: #333;
-        line-height: 1.55;
-        padding: 0 15px;
+        max-width: 750px;
+        margin: 40px auto;
     }
 
-    /* Section headers */
-    .section-title {
-        font-family: 'Lobster Two', cursive;
-        font-style: italic;
+    /* LEFT-ALIGNED HEADINGS ONLY */
+    #main-content h2 {
+        text-align: left;
         font-size: 2.6rem;
-        margin-top: 40px;
-        margin-bottom: 10px;
-        color: #000;
+        margin-left: 10px;
+        font-style: italic;
+        color: transparent;
+        background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
+        -webkit-background-clip: text;
+        text-shadow:
+            0 0 6px #7ebf7b,
+            0 0 12px #7ebf7b,
+            0 0 6px #a36fd0,
+            0 0 12px #a36fd0;
+    }
+
+    #main-content p {
+        font-size: 1.4rem;
+        margin-top: 10px;
+        line-height: 1.55;
+        font-style: italic;
     }
 
     .site-footer {
         text-align: center;
         padding: 20px;
-        background: #f1f1f1;
+        background: #f0f0f0;
         color: #555;
-        margin-top: 50px;
-        font-size: 0.9rem;
+        margin-top: 40px;
+        font-size: 1rem;
     }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-    <h1>
-        <span class="initial" data-initial="R">R</span>obby
-        <span class="initial" data-initial="S">S</span>awicki
-    </h1>
+    <h1>Robby Sawicki</h1>
     <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
 </header>
 
 <nav class="navigation-bar">
-    <a href="projects.html" class="neon-button"><span class="first-letter" data-letter="P">P</span>rojects</a>
-    <a href="Robby Sawicki Resume.pdf" class="neon-button" target="_blank"><span class="first-letter" data-letter="R">R</span>esume</a>
-    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+    <a href="projects.html" class="neon-button small-btn"><span class="first-letter">P</span>rojects</a>
+    <a href="Robby Sawicki Resume.pdf" target="_blank" class="neon-button small-btn"><span class="first-letter">R</span>esume</a>
+    <a href="https://www.linkedin.com/in/robbysawicki/" class="linkedin-link" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
     </a>
 </nav>
 
 <main id="main-content">
 
-    <!-- WELCOME SECTION -->
-    <h2 class="section-title" style="font-weight: 400;">Welcome</h2>
+    <h2>Welcome</h2>
     <p>
-        Welcome to my professional space. Feel free to explore my projects, view my resume, or connect with me on LinkedIn.
-        I specialize in high-impact Out-Of-Home campaigns and creative wildposting that grabs attention and builds community presence.
+        Welcome to my professional space. Here you can explore my projects, view my resume,
+        and learn more about my work in Out-of-Home media and wildposting campaigns.
     </p>
 
-    <!-- ABOUT ME SECTION -->
-    <h2 class="section-title">About Me</h2>
+    <h2>About Me</h2>
     <p>
-        I’m a Toronto-based media professional with a passion for outdoor advertising, bold visuals, and strategic brand amplification.
-        My work focuses on connecting brands with audiences in the real world — through impactful OOH placements, street-level campaigns,
-        and creative wildposting executions.
+        I'm Robby Sawicki — a media sales professional specializing in high-impact OOH and
+        creative wildposting campaigns. I focus on helping brands spark curiosity, boost visibility,
+        and create real-world presence through strategically placed outdoor media.
     </p>
 
 </main>
