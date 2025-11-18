@@ -23,10 +23,11 @@
 
     .site-header h1 {
         font-family: 'Lobster Two', cursive;
+        font-style: italic;
+        font-weight: 400 !important; /* Not bold */
         font-size: 4rem;
         color: #000;
         margin: 0;
-        font-style: italic;
     }
 
     /* Initial glow letters */
@@ -34,6 +35,7 @@
         position: relative;
         display: inline-block;
         color: #000;
+        font-weight: 400 !important; /* Not bold */
     }
 
     .initial::before,
@@ -68,16 +70,22 @@
 
     .neon-button {
         position: relative;
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
         font-family: 'Lobster Two', cursive;
+        font-weight: 400 !important; /* Not bold */
         font-size: 2rem;
         font-style: italic;
+
         text-decoration: none;
         padding: 12px 25px;
         color: #fff;
         border-radius: 8px;
-        border: none;
         cursor: pointer;
+
         background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
         transition: all 0.3s ease;
     }
@@ -90,6 +98,7 @@
     .neon-button span.first-letter {
         position: relative;
         display: inline-block;
+        font-weight: 400 !important; /* Not bold */
     }
 
     .neon-button span.first-letter::before,
@@ -115,9 +124,9 @@
 
     /* Larger LinkedIn logo */
     .linkedin-link img {
-        height: 72px; /* Increased height */
+        height: 72px;
         width: auto;
-        margin-top: 4px; /* Helps lower it slightly to align with button bottom */
+        margin-top: 4px;
         transition: transform 0.3s ease;
     }
 
@@ -139,6 +148,7 @@
     .section-title {
         font-family: 'Lobster Two', cursive;
         font-style: italic;
+        font-weight: 400 !important; /* Not bold */
         font-size: 2.6rem;
         margin-top: 40px;
         margin-bottom: 10px;
@@ -175,14 +185,12 @@
 
 <main id="main-content">
 
-    <!-- WELCOME SECTION -->
-    <h2 class="section-title" style="font-weight: 400;">Welcome</h2>
+    <h2 class="section-title">Welcome</h2>
     <p>
         Welcome to my professional space. Feel free to explore my projects, view my resume, or connect with me on LinkedIn.
         I specialize in high-impact Out-Of-Home campaigns and creative wildposting that grabs attention and builds community presence.
     </p>
 
-    <!-- ABOUT ME SECTION -->
     <h2 class="section-title">About Me</h2>
     <p>
         I’m a Toronto-based media professional with a passion for outdoor advertising, bold visuals, and strategic brand amplification.
