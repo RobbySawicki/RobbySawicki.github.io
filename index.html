@@ -193,7 +193,7 @@
 
         /*
         ========================================
-        MOBILE FRIENDLY MEDIA QUERIES
+        MOBILE FRIENDLY MEDIA QUERIES (FIX APPLIED)
         ========================================
         */
         @media (max-width: 600px) {
@@ -206,14 +206,15 @@
             .site-header {
                 width: 100%;
                 text-align: center; 
+                /* 🔑 FIX: Allows the flex item to shrink below the content size, preventing overflow */
+                min-width: 0; 
             }
             .site-header p {
                 text-align: center; 
             }
             .site-header h1 { 
                 font-size: 3rem; 
-                /* FIX: Prevents "Robby" and "Sawicki" from splitting onto two lines */
-                white-space: nowrap; 
+                /* REMOVED: white-space: nowrap; - relying on font-size reduction and min-width: 0 on parent */
             }
             
             /* Navigation Stacking & Sizing */
