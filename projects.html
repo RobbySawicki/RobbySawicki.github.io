@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects – Robby Sawicki</title>
+  <title>Projects</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Lobster+Two:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Lobster+Two:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -26,42 +23,27 @@
 
 <body class="bg-gray-900 text-white">
 
-  <!-- NAVBAR -->
-  <header class="p-6 flex justify-between items-center bg-gray-950 bg-opacity-80 backdrop-blur-md">
-    <h1 class="text-4xl brand-font">Robby</h1>
+  <!-- TOP NAV BUTTONS -->
+  <div class="flex justify-center gap-4 p-6">
+    <a href="index.html" class="px-4 py-2 bg-purple-600 rounded-xl hover:bg-purple-500 transition">Home</a>
+    <a href="resume.pdf" target="_blank" class="px-4 py-2 bg-green-600 rounded-xl hover:bg-green-500 transition">Resume</a>
+    <a href="https://www.linkedin.com/in/robbysawicki" target="_blank" class="px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-500 transition">LinkedIn</a>
+  </div>
 
-    <nav class="space-x-4">
-      <a href="index.html" class="px-4 py-2 bg-purple-600 rounded-xl hover:bg-purple-500 transition">
-        Home
-      </a>
-      <a href="resume.pdf" class="px-4 py-2 bg-green-600 rounded-xl hover:bg-green-500 transition" target="_blank">
-        Resume
-      </a>
-      <a href="https://www.linkedin.com/in/robbysawicki" target="_blank"
-         class="px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-500 transition">
-        LinkedIn
-      </a>
-      <a href="projects.html" class="px-4 py-2 bg-gray-700 rounded-xl hover:bg-gray-600 transition">
-        Projects
-      </a>
-    </nav>
-  </header>
-
-  <!-- INTRO SECTION -->
-  <section class="max-w-4xl mx-auto mt-16 px-4">
-    <h2 class="text-5xl font-bold mb-6">Projects</h2>
-    <p class="text-lg text-gray-300 leading-relaxed">
-      Below is a collection of personal, creative, and technical projects I’ve worked on —
-      showcasing everything from interactive design to branding experiments and development work.
-      This page grows as I do, so expect more updates soon.
+  <!-- INTRO -->
+  <section class="max-w-3xl mx-auto text-center mt-12 px-4">
+    <h1 class="text-5xl font-bold brand-font mb-4">Projects</h1>
+    <p class="text-gray-300 text-lg leading-relaxed">
+      A curated selection of creative, professional, and technical projects I've worked on.
+      This collection continues to grow and evolve—just like I do. More updates coming soon.
     </p>
   </section>
 
-  <!-- PROJECT LIST EXAMPLE (empty until you add items) -->
-  <section class="max-w-4xl mx-auto mt-12 px-4 space-y-6">
-    <div class="p-6 bg-gray-800 rounded-2xl shadow-lg">
-      <h3 class="text-2xl font-semibold">Project Name</h3>
-      <p class="text-gray-400 mt-2">Description of the project...</p>
+  <!-- PROJECTS GRID (empty placeholder) -->
+  <section class="max-w-4xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h3 class="text-2xl font-semibold mb-2">Project Name</h3>
+      <p class="text-gray-400">Description goes here...</p>
     </div>
   </section>
 
