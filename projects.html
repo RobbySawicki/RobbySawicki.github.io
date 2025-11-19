@@ -1,109 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Robby Sawicki</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects – Robby Sawicki</title>
 
-    <!-- This favicon is the version you tried before encoding -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Lobster+Two:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
 
-    <style>
-        body {
-            background-color: #ffffff;
-            margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
-            text-align: center; 
-        }
-
-        /* --- WIDE, SPLIT HEADER STYLES --- */
-        .header-container {
-            max-width: 1050px; 
-            margin: 0 auto; 
-            display: flex;
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 15px 10px 15px;
-        }
-
-        .site-header {
-            text-align: left;
-            padding: 0;
-        }
-
-        .site-header h1 {
-            font-family: 'Lobster Two', cursive;
-            font-size: 4rem;
-            color: #000;
-            margin: 0;
-            font-style: italic;
-            font-weight: 400 !important;
-        }
-
-        .site-header p {
-            margin: 5px 0 0 0;
-            font-size: 1.1rem;
-        }
-
-        /* Initial glow letters (ANIMATION INCLUDED) */
-        .initial {
-            position: relative;
-            display: inline-block;
-            color: #000;
-            font-weight: 400;
-        }
-
-        .initial::before,
-        .initial::after {
-            content: attr(data-initial);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .initial::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-            animation: settleGreen 2s forwards;
-        }
-
-        .initial::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-            animation: settlePurple 2s forwards;
-        }
-
-        @keyframes settleGreen {
-            0% { transform: translate(-1px, -1px); }
-            30% { transform: translate(-2.6px, -1.3px); }
-            60% { transform: translate(-1.3px, -2.6px); }
-            100% { transform: translate(-1.95px, -1.95px); }
-        }
-
-        @keyframes settlePurple {
-            0% { transform: translate(1px, 1px); }
-            30% { transform: translate(2.6px, 2.6px); }
-            60% { transform: translate(1.3px, 2.6px); }
-            100% { transform: translate(1.95px, 1.95px); }
-        }
-    </style>
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+    }
+    .brand-font {
+      font-family: "Lobster Two", cursive;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-gray-900 text-white">
 
-    <div class="header-container">
-        <div class="site-header">
-            <h1><span class="initial" data-initial="R">R</span>obby Sawicki</h1>
-            <p>Projects</p>
-        </div>
+  <!-- NAVBAR -->
+  <header class="p-6 flex justify-between items-center bg-gray-950 bg-opacity-80 backdrop-blur-md">
+    <h1 class="text-4xl brand-font">Robby</h1>
+
+    <nav class="space-x-4">
+      <a href="index.html" class="px-4 py-2 bg-purple-600 rounded-xl hover:bg-purple-500 transition">
+        Home
+      </a>
+      <a href="resume.pdf" class="px-4 py-2 bg-green-600 rounded-xl hover:bg-green-500 transition" target="_blank">
+        Resume
+      </a>
+      <a href="https://www.linkedin.com/in/robbysawicki" target="_blank"
+         class="px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-500 transition">
+        LinkedIn
+      </a>
+      <a href="projects.html" class="px-4 py-2 bg-gray-700 rounded-xl hover:bg-gray-600 transition">
+        Projects
+      </a>
+    </nav>
+  </header>
+
+  <!-- INTRO SECTION -->
+  <section class="max-w-4xl mx-auto mt-16 px-4">
+    <h2 class="text-5xl font-bold mb-6">Projects</h2>
+    <p class="text-lg text-gray-300 leading-relaxed">
+      Below is a collection of personal, creative, and technical projects I’ve worked on —
+      showcasing everything from interactive design to branding experiments and development work.
+      This page grows as I do, so expect more updates soon.
+    </p>
+  </section>
+
+  <!-- PROJECT LIST EXAMPLE (empty until you add items) -->
+  <section class="max-w-4xl mx-auto mt-12 px-4 space-y-6">
+    <div class="p-6 bg-gray-800 rounded-2xl shadow-lg">
+      <h3 class="text-2xl font-semibold">Project Name</h3>
+      <p class="text-gray-400 mt-2">Description of the project...</p>
     </div>
+  </section>
+
+  <footer class="text-center text-gray-500 mt-20 p-6">
+    © 2025 Robby Sawicki
+  </footer>
 
 </body>
 </html>
