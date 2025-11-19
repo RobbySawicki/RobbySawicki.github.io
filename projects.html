@@ -1,270 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Robby Sawicki</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects – Robby Sawicki</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ffae' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23ff00ff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
-
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background-color: #ffffff;
             margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
+            padding: 0;
+            font-family: "Lobster Two", cursive;
+            background-color: #0a0a0a;
+            color: white;
             text-align: center;
         }
 
-        .header-container {
-            max-width: 1050px;
-            margin: 0 auto;
+        /* Top name header matching index page */
+        .header-name {
+            font-size: 55px;
+            margin-top: 40px;
+        }
+
+        .glow-green-purple {
+            color: white;
+            text-shadow:
+                -4px -4px 12px #6bff8f,
+                 4px  4px 12px #b37bff;
+        }
+
+        /* Buttons row */
+        .nav-buttons {
+            margin-top: 25px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 15px 10px 15px;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .site-header {
-            text-align: left;
-            padding: 0;
+        .nav-buttons a {
+            font-family: "Lobster Two", cursive;
+            font-size: 26px;
+            padding: 10px 22px;
+            background-color: #1a1a1a;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            transition: 0.25s;
         }
 
-        .site-header h1 {
-            font-family: 'Lobster Two', cursive;
+        .nav-buttons a:hover {
+            transform: scale(1.08);
+            background-color: #2a2a2a;
+        }
+
+        /* LinkedIn Icon – SAME placement & size as index page */
+        .linkedin-icon {
+            width: 42px;
+            vertical-align: middle;
+            margin-left: 10px;
+            margin-top: -6px;
+            filter: brightness(1) saturate(1);
+        }
+
+        /* Page Header */
+        h2 {
+            margin-top: 40px;
+            font-size: 38px;
+            font-weight: normal;
             font-style: italic;
-            font-weight: 400 !important;
-            font-size: 4rem;
-            color: #000;
-            margin: 0;
         }
 
-        .site-header p {
-            margin: 5px 0 0 0;
-            font-size: 1.1rem;
-        }
-
-        .initial {
-            position: relative;
-            display: inline-block;
-            color: #000;
-            font-weight: 400 !important;
-        }
-
-        .initial::before,
-        .initial::after {
-            content: attr(data-initial);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .initial::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-        }
-
-        .initial::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-        }
-
-        /* Navigation buttons */
-        .navigation-bar {
+        /* Project Cards */
+        .projects-container {
+            margin-top: 40px;
             display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            flex-wrap: nowrap;
-            margin: 0;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
         }
 
-        .neon-button {
-            font-size: 1.5rem;
-            padding: 8px 18px;
-            position: relative;
+        .project-card {
+            width: 310px;
+            height: 200px;
+            background-color: #111;
+            border-radius: 18px;
+            padding: 20px;
+            font-size: 24px;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            font-family: 'Lobster Two', cursive;
-            font-weight: 400 !important;
-            font-style: italic;
-            text-decoration: none;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-            background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
-            transition: all 0.3s ease;
+
+            /* Green top-left & purple bottom-right glow */
+            box-shadow:
+                -6px -6px 18px #6bff8f,
+                 6px  6px 18px #b37bff;
         }
 
-        .neon-button:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
-        }
-
-        .neon-button span.first-letter {
-            position: relative;
-            display: inline-block;
-        }
-
-        .neon-button span.first-letter::before,
-        .neon-button span.first-letter::after {
-            content: attr(data-letter);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .neon-button span.first-letter::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5.2px #7ebf7b, 0 0 9.75px #7ebf7b;
-        }
-
-        .neon-button span.first-letter::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5.2px #a36fd0, 0 0 9.75px #a36fd0;
-        }
-
-        .linkedin-link img {
-            height: 40px;
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .linkedin-link:hover img {
-            transform: scale(1.1);
-        }
-
-        #main-content {
-            max-width: 1050px;
-            margin: 30px auto;
-            font-size: 1.15rem;
-            color: #333;
-            line-height: 1.55;
-            padding: 0 15px;
-            text-align: left;
-        }
-
-        .section-title {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 2.6rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            text-align: center;
-            color: #000;
-        }
-
-        /* Project cards */
-        .project-card {
-            background: #f7f7f7;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #e2e2e2;
-        }
-
-        .project-card h3 {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400;
-            font-size: 2rem;
-            margin: 0 0 10px 0;
-            color: #000;
-        }
-
-        .project-card p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .site-footer {
-            text-align: center;
-            padding: 20px;
-            background: #f1f1f1;
-            color: #555;
-            margin-top: 50px;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            .header-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .navigation-bar {
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-            }
-
-            .neon-button {
-                width: 80%;
-                font-size: 1.8rem;
-            }
-
-            #main-content {
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
-
 <body>
 
-<div class="header-container">
-    <header class="site-header">
-        <h1>
-            <span class="full-name">
-                <span class="initial" data-initial="R">R</span>obby
-                <span class="initial" data-initial="S">S</span>awicki
-            </span>
-        </h1>
-        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
-    </header>
+    <!-- Title / Name -->
+    <div class="header-name">
+        <span class="glow-green-purple">Robby</span>
+        <span class="glow-green-purple">Sawicki</span>
+    </div>
 
-    <nav class="navigation-bar">
-        <!-- Changed this button to go HOME -->
-        <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>ome</a>
-
-        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" class="linkedin-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+    <!-- Buttons + LinkedIn (matches homepage placement) -->
+    <div class="nav-buttons">
+        <a href="index.html">Home</a>
+        <a href="resume.pdf" target="_blank">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank">
+            LinkedIn
+            <img src="linkedin.png" class="linkedin-icon">
         </a>
-    </nav>
-</div>
-
-<main id="main-content">
-
-    <h2 class="section-title">Projects I've Worked On</h2>
-
-    <!-- Example Projects -->
-    <div class="project-card">
-        <h3>Sample Project 1</h3>
-        <p>Description of the project goes here. You can add images, links, or details.</p>
     </div>
 
-    <div class="project-card">
-        <h3>Sample Project 2</h3>
-        <p>Another example project. You can add as many cards as you'd like.</p>
+    <!-- Header -->
+    <h2>Projects I've Worked On</h2>
+
+    <!-- Project Cards -->
+    <div class="projects-container">
+        <div class="project-card">Project 1</div>
+        <div class="project-card">Project 2</div>
+        <div class="project-card">Project 3</div>
     </div>
-
-</main>
-
-<footer class="site-footer">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
-</footer>
 
 </body>
 </html>
