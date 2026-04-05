@@ -1,337 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Robby</title>
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Projects | Robby</title>
+    
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='glow' x='-50%' y='-50%' width='200%' height='200%'><feDropShadow dx='4' dy='-4' stdDeviation='4' flood-color='%2300ff88' /><feDropShadow dx='-4' dy='4' stdDeviation='4' flood-color='%23bf5fff' /></filter></defs><circle cx='60' cy='64' r='60' fill='black'/><text x='64' y='64' font-family='&quot;Lobster Two&quot;, cursive' font-size='88' fill='white' text-anchor='middle' alignment-baseline='central' filter='url(%23glow)' font-style='italic'>R</text></svg>">
+    
+        <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+        <style>
+                    /* ===================== GLOBAL RESET & BASE ===================== */
+                    *, *::before, *::after { box-sizing: border-box; }
 
-    <link rel="icon" href="favicon.svg">
+                    body {
+                                    background-color: #0a0a0f;
+                                    margin: 0;
+                                    font-family: 'Inter', sans-serif;
+                                    color: #e0e0e0;
+                                    text-align: center;
+                    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+                    /* Top accent bar */
+                    body::before {
+                                    content: '';
+                                    display: block;
+                                    height: 4px;
+                                    background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88);
+                                    background-size: 200% 100%;
+                                    animation: shimmer 3s linear infinite;
+                    }
 
-    <style>
-        body {
-            background-color: #ffffff;
-            margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
-            text-align: center;
-        }
+                    @keyframes shimmer {
+                                    0%   { background-position: 0% 0%; }
+                                    100% { background-position: 200% 0%; }
+                    }
 
-        .header-container {
-            max-width: 1050px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 15px 10px 15px;
-        }
+                    /* ===================== HEADER ===================== */
+                    .header-container {
+                                    max-width: 1050px;
+                                    margin: 0 auto;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 18px 20px 12px 20px;
+                                    border-bottom: 1px solid #1e1e2e;
+                    }
 
-        .site-header {
-            text-align: left;
-            padding: 0;
-        }
+                    .site-header {
+                                    text-align: left;
+                                    padding: 0;
+                    }
 
-        .site-header h1 {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 4rem;
-            color: #000;
-            margin: 0;
-        }
+                    .site-header h1 {
+                                    font-family: 'Lobster Two', cursive;
+                                    font-style: italic;
+                                    font-weight: 400 !important;
+                                    font-size: 4rem;
+                                    color: #ffffff;
+                                    margin: 0;
+                                    text-shadow: 0 0 20px rgba(0,255,136,0.3);
+                    }
 
-        .site-header p {
-            margin: 5px 0 0 0;
-            font-size: 1.1rem;
-        }
+                    .site-header p {
+                                    margin: 5px 0 0 0;
+                                    font-size: 1rem;
+                                    color: #aaa;
+                                    letter-spacing: 0.03em;
+                    }
 
-        .initial {
-            position: relative;
-            display: inline-block;
-            color: #000;
-            font-weight: 400 !important;
-        }
+                    /* ===================== GLITCH-GLOW INITIALS ===================== */
+                    .initial {
+                                    position: relative;
+                                    display: inline-block;
+                                    color: #ffffff;
+                                    font-weight: 400 !important;
+                    }
 
-        .initial::before,
-        .initial::after {
-            content: attr(data-initial);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+                    .initial::before,
+                    .initial::after {
+                                    content: attr(data-initial);
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    z-index: -1;
+                    }
 
-        .initial::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5px #7ebf7b, 0 0 10px #7ebf7b;
-        }
+                    .initial::before {
+                                    color: #00ff88;
+                                    transform: translate(-2px, -2px);
+                                    text-shadow: 0 0 8px #00ff88, 0 0 16px #00ff88;
+                    }
 
-        .initial::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5px #a36fd0, 0 0 10px #a36fd0;
-        }
+                    .initial::after {
+                                    color: #bf5fff;
+                                    transform: translate(2px, 2px);
+                                    text-shadow: 0 0 8px #bf5fff, 0 0 16px #bf5fff;
+                    }
 
-        /* Navigation bar */
-        .navigation-bar {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            flex-wrap: nowrap;
-        }
+                    /* ===================== NAV ===================== */
+                    .navigation-bar {
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    gap: 15px;
+                                    flex-wrap: nowrap;
+                    }
 
-        /* Neon button */
-        .neon-button {
-            font-size: 1.5rem;
-            padding: 8px 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            text-decoration: none;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-            background: linear-gradient(to bottom right, #7ebf7b, #a36fd0);
-            transition: 0.3s ease;
-        }
+                    .neon-button {
+                                    font-size: 1.4rem;
+                                    padding: 9px 22px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    font-family: 'Lobster Two', cursive;
+                                    font-style: italic;
+                                    font-weight: 400 !important;
+                                    text-decoration: none;
+                                    color: #fff;
+                                    border-radius: 10px;
+                                    cursor: pointer;
+                                    background: linear-gradient(135deg, #00c966, #8a2be2);
+                                    border: 1px solid rgba(0,255,136,0.25);
+                                    transition: all 0.3s ease;
+                    }
 
-        .neon-button:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px #7ebf7b, 0 0 15px #a36fd0;
-        }
+                    .neon-button:hover {
+                                    filter: brightness(1.25);
+                                    box-shadow: 0 0 18px #00ff88, 0 0 18px #bf5fff;
+                                    transform: translateY(-2px);
+                    }
 
-        .neon-button span.first-letter {
-            position: relative;
-        }
+                    .neon-button span.first-letter {
+                                    position: relative;
+                    }
 
-        .neon-button span.first-letter::before,
-        .neon-button span.first-letter::after {
-            content: attr(data-letter);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+                    .neon-button span.first-letter::before,
+                    .neon-button span.first-letter::after {
+                                    content: attr(data-letter);
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    z-index: -1;
+                    }
 
-        .neon-button span.first-letter::before {
-            color: #7ebf7b;
-            transform: translate(-1.95px, -1.95px);
-            text-shadow: 0 0 5px #7ebf7b, 0 0 10px #7ebf7b;
-        }
+                    .neon-button span.first-letter::before {
+                                    color: #00ff88;
+                                    transform: translate(-1.5px, -1.5px);
+                                    text-shadow: 0 0 5px #00ff88;
+                    }
 
-        .neon-button span.first-letter::after {
-            color: #a36fd0;
-            transform: translate(1.95px, 1.95px);
-            text-shadow: 0 0 5px #a36fd0, 0 0 10px #a36fd0;
-        }
+                    .neon-button span.first-letter::after {
+                                    color: #bf5fff;
+                                    transform: translate(1.5px, 1.5px);
+                                    text-shadow: 0 0 5px #bf5fff;
+                    }
 
-        /* LinkedIn logo */
-        .linkedin-link {
-            display: flex;
-            align-items: center;
-        }
+                    /* ===================== LINKEDIN ===================== */
+                    .linkedin-link {
+                                    display: flex;
+                                    align-items: center;
+                    }
 
-        .linkedin-link img {
-            height: 40px;
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
+                    .linkedin-link img {
+                                    height: 40px;
+                                    width: auto;
+                                    display: block;
+                                    transition: transform 0.3s ease, filter 0.3s ease;
+                                    border-radius: 6px;
+                    }
 
-        .linkedin-link:hover img {
-            transform: scale(1.1);
-        }
+                    .linkedin-link:hover img {
+                                    transform: scale(1.1);
+                                    filter: drop-shadow(0 0 8px #00ff88);
+                    }
 
-        /* Main content */
-        #main-content {
-            max-width: 1050px;
-            margin: 30px auto;
-            text-align: left;
-            padding: 0 15px;
-        }
+                    /* ===================== MAIN CONTENT ===================== */
+                    #main-content {
+                                    max-width: 1050px;
+                                    margin: 40px auto;
+                                    text-align: left;
+                                    padding: 0 20px;
+                    }
 
-        .section-title {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-size: 2.6rem;
-            color: #000;
-            font-weight: 400 !important;
-            text-align: center;
-        }
+                    /* ===================== SECTION TITLE ===================== */
+                    .section-title {
+                                    font-family: 'Lobster Two', cursive;
+                                    font-style: italic;
+                                    font-size: 2.8rem;
+                                    font-weight: 400 !important;
+                                    text-align: center;
+                                    margin-bottom: 10px;
+                                    background: linear-gradient(90deg, #00ff88, #bf5fff);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                    background-clip: text;
+                                    filter: drop-shadow(0 0 12px rgba(0,255,136,0.25));
+                    }
 
-        /* Project cards — now vertical stack */
-        .projects-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-top: 40px;
-        }
+                    /* ===================== PROJECT CARDS ===================== */
+                    .projects-grid {
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 40px;
+                                    margin-top: 40px;
+                    }
 
-        .project-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            border: 2px solid #ddd;
+                    .project-card {
+                                    background: #12121c;
+                                    border-radius: 16px;
+                                    padding: 24px;
+                                    border: 1px solid #2a2a40;
+                                    box-shadow:
+                                                        -4px -4px 16px rgba(0,255,136,0.08),
+                                                        4px 4px 16px rgba(191,95,255,0.08);
+                                    transition: 0.3s ease;
+                    }
 
-            /* Glow outline */
-            box-shadow:
-                -4px -4px 12px #7ebf7b,
-                 4px  4px 12px #a36fd0;
+                    .project-card:hover {
+                                    transform: translateY(-6px);
+                                    box-shadow:
+                                                        -6px -6px 24px rgba(0,255,136,0.18),
+                                                        6px 6px 24px rgba(191,95,255,0.18);
+                    }
 
-            transition: 0.3s ease;
-        }
+                    /* Image placeholder */
+                    .project-image {
+                                    width: 100%;
+                                    height: 220px;
+                                    border: 1px solid #2a2a40;
+                                    border-radius: 12px;
+                                    background: linear-gradient(135deg, #0f1f17, #1a0f2e);
+                                    margin-bottom: 18px;
+                    }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow:
-                -6px -6px 18px #7ebf7b,
-                 6px  6px 18px #a36fd0;
-        }
+                    .project-card h3 {
+                                    font-family: 'Lobster Two', cursive;
+                                    font-style: italic;
+                                    font-weight: 400 !important;
+                                    font-size: 1.9rem;
+                                    margin-bottom: 10px;
+                                    background: linear-gradient(90deg, #00ff88, #bf5fff);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                    background-clip: text;
+                    }
 
-        /* Image section on top */
-        .project-image {
-            width: 100%;
-            height: 220px;
-            border: 2px solid #999;
-            border-radius: 10px;
-            background-color: #f7f7f7;
-            margin-bottom: 15px;
-        }
+                    .project-card p {
+                                    font-size: 1rem;
+                                    line-height: 1.6;
+                                    color: #aaa;
+                    }
 
-        .project-card h3 {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 1.9rem;
-            margin-bottom: 10px;
-        }
+                    /* ===================== FOOTER ===================== */
+                    .site-footer {
+                                    text-align: center;
+                                    padding: 24px;
+                                    background: #0d0d18;
+                                    color: #555;
+                                    margin-top: 60px;
+                                    font-size: 0.85rem;
+                                    border-top: 1px solid #1e1e2e;
+                                    letter-spacing: 0.03em;
+                    }
 
-        .project-card p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
+                    /* ===================== MOBILE ===================== */
+                    @media (max-width: 600px) {
+                                    .header-container {
+                                                        flex-direction: column;
+                                                        text-align: center;
+                                                        justify-content: center;
+                                    }
+                                    .site-header { text-align: center; }
+                                    .navigation-bar {
+                                                        flex-direction: column;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                        width: 100%;
+                                                        gap: 12px;
+                                                        margin-top: 15px;
+                                    }
+                                    .neon-button {
+                                                        width: 80%;
+                                                        max-width: 260px;
+                                                        font-size: 1.7rem;
+                                                        padding: 12px 20px;
+                                    }
+                                    .linkedin-link img { margin: 0 auto; }
+                                    #main-content {
+                                                        text-align: center;
+                                                        padding: 0 20px;
+                                    }
+                                    .projects-grid { align-items: center; }
+                                    .project-card {
+                                                        width: 100%;
+                                                        max-width: 420px;
+                                                        margin: 0 auto;
+                                                        text-align: center;
+                                    }
+                    }
+                </style>
+    </head>
 
-        /* Footer */
-        .site-footer {
-            text-align: center;
-            padding: 20px;
-            background: #f1f1f1;
-            color: #555;
-            margin-top: 50px;
-            font-size: 0.9rem;
-        }
+    <body>
 
-        /* ================================================= */
-        /* MOBILE STYLES (Added here at the bottom)          */
-        /* ================================================= */
+        <div class="header-container">
+                <header class="site-header">
+                            <h1>
+                                            <span class="initial" data-initial="R">R</span>span>obby
+                                            <span class="initial" data-initial="S">S</span>span>awicki
+                            </h1>
+                            <p>Media Sales &amp; OOH Specialist | Wildposting Campaigns</p>
+                </header>header>
         
-        @media (max-width: 600px) {
-
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
-            }
-
-            .site-header {
-                text-align: center;
-            }
-
-            .navigation-bar {
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                gap: 12px;
-                margin-top: 15px;
-            }
-
-            .neon-button {
-                width: 80%;
-                max-width: 260px;
-                font-size: 1.8rem;
-                padding: 12px 20px;
-            }
-
-            .linkedin-link img {
-                margin: 0 auto;
-            }
-
-            #main-content {
-                text-align: center;
-                padding: 0 20px;
-            }
-
-            .projects-grid {
-                align-items: center;
-            }
-
-            .project-card {
-                width: 100%;
-                max-width: 420px;
-                margin: 0 auto;
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="header-container">
-    <header class="site-header">
-        <h1>
-            <span class="initial" data-initial="R">R</span>obby
-            <span class="initial" data-initial="S">S</span>awicki
-        </h1>
-        <p>Media Sales & OOH Specialist | Wildposting Campaigns</p>
-    </header>
-
-    <nav class="navigation-bar">
-        <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>ome</a>
-        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" class="linkedin-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
-        </a>
-    </nav>
-</div>
-
-<main id="main-content">
-
-    <h2 class="section-title">Projects</h2>
-
-    <div class="projects-grid">
-
-        <div class="project-card">
-            <div class="project-image"></div>
-            <h3>Project 1</h3>
-            <p>Description will go here.</p>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image"></div>
-            <h3>Project 2</h3>
-            <p>Description will go here.</p>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image"></div>
-            <h3>Project 3</h3>
-            <p>Description will go here.</p>
-        </div>
-
-    </div>
-
-</main>
-
-<footer class="site-footer">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
-</footer>
-
-</body>
-</html>
+            <nav class="navigation-bar">
+                    <a href="index.html" class="neon-button"><span class="first-letter" data-letter="H">H</span>span>ome</a>a>
+                    <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" class="linkedin-link">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+                    </a>a>
+            </nav>nav>
+        </div>div>
+    
+    <main id="main-content">
+    
+        <h2 class="section-title">Projects</h2>
+    
+        <div class="projects-grid">
+        
+                <div class="project-card">
+                            <div class="project-image"></div>div>
+                            <h3>Project 1</h3>
+                            <p>Description will go here.</p>
+                </div>div>
+        
+                <div class="project-card">
+                            <div class="project-image"></div>div>
+                            <h3>Project 2</h3>
+                            <p>Description will go here.</p>
+                </div>div>
+        
+                <div class="project-card">
+                            <div class="project-image"></div>div>
+                            <h3>Project 3</h3>
+                            <p>Description will go here.</p>
+                </div>div>
+        
+        </div>div>
+    
+    </main>main>
+    
+    <footer class="site-footer">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
+    </footer>footer>
+    
+    </body>
+</html>html></script></p></p>
+                            </h1>
+    </body>
+        </style></title>
+    </head>
