@@ -22,7 +22,7 @@
         }
 
         /* TikTok-style animated top bar */
-        body::before {
+        .sticky-header::before {
             content: '';
             display: block;
             height: 4px;
@@ -34,6 +34,14 @@
         @keyframes shimmer {
             0%   { background-position: 0% 0%; }
             100% { background-position: 200% 0%; }
+        }
+
+        /* ---- STICKY NAV ---- */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #0a0a0f;
         }
 
         /* ---- HEADER ---- */
@@ -223,6 +231,7 @@
 </head>
 <body>
 
+<div class="sticky-header">
 <div class="header-container">
     <header class="site-header">
         <h1>Robby Sawicki</h1>
@@ -235,6 +244,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
         </a>
     </nav>
+</div>
 </div>
 
 <main id="main-content">
