@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Robby</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27128%27%20height%3D%27128%27%20viewBox%3D%270%200%20128%20128%27%3E%3Cdefs%3E%3Cfilter%20id%3D%27g%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeDropShadow%20dx%3D%273%27%20dy%3D%27-3%27%20stdDeviation%3D%273%27%20flood-color%3D%27%2300ff88%27%20flood-opacity%3D%270.95%27%2F%3E%3CfeDropShadow%20dx%3D%27-3%27%20dy%3D%273%27%20stdDeviation%3D%273%27%20flood-color%3D%27%23bf5fff%27%20flood-opacity%3D%270.95%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%27128%27%20height%3D%27128%27%20rx%3D%2718%27%20fill%3D%27%230a0a0f%27%2F%3E%3Ctext%20x%3D%2764%27%20y%3D%2798%27%20font-family%3D%27Georgia%2Cserif%27%20font-size%3D%2796%27%20fill%3D%27white%27%20text-anchor%3D%27middle%27%20filter%3D%27url(%23g)%27%20font-style%3D%27italic%27%3ER%3C%2Ftext%3E%3C%2Fsvg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27128%27%20height%3D%27128%27%20viewBox%3D%270%200%20128%20128%27%3E%3Cdefs%3E%3Cstyle%3E%40import%20url(%27https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DLobster%2BTwo%3Aital%401%27)%3B%3C%2Fstyle%3E%3Cfilter%20id%3D%27g%27%20x%3D%27-50%25%27%20y%3D%27-50%25%27%20width%3D%27200%25%27%20height%3D%27200%25%27%3E%3CfeDropShadow%20dx%3D%273%27%20dy%3D%27-3%27%20stdDeviation%3D%273%27%20flood-color%3D%27%2300ff88%27%20flood-opacity%3D%270.95%27%2F%3E%3CfeDropShadow%20dx%3D%27-3%27%20dy%3D%273%27%20stdDeviation%3D%273%27%20flood-color%3D%27%23bf5fff%27%20flood-opacity%3D%270.95%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2764%27%20cy%3D%2764%27%20r%3D%2764%27%20fill%3D%27%230a0a0f%27%2F%3E%3Ctext%20x%3D%2764%27%20y%3D%2794%27%20font-family%3D%27Lobster%20Two%2Ccursive%27%20font-size%3D%2790%27%20fill%3D%27white%27%20text-anchor%3D%27middle%27%20filter%3D%27url(%23g)%27%20font-style%3D%27italic%27%3ER%3C%2Ftext%3E%3C%2Fsvg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -37,6 +37,10 @@
         .awards-list li::before { content: '\1F3C6'; position: absolute; left: 0; top: 0; }
         .site-footer { text-align: center; padding: 24px; background: #0d0d18; color: #555; margin-top: 60px; font-size: 0.85rem; border-top: 1px solid #1e1e2e; }
         @media (max-width: 600px) { .header-container { flex-direction: column; text-align: center; justify-content: center; gap: 12px; } .site-header { text-align: center; } .navigation-bar { flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 12px; } .neon-button { width: 80%; max-width: 260px; font-size: 1.7rem; padding: 12px 20px; } .linkedin-link img { margin: 0 auto; } #main-content { text-align: center; padding: 0 20px; } .projects-grid { align-items: center; } .project-card { width: 100%; max-width: 420px; margin: 0 auto; text-align: center; } }
+    
+        .card-badge { position: absolute; top: 12px; right: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; z-index: 10; letter-spacing: 0.5px; }
+        . { background: linear-gradient(135deg, #00ff88, #00cc6a); color: #0a0a0f; }
+        .recent-badge { background: linear-gradient(135deg, #bf5fff, #9b3fd4); color: white; }
     </style>
 </head>
 <body>
@@ -55,8 +59,7 @@
 <main id="main-content">
     <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
-        <!-- ===== PROJECT: KRAFT HEINZ x DEADPOOL ===== -->
-        <div class="project-card">
+        <div class="project-card" style="position: relative;"><span class="card-badge " title="Pinned">📌 Pinned</span>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/eN2rNIgy9JQ" title="Kraft Heinz x Deadpool - Can't Unsee It" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
@@ -79,47 +82,24 @@
             </ul>
             <p style="margin-bottom:18px; color:#888; font-size:0.9rem;">The campaign's viral success demonstrated how smart cultural timing and bold creative can turn a condiment into a pop-culture moment &mdash; garnering millions of impressions and widespread earned media coverage globally.</p>
         </div>
-        <!-- ===== PROJECT: PHILADELPHIA - SCHMEAR SOCKS ===== -->
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #003087, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F9E6;</span></div>
-            <h3>Philadelphia Cream Cheese &mdash; &ldquo;Schmear Socks&rdquo;</h3>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2023</span>
-            </div>
-            <p style="margin-bottom:14px;">To combat falling popularity among younger consumers, Philadelphia hijacked the launch of Nike's <strong style="color:#fff;">&ldquo;Montreal Bagel Dunks&rdquo;</strong> sneakers by releasing limited-edition, cream-cheese-themed socks with digital creator partnerships. The bold culture-jacking stunt drove a <strong style="color:#00ff88;">15.3% sales increase</strong> and brought Philly back into the conversation with a new generation.</p>
-            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Supported the media strategy for this campaign on the Kraft Heinz account, helping plan digital and social placements to amplify the cultural moment and maximize reach among the target youth demographic.</p>
+
+                <div class="project-card" style="position: relative;"><span class="card-badge recent-badge" title="Most Recent">🆕 Recent</span>
+        <div class="video-container">
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/95c8gQzsLA0" title="Canada Soccer Jersey Swap - Little Italy Toronto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <!-- ===== PROJECT: PHILADELPHIA - A LITTLE TASTE OF HELL ===== -->
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #1a0a0a, #2e0f0f); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F525;</span></div>
-            <h3>Philadelphia Cream Cheese &mdash; &ldquo;A Little Taste of Hell&rdquo;</h3>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2023</span>
-            </div>
-            <p style="margin-bottom:14px;">Philadelphia targeted a new generation by introducing a limited-edition cream cheese that was <strong style="color:#fff;">208&times; hotter than jalape&ntilde;os</strong>. Featuring a &ldquo;devil-horned&rdquo; logo and bold black packaging, the product was sold exclusively through <strong style="color:#bf5fff;">Uber Eats</strong>, bringing a &ldquo;little taste of hell&rdquo; to the brand and generating massive buzz on social media.</p>
-            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Contributed to the media strategy and channel planning that supported this product launch, coordinating digital placements and partnership activations to drive awareness and trial among younger audiences.</p>
+        <div class="project-content">
+            <h3>Canada Soccer — “Our Game Now” Jersey Swap</h3>
+            <p>Ahead of the 2026 FIFA World Cup, Canada Soccer hosted a jersey swap event outside Café Diplomatico in Toronto’s Little Italy on April 4, 2026. Hundreds of Italian-Canadian fans lined up to trade their Italy jerseys for Canada’s new “Our Game Now” 2026 World Cup kits. In a surprise twist, Canada Soccer didn’t take any Italy jerseys — instead giving away free 2026 jerseys and posters to all attendees. The event drew massive crowds and generated widespread media coverage from CP24, TSN, Toronto Star, and 6ixBuzzTV, trending across social media with over 10K engagements.</p>
         </div>
-        <!-- ===== PROJECT: PHILADELPHIA - IRRESISTIBLY FLUFFY ===== -->
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #0f1f2e, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x2601;&#xFE0F;</span></div>
-            <h3>Philadelphia Cream Cheese &mdash; &ldquo;Irresistibly Fluffy&rdquo;</h3>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2024</span>
-            </div>
-            <p style="margin-bottom:14px;">A campaign focused on repositioning <strong style="color:#fff;">Philly Whipped cream cheese</strong> as the ideal &ldquo;easy to serve&rdquo; dip for snacking. The &ldquo;Irresistibly Fluffy&rdquo; creative highlighted the unique light texture of the product, shifting consumer perception away from traditional bagel-and-toast use cases toward a broader snacking occasion.</p>
-            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Supported the media planning for this repositioning effort, helping to identify the right channels and audiences to communicate the new snacking positioning and drive product trial across Canada.</p>
-        </div>
-        <!-- ===== PROJECT: PHILADELPHIA - BONUTS ===== -->
-        <div class="project-card">
+    </div>
+
+                <div class="project-card">
+        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #87CEEB); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.4rem; font-weight:bold; color:#FFD100; text-align:center; padding:10px; font-family:'Inter',sans-serif;">KD Frozen</span></div>
+        <h3>KD — Frozen Launch</h3>
+        <p class="project-category">Media Planning | Kraft Heinz</p>
+        <p>As a Media Planner at dentsu (Carat), I supported the media strategy for the launch of KD Frozen (2024), bringing the iconic Kraft Dinner brand into the frozen aisle for the first time. The ready-to-heat frozen mac and cheese entrées were introduced across Canadian grocery retailers including Sobeys, FreshCo, and Safeway. The media plan drove awareness of the new product format through digital advertising, in-store activations, and social content, positioning KD Frozen as a convenient, premium option for consumers seeking the classic KD taste in a quick, heat-and-eat format.</p>
+
+                <div class="project-card">
             <div class="project-image" style="background: linear-gradient(135deg, #2e1a0f, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F369;</span></div>
             <h3>Philadelphia Cream Cheese &mdash; &ldquo;Bonuts&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
@@ -132,75 +112,101 @@
             <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Contributed to the media planning and channel strategy supporting this product launch, helping to coordinate digital and social activations to maximize awareness and drive consumer excitement.</p>
         </div>
 
-        <!-- ===== PROJECT: LUNCHABLES - GOODBYE/HELLO ===== -->
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #FFD700, #FF6347); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F96A;</span></div>
-            <h3>Lunchables &mdash; &ldquo;Goodbye/Hello&rdquo;</h3>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
-                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
-                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2024</span>
-            </div>
-            <p style="margin-bottom:14px;">In April 2024, Kraft Heinz marked the return of <strong style="color:#fff;">Lunchables to Canadian shelves after a 15-year absence</strong> with the nostalgia-driven &ldquo;Goodbye/Hello&rdquo; campaign. The two-part creative &mdash; featuring a press conference-style video titled &ldquo;Goodbye, Canada&rdquo; followed by the reveal &mdash; leveraged irony and nostalgia to reintroduce the iconic snack brand to a new generation of Canadian families, including a giveaway of <strong style="color:#00ff88;">10,000 free samples</strong>.</p>
-            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Contributed to the media planning and strategy supporting the Canadian relaunch of Lunchables, helping coordinate channel selection and media buys to maximize awareness and excitement around the brand's highly anticipated return to market.</p>
-        </div>
+                <div class="project-card">
+        <div class="project-image" style="background: linear-gradient(135deg, #FFD700, #DAA520); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.2rem; font-weight:bold; color:#003DA5; text-align:center; padding:10px; font-family:'Inter',sans-serif;">Spoon KD</span></div>
+        <h3>KD — “Spoon KD”</h3>
+        <p class="project-category">Media Planning | Kraft Heinz</p>
+        <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for KD’s “Spoon KD” campaign (2023). In a playful nod to the timeless fork vs. spoon debate, KD launched “Spoon KD” — positioning the spoon as the definitive utensil for eating Kraft Dinner. After over 50 years with a fork on the box, the campaign introduced the spoon front and center, sparking conversation and engagement across social media, digital placements, and in-store activations.</p>
+    </div>
 
-        <div class="project-card">
-            <div class="project-image"><img src="https://img.youtube.com/vi/o-n_GmEu4OA/hqdefault.jpg" alt="Kraft Peanut Butter Welcome Home Jars" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
-            <h3>Kraft Peanut Butter — "Welcome Home Jars"</h3>
-            <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Kraft Peanut Butter's "Welcome Home Jars" campaign (2023), an initiative welcoming newcomers to Canada. Partnering with Duolingo and featuring Nav Bhatia, the campaign replaced jar labels with welcome messages in five languages and included custom language resources and real-time interactive airport billboards. All limited-edition jars were claimed within hours of launch. The integrated media plan spanned contextually relevant OOH placements, social, and digital channels.</p>
-            <p><strong>Awards:</strong></p>
-            <ul class="awards-list">
-                <li>🏆 Strategy Marketing Awards 2024 — Bronze (Integrated Campaign)</li>
-            </ul>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #8B4513, #D2691E); display:flex; align-items:center; justify-content:center;"><span style="font-size:2.2rem; font-weight:bold; color:#fff; text-align:center; font-family:'Lobster Two',cursive; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">QJar Codes<br><span style='font-size:1rem;font-weight:normal;'>Kraft Peanut Butter</span></span></div>
-            <h3>Kraft Peanut Butter — "QJar Codes"</h3>
-            <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for Kraft Peanut Butter's "QJar Codes" campaign (2024). To combat rising grocery prices, this innovative AI-driven campaign turned the residue left inside empty Kraft Peanut Butter jars into scannable QR codes, unlocking instant delivery of a new jar via SkipTheDishes. The campaign drove a 120% increase in sales during the campaign period. The media strategy included high-traffic OOH placements at Toronto's Yonge-Dundas Square, TV spots, and social media activations across Instagram and TikTok.</p>
-            <p><strong>Awards:</strong></p>
-            <ul class="awards-list">
-                <li>🏆 Strategy Marketing Awards 2024 — 2× Bronze</li>
-            </ul>
-        </div>
-
-        <div class="project-card">
+                <div class="project-card">
             <div class="project-image"><img src="https://img.youtube.com/vi/Rf-aH6Cel64/hqdefault.jpg" alt="Kraft Hockeyville 2024" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
             <h3>Kraft Hockeyville</h3>
             <p class="project-category">Media Planning | Kraft Heinz</p>
             <p>As a Media Planner at dentsu (Carat), I supported the national media plan for Kraft Hockeyville 2024, Kraft Heinz's iconic annual competition celebrating the role of local hockey arenas in Canadian communities. Partnering with the NHL and NHLPA, the campaign invited communities across Canada to nominate their arena for a chance to win $250,000 in upgrades and an NHL pre-season game. Elliot Lake, Ontario was crowned the 2024 winner. The fully integrated media plan included linear TV integrations during hockey programming, high-impact digital placements, social media outreach, and national OOH to drive nominations and community voting.</p>
         </div>
 
-        <div class="project-card">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/s5rKHbyFcVM" title="Never Mind | Tingly Ted's" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <h3>Tingly Ted’s — Ed Sheeran x Kraft Heinz</h3>
-            <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Tingly Ted’s, a hot sauce brand launched in 2023 through a collaboration between Ed Sheeran and Kraft Heinz. Named after Sheeran’s childhood teddy bear, the “bland-busting” condiment launched in “Tingly” and “Xtra Tingly” flavors. The integrated campaign, titled “Catchup with Tingly Ted,” featured TV spots, social video content across TikTok, Instagram, and YouTube, and outdoor advertising, starring Sheeran alongside a giant teddy bear mascot.</p>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #00C9FF, #92FE9D); display:flex; align-items:center; justify-content:center;"><span style="font-size:2.2rem; font-weight:bold; color:#000; text-align:center; font-family:'Lobster Two',cursive; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">MiO Energy<br><span style='font-size:1rem;font-weight:normal;'>Influencer Campaign</span></span></div>
-            <h3>MiO Energy — Influencer Campaign</h3>
-            <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for MiO Energy’s influencer-driven campaign (2023–2024). The campaign leveraged creators on TikTok and Instagram to promote MiO Energy’s product line to a younger, digitally-native audience. Key activations included the “Another Busy Morning” influencer series and “Squeeze” productivity content, focusing on themes of staying hydrated and energized. The media plan targeted high-impact digital placements and social-first content partnerships to drive awareness around MiO’s rebranded energy line.</p>
-        </div>
-    </div>
-    <div class="project-card">
+                <div class="project-card">
         <div class="video-container">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/95c8gQzsLA0" title="Canada Soccer Jersey Swap - Little Italy Toronto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTPchTpqNHU" title="Smack For Heinz - Chicago Billboards" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="project-content">
-            <h3>Canada Soccer — “Our Game Now” Jersey Swap</h3>
-            <p>Ahead of the 2026 FIFA World Cup, Canada Soccer hosted a jersey swap event outside Café Diplomatico in Toronto’s Little Italy on April 4, 2026. Hundreds of Italian-Canadian fans lined up to trade their Italy jerseys for Canada’s new “Our Game Now” 2026 World Cup kits. In a surprise twist, Canada Soccer didn’t take any Italy jerseys — instead giving away free 2026 jerseys and posters to all attendees. The event drew massive crowds and generated widespread media coverage from CP24, TSN, Toronto Star, and 6ixBuzzTV, trending across social media with over 10K engagements.</p>
+            <h3>Heinz Ketchup — “Smack For Heinz”</h3>
+            <p class="project-category">Media Planning | Kraft Heinz</p>
+            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for the “Smack For Heinz” campaign (2024). This interactive OOH activation placed ketchup-dispensing billboards outside famous Chicago hot dog stands and restaurants known for not serving Heinz. Fans could “smack” the billboard to receive a free Heinz ketchup packet, turning the classic physical act of tapping a bottle into a digital-physical experience. The campaign generated 366 million earned impressions, helped drive $8.4 million in new restaurant business, and outperformed social benchmarks by 157%.</p>
+            <p><strong>Awards:</strong></p>
+            <ul class="awards-list">
+                <li>🏆 Strategy Agency of the Year 2024 — Winner</li>
+                <li>🏆 The One Club (ADC Awards) — Merit</li>
+            </ul>
         </div>
     </div>
-    <div class="project-card">
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #0f1f2e, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x2601;&#xFE0F;</span></div>
+            <h3>Philadelphia Cream Cheese &mdash; &ldquo;Irresistibly Fluffy&rdquo;</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2024</span>
+            </div>
+            <p style="margin-bottom:14px;">A campaign focused on repositioning <strong style="color:#fff;">Philly Whipped cream cheese</strong> as the ideal &ldquo;easy to serve&rdquo; dip for snacking. The &ldquo;Irresistibly Fluffy&rdquo; creative highlighted the unique light texture of the product, shifting consumer perception away from traditional bagel-and-toast use cases toward a broader snacking occasion.</p>
+            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Supported the media planning for this repositioning effort, helping to identify the right channels and audiences to communicate the new snacking positioning and drive product trial across Canada.</p>
+        </div>
+
+                <div class="project-card">
+        <div class="video-container">
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YeFD2CVDijE" title="Heinz - The Wait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="project-content">
+            <h3>Heinz Ketchup — “The Wait”</h3>
+            <p class="project-category">Media Planning | Kraft Heinz</p>
+            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for Heinz’s global “The Wait” campaign (January 2024). Based on research showing that over two-thirds of diners prefer waiting for Heinz ketchup rather than eating without it, the campaign celebrated this “irrational love” through 15-second film spots, social media content on Instagram and TikTok, print ads, and high-traffic digital out-of-home placements. The campaign ran across Canada, the U.S., UK, Brazil, Chile, France, and the UAE as part of the broader “It Has To Be Heinz” brand platform.</p>
+        </div>
+    </div>
+
+                <div class="project-card">
+        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #1a1a2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.4rem; font-weight:bold; color:#FFD100; text-align:center; padding:10px; font-family:'Inter',sans-serif;">Cancel Coverage</span></div>
+        <h3>KD — “Cancel Coverage”</h3>
+        <p class="project-category">Media Planning | Kraft Heinz</p>
+        <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for KD’s “Cancel Coverage” campaign (2023). Tapping into Gen Z’s embrace of JOMO (Joy Of Missing Out), KD created a fund to pay restaurant cancellation fees for consumers who chose to stay in with a box of KD instead of going out. The campaign was activated through social media, digital placements, and influencer content, positioning KD as the ultimate comfort food for nights in and resonating strongly with younger audiences who value authenticity over appearances.</p>
+    </div>
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #003087, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F9E6;</span></div>
+            <h3>Philadelphia Cream Cheese &mdash; &ldquo;Schmear Socks&rdquo;</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2023</span>
+            </div>
+            <p style="margin-bottom:14px;">To combat falling popularity among younger consumers, Philadelphia hijacked the launch of Nike's <strong style="color:#fff;">&ldquo;Montreal Bagel Dunks&rdquo;</strong> sneakers by releasing limited-edition, cream-cheese-themed socks with digital creator partnerships. The bold culture-jacking stunt drove a <strong style="color:#00ff88;">15.3% sales increase</strong> and brought Philly back into the conversation with a new generation.</p>
+            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Supported the media strategy for this campaign on the Kraft Heinz account, helping plan digital and social placements to amplify the cultural moment and maximize reach among the target youth demographic.</p>
+        </div>
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #1a0a0a, #2e0f0f); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F525;</span></div>
+            <h3>Philadelphia Cream Cheese &mdash; &ldquo;A Little Taste of Hell&rdquo;</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2023</span>
+            </div>
+            <p style="margin-bottom:14px;">Philadelphia targeted a new generation by introducing a limited-edition cream cheese that was <strong style="color:#fff;">208&times; hotter than jalape&ntilde;os</strong>. Featuring a &ldquo;devil-horned&rdquo; logo and bold black packaging, the product was sold exclusively through <strong style="color:#bf5fff;">Uber Eats</strong>, bringing a &ldquo;little taste of hell&rdquo; to the brand and generating massive buzz on social media.</p>
+            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Contributed to the media strategy and channel planning that supported this product launch, coordinating digital placements and partnership activations to drive awareness and trial among younger audiences.</p>
+        </div>
+
+                <div class="project-card">
+        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #FFD100); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem; font-weight:bold; color:#fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-family:'Lobster Two',cursive;">KD</span></div>
+        <h3>KD — “Gotta Be KD” Brand Refresh</h3>
+        <p class="project-category">Media Planning | Kraft Heinz</p>
+        <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Kraft Dinner’s major brand refresh in September 2023. The “Gotta Be KD” platform marked the most significant rebrand in the product’s history, featuring a redesigned logo, simplified packaging, and a youth-focused positioning targeting Gen Z and Millennials. The media plan encompassed high-engagement digital placements, influencer partnerships, out-of-home advertising, and TikTok-first social content to reposition KD as a cultural staple of authenticity and social comfort.</p>
+    </div>
+
+                <div class="project-card">
         <div class="video-container">
             <iframe width="100%" height="250" src="https://www.youtube.com/embed/8LmaGGBSdLw" title="Heinz Ketchup Fraud" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -218,55 +224,59 @@
             </ul>
         </div>
     </div>
-    <div class="project-card">
-        <div class="video-container">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YeFD2CVDijE" title="Heinz - The Wait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #FFD700, #FF6347); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x1F96A;</span></div>
+            <h3>Lunchables &mdash; &ldquo;Goodbye/Hello&rdquo;</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Kraft Heinz</span>
+                <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">dentsu</span>
+                <span style="background:#1a0f2e; color:#bf5fff; border:1px solid #bf5fff; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">2024</span>
+            </div>
+            <p style="margin-bottom:14px;">In April 2024, Kraft Heinz marked the return of <strong style="color:#fff;">Lunchables to Canadian shelves after a 15-year absence</strong> with the nostalgia-driven &ldquo;Goodbye/Hello&rdquo; campaign. The two-part creative &mdash; featuring a press conference-style video titled &ldquo;Goodbye, Canada&rdquo; followed by the reveal &mdash; leveraged irony and nostalgia to reintroduce the iconic snack brand to a new generation of Canadian families, including a giveaway of <strong style="color:#00ff88;">10,000 free samples</strong>.</p>
+            <p><strong style="color:#00ff88;">My Role &mdash; Media Planner at dentsu:</strong> Contributed to the media planning and strategy supporting the Canadian relaunch of Lunchables, helping coordinate channel selection and media buys to maximize awareness and excitement around the brand's highly anticipated return to market.</p>
         </div>
-        <div class="project-content">
-            <h3>Heinz Ketchup — “The Wait”</h3>
+
+                <div class="project-card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/s5rKHbyFcVM" title="Never Mind | Tingly Ted's" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <h3>Tingly Ted’s — Ed Sheeran x Kraft Heinz</h3>
             <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for Heinz’s global “The Wait” campaign (January 2024). Based on research showing that over two-thirds of diners prefer waiting for Heinz ketchup rather than eating without it, the campaign celebrated this “irrational love” through 15-second film spots, social media content on Instagram and TikTok, print ads, and high-traffic digital out-of-home placements. The campaign ran across Canada, the U.S., UK, Brazil, Chile, France, and the UAE as part of the broader “It Has To Be Heinz” brand platform.</p>
+            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Tingly Ted’s, a hot sauce brand launched in 2023 through a collaboration between Ed Sheeran and Kraft Heinz. Named after Sheeran’s childhood teddy bear, the “bland-busting” condiment launched in “Tingly” and “Xtra Tingly” flavors. The integrated campaign, titled “Catchup with Tingly Ted,” featured TV spots, social video content across TikTok, Instagram, and YouTube, and outdoor advertising, starring Sheeran alongside a giant teddy bear mascot.</p>
         </div>
-    </div>
-    <div class="project-card">
-        <div class="video-container">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTPchTpqNHU" title="Smack For Heinz - Chicago Billboards" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="project-content">
-            <h3>Heinz Ketchup — “Smack For Heinz”</h3>
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #8B4513, #D2691E); display:flex; align-items:center; justify-content:center;"><span style="font-size:2.2rem; font-weight:bold; color:#fff; text-align:center; font-family:'Lobster Two',cursive; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">QJar Codes<br><span style='font-size:1rem;font-weight:normal;'>Kraft Peanut Butter</span></span></div>
+            <h3>Kraft Peanut Butter — "QJar Codes"</h3>
             <p class="project-category">Media Planning | Kraft Heinz</p>
-            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for the “Smack For Heinz” campaign (2024). This interactive OOH activation placed ketchup-dispensing billboards outside famous Chicago hot dog stands and restaurants known for not serving Heinz. Fans could “smack” the billboard to receive a free Heinz ketchup packet, turning the classic physical act of tapping a bottle into a digital-physical experience. The campaign generated 366 million earned impressions, helped drive $8.4 million in new restaurant business, and outperformed social benchmarks by 157%.</p>
+            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for Kraft Peanut Butter's "QJar Codes" campaign (2024). To combat rising grocery prices, this innovative AI-driven campaign turned the residue left inside empty Kraft Peanut Butter jars into scannable QR codes, unlocking instant delivery of a new jar via SkipTheDishes. The campaign drove a 120% increase in sales during the campaign period. The media strategy included high-traffic OOH placements at Toronto's Yonge-Dundas Square, TV spots, and social media activations across Instagram and TikTok.</p>
             <p><strong>Awards:</strong></p>
             <ul class="awards-list">
-                <li>🏆 Strategy Agency of the Year 2024 — Winner</li>
-                <li>🏆 The One Club (ADC Awards) — Merit</li>
+                <li>🏆 Strategy Marketing Awards 2024 — 2× Bronze</li>
             </ul>
         </div>
+
+                <div class="project-card">
+            <div class="project-image" style="background: linear-gradient(135deg, #00C9FF, #92FE9D); display:flex; align-items:center; justify-content:center;"><span style="font-size:2.2rem; font-weight:bold; color:#000; text-align:center; font-family:'Lobster Two',cursive; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">MiO Energy<br><span style='font-size:1rem;font-weight:normal;'>Influencer Campaign</span></span></div>
+            <h3>MiO Energy — Influencer Campaign</h3>
+            <p class="project-category">Media Planning | Kraft Heinz</p>
+            <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for MiO Energy’s influencer-driven campaign (2023–2024). The campaign leveraged creators on TikTok and Instagram to promote MiO Energy’s product line to a younger, digitally-native audience. Key activations included the “Another Busy Morning” influencer series and “Squeeze” productivity content, focusing on themes of staying hydrated and energized. The media plan targeted high-impact digital placements and social-first content partnerships to drive awareness around MiO’s rebranded energy line.</p>
+        </div>
     </div>
-    <div class="project-card">
-        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #FFD100); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem; font-weight:bold; color:#fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-family:'Lobster Two',cursive;">KD</span></div>
-        <h3>KD — “Gotta Be KD” Brand Refresh</h3>
-        <p class="project-category">Media Planning | Kraft Heinz</p>
-        <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Kraft Dinner’s major brand refresh in September 2023. The “Gotta Be KD” platform marked the most significant rebrand in the product’s history, featuring a redesigned logo, simplified packaging, and a youth-focused positioning targeting Gen Z and Millennials. The media plan encompassed high-engagement digital placements, influencer partnerships, out-of-home advertising, and TikTok-first social content to reposition KD as a cultural staple of authenticity and social comfort.</p>
-    </div>
-    <div class="project-card">
-        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #1a1a2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.4rem; font-weight:bold; color:#FFD100; text-align:center; padding:10px; font-family:'Inter',sans-serif;">Cancel Coverage</span></div>
-        <h3>KD — “Cancel Coverage”</h3>
-        <p class="project-category">Media Planning | Kraft Heinz</p>
-        <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for KD’s “Cancel Coverage” campaign (2023). Tapping into Gen Z’s embrace of JOMO (Joy Of Missing Out), KD created a fund to pay restaurant cancellation fees for consumers who chose to stay in with a box of KD instead of going out. The campaign was activated through social media, digital placements, and influencer content, positioning KD as the ultimate comfort food for nights in and resonating strongly with younger audiences who value authenticity over appearances.</p>
-    </div>
-<div class="project-card">
-        <div class="project-image" style="background: linear-gradient(135deg, #FFD700, #DAA520); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.2rem; font-weight:bold; color:#003DA5; text-align:center; padding:10px; font-family:'Inter',sans-serif;">Spoon KD</span></div>
-        <h3>KD — “Spoon KD”</h3>
-        <p class="project-category">Media Planning | Kraft Heinz</p>
-        <p>As a Media Planner at dentsu (Carat), I contributed to the media strategy for KD’s “Spoon KD” campaign (2023). In a playful nod to the timeless fork vs. spoon debate, KD launched “Spoon KD” — positioning the spoon as the definitive utensil for eating Kraft Dinner. After over 50 years with a fork on the box, the campaign introduced the spoon front and center, sparking conversation and engagement across social media, digital placements, and in-store activations.</p>
-    </div>
-    <div class="project-card">
-        <div class="project-image" style="background: linear-gradient(135deg, #003DA5, #87CEEB); display:flex; align-items:center; justify-content:center;"><span style="font-size:1.4rem; font-weight:bold; color:#FFD100; text-align:center; padding:10px; font-family:'Inter',sans-serif;">KD Frozen</span></div>
-        <h3>KD — Frozen Launch</h3>
-        <p class="project-category">Media Planning | Kraft Heinz</p>
-        <p>As a Media Planner at dentsu (Carat), I supported the media strategy for the launch of KD Frozen (2024), bringing the iconic Kraft Dinner brand into the frozen aisle for the first time. The ready-to-heat frozen mac and cheese entrées were introduced across Canadian grocery retailers including Sobeys, FreshCo, and Safeway. The media plan drove awareness of the new product format through digital advertising, in-store activations, and social content, positioning KD Frozen as a convenient, premium option for consumers seeking the classic KD taste in a quick, heat-and-eat format.</p>
-    </div>
+
+                <div class="project-card">
+            <div class="project-image"><img src="https://img.youtube.com/vi/o-n_GmEu4OA/hqdefault.jpg" alt="Kraft Peanut Butter Welcome Home Jars" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+            <h3>Kraft Peanut Butter — "Welcome Home Jars"</h3>
+            <p class="project-category">Media Planning | Kraft Heinz</p>
+            <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Kraft Peanut Butter's "Welcome Home Jars" campaign (2023), an initiative welcoming newcomers to Canada. Partnering with Duolingo and featuring Nav Bhatia, the campaign replaced jar labels with welcome messages in five languages and included custom language resources and real-time interactive airport billboards. All limited-edition jars were claimed within hours of launch. The integrated media plan spanned contextually relevant OOH placements, social, and digital channels.</p>
+            <p><strong>Awards:</strong></p>
+            <ul class="awards-list">
+                <li>🏆 Strategy Marketing Awards 2024 — Bronze (Integrated Campaign)</li>
+            </ul>
+        </div>
+        </div>
 </main>
 <footer class="site-footer">
     <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved.</p>
