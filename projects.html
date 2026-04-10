@@ -329,7 +329,24 @@
         </div>
 
         <div class="project-card">
-            <div class="project-image"><img src="https://img.youtube.com/vi/o-n_GmEu4OA/hqdefault.jpg" alt="Kraft Peanut Butter Welcome Home Jars" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/o-n_GmEu4OA" title="Kraft Peanut Butter Welcome Home Jars" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;border:0;"></iframe>
+            </div>
+            <div class="mio-carousel" style="position:relative;overflow:hidden;border-radius:12px;margin-top:12px;">
+                <div class="mio-carousel-track" style="display:flex;transition:transform 0.35s ease;will-change:transform;">
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                                <img src="whj-hero.jpg" alt="Welcome Home Jars — Hero" style="width:100%;height:224px;object-fit:cover;border-radius:12px;display:block;">
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                                <img src="whj-airport.jpg" alt="Welcome Home Jars — Airport OOH" style="width:100%;height:224px;object-fit:cover;border-radius:12px;display:block;">
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                                <img src="whj-social.jpg" alt="Welcome Home Jars — Social" style="width:100%;height:224px;object-fit:cover;border-radius:12px;display:block;">
+                    </div>
+                </div>
+                <button onclick="(function(btn){var t=btn.closest('.mio-carousel').querySelector('.mio-carousel-track');var slides=t.querySelectorAll('.mio-carousel-slide');var cur=parseInt(t.getAttribute('data-index')||'0');var next=Math.max(0,cur-1);t.style.transform='translateX(-'+next+'00%)';t.setAttribute('data-index',next);btn.closest('.mio-carousel').querySelector('.mio-next-btn').style.opacity='1';if(next===0)btn.style.opacity='0.3';})(this)" class="mio-prev-btn" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;z-index:10;opacity:0.3;display:flex;align-items:center;justify-content:center;">&#8249;</button>
+                <button onclick="(function(btn){var t=btn.closest('.mio-carousel').querySelector('.mio-carousel-track');var slides=t.querySelectorAll('.mio-carousel-slide');var cur=parseInt(t.getAttribute('data-index')||'0');var next=Math.min(slides.length-1,cur+1);t.style.transform='translateX(-'+next+'00%)';t.setAttribute('data-index',next);btn.closest('.mio-carousel').querySelector('.mio-prev-btn').style.opacity='1';if(next===slides.length-1)btn.style.opacity='0.3';})(this)" class="mio-next-btn" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">&#8250;</button>
+            </div>
             <h3>Kraft Peanut Butter — "Welcome Home Jars"</h3>
             <p class="project-category">Media Planning | Kraft Heinz</p>
             <p>As a Media Planner at dentsu (Carat), I supported the media strategy for Kraft Peanut Butter's "Welcome Home Jars" campaign (2023), an initiative welcoming newcomers to Canada. Partnering with Duolingo and featuring Nav Bhatia, the campaign replaced jar labels with welcome messages in five languages and included custom language resources and real-time interactive airport billboards. All limited-edition jars were claimed within hours of launch. The integrated media plan spanned contextually relevant OOH placements, social, and digital channels.</p>
