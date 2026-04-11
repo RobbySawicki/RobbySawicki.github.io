@@ -26,6 +26,12 @@
     --page-h: min(594px, 63.6vw); /* page-w * 1.414 */
     --spine-w: 40px;
     --edge-h: 24px;
+    /* Animation durations — authoritative. JS reads these via cssDurationMs()
+       so timing cannot drift between CSS and JS. Tune here only. */
+    --approach-duration: 2s;
+    --cover-duration: 1.2s;
+    --book-open-duration: 1s;
+    --flip-duration: 0.7s;
 }
 
 /* ---- RESET & BODY ---- */
@@ -108,8 +114,8 @@ body {
     height: var(--page-h);
     perspective: 1800px;
     perspective-origin: 50% 40%;
-    transition: width 1s cubic-bezier(0.4,0,0.2,1),
-                height 1s cubic-bezier(0.4,0,0.2,1);
+    transition: width var(--book-open-duration) cubic-bezier(0.4,0,0.2,1),
+                height var(--book-open-duration) cubic-bezier(0.4,0,0.2,1);
 }
 
 /* When book is open, container is two pages wide */
@@ -138,8 +144,8 @@ body {
     transform-style: preserve-3d;
     /* Closed: gentle tilt to show spine, top edge, and cover clearly */
     transform: rotateX(18deg) rotateY(-12deg);
-    transition: transform 1s cubic-bezier(0.4,0,0.2,1);
-    animation: bookApproach 2s cubic-bezier(0.4,0,0.2,1) forwards;
+    transition: transform var(--book-open-duration) cubic-bezier(0.4,0,0.2,1);
+    animation: bookApproach var(--approach-duration) cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 /* When open: flatten to bird's-eye */
@@ -278,8 +284,8 @@ body {
     transform-origin: left center;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    transition: transform 1.2s cubic-bezier(0.4,0,0.2,1),
-                box-shadow 1.2s ease;
+    transition: transform var(--cover-duration) cubic-bezier(0.4,0,0.2,1),
+                box-shadow var(--cover-duration) ease;
     box-shadow: 2px 4px 16px rgba(0,0,0,0.4);
 }
 
@@ -539,13 +545,13 @@ body {
 /* Flip forward: right page turns left */
 .page-flip-overlay.flipping-forward {
     display: block;
-    animation: flipPageForward 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: flipPageForward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Flip backward: page turns back right */
 .page-flip-overlay.flipping-backward {
     display: block;
-    animation: flipPageBackward 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: flipPageBackward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes flipPageForward {
@@ -825,7 +831,7 @@ body {
 }
 
 .linkedin-badge:hover { background: #0077b5; color: #fff; box-shadow: 0 0 12px rgba(0,119,181,0.4); }
-.linkedin-badge img { height: 16px; width: 16px; border-radius: 3px; }
+.linkedin-badge .linkedin-glyph { width: 16px; height: 16px; flex-shrink: 0; }
 
 .intro-text { text-align: center; font-style: italic; }
 
@@ -867,6 +873,8 @@ body {
 }
 
 /* ---- Project content ---- */
+.project-badge-row { text-align: center; }
+
 .project-badge {
     display: inline-block;
     font-family: var(--font-ui);

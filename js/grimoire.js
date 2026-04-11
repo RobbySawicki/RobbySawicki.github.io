@@ -6,8 +6,40 @@
 (function () {
     const container = document.getElementById('grimoire');
     const nav = document.getElementById('grimoire-nav');
-    const romanNumerals = ['I','II','III','IV','V','VI','VII','VIII','IX','X',
-        'XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII'];
+
+    // Inline LinkedIn "in" glyph. Previously hotlinked from Wikimedia commons
+    // (https://upload.wikimedia.org/...) which is not guaranteed available.
+    const LINKEDIN_SVG =
+        '<svg class="linkedin-glyph" viewBox="0 0 24 24" aria-hidden="true" width="16" height="16" fill="currentColor">' +
+        '<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>' +
+        '</svg>';
+
+    // Read a CSS custom property that holds a duration (e.g. "0.7s" or "700ms")
+    // and return it as milliseconds. Falls back to 0 if unparseable.
+    function cssDurationMs(name) {
+        const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        if (!v) return 0;
+        if (v.endsWith('ms')) return parseFloat(v);
+        if (v.endsWith('s'))  return parseFloat(v) * 1000;
+        return parseFloat(v) || 0;
+    }
+
+    // Roman numeral converter — used for chapter numbers in the TOC.
+    // Replaces a hardcoded array that had no headroom for new projects.
+    function toRoman(n) {
+        const pairs = [['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],
+                       ['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]];
+        let out = '';
+        for (const [k, v] of pairs) { while (n >= v) { out += k; n -= v; } }
+        return out;
+    }
+
+    // Derive initials from the owner's name — no more hardcoded "RS".
+    function ownerInitials() {
+        return (SITE_DATA.owner.name || '')
+            .split(/\s+/).filter(Boolean)
+            .map(w => w.charAt(0).toUpperCase()).join('');
+    }
 
     let currentSpread = 0;
     let totalSpreads = 0;
@@ -28,26 +60,30 @@
 
     function leftIntro() {
         return '<div class="left-inner">' +
-            '<div class="portrait-placeholder">RS</div>' +
+            '<div class="portrait-placeholder" aria-hidden="true">' + ownerInitials() + '</div>' +
             '<p class="intro-name">' + SITE_DATA.owner.name + '</p>' +
             '<a href="' + SITE_DATA.owner.linkedin + '" target="_blank" rel="noopener noreferrer" class="linkedin-badge">' +
-            '<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">' +
-            'Connect on LinkedIn</a></div>';
+            LINKEDIN_SVG +
+            '<span>Connect on LinkedIn</span></a></div>';
     }
 
+    // Media schema: project.media = { type, src, textStyle?, alt? }
+    //   type: 'video' | 'image' | 'glyph'
+    //   src:  YouTube videoId | image URL | emoji/text glyph
     function leftMedia(project) {
+        const m = project.media || { type: 'glyph', src: '\u2726' };
         let media = '';
-        if (project.videoId) {
-            media = '<div class="video-slot" data-video-id="' + project.videoId + '">' +
-                '<img src="https://img.youtube.com/vi/' + project.videoId + '/hqdefault.jpg" alt="Watch video" loading="lazy">' +
-                '<button class="video-play-btn" aria-label="Play video">\u25B6</button></div>';
-        } else if (project.thumbnailUrl) {
-            media = '<div class="thumb-slot"><img src="' + project.thumbnailUrl + '" alt="' + project.title + '" loading="lazy"></div>';
-        } else if (project.emoji) {
-            const cls = project.emojiStyle === 'text' ? 'project-emoji text-style' : 'project-emoji';
-            media = '<div class="' + cls + '">' + project.emoji + '</div>';
-        } else {
-            media = '<div class="project-emoji">\u2726</div>';
+        if (m.type === 'video') {
+            const alt = m.alt || ('Watch video for ' + project.title);
+            media = '<div class="video-slot" data-video-id="' + m.src + '">' +
+                '<img src="https://img.youtube.com/vi/' + m.src + '/hqdefault.jpg" alt="' + alt + '" loading="lazy">' +
+                '<button type="button" class="video-play-btn" aria-label="Play video for ' + project.title + '">\u25B6</button></div>';
+        } else if (m.type === 'image') {
+            const alt = m.alt || project.title;
+            media = '<div class="thumb-slot"><img src="' + m.src + '" alt="' + alt + '" loading="lazy"></div>';
+        } else { // 'glyph'
+            const cls = m.textStyle ? 'project-emoji text-style' : 'project-emoji';
+            media = '<div class="' + cls + '" aria-hidden="true">' + m.src + '</div>';
         }
         return '<div class="left-inner">' + media + '</div>';
     }
@@ -62,24 +98,27 @@
     }
 
     function rightToc() {
+        // Chapter number is independent of spread index: inserting a new
+        // front-matter spread no longer shifts every project's Roman numeral.
+        let chapterNum = 1;
         let items = '<p class="toc-section-label">Chapters</p>';
-        items += tocEntry('Introduction', 1, 0);
-        items += tocEntry('About the Author', 2, 2);
+        items += tocEntry('Introduction', chapterNum++, 0);
+        items += tocEntry('About the Author', chapterNum++, 2);
         items += '<p class="toc-section-label">Projects</p>';
         SITE_DATA.projects.forEach((p, i) => {
             let title = p.title;
             if (p.campaign) title += ' ' + p.campaign;
             if (title.length > 38) title = title.substring(0, 36) + '\u2026';
-            items += tocEntry(title, i + 3, i + 3);
+            items += tocEntry(title, chapterNum++, i + 3);
         });
         return '<div class="right-inner">' +
             '<h2 class="page-heading">Table of Contents</h2>' +
             '<ul class="toc-list">' + items + '</ul></div>';
     }
 
-    function tocEntry(title, romanIdx, spreadIdx) {
+    function tocEntry(title, chapterNum, spreadIdx) {
         return '<li><button type="button" class="toc-entry" data-goto="' + spreadIdx + '">' +
-            '<span class="toc-chapter">' + (romanNumerals[romanIdx - 1] || romanIdx) + '. ' + title + '</span>' +
+            '<span class="toc-chapter">' + toRoman(chapterNum) + '. ' + title + '</span>' +
             '<span class="toc-dots" aria-hidden="true"></span>' +
             '<span class="toc-page-num">' + (spreadIdx * 2 + 1) + '</span>' +
             '</button></li>';
@@ -94,8 +133,8 @@
     function rightProject(project) {
         let badge = '';
         if (project.badge) {
-            badge = '<div style="text-align:center"><span class="project-badge ' + project.badge + '">' +
-                (project.badge === 'pinned' ? '\uD83D\uDCCC Pinned' : '\uD83C\uDD95 Recent') + '</span></div>';
+            badge = '<div class="project-badge-row"><span class="project-badge ' + project.badge + '">' +
+                (project.badge === 'pinned' ? 'Pinned' : 'Recent') + '</span></div>';
         }
 
         let campaign = project.campaign ? '<p class="project-campaign">' + project.campaign + '</p>' : '';
@@ -107,11 +146,17 @@
                 '</div>';
         }
 
-        let externalLink = project.externalLink
-            ? '<a href="' + project.externalLink + '" target="_blank" rel="noopener" class="project-link">\u2197 View Campaign</a>' : '';
-
-        let instagram = project.instagramUrl
-            ? '<div class="instagram-slot"><a href="' + project.instagramUrl + '" target="_blank" rel="noopener" class="instagram-link">\uD83D\uDCF7 View on Instagram</a></div>' : '';
+        // Unified CTA — collapses externalLink/instagramUrl into one optional { type, url, label }.
+        let cta = '';
+        if (project.cta && project.cta.url) {
+            if (project.cta.type === 'external') {
+                const label = project.cta.label || 'View Campaign';
+                cta = '<a href="' + project.cta.url + '" target="_blank" rel="noopener" class="project-link">\u2197 ' + label + '</a>';
+            } else if (project.cta.type === 'instagram') {
+                const label = project.cta.label || 'View on Instagram';
+                cta = '<div class="instagram-slot"><a href="' + project.cta.url + '" target="_blank" rel="noopener" class="instagram-link">' + label + '</a></div>';
+            }
+        }
 
         let role = project.role
             ? '<p class="project-role"><span class="role-label">My Role \u2014 </span>' + project.role + '</p>' : '';
@@ -125,7 +170,7 @@
         return '<div class="right-inner">' +
             badge +
             '<h2 class="page-heading">' + project.title + '</h2>' +
-            campaign + tags + externalLink + instagram +
+            campaign + tags + cta +
             '<p>' + project.description + '</p>' +
             role + awards + '</div>';
     }
@@ -244,27 +289,49 @@
         var cover = document.getElementById('book-cover');
         var book = document.getElementById('book');
 
-        // Step 1: Swing cover open (hinge animation)
+        // Durations come from CSS custom properties so tuning the animation
+        // in CSS cannot silently drift from the JS choreography.
+        var coverDurMs = cssDurationMs('--cover-duration') || 1200;
+
+        // Step 1: Swing cover open (hinge animation / mobile fade)
         cover.classList.add('opened');
 
         // Step 2: Widen container + flatten perspective
         container.classList.add('open');
         book.classList.add('open');
 
-        // Step 3: After cover halfway open, reveal spreads beneath
+        // Step 3: Mid-swing, hide the page-block / back-cover and reveal the spreads
+        // beneath. No event for "halfway through a transition" exists — so we use a
+        // single timer derived from the authoritative CSS duration.
         setTimeout(function() {
-            document.querySelector('.page-block').style.display = 'none';
-            document.querySelector('.back-cover').style.display = 'none';
+            var pb = document.querySelector('.page-block');
+            var bc = document.querySelector('.back-cover');
+            if (pb) pb.style.display = 'none';
+            if (bc) bc.style.display = 'none';
             var sc = document.querySelector('.spreads-container');
-            sc.style.display = 'block';
-        }, 500);
+            if (sc) sc.style.display = 'block';
+        }, Math.round(coverDurMs * 0.42));
 
-        // Step 4: Show navigation after everything settles, move focus to next-button
-        setTimeout(function() {
+        // Step 4: When the cover finishes its transform transition, reveal nav and
+        // move focus so keyboard users land on an interactive control.
+        function onCoverOpened(e) {
+            if (e.propertyName && e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+            cover.removeEventListener('transitionend', onCoverOpened);
             nav.classList.add('visible');
             var nextBtn = document.getElementById('nav-next');
             if (nextBtn) nextBtn.focus();
-        }, 1200);
+        }
+        cover.addEventListener('transitionend', onCoverOpened);
+        // Safety net: if transitionend never fires (rare — reduced-motion edge cases),
+        // force the reveal shortly after the expected duration.
+        setTimeout(function() {
+            if (!nav.classList.contains('visible')) {
+                cover.removeEventListener('transitionend', onCoverOpened);
+                nav.classList.add('visible');
+                var nextBtn = document.getElementById('nav-next');
+                if (nextBtn) nextBtn.focus();
+            }
+        }, coverDurMs + 200);
 
         updateIndicator();
     }
@@ -280,41 +347,29 @@
         var flipOverlay = document.getElementById('flip-overlay');
         var direction = idx > currentSpread ? 'forward' : 'backward';
 
-        if (direction === 'forward') {
-            // Show flip overlay on top of current spread, animate it turning left
-            flipOverlay.className = 'page-flip-overlay flipping-forward';
+        // Duration comes from CSS so JS can never drift past the keyframes.
+        var flipDurMs = cssDurationMs('--flip-duration') || 700;
+        var midpointMs = Math.round(flipDurMs / 2);
 
-            // Halfway through the flip, swap the content
-            setTimeout(function() {
-                spreads[currentSpread].classList.remove('active');
-                spreads[idx].classList.add('active');
-                currentSpread = idx;
-                updateIndicator();
-            }, 350);
+        flipOverlay.className = 'page-flip-overlay ' +
+            (direction === 'forward' ? 'flipping-forward' : 'flipping-backward');
 
-            // After flip finishes, hide overlay
-            setTimeout(function() {
-                flipOverlay.className = 'page-flip-overlay';
-                isFlipping = false;
-            }, 750);
-        } else {
-            // Flip backward: overlay starts turned left, swings back right
-            flipOverlay.className = 'page-flip-overlay flipping-backward';
+        // Midpoint swap: when the overlay passes 90° we swap the underlying content
+        // so the second half of the flip reveals the target spread.
+        setTimeout(function() {
+            spreads[currentSpread].classList.remove('active');
+            spreads[idx].classList.add('active');
+            currentSpread = idx;
+            updateIndicator();
+        }, midpointMs);
 
-            // Swap content at midpoint
-            setTimeout(function() {
-                spreads[currentSpread].classList.remove('active');
-                spreads[idx].classList.add('active');
-                currentSpread = idx;
-                updateIndicator();
-            }, 350);
-
-            // After flip finishes, hide overlay
-            setTimeout(function() {
-                flipOverlay.className = 'page-flip-overlay';
-                isFlipping = false;
-            }, 750);
+        // Clean up when the keyframe animation finishes — no more hardcoded tail timer.
+        function onFlipEnd() {
+            flipOverlay.removeEventListener('animationend', onFlipEnd);
+            flipOverlay.className = 'page-flip-overlay';
+            isFlipping = false;
         }
+        flipOverlay.addEventListener('animationend', onFlipEnd);
     }
 
     function nextSpread() { goToSpread(currentSpread + 1); }
