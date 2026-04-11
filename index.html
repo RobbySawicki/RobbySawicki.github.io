@@ -3,287 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Robby</title>
+    <title>Robby Sawicki | The Grimoire of Works</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='g' x='-50%25' y='-50%25' width='200%25' height='200%25'><feDropShadow dx='3' dy='-3' stdDeviation='3' flood-color='%2300ff88' flood-opacity='0.95'/><feDropShadow dx='-3' dy='3' stdDeviation='3' flood-color='%23bf5fff' flood-opacity='0.95'/></filter></defs><circle cx='64' cy='64' r='64' fill='%230a0a0f'/><path d='M59.86 39.29L69.94 37.94L65.44 58.91L67.78 58.91Q70.93 58.91 73.59 57.43Q76.24 55.94 78.22 53.60Q80.20 51.26 81.28 48.38Q82.36 45.50 82.36 42.80L82.36 42.80Q82.36 40.82 81.73 39.02Q81.10 37.22 79.62 35.83Q78.13 34.43 75.61 33.58Q73.09 32.72 69.22 32.72L69.22 32.72Q64.36 32.72 60.04 34.30Q55.72 35.87 52.48 38.80Q49.24 41.72 47.35 45.95Q45.46 50.18 45.46 55.49L45.46 55.49Q45.46 58.64 45.78 59.81Q46.09 60.98 46.54 61.61L46.54 61.61Q44.92 61.61 43.39 61.16Q41.86 60.71 40.65 59.72Q39.43 58.73 38.71 57.16Q37.99 55.58 37.99 53.33L37.99 53.33Q37.99 48.65 40.69 44.38Q43.39 40.10 47.94 36.77Q52.48 33.44 58.33 31.46Q64.18 29.48 70.39 29.48L70.39 29.48Q75.16 29.48 78.85 30.65Q82.54 31.82 85.02 33.80Q87.49 35.78 88.75 38.44Q90.01 41.09 90.01 43.97L90.01 43.97Q90.01 48.20 87.36 52.39Q84.70 56.57 79.66 59.18L79.66 59.18Q83.62 60.08 85.06 62.51Q86.50 64.94 86.50 68.36L86.50 68.36Q86.50 71.06 85.83 74.17Q85.15 77.27 84.30 80.28Q83.44 83.30 82.77 86.05Q82.09 88.79 82.09 90.86L82.09 90.86Q82.09 93.11 83.03 94.73Q83.98 96.35 85.60 96.98L85.60 96.98Q82.72 97.79 80.97 98.15Q79.21 98.51 77.59 98.51L77.59 98.51Q74.17 98.51 72.69 96.62Q71.20 94.73 71.20 92.66L71.20 92.66Q71.20 90.32 72.01 87.31Q72.82 84.29 73.81 81.09Q74.80 77.90 75.61 74.84Q76.42 71.78 76.42 69.35L76.42 69.35Q76.42 65.12 74.58 63.59Q72.73 62.06 69.85 62.06L69.85 62.06Q68.86 62.06 67.33 62.24Q65.80 62.42 64.63 62.69L64.63 62.69L57.34 96.98L47.44 96.98L59.86 39.29Z' fill='white' filter='url(%23g)'/></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-
-        body {
-            background-color: #0a0a0f;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: #e0e0e0;
-            text-align: center;
-        }
-
-        /* TikTok-style animated top bar */
-        .sticky-header::before {
-            content: '';
-            display: block;
-            height: 4px;
-            background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88);
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
-        }
-
-        @keyframes shimmer {
-            0%   { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-
-        /* ---- STICKY NAV ---- */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: #0a0a0f;
-        }
-
-        /* ---- HEADER ---- */
-        .header-container {
-            max-width: 1050px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 20px 14px 20px;
-            border-bottom: 1px solid #1e1e2e;
-        }
-
-        .site-header {
-            text-align: left;
-            padding: 0;
-        }
-
-        .site-header h1 {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 4rem;
-            margin: 0;
-            line-height: 1.1;
-            color: #fff;
-            /* TikTok dual-glow split effect */
-            text-shadow:
-                -2px -2px 0   #00ff88,
-                -2px -2px 10px rgba(0,255,136,0.7),
-                 2px  2px 0   #bf5fff,
-                 2px  2px 10px rgba(191,95,255,0.7);
-        }
-
-        .site-header p {
-            margin: 6px 0 0 0;
-            font-size: 1rem;
-            color: #999;
-            letter-spacing: 0.03em;
-        }
-
-        /* ---- NAV ---- */
-        .navigation-bar {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: nowrap;
-            margin: 0;
-        }
-
-        .neon-button {
-            font-size: 1.4rem;
-            padding: 9px 22px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Lobster Two', cursive;
-            font-weight: 400 !important;
-            font-style: italic;
-            text-decoration: none;
-            color: #fff;
-            border-radius: 10px;
-            cursor: pointer;
-            background: linear-gradient(135deg, #00c966, #8a2be2);
-            border: 1px solid rgba(0,255,136,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .neon-button:hover {
-            filter: brightness(1.25);
-            box-shadow: 0 0 18px #00ff88, 0 0 18px #bf5fff;
-            transform: translateY(-2px);
-        }
-
-        /* ---- LINKEDIN ---- */
-        .linkedin-link {
-            display: flex;
-            align-items: center;
-        }
-
-        .linkedin-link img {
-            height: 40px;
-            width: auto;
-            display: block;
-            border-radius: 6px;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .linkedin-link:hover img {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 8px #00ff88);
-        }
-
-        /* ---- MAIN ---- */
-        #main-content {
-            max-width: 1050px;
-            margin: 40px auto;
-            font-size: 1.1rem;
-            color: #ccc;
-            line-height: 1.7;
-            padding: 0 20px;
-            text-align: left;
-        }
-
-        .section-title {
-            font-family: 'Lobster Two', cursive;
-            font-style: italic;
-            font-weight: 400 !important;
-            font-size: 2.8rem;
-            margin-top: 50px;
-            margin-bottom: 14px;
-            text-align: center;
-            background: linear-gradient(90deg, #00ff88, #bf5fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .content-card {
-            background: #12121c;
-            border: 1px solid #2a2a40;
-            border-radius: 16px;
-            padding: 24px 28px;
-            margin-bottom: 20px;
-            box-shadow:
-                0 0 20px rgba(0,255,136,0.06),
-                0 0 20px rgba(191,95,255,0.06);
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-
-        .content-card:hover {
-            box-shadow:
-                0 0 30px rgba(0,255,136,0.15),
-                0 0 30px rgba(191,95,255,0.15);
-            transform: translateY(-3px);
-        }
-
-        /* ---- FOOTER ---- */
-        .site-footer {
-            text-align: center;
-            padding: 24px;
-            background: #0d0d18;
-            color: #555;
-            margin-top: 60px;
-            font-size: 0.85rem;
-            border-top: 1px solid #1e1e2e;
-        }
-
-        /* ---- MOBILE ---- */
-        @media (max-width: 600px) {
-            .header-container {
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 10px;
-                gap: 12px;
-            }
-            .site-header {
-                width: 100%;
-                text-align: center;
-            }
-            .site-header p { text-align: center; }
-            .site-header h1 { font-size: 3rem; }
-            .navigation-bar {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-                width: 100%;
-            }
-            .neon-button {
-                font-size: 1.7rem;
-                padding: 10px 20px;
-                width: 80%;
-                justify-content: center;
-            }
-            .linkedin-link {
-                width: 80%;
-                justify-content: center;
-            }
-            .linkedin-link img { height: 45px; }
-            #main-content {
-                font-size: 1rem;
-                padding: 0 12px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=MedievalSharp&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grimoire.css">
 </head>
 <body>
 
-<div class="sticky-header">
-<div class="header-container">
-    <header class="site-header">
-        <h1>Robby Sawicki</h1>
-        <p>Media Sales &amp; OOH Specialist | Wildposting Campaigns</p>
-    </header>
-
-    <nav class="navigation-bar">
-        <a href="projects.html" class="neon-button">Projects</a>
-        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
-        </a>
-    </nav>
-</div>
-</div>
-
-<main id="main-content">
-
-    <h2 class="section-title">Welcome</h2>
-    <div class="content-card">
-        <p>
-            Welcome to my website. I'm a Toronto-based marketing and media professional with a passion for bold brand work,
-            street-level campaigns, and connecting ideas to audiences. Feel free to explore my projects or connect with me on LinkedIn.
-        </p>
+    <!-- Ambient background -->
+    <div id="grimoire-bg">
+        <div class="bg-orb bg-orb-green"></div>
+        <div class="bg-orb bg-orb-purple"></div>
     </div>
 
-    <h2 class="section-title">About Me</h2>
-    <div class="content-card">
-        <p>
-            I'm a results-driven marketing professional based in Toronto with over 3 years of experience spanning media planning,
-            OOH advertising, and account management. Currently an <strong style="color:#00ff88;">Account Executive at Grassroots Advertising Inc.</strong>,
-            where I work with brands and agencies to execute high-impact Wildposting&reg; and out-of-home campaigns across Canada
-            &mdash; from street-level wildpostings and guerrilla sampling to murals, experiential activations, and scent marketing.
-        </p>
-        <p style="margin-top:16px;">
-            Prior to Grassroots, I spent over 2 years at <strong style="color:#bf5fff;">dentsu</strong> as a Media Planner (and before that,
-            Assistant Media Planner), managing national media strategy and buying for <strong style="color:#00ff88;">Kraft Heinz</strong>
-            &mdash; one of the world's largest food &amp; beverage companies. There I developed deep expertise in competitive analysis,
-            media mix planning, and translating marketing objectives into measurable campaign results.
-        </p>
-        <p style="margin-top:16px;">
-            I hold a <strong style="color:#bf5fff;">Bachelor of Commerce in Marketing</strong> from Toronto Metropolitan University,
-            where I also served as Co-Head of the Rugby Club. My skill set spans marketing strategy, OOH media sales,
-            project management, and social media measurement &mdash; and I thrive in fast-paced, creative environments
-            where big ideas meet real-world execution.
-        </p>
+    <!-- Navigation overlay -->
+    <div id="grimoire-nav">
+        <button id="nav-prev" aria-label="Previous page" title="Previous page">&#x276E;</button>
+        <span id="page-indicator">Cover</span>
+        <button id="nav-next" aria-label="Next page" title="Next page">&#x276F;</button>
     </div>
 
-</main>
+    <!-- Book container — pages built dynamically by grimoire.js -->
+    <div id="grimoire"></div>
 
-<footer class="site-footer">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved. (It really isn't, but it is my name)</p>
-</footer>
+    <!-- Video modal overlay -->
+    <div id="video-modal" class="video-modal hidden">
+        <div class="video-modal-backdrop"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" aria-label="Close video">&times;</button>
+            <div class="video-modal-player">
+                <iframe id="video-modal-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/grimoire.js"></script>
 </body>
 </html>
