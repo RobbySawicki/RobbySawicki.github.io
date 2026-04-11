@@ -377,6 +377,7 @@
 
         isFlipping = true;
         var spreads = document.querySelectorAll('.spread');
+        var spreadsEl = document.getElementById('spreads');
         var flipOverlay = document.getElementById('flip-overlay');
         var direction = idx > currentSpread ? 'forward' : 'backward';
 
@@ -386,6 +387,14 @@
 
         flipOverlay.className = 'page-flip-overlay ' +
             (direction === 'forward' ? 'flipping-forward' : 'flipping-backward');
+
+        // Flag the container so the CSS can hang flip-synced animations
+        // (moving shadow on the stationary page, content rise on reveal)
+        // off .is-flipping-forward / .is-flipping-backward.
+        if (spreadsEl) {
+            spreadsEl.classList.remove('is-flipping-forward', 'is-flipping-backward');
+            spreadsEl.classList.add('is-flipping-' + direction);
+        }
 
         // Midpoint swap: when the overlay passes 90° we swap the underlying content
         // so the second half of the flip reveals the target spread.
@@ -400,6 +409,9 @@
         function onFlipEnd() {
             flipOverlay.removeEventListener('animationend', onFlipEnd);
             flipOverlay.className = 'page-flip-overlay';
+            if (spreadsEl) {
+                spreadsEl.classList.remove('is-flipping-forward', 'is-flipping-backward');
+            }
             isFlipping = false;
         }
         flipOverlay.addEventListener('animationend', onFlipEnd);

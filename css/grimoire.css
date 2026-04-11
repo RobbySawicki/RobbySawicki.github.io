@@ -483,6 +483,7 @@ body {
         0 0 20px rgba(0,255,136,0.2),
         0 0 20px rgba(191,95,255,0.2),
         inset 0 0 15px rgba(0,255,136,0.1);
+    animation: sigilBreathe 4.5s ease-in-out infinite;
 }
 
 .cover-sigil-letter {
@@ -491,6 +492,23 @@ body {
     font-weight: 700;
     color: #fff;
     text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-purple);
+}
+
+@keyframes sigilBreathe {
+    0%, 100% {
+        box-shadow:
+            0 0 18px rgba(0,255,136,0.18),
+            0 0 18px rgba(191,95,255,0.18),
+            inset 0 0 14px rgba(0,255,136,0.08);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow:
+            0 0 30px rgba(0,255,136,0.32),
+            0 0 30px rgba(191,95,255,0.32),
+            inset 0 0 20px rgba(0,255,136,0.16);
+        transform: scale(1.04);
+    }
 }
 
 .cover-tagline {
@@ -508,12 +526,13 @@ body {
     color: rgba(255,255,255,0.72);
     margin-top: var(--sp-6);
     letter-spacing: 0.05em;
-    animation: hintPulse 2s ease-in-out infinite;
+    animation: hintPulse 2.4s ease-in-out infinite;
+    transform-origin: center;
 }
 
 @keyframes hintPulse {
-    0%, 100% { opacity: 0.6; }
-    50%      { opacity: 0.98; }
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.98; transform: scale(1.04); }
 }
 
 /* ============================================
@@ -652,6 +671,90 @@ body {
    the initial reveal. */
 .spread {
     transition: opacity 0.35s ease;
+}
+
+/* ---- FLIP-SYNCED ANIMATIONS ----
+   When a flip is in progress, the spreads-container carries an
+   .is-flipping-forward or .is-flipping-backward class. These rules
+   hang off that class so they fire for the duration of the flip and
+   reset when it clears.
+*/
+
+/* Moving shadow on the right page during a forward flip.
+   Reads as the lifting page casting shade on the page beneath. */
+.spread-right::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+        270deg,
+        rgba(0,0,0,0.38) 0%,
+        rgba(0,0,0,0.22) 35%,
+        rgba(0,0,0,0.05) 75%,
+        transparent 100%
+    );
+    z-index: 3;
+}
+
+.spreads-container.is-flipping-forward .spread.active .spread-right::after {
+    animation: flipShadowForward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Mirror on the left page during a backward flip */
+.spread-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.38) 0%,
+        rgba(0,0,0,0.22) 35%,
+        rgba(0,0,0,0.05) 75%,
+        transparent 100%
+    );
+    z-index: 3;
+}
+
+.spreads-container.is-flipping-backward .spread.active .spread-left::before {
+    animation: flipShadowBackward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes flipShadowForward {
+    0%   { opacity: 0; }
+    30%  { opacity: 0.7; }
+    65%  { opacity: 0.35; }
+    100% { opacity: 0; }
+}
+
+@keyframes flipShadowBackward {
+    0%   { opacity: 0; }
+    30%  { opacity: 0.7; }
+    65%  { opacity: 0.35; }
+    100% { opacity: 0; }
+}
+
+/* Content rise: during a flip, the target spread's right-inner fades
+   and translates up slightly as it comes into view. Subtle but reads
+   as the content "arriving" rather than snapping. */
+.spreads-container.is-flipping-forward .spread.active .right-inner,
+.spreads-container.is-flipping-backward .spread.active .right-inner {
+    animation: contentRise 0.55s cubic-bezier(0.22, 0.9, 0.32, 1) backwards;
+    animation-delay: 0.15s;
+}
+
+@keyframes contentRise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ---- PAGE FLIP OVERLAY ----
@@ -1130,25 +1233,37 @@ body {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 48px; height: 48px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.9);
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.55);
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease,
+                transform 0.35s cubic-bezier(0.22, 0.9, 0.32, 1);
     backdrop-filter: blur(4px);
 }
 
-.video-play-btn:hover {
-    background: rgba(0,255,136,0.3);
-    border-color: var(--neon-green);
-    box-shadow: 0 0 20px rgba(0,255,136,0.4);
-    transform: translate(-50%, -50%) scale(1.1);
+.video-slot:hover .video-play-btn,
+.video-play-btn:focus-visible {
+    background: rgba(201,168,76,0.35);
+    border-color: var(--gold-lit);
+    box-shadow: 0 0 22px rgba(201,168,76,0.55),
+                0 0 6px rgba(0,0,0,0.5);
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.video-slot {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-slot:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 18px rgba(201,168,76,0.22);
 }
 
 .thumb-slot {
@@ -1300,13 +1415,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease,
+                transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    flex-shrink: 0;
 }
 
-#grimoire-nav button:hover {
-    border-color: var(--neon-green);
-    box-shadow: 0 0 12px rgba(0,255,136,0.3);
-    color: var(--neon-green);
+#grimoire-nav button:hover,
+#grimoire-nav button:focus-visible {
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(201,168,76,0.35),
+                inset 0 0 10px rgba(201,168,76,0.1);
+    color: var(--gold-lit);
+    transform: translateY(-1px) scale(1.05);
+}
+
+#grimoire-nav button:active {
+    transform: translateY(0) scale(0.96);
+    transition-duration: 0.08s;
 }
 
 #page-indicator {
@@ -1554,9 +1679,13 @@ body {
     .page-flip-overlay,
     .bg-orb,
     .cover-hint,
+    .cover-sigil,
     .linkedin-badge,
     .video-play-btn,
     .video-modal-content,
+    .right-inner,
+    .spread-right::after,
+    .spread-left::before,
     #grimoire,
     #grimoire-nav button {
         animation: none !important;
@@ -1570,4 +1699,9 @@ body {
         transform: rotateX(2deg) rotateY(0deg) !important;
     }
     .spread { transition: opacity 0.15s ease !important; }
+    /* Flip shadow overlays must not flash when reduced-motion is on */
+    .spreads-container.is-flipping-forward .spread.active .spread-right::after,
+    .spreads-container.is-flipping-backward .spread.active .spread-left::before {
+        opacity: 0 !important;
+    }
 }
