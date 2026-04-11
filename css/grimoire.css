@@ -31,6 +31,34 @@
 /* ---- RESET & BODY ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Button reset for semantic <button>s that are styled as surfaces (cover, TOC entries).
+   Keeps keyboard/screen-reader semantics without inheriting UA chrome. */
+button.book-cover,
+.toc-list button.toc-entry {
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+.toc-list button.toc-entry {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+}
+
+/* Visible focus ring for keyboard users — parchment-side and cover-side variants */
+button.book-cover:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+.toc-list button.toc-entry:focus-visible,
+#grimoire-nav button:focus-visible,
+.video-modal-close:focus-visible {
+    outline: 2px solid var(--neon-green);
+    outline-offset: 2px;
+}
+
 body {
     background: var(--bg-dark);
     font-family: var(--font-body);
@@ -813,18 +841,17 @@ body {
     line-height: 1.4;
 }
 
-.toc-list li a {
+.toc-list li button.toc-entry {
     display: flex;
     align-items: baseline;
     gap: 5px;
     text-decoration: none;
     color: var(--ink);
-    cursor: pointer;
-    width: 100%;
     transition: color 0.2s;
 }
 
-.toc-list li a:hover { color: #006644; }
+.toc-list li button.toc-entry:hover,
+.toc-list li button.toc-entry:focus-visible { color: #006644; }
 
 .toc-chapter { font-family: var(--font-heading); white-space: nowrap; flex-shrink: 0; }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--parchment-edge); min-width: 15px; margin-bottom: 3px; }
@@ -1147,26 +1174,174 @@ body {
     .right-inner { padding: 20px 16px 36px; }
 }
 
+/* ============================================
+   MOBILE: single-page mode (<650px)
+   — kills 3D tilt, stacks left/right vertically so content is legible
+   — cover fades instead of hinging (hinge needs perspective)
+   — page flip becomes a crossfade (no overlay, no rotateY)
+   ============================================ */
 @media (max-width: 650px) {
     :root {
-        --page-w: 44vw;
-        --page-h: calc(44vw * 1.414);
-        --spine-w: 24px;
-        --edge-h: 14px;
+        --page-w: min(92vw, 420px);
+        --page-h: calc(100vh - 120px);
+        --spine-w: 0;
+        --edge-h: 0;
     }
 
-    body { align-items: flex-start; padding-top: 15px; }
+    body {
+        align-items: flex-start;
+        padding: 16px 0 88px;
+        min-height: 100vh;
+    }
 
-    .cover-title { font-size: 1.3rem; }
-    .cover-subtitle { font-size: 0.75rem; }
-    .cover-ornament { font-size: 1.2rem; }
-    .page-heading { font-size: 1.1rem; }
-    .right-inner { padding: 14px 12px 32px; }
-    .spread p, .right-inner p { font-size: 0.75rem; }
-    .toc-list li { font-size: 0.65rem; }
-    .tag { font-size: 0.55rem; padding: 2px 6px; }
+    #grimoire {
+        perspective: none;
+        height: var(--page-h);
+    }
 
-    #grimoire-nav { bottom: 8px; padding: 7px 14px; gap: 8px; }
-    #grimoire-nav button { width: 32px; height: 32px; font-size: 0.9rem; }
-    #page-indicator { font-size: 0.75rem; min-width: 70px; }
+    #grimoire.open { width: var(--page-w); }
+
+    /* Kill 3D tilt + approach animation on mobile */
+    .book {
+        transform: none !important;
+        animation: none !important;
+    }
+    .book.open { transform: none; }
+
+    /* Hide every 3D structural element — they only make sense with perspective */
+    .book-spine,
+    .book-top-edge,
+    .book-bottom-edge,
+    .book-right-edge,
+    .book-shadow,
+    .page-block,
+    .back-cover { display: none; }
+
+    /* Cover: fade out instead of hinging (hinge requires 3D perspective) */
+    .book-cover {
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+    .book-cover.opened {
+        transform: none !important;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Container tracks the single-page width on mobile */
+    .spreads-container { width: 100%; }
+
+    /* Spread becomes a vertical stack: media on top, content below */
+    .spread {
+        flex-direction: column;
+        transition: opacity 0.3s ease;
+    }
+
+    .spread-left {
+        width: 100%;
+        height: 36%;
+        border-radius: 10px 10px 0 0;
+        border-right: none;
+        border-bottom: 1px solid var(--parchment-edge);
+        box-shadow: inset 0 -6px 14px rgba(0,0,0,0.05);
+    }
+
+    .spread-right {
+        width: 100%;
+        height: 64%;
+        border-radius: 0 0 10px 10px;
+        border-left: none;
+    }
+
+    /* Kill the vertical spine crease — no spine on mobile */
+    .spread-left::after,
+    .spread-right::before { display: none; }
+
+    /* Page flip overlay is desktop-only — mobile relies on .spread opacity crossfade */
+    .page-flip-overlay { display: none !important; }
+
+    /* Left-page content sizing */
+    .left-inner { padding: 16px 18px; }
+    .left-inner .video-slot,
+    .left-inner .thumb-slot { width: 85%; padding-bottom: 47.8%; }
+    .left-inner .project-emoji { width: 70%; height: 80%; font-size: 3rem; }
+    .left-inner .portrait-placeholder {
+        width: 88px;
+        height: 88px;
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    .left-decorative { padding: 20px; }
+    .left-decorative .deco-sigil { width: 72px; height: 72px; margin-bottom: 12px; }
+    .left-decorative .deco-sigil-letter { font-size: 2.2rem; }
+
+    /* Cover content */
+    .cover-title { font-size: 1.8rem; }
+    .cover-subtitle { font-size: 1rem; }
+    .cover-ornament { font-size: 1.4rem; }
+    .cover-sigil { width: 60px; height: 60px; }
+    .cover-sigil-letter { font-size: 1.9rem; }
+    .cover-hint { font-size: 0.75rem; margin-top: 18px; }
+
+    /* Readable text */
+    .page-heading { font-size: 1.35rem; margin-bottom: 12px; }
+    .right-inner { padding: 18px 18px 28px; }
+    .spread p, .right-inner p { font-size: 0.95rem; line-height: 1.65; }
+    .intro-name { font-size: 1.3rem; }
+    .intro-text { font-size: 0.95rem; }
+    .toc-list li { font-size: 0.85rem; }
+    .tag { font-size: 0.7rem; padding: 3px 9px; }
+    .project-campaign { font-size: 1rem; }
+    .project-badge { font-size: 0.65rem; padding: 3px 10px; }
+    .awards-list li { font-size: 0.85rem; }
+
+    /* Nav pill: bigger tap targets, above iOS HIG minimum */
+    #grimoire-nav {
+        bottom: 14px;
+        padding: 8px 18px;
+        gap: 10px;
+    }
+    #grimoire-nav button {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    #page-indicator {
+        font-size: 0.78rem;
+        min-width: 140px;
+        max-width: 60vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION
+   — respect prefers-reduced-motion:reduce (vestibular safety)
+   — kills rotation/translate animations but keeps opacity fades
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .book,
+    .book-cover,
+    .book.open,
+    .book-cover.opened,
+    .page-flip-overlay,
+    .bg-orb,
+    .cover-hint,
+    .linkedin-badge,
+    .video-play-btn,
+    .video-modal-content,
+    #grimoire,
+    #grimoire-nav button {
+        animation: none !important;
+        transition: opacity 0.2s ease !important;
+    }
+    .book-cover.opened {
+        opacity: 0;
+        transform: none !important;
+    }
+    .book {
+        transform: rotateX(2deg) rotateY(0deg) !important;
+    }
+    .spread { transition: opacity 0.15s ease !important; }
 }

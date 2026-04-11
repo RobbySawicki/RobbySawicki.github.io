@@ -13,28 +13,28 @@
 <body>
 
     <!-- Ambient background -->
-    <div id="grimoire-bg">
+    <div id="grimoire-bg" aria-hidden="true">
         <div class="bg-orb bg-orb-green"></div>
         <div class="bg-orb bg-orb-purple"></div>
     </div>
 
     <!-- Navigation overlay -->
-    <div id="grimoire-nav">
-        <button id="nav-prev" aria-label="Previous page" title="Previous page">&#x276E;</button>
-        <span id="page-indicator">Cover</span>
-        <button id="nav-next" aria-label="Next page" title="Next page">&#x276F;</button>
-    </div>
+    <nav id="grimoire-nav" aria-label="Grimoire navigation">
+        <button id="nav-prev" type="button" aria-label="Previous spread" title="Previous spread">&#x276E;</button>
+        <span id="page-indicator" aria-live="polite" aria-atomic="true">Cover</span>
+        <button id="nav-next" type="button" aria-label="Next spread" title="Next spread">&#x276F;</button>
+    </nav>
 
     <!-- Book container — pages built dynamically by grimoire.js -->
-    <div id="grimoire"></div>
+    <main id="grimoire" aria-label="Portfolio grimoire"></main>
 
     <!-- Video modal overlay -->
-    <div id="video-modal" class="video-modal hidden">
+    <div id="video-modal" class="video-modal hidden" role="dialog" aria-modal="true" aria-label="Video player">
         <div class="video-modal-backdrop"></div>
         <div class="video-modal-content">
-            <button class="video-modal-close" aria-label="Close video">&times;</button>
+            <button class="video-modal-close" type="button" aria-label="Close video">&times;</button>
             <div class="video-modal-player">
-                <iframe id="video-modal-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="video-modal-iframe" title="Campaign video" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>

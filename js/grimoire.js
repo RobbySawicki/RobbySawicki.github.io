@@ -13,6 +13,8 @@
     let totalSpreads = 0;
     let isFlipping = false;
     let bookIsOpen = false;
+    let spreadTitles = [];
+    let lastFocusBeforeModal = null;
 
     // ============ CONTENT BUILDERS ============
 
@@ -76,11 +78,11 @@
     }
 
     function tocEntry(title, romanIdx, spreadIdx) {
-        return '<li><a data-goto="' + spreadIdx + '">' +
+        return '<li><button type="button" class="toc-entry" data-goto="' + spreadIdx + '">' +
             '<span class="toc-chapter">' + (romanNumerals[romanIdx - 1] || romanIdx) + '. ' + title + '</span>' +
-            '<span class="toc-dots"></span>' +
+            '<span class="toc-dots" aria-hidden="true"></span>' +
             '<span class="toc-page-num">' + (spreadIdx * 2 + 1) + '</span>' +
-            '</a></li>';
+            '</button></li>';
     }
 
     function rightAbout() {
@@ -137,19 +139,22 @@
         book.className = 'book';
         book.id = 'book';
 
-        // --- Front Cover ---
-        const cover = document.createElement('div');
+        // --- Front Cover (as a real button for keyboard + screen reader users) ---
+        const cover = document.createElement('button');
         cover.className = 'book-cover';
         cover.id = 'book-cover';
+        cover.type = 'button';
+        cover.setAttribute('aria-label',
+            'Open ' + SITE_DATA.owner.name + '\u2019s Grimoire of Works');
         cover.innerHTML =
             '<div class="cover-content">' +
-            '<div class="cover-ornament">\u2726 \u2727 \u2726</div>' +
+            '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
             '<h1 class="cover-title">' + SITE_DATA.owner.name + '</h1>' +
             '<p class="cover-subtitle">The Grimoire of Works</p>' +
-            '<div class="cover-sigil"><span class="cover-sigil-letter">R</span></div>' +
+            '<div class="cover-sigil" aria-hidden="true"><span class="cover-sigil-letter">R</span></div>' +
             '<p class="cover-tagline">' + SITE_DATA.owner.title + '</p>' +
-            '<div class="cover-ornament">\u2726 \u2727 \u2726</div>' +
-            '<p class="cover-hint">Click to Open</p>' +
+            '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
+            '<p class="cover-hint" aria-hidden="true">Click to Open</p>' +
             '</div>';
         book.appendChild(cover);
 
@@ -158,21 +163,23 @@
         spreadsEl.className = 'spreads-container';
         spreadsEl.id = 'spreads';
 
-        // Build spread data: [ { left, right }, ... ]
+        // Build spread data: [ { left, right, title }, ... ]
         const spreadData = [
-            { left: leftIntro(), right: rightIntro() },
-            { left: leftDecorative('Contents', '\u2630'), right: rightToc() },
-            { left: leftDecorative('About', 'R'), right: rightAbout() }
+            { left: leftIntro(), right: rightIntro(), title: 'Welcome' },
+            { left: leftDecorative('Contents', '\u2630'), right: rightToc(), title: 'Contents' },
+            { left: leftDecorative('About', 'R'), right: rightAbout(), title: 'About the Author' }
         ];
 
         SITE_DATA.projects.forEach(function(project) {
             spreadData.push({
                 left: leftMedia(project),
-                right: rightProject(project)
+                right: rightProject(project),
+                title: project.title
             });
         });
 
         totalSpreads = spreadData.length;
+        spreadTitles = spreadData.map(function(s) { return s.title; });
 
         spreadData.forEach(function(s, i) {
             const spread = document.createElement('div');
@@ -252,9 +259,11 @@
             sc.style.display = 'block';
         }, 500);
 
-        // Step 4: Show navigation after everything settles
+        // Step 4: Show navigation after everything settles, move focus to next-button
         setTimeout(function() {
             nav.classList.add('visible');
+            var nextBtn = document.getElementById('nav-next');
+            if (nextBtn) nextBtn.focus();
         }, 1200);
 
         updateIndicator();
@@ -313,7 +322,9 @@
 
     function updateIndicator() {
         var indicator = document.getElementById('page-indicator');
-        indicator.textContent = 'Spread ' + (currentSpread + 1) + ' / ' + totalSpreads;
+        var title = spreadTitles[currentSpread] || '';
+        var label = 'Spread ' + (currentSpread + 1) + ' of ' + totalSpreads;
+        indicator.textContent = title ? (label + ' \u2014 ' + title) : label;
     }
 
     // ============ NAVIGATION SETUP ============
@@ -402,26 +413,46 @@
     function setupVideoModal() {
         var modal = document.getElementById('video-modal');
         var iframe = document.getElementById('video-modal-iframe');
+        var closeBtn = document.querySelector('.video-modal-close');
+
+        function openModal(videoId) {
+            lastFocusBeforeModal = document.activeElement;
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+            modal.classList.remove('hidden');
+            // Focus the close button so keyboard users land inside the dialog
+            closeBtn.focus();
+        }
 
         function closeModal() {
             iframe.src = '';
             modal.classList.add('hidden');
+            // Restore focus to whatever opened the modal
+            if (lastFocusBeforeModal && typeof lastFocusBeforeModal.focus === 'function') {
+                lastFocusBeforeModal.focus();
+            }
+            lastFocusBeforeModal = null;
         }
 
         document.addEventListener('click', function(e) {
             var slot = e.target.closest('.video-slot');
             if (slot) {
                 e.stopPropagation();
-                iframe.src = 'https://www.youtube.com/embed/' + slot.getAttribute('data-video-id') + '?autoplay=1';
-                modal.classList.remove('hidden');
+                openModal(slot.getAttribute('data-video-id'));
             }
         });
 
-        document.querySelector('.video-modal-close').addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', closeModal);
         document.querySelector('.video-modal-backdrop').addEventListener('click', closeModal);
 
+        // Focus trap: while modal is open, Tab always returns to the close button
+        // (the modal has one interactive element, so this is a valid minimal trap).
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+            if (modal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') { closeModal(); return; }
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                closeBtn.focus();
+            }
         });
     }
 
