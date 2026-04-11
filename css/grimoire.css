@@ -655,66 +655,82 @@ body {
 }
 
 /* ---- PAGE FLIP OVERLAY ----
-   A div that covers the right half, styled as a parchment page,
-   animates a rotateY hinge to simulate a page turning left */
-
+   A two-faced div that covers the right half and rotates on its left
+   edge. Front face = top of the page (visible first half of the flip).
+   Back face = underside (visible second half, rotated 180deg). This is
+   what sells it as a page turn instead of a flat card rotation.
+*/
 .page-flip-overlay {
     position: absolute;
     top: 0;
     left: 50%;
     width: 50%;
     height: 100%;
-    background:
-        linear-gradient(270deg, rgba(0,0,0,0.03) 0%, transparent 8%),
-        radial-gradient(ellipse at 40% 40%, var(--parchment), var(--parchment-mid) 70%, var(--parchment-dark) 100%);
-    border-radius: 0 10px 10px 0;
     transform-origin: left center;
+    transform-style: preserve-3d;
     transform: rotateY(0deg);
     z-index: 50;
     pointer-events: none;
-    backface-visibility: hidden;
-    box-shadow: -4px 0 12px rgba(0,0,0,0.15);
     display: none;
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Front face — the top of the page, visible 0° → 90° of a forward flip.
+   Inset shadow on the binding (left) edge suggests the page has thickness;
+   the horizontal darkening gradient simulates raking light as the page lifts. */
+.flip-front {
+    background:
+        linear-gradient(90deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.03) 10%, transparent 25%),
+        radial-gradient(ellipse at 40% 40%, var(--parchment), var(--parchment-mid) 70%, var(--parchment-dark) 100%);
+    border-radius: 0 10px 10px 0;
+    box-shadow:
+        -4px 0 12px rgba(0,0,0,0.18),
+        inset -1px 0 0 rgba(0,0,0,0.2),   /* thin edge on the page's right rim */
+        inset 6px 0 14px rgba(0,0,0,0.08); /* shading near the binding */
+}
+
+/* Back face — the underside of the page, rotated 180° so it only shows
+   once the flip passes vertical. Slightly darker gradient + mirrored
+   shadows give the reverse a different character than the front. */
+.flip-back {
+    transform: rotateY(180deg);
+    background:
+        linear-gradient(270deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.04) 10%, transparent 25%),
+        radial-gradient(ellipse at 60% 40%, var(--parchment-mid), var(--parchment-dark) 70%, var(--parchment-edge) 100%);
+    border-radius: 10px 0 0 10px;
+    box-shadow:
+        4px 0 12px rgba(0,0,0,0.18),
+        inset 1px 0 0 rgba(0,0,0,0.2),
+        inset -6px 0 14px rgba(0,0,0,0.08);
 }
 
 /* Flip forward: right page turns left */
 .page-flip-overlay.flipping-forward {
     display: block;
-    animation: flipPageForward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* Asymmetric easing — harder lift, softer settle. Feels like paper. */
+    animation: flipPageForward var(--flip-duration) cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 /* Flip backward: page turns back right */
 .page-flip-overlay.flipping-backward {
     display: block;
-    animation: flipPageBackward var(--flip-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: flipPageBackward var(--flip-duration) cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 @keyframes flipPageForward {
-    0% {
-        transform: rotateY(0deg);
-        box-shadow: -4px 0 12px rgba(0,0,0,0.15);
-    }
-    40% {
-        box-shadow: -8px 0 24px rgba(0,0,0,0.3);
-    }
-    100% {
-        transform: rotateY(-180deg);
-        box-shadow: 4px 0 8px rgba(0,0,0,0.1);
-    }
+    0%   { transform: rotateY(0deg); }
+    100% { transform: rotateY(-180deg); }
 }
 
 @keyframes flipPageBackward {
-    0% {
-        transform: rotateY(-180deg);
-        box-shadow: 4px 0 8px rgba(0,0,0,0.1);
-    }
-    40% {
-        box-shadow: -8px 0 24px rgba(0,0,0,0.3);
-    }
-    100% {
-        transform: rotateY(0deg);
-        box-shadow: -4px 0 12px rgba(0,0,0,0.15);
-    }
+    0%   { transform: rotateY(-180deg); }
+    100% { transform: rotateY(0deg); }
 }
 
 /* Left page */
@@ -1246,8 +1262,14 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
+    /* Fixed width — otherwise the pill grows/shrinks as spread titles
+       change length, which reads as visual jitter. Indicator uses flex:1
+       and ellipsis to absorb the variable content. */
+    width: 480px;
+    max-width: 92vw;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--sp-4);
     background: rgba(10,10,15,0.85);
     backdrop-filter: blur(12px);
@@ -1255,8 +1277,8 @@ body {
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.1);
     box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-    /* Hidden until book is open. JS now adds .visible on cover transitionend,
-       so the CSS delay is shorter — nav appears as the cover finishes, not a beat later. */
+    /* Hidden until book is open. JS adds .visible on cover transitionend,
+       so the CSS delay is shorter — nav appears as the cover finishes. */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease 0.1s;
@@ -1292,8 +1314,8 @@ body {
     font-size: 0.82rem;
     letter-spacing: 0.08em;
     color: rgba(255,255,255,0.82);
-    min-width: 180px;
-    max-width: 40vw;
+    flex: 1 1 auto;
+    min-width: 0;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -1500,24 +1522,22 @@ body {
     .project-badge { font-size: 0.65rem; padding: 3px 10px; }
     .awards-list li { font-size: 0.85rem; }
 
-    /* Nav pill: bigger tap targets, above iOS HIG minimum */
+    /* Nav pill: bigger tap targets, above iOS HIG minimum.
+       Width inherits from the base rule's fixed 480px / 92vw clamp. */
     #grimoire-nav {
         bottom: 14px;
-        padding: 8px 18px;
-        gap: 10px;
+        padding: 8px 14px;
+        gap: 8px;
     }
     #grimoire-nav button {
         width: 44px;
         height: 44px;
         font-size: 1rem;
+        flex-shrink: 0;
     }
     #page-indicator {
         font-size: 0.78rem;
-        min-width: 140px;
-        max-width: 60vw;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        /* flex:1 + min-width:0 from the base rule handle the absorption */
     }
 }
 

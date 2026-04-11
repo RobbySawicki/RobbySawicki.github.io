@@ -262,10 +262,17 @@
             spreadsEl.appendChild(spread);
         });
 
-        // --- Page flip overlay (animated turning page) ---
+        // --- Page flip overlay (animated turning page with two faces) ---
+        // Two children give the overlay a real underside: the front face is what
+        // the user sees at rest, the back face is rotated 180° and only appears
+        // once the flip passes the 90° midpoint. Produces a 3D page-turn instead
+        // of a flat card rotation.
         var flipOverlay = document.createElement('div');
         flipOverlay.className = 'page-flip-overlay';
         flipOverlay.id = 'flip-overlay';
+        flipOverlay.innerHTML =
+            '<div class="flip-face flip-front" aria-hidden="true"></div>' +
+            '<div class="flip-face flip-back" aria-hidden="true"></div>';
         spreadsEl.appendChild(flipOverlay);
 
         book.appendChild(spreadsEl);
@@ -332,14 +339,22 @@
             }
         }, Math.round(coverDurMs * 0.42));
 
-        // Step 4: When the cover finishes its transform transition, reveal nav and
-        // move focus so keyboard users land on an interactive control.
-        function onCoverOpened(e) {
-            if (e.propertyName && e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
-            cover.removeEventListener('transitionend', onCoverOpened);
+        // Step 4: When the cover finishes its transform transition, reveal nav,
+        // move focus so keyboard users land on an interactive control, and HIDE
+        // the cover element entirely. (The cover ends at rotateY(-160deg), which
+        // leaves the cover-back face visible at ~20deg — producing a visible
+        // third rectangle to the left of the open spread. Hiding the cover after
+        // the reveal moment kills that ghost rectangle.)
+        function finishCoverReveal() {
             nav.classList.add('visible');
             var nextBtn = document.getElementById('nav-next');
             if (nextBtn) nextBtn.focus();
+            cover.style.visibility = 'hidden';
+        }
+        function onCoverOpened(e) {
+            if (e.propertyName && e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+            cover.removeEventListener('transitionend', onCoverOpened);
+            finishCoverReveal();
         }
         cover.addEventListener('transitionend', onCoverOpened);
         // Safety net: if transitionend never fires (rare — reduced-motion edge cases),
@@ -347,9 +362,7 @@
         setTimeout(function() {
             if (!nav.classList.contains('visible')) {
                 cover.removeEventListener('transitionend', onCoverOpened);
-                nav.classList.add('visible');
-                var nextBtn = document.getElementById('nav-next');
-                if (nextBtn) nextBtn.focus();
+                finishCoverReveal();
             }
         }, coverDurMs + 200);
 
@@ -466,21 +479,9 @@
             }
         }, { passive: true });
 
-        var mouseDown = false;
-        container.addEventListener('mousedown', function(e) {
-            if (e.target.closest('a, button')) return;
-            startX = e.clientX;
-            mouseDown = true;
-        });
-
-        document.addEventListener('mouseup', function(e) {
-            if (!mouseDown || !bookIsOpen) return;
-            mouseDown = false;
-            var dx = e.clientX - startX;
-            if (Math.abs(dx) > 60) {
-                if (dx < 0) nextSpread(); else prevSpread();
-            }
-        });
+        // Desktop mouse-drag-as-swipe removed: it collided with text selection
+        // (any drag > 60px on parchment prose would advance the spread).
+        // Desktop users navigate via keyboard arrows and the nav pill buttons.
     }
 
     // ============ VIDEO MODAL ============
