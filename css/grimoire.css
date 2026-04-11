@@ -4,33 +4,67 @@
    ============================================ */
 
 :root {
+    /* Substrate */
     --bg-dark: #0a0a0f;
+    --leather: #2a1810;
+    --leather-hi: #2e1a10;
+    --leather-lo: #140a05;        /* was --leather-dark #1a0e08, tightened */
+    --leather-dark: #140a05;      /* alias, kept for any external ref */
+
+    /* Parchment */
     --parchment: #f4e8c1;
     --parchment-mid: #e8d8a8;
     --parchment-dark: #d4c49a;
     --parchment-edge: #c4a86b;
-    --ink: #2a1a0a;
-    --ink-light: #5a4a3a;
+    --parchment-grain: rgba(180,160,120,0.25);
+
+    /* Ink (three real roles — was four hardcoded) */
+    --ink: #2a1a0a;               /* body */
+    --ink-deep: #1a0a00;           /* bold / emphasis — was a literal */
+    --ink-light: #5a4a3a;          /* secondary / page numbers */
+
+    /* Gold (single scale — --gold-bright was declared and unused) */
+    --gold: #c9a84c;
+    --gold-lit: #e8c96a;           /* replaces the dead #FFD700 */
+    --cover-border: #8B6914;
+    --rule-strong: rgba(201,168,76,0.45);
+    --rule-soft: rgba(201,168,76,0.22);
+
+    /* Arcane accents — used on the cover and ambient bg orbs only.
+       Interior of the book is parchment + ink + gold. Neon accents
+       are deepened to -deep variants when they appear on parchment. */
     --neon-green: #00ff88;
     --neon-purple: #bf5fff;
-    --leather: #2a1810;
-    --leather-dark: #1a0e08;
-    --gold: #c9a84c;
-    --gold-bright: #FFD700;
-    --cover-border: #8B6914;
+    --sigil-green-deep: #0d7a47;   /* was #006633 / #006644 (two near-duplicates) */
+    --sigil-purple-deep: #6a2ca0;
+
+    /* Typography */
     --font-display: 'Cinzel Decorative', serif;
     --font-heading: 'MedievalSharp', cursive;
     --font-body: 'Crimson Text', serif;
     --font-ui: 'Inter', sans-serif;
+
+    /* Layout */
     --page-w: min(420px, 45vw);
-    --page-h: min(594px, 63.6vw); /* page-w * 1.414 */
+    --page-h: min(594px, 63.6vw);
     --spine-w: 40px;
     --edge-h: 24px;
+
+    /* Spacing scale — typeset rhythm, not magic numbers */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 20px;
+    --sp-6: 24px;
+    --sp-7: 32px;
+    --sp-8: 40px;
+
     /* Animation durations — authoritative. JS reads these via cssDurationMs()
        so timing cannot drift between CSS and JS. Tune here only. */
-    --approach-duration: 2s;
-    --cover-duration: 1.2s;
-    --book-open-duration: 1s;
+    --approach-duration: 1.2s;     /* was 2s — too long for a first impression */
+    --cover-duration: 1s;          /* was 1.2s */
+    --book-open-duration: 0.9s;
     --flip-duration: 0.7s;
 }
 
@@ -91,15 +125,20 @@ body {
     border-radius: 50%;
     filter: blur(120px);
     opacity: 0.1;
-    animation: orbFloat 12s ease-in-out infinite alternate;
+    /* Longer loop + linear easing masks the visible "pause" at each end of
+       the prior ease-in-out alternate, which read as mechanical. */
+    animation: orbFloat 20s linear infinite;
 }
 
 .bg-orb-green { width: 400px; height: 400px; background: var(--neon-green); top: -10%; left: -10%; }
-.bg-orb-purple { width: 500px; height: 500px; background: var(--neon-purple); bottom: -15%; right: -10%; animation-delay: -6s; }
+.bg-orb-purple { width: 500px; height: 500px; background: var(--neon-purple); bottom: -15%; right: -10%; animation-delay: -10s; }
 
 @keyframes orbFloat {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(60px,40px) scale(1.15); }
+    0%   { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(40px, 30px) scale(1.08); }
+    50%  { transform: translate(60px, 60px) scale(1.15); }
+    75%  { transform: translate(20px, 40px) scale(1.08); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
 /* ============================================
@@ -145,7 +184,8 @@ body {
     /* Closed: gentle tilt to show spine, top edge, and cover clearly */
     transform: rotateX(18deg) rotateY(-12deg);
     transition: transform var(--book-open-duration) cubic-bezier(0.4,0,0.2,1);
-    animation: bookApproach var(--approach-duration) cubic-bezier(0.4,0,0.2,1) forwards;
+    /* Faster, snappier landing than the prior 2s standard easing */
+    animation: bookApproach var(--approach-duration) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* When open: flatten to bird's-eye */
@@ -265,46 +305,125 @@ body {
    COVER (closed state)
    ============================================ */
 
+/* ---- COVER (two-faced for the endpaper reveal) ----
+   .book-cover is the container/button; .cover-front and .cover-back are
+   the two faces of the leather slab. When the cover hinges open, the
+   back face (bookplate / Ex Libris) rotates into view instead of a
+   hidden backface — this is the richest single moment in the book.
+*/
 .book-cover {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background:
-        radial-gradient(ellipse at 30% 30%, rgba(60,35,20,0.9), transparent 70%),
-        radial-gradient(ellipse at 70% 70%, rgba(40,20,10,0.8), transparent 60%),
-        linear-gradient(145deg, #2e1a10, #1a0e08 40%, #0f0805 100%);
-    border: 3px solid var(--cover-border);
-    border-radius: 3px 10px 10px 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: none;
     cursor: pointer;
     z-index: 30;
     transform-origin: left center;
     transform-style: preserve-3d;
-    backface-visibility: hidden;
     transition: transform var(--cover-duration) cubic-bezier(0.4,0,0.2,1),
                 box-shadow var(--cover-duration) ease;
     box-shadow: 2px 4px 16px rgba(0,0,0,0.4);
 }
 
-/* Cover inner borders */
-.book-cover::before {
+.cover-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--cover-border);
+    border-radius: 3px 10px 10px 3px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.cover-front {
+    background:
+        radial-gradient(ellipse at 30% 30%, rgba(60,35,20,0.9), transparent 70%),
+        radial-gradient(ellipse at 70% 70%, rgba(40,20,10,0.8), transparent 60%),
+        linear-gradient(145deg, var(--leather-hi), var(--leather-lo) 40%, #0f0805 100%);
+}
+
+/* Cover inner borders — live on the front face now */
+.cover-front::before {
     content: '';
     position: absolute;
-    inset: 8px;
-    border: 1px solid rgba(139,105,20,0.4);
+    inset: var(--sp-2);
+    border: 1px solid var(--rule-strong);
     border-radius: 2px;
     pointer-events: none;
 }
 
-.book-cover::after {
+.cover-front::after {
     content: '';
     position: absolute;
     inset: 14px;
-    border: 1px solid rgba(139,105,20,0.2);
+    border: 1px solid var(--rule-soft);
     pointer-events: none;
+}
+
+/* Back face — the endpaper / bookplate the user sees as the cover swings */
+.cover-back {
+    transform: rotateY(180deg);
+    background:
+        radial-gradient(ellipse at 70% 40%, rgba(80,40,22,0.55), transparent 65%),
+        radial-gradient(ellipse at 20% 70%, rgba(45,22,10,0.6), transparent 60%),
+        linear-gradient(135deg, #22140c, #160a05 55%, #0c0502 100%);
+}
+
+/* Bookplate — the central ornament on the inside cover */
+.bookplate {
+    text-align: center;
+    padding: var(--sp-6) var(--sp-7);
+    border: 2px double var(--gold);
+    border-radius: 3px;
+    background: rgba(0,0,0,0.18);
+    max-width: 78%;
+    color: var(--gold);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3),
+                0 0 24px rgba(201,168,76,0.08);
+}
+
+.bookplate-ornament {
+    font-size: 1.05rem;
+    color: var(--gold);
+    opacity: 0.7;
+    letter-spacing: 0.3em;
+    line-height: 1;
+}
+
+.bookplate-label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: var(--sp-4) 0 var(--sp-1);
+    text-shadow: 0 0 8px rgba(201,168,76,0.3);
+}
+
+.bookplate-sigil {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin: var(--sp-2) 0 var(--sp-1);
+    text-shadow: 0 0 14px rgba(201,168,76,0.55),
+                 0 0 2px rgba(201,168,76,0.9);
+    line-height: 1;
+}
+
+.bookplate-owner {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.78rem;
+    color: rgba(201,168,76,0.78);
+    margin: 0 0 var(--sp-4);
+    letter-spacing: 0.04em;
 }
 
 /* Cover opens by rotating on left hinge */
@@ -383,17 +502,18 @@ body {
 }
 
 .cover-hint {
-    font-family: var(--font-ui);
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.3);
-    margin-top: 24px;
-    letter-spacing: 0.08em;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.72);
+    margin-top: var(--sp-6);
+    letter-spacing: 0.05em;
     animation: hintPulse 2s ease-in-out infinite;
 }
 
 @keyframes hintPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.7; }
+    0%, 100% { opacity: 0.6; }
+    50%      { opacity: 0.98; }
 }
 
 /* ============================================
@@ -491,7 +611,9 @@ body {
    SPREADS (open book pages)
    ============================================ */
 
-/* Hidden when closed (display:none), shown via JS on open */
+/* Hidden when closed (display:none), shown via JS on open.
+   Opacity transition (toggled via .revealed) fills the dead-air gap
+   between the cover starting its swing and the spreads appearing. */
 .spreads-container {
     position: absolute;
     top: 0;
@@ -499,6 +621,12 @@ body {
     width: calc(var(--page-w) * 2);
     height: 100%;
     display: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+
+.spreads-container.revealed {
+    opacity: 1;
 }
 
 .spread {
@@ -517,6 +645,13 @@ body {
     opacity: 1;
     pointer-events: auto;
     z-index: 10;
+}
+
+/* Soft crossfade on the .active swap — hidden under the flip overlay
+   on desktop, visible on mobile where the overlay is disabled and on
+   the initial reveal. */
+.spread {
+    transition: opacity 0.35s ease;
 }
 
 /* ---- PAGE FLIP OVERLAY ----
@@ -712,18 +847,21 @@ body {
 .left-inner .portrait-placeholder {
     width: 140px;
     height: 140px;
-    margin: 0 auto 20px;
+    margin: 0 auto var(--sp-5);
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--leather), var(--leather-dark));
+    background: linear-gradient(135deg, var(--leather-hi), var(--leather-lo));
     border: 3px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
-    font-size: 3rem;
-    color: #fff;
-    text-shadow: 0 0 10px var(--neon-green);
-    box-shadow: 0 0 20px rgba(0,255,136,0.15), 0 0 20px rgba(191,95,255,0.15);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold-lit);
+    text-shadow: 0 0 12px rgba(201,168,76,0.6),
+                 0 0 2px rgba(201,168,76,0.9);
+    box-shadow: 0 0 22px rgba(201,168,76,0.18),
+                inset 0 0 12px rgba(0,0,0,0.4);
 }
 
 /* ---- Right page content ---- */
@@ -747,29 +885,45 @@ body {
 .spread-right .corner-tr,
 .spread-right .corner-br {
     position: absolute;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--parchment-edge);
-    opacity: 0.4;
+    opacity: 0.55;
     pointer-events: none;
 }
 
-.spread-left .corner-tl { top: 10px; left: 12px; }
-.spread-left .corner-bl { bottom: 10px; left: 12px; }
-.spread-right .corner-tr { top: 10px; right: 12px; }
-.spread-right .corner-br { bottom: 10px; right: 12px; }
+.spread-left .corner-tl { top: var(--sp-3); left: var(--sp-3); }
+.spread-left .corner-bl { bottom: var(--sp-3); left: var(--sp-3); }
+.spread-right .corner-tr { top: var(--sp-3); right: var(--sp-3); }
+.spread-right .corner-br { bottom: var(--sp-3); right: var(--sp-3); }
 
-/* Page Numbers */
+/* Page Numbers — Cinzel reads better than MedievalSharp at small sizes */
 .page-number {
     position: absolute;
-    bottom: 10px;
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
+    bottom: var(--sp-3);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
     color: var(--ink-light);
-    opacity: 0.5;
+    opacity: 0.55;
 }
 
-.spread-left .page-number { right: 20px; }
-.spread-right .page-number { left: 20px; }
+.spread-left .page-number { right: var(--sp-5); }
+.spread-right .page-number { left: var(--sp-5); }
+
+/* ---- Ornament divider — reusable book-native section break ----
+   Echoes the cover's ✦ ✧ ✦ motif into project spread interiors so the
+   signature ornament appears on every page instead of just the cover. */
+.ornament-divider {
+    display: block;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    opacity: 0.55;
+    margin: var(--sp-4) 0 var(--sp-3);
+    line-height: 1;
+    user-select: none;
+}
 
 /* ============================================
    TYPOGRAPHY & CONTENT STYLES
@@ -779,12 +933,14 @@ body {
     font-family: var(--font-heading);
     font-size: 1.6rem;
     text-align: center;
-    margin-bottom: 14px;
-    background: linear-gradient(90deg, var(--neon-green), var(--neon-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: brightness(0.7) saturate(1.3);
+    margin-bottom: var(--sp-4);
+    color: var(--ink-deep);
+    /* Soft gold glow — reads as illuminated ink, passes WCAG AA.
+       Replaces a neon gradient that failed contrast on parchment. */
+    text-shadow:
+        0 0 1px rgba(201,168,76,0.25),
+        0 0 10px rgba(201,168,76,0.15);
+    letter-spacing: 0.01em;
 }
 
 .spread p,
@@ -797,7 +953,7 @@ body {
 
 .spread strong,
 .right-inner strong {
-    color: #1a0a00;
+    color: var(--ink-deep);
     font-weight: 600;
 }
 
@@ -816,22 +972,28 @@ body {
     justify-content: center;
     gap: 8px;
     text-decoration: none;
-    color: #0077b5;
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-    padding: 5px 14px;
-    border: 1px solid #0077b5;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 0 auto var(--sp-4);
+    padding: var(--sp-1) var(--sp-4);
+    border: 1px solid var(--parchment-edge);
     border-radius: 20px;
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    transition: all 0.3s ease;
+    background: rgba(42,24,16,0.04);
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
 }
 
-.linkedin-badge:hover { background: #0077b5; color: #fff; box-shadow: 0 0 12px rgba(0,119,181,0.4); }
-.linkedin-badge .linkedin-glyph { width: 16px; height: 16px; flex-shrink: 0; }
+.linkedin-badge:hover,
+.linkedin-badge:focus-visible {
+    color: var(--ink-deep);
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+}
+
+.linkedin-badge .linkedin-glyph { width: 14px; height: 14px; flex-shrink: 0; }
 
 .intro-text { text-align: center; font-style: italic; }
 
@@ -841,10 +1003,10 @@ body {
 .toc-list li {
     display: flex;
     align-items: baseline;
-    gap: 5px;
-    margin-bottom: 5px;
-    font-size: 0.78rem;
-    line-height: 1.4;
+    gap: var(--sp-1);
+    margin-bottom: var(--sp-1);
+    font-size: 0.82rem;
+    line-height: 1.45;
 }
 
 .toc-list li button.toc-entry {
@@ -857,11 +1019,11 @@ body {
 }
 
 .toc-list li button.toc-entry:hover,
-.toc-list li button.toc-entry:focus-visible { color: #006644; }
+.toc-list li button.toc-entry:focus-visible { color: var(--sigil-green-deep); }
 
-.toc-chapter { font-family: var(--font-heading); white-space: nowrap; flex-shrink: 0; }
+.toc-chapter { font-family: var(--font-display); font-weight: 400; white-space: nowrap; flex-shrink: 0; }
 .toc-dots { flex: 1; border-bottom: 1px dotted var(--parchment-edge); min-width: 15px; margin-bottom: 3px; }
-.toc-page-num { font-family: var(--font-heading); white-space: nowrap; flex-shrink: 0; color: var(--ink-light); }
+.toc-page-num { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; color: var(--ink-light); }
 
 .toc-section-label {
     font-family: var(--font-heading);
@@ -887,8 +1049,21 @@ body {
     text-transform: uppercase;
 }
 
-.project-badge.pinned { background: linear-gradient(135deg, var(--neon-green), #00cc6a); color: #0a0a0f; }
-.project-badge.recent { background: linear-gradient(135deg, var(--neon-purple), #9b3fd4); color: #fff; }
+/* Book-native badges — subdued pill in gold, ink text. The neon gradient
+   endpoints (#00cc6a, #9b3fd4) are gone; this is the cover's visual
+   language echoing into the interior, not a SaaS chip. */
+.project-badge {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    background: rgba(201,168,76,0.10);
+    color: var(--ink-deep);
+    border: 1px solid var(--gold);
+    text-transform: uppercase;
+}
+.project-badge.pinned,
+.project-badge.recent { /* no variant — both pinned and recent look the same */ }
 
 .project-campaign {
     font-family: var(--font-body);
@@ -901,17 +1076,24 @@ body {
 
 .project-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 10px; }
 
-.tag {
-    font-family: var(--font-ui);
-    font-size: 0.6rem;
-    padding: 2px 8px;
+/* Tags — neutralized book-native chips. No more neon Jira pills; both
+   variant classes collapse to one parchment-and-ink style that reads as
+   marginalia, not SaaS chrome. The variant classes are kept so the
+   renderer's alternation is a no-op rather than a render change. */
+.tag,
+.tag-green,
+.tag-purple {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.72rem;
+    padding: 2px 10px;
     border-radius: 12px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.015em;
     font-weight: 500;
+    background: rgba(42,24,16,0.06);
+    color: var(--ink);
+    border: 1px solid var(--parchment-edge);
 }
-
-.tag-green { background: rgba(0,255,136,0.12); color: #006633; border: 1px solid rgba(0,255,136,0.3); }
-.tag-purple { background: rgba(191,95,255,0.1); color: #6a2ca0; border: 1px solid rgba(191,95,255,0.3); }
 
 /* Video Thumbnail */
 .video-slot {
@@ -990,18 +1172,23 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    color: #006644;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--sigil-green-deep);
     text-decoration: none;
-    padding: 3px 10px;
-    border: 1px solid rgba(0,255,136,0.3);
+    padding: 3px 12px;
+    border: 1px solid var(--parchment-edge);
     border-radius: 16px;
     margin-bottom: 10px;
-    transition: all 0.3s;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
 }
 
-.project-link:hover { background: rgba(0,255,136,0.1); border-color: var(--neon-green); }
+.project-link:hover,
+.project-link:focus-visible {
+    background: rgba(13,122,71,0.08);
+    border-color: var(--sigil-green-deep);
+}
 
 .project-role {
     font-size: 0.8rem;
@@ -1010,7 +1197,7 @@ body {
     border-top: 1px solid var(--parchment-edge);
 }
 
-.role-label { font-weight: 600; color: #006633; }
+.role-label { font-weight: 600; color: var(--sigil-green-deep); font-style: italic; }
 
 .awards-heading { font-family: var(--font-heading); font-size: 0.9rem; margin: 8px 0 5px; color: var(--ink); }
 
@@ -1032,17 +1219,22 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    color: #c13584;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--sigil-purple-deep);
     text-decoration: none;
-    padding: 5px 12px;
-    border: 1px solid rgba(193,53,132,0.3);
+    padding: 3px 12px;
+    border: 1px solid var(--parchment-edge);
     border-radius: 16px;
-    transition: all 0.3s;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
 }
 
-.instagram-link:hover { background: rgba(193,53,132,0.1); }
+.instagram-link:hover,
+.instagram-link:focus-visible {
+    background: rgba(106,44,160,0.08);
+    border-color: var(--sigil-purple-deep);
+}
 
 /* ============================================
    NAVIGATION
@@ -1050,23 +1242,24 @@ body {
 
 #grimoire-nav {
     position: fixed;
-    bottom: 20px;
+    bottom: var(--sp-5);
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--sp-4);
     background: rgba(10,10,15,0.85);
     backdrop-filter: blur(12px);
-    padding: 10px 24px;
+    padding: var(--sp-2) var(--sp-6);
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.1);
     box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-    /* Hidden until book is open */
+    /* Hidden until book is open. JS now adds .visible on cover transitionend,
+       so the CSS delay is shorter — nav appears as the cover finishes, not a beat later. */
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.5s ease 0.8s;
+    transition: opacity 0.4s ease 0.1s;
 }
 
 #grimoire-nav.visible {
@@ -1095,11 +1288,16 @@ body {
 }
 
 #page-indicator {
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
-    min-width: 100px;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.82);
+    min-width: 180px;
+    max-width: 40vw;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ============================================

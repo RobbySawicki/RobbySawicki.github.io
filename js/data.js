@@ -23,7 +23,7 @@ const SITE_DATA = {
     domain: "robbysawicki.com"
   },
 
-  intro: `Welcome to my website. I'm a Toronto-based marketing and media professional with a passion for bold brand work, street-level campaigns, and connecting ideas to audiences. Feel free to explore my projects or connect with me on LinkedIn.`,
+  intro: `I am Robby Sawicki \u2014 a Toronto media craftsman. I work at street level and at national scale, planning out-of-home and integrated campaigns for brands that want their ideas to live outside the screen. This volume collects the work. Turn the pages, or meet me on LinkedIn.`,
 
   about: [
     `I'm a results-driven marketing professional based in Toronto with over 3 years of experience spanning media planning, OOH advertising, and account management. Currently an <strong>Account Executive at Grassroots Advertising Inc.</strong>, where I work with brands and agencies to execute high-impact Wildposting\u00AE and out-of-home campaigns across Canada \u2014 from street-level wildpostings and guerrilla sampling to murals, experiential activations, and scent marketing.`,

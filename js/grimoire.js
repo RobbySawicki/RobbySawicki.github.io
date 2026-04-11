@@ -92,7 +92,8 @@
 
     function rightIntro() {
         return '<div class="right-inner">' +
-            '<h2 class="page-heading">Welcome</h2>' +
+            '<h2 class="page-heading">Invocation</h2>' +
+            '<div class="ornament-divider" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
             '<p class="intro-text">' + SITE_DATA.intro + '</p>' +
             '</div>';
     }
@@ -163,7 +164,8 @@
 
         let awards = '';
         if (project.awards && project.awards.length) {
-            awards = '<h3 class="awards-heading">Awards & Recognition</h3><ul class="awards-list">' +
+            awards = '<div class="ornament-divider" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
+                '<h3 class="awards-heading">Awards &amp; Recognition</h3><ul class="awards-list">' +
                 project.awards.map(function(a) { return '<li>' + a + '</li>'; }).join('') + '</ul>';
         }
 
@@ -184,7 +186,8 @@
         book.className = 'book';
         book.id = 'book';
 
-        // --- Front Cover (as a real button for keyboard + screen reader users) ---
+        // --- Front Cover (two-faced: cover-front shows leather + title, cover-back
+        //     shows the endpaper/bookplate during the hinge swing). ---
         const cover = document.createElement('button');
         cover.className = 'book-cover';
         cover.id = 'book-cover';
@@ -192,14 +195,25 @@
         cover.setAttribute('aria-label',
             'Open ' + SITE_DATA.owner.name + '\u2019s Grimoire of Works');
         cover.innerHTML =
-            '<div class="cover-content">' +
-            '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
-            '<h1 class="cover-title">' + SITE_DATA.owner.name + '</h1>' +
-            '<p class="cover-subtitle">The Grimoire of Works</p>' +
-            '<div class="cover-sigil" aria-hidden="true"><span class="cover-sigil-letter">R</span></div>' +
-            '<p class="cover-tagline">' + SITE_DATA.owner.title + '</p>' +
-            '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
-            '<p class="cover-hint" aria-hidden="true">Click to Open</p>' +
+            '<div class="cover-face cover-front">' +
+              '<div class="cover-content">' +
+                '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
+                '<h1 class="cover-title">' + SITE_DATA.owner.name + '</h1>' +
+                '<p class="cover-subtitle">The Grimoire of Works</p>' +
+                '<div class="cover-sigil" aria-hidden="true"><span class="cover-sigil-letter">R</span></div>' +
+                '<p class="cover-tagline">' + SITE_DATA.owner.title + '</p>' +
+                '<div class="cover-ornament" aria-hidden="true">\u2726 \u2727 \u2726</div>' +
+                '<p class="cover-hint" aria-hidden="true">Open the tome</p>' +
+              '</div>' +
+            '</div>' +
+            '<div class="cover-face cover-back" aria-hidden="true">' +
+              '<div class="bookplate">' +
+                '<div class="bookplate-ornament">\u2726 \u2727 \u2726</div>' +
+                '<div class="bookplate-label">Ex Libris</div>' +
+                '<div class="bookplate-sigil">' + ownerInitials() + '</div>' +
+                '<div class="bookplate-owner">' + SITE_DATA.owner.name + '</div>' +
+                '<div class="bookplate-ornament">\u2726 \u2727 \u2726</div>' +
+              '</div>' +
             '</div>';
         book.appendChild(cover);
 
@@ -309,7 +323,13 @@
             if (pb) pb.style.display = 'none';
             if (bc) bc.style.display = 'none';
             var sc = document.querySelector('.spreads-container');
-            if (sc) sc.style.display = 'block';
+            if (sc) {
+                sc.style.display = 'block';
+                // Next frame: add .revealed so opacity transitions from 0 to 1
+                // and the spread dissolves in under the swinging cover instead
+                // of snapping on.
+                requestAnimationFrame(function() { sc.classList.add('revealed'); });
+            }
         }, Math.round(coverDurMs * 0.42));
 
         // Step 4: When the cover finishes its transform transition, reveal nav and
@@ -378,8 +398,8 @@
     function updateIndicator() {
         var indicator = document.getElementById('page-indicator');
         var title = spreadTitles[currentSpread] || '';
-        var label = 'Spread ' + (currentSpread + 1) + ' of ' + totalSpreads;
-        indicator.textContent = title ? (label + ' \u2014 ' + title) : label;
+        var folio = 'Folio ' + toRoman(currentSpread + 1) + ' \u00B7 ' + toRoman(totalSpreads);
+        indicator.textContent = title ? (folio + ' \u2014 ' + title) : folio;
     }
 
     // ============ NAVIGATION SETUP ============
