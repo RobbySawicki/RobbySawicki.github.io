@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grimoire of Robby Sawicki</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><circle cx='64' cy='64' r='60' fill='%231a0a00' stroke='%23c8a24e' stroke-width='4'/><text x='64' y='82' font-size='70' text-anchor='middle' fill='%23c8a24e' font-family='serif'>R</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Crimson Text', Georgia, serif;
+            color: #2b1a0e;
+            text-align: center;
+            background: #1a0f05;
+            min-height: 100vh;
+        }
+
+        /* Parchment background layer */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255,200,100,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(255,180,80,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, #1a0f05 0%, #2a1a0a 50%, #1a0f05 100%);
+        }
+
+        /* Ornate gold top border */
+        .grimoire-header::before {
+            content: '';
+            display: block;
+            height: 6px;
+            background: linear-gradient(to right,
+                transparent 0%,
+                #8b6914 10%,
+                #c8a24e 30%,
+                #f0d070 50%,
+                #c8a24e 70%,
+                #8b6914 90%,
+                transparent 100%
+            );
+        }
+
+        .grimoire-header::after {
+            content: '\2726 \2726 \2726';
+            display: block;
+            text-align: center;
+            color: #c8a24e;
+            font-size: 1.2rem;
+            letter-spacing: 20px;
+            padding: 6px 0 0 0;
+            opacity: 0.7;
+        }
+
+        /* ---- STICKY NAV ---- */
+        .grimoire-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, #1a0f05 0%, #1a0f05ee 100%);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid #3d2b14;
+        }
+
+        /* ---- HEADER ---- */
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px 16px 24px;
+        }
+
+        .site-header {
+            text-align: left;
+            padding: 0;
+        }
+
+        .site-header h1 {
+            font-family: 'Uncial Antiqua', 'MedievalSharp', cursive;
+            font-weight: 400;
+            font-size: 3.2rem;
+            margin: 0;
+            line-height: 1.1;
+            color: #f0d070;
+            text-shadow:
+                0 0 20px rgba(200,162,78,0.5),
+                0 0 40px rgba(200,162,78,0.2),
+                2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 0.02em;
+        }
+
+        .site-header p {
+            margin: 8px 0 0 0;
+            font-size: 0.95rem;
+            color: #a08050;
+            letter-spacing: 0.08em;
+            font-style: italic;
+            text-transform: uppercase;
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* ---- NAV ---- */
+        .navigation-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+            margin: 0;
+        }
+
+        .grimoire-button {
+            font-size: 1.1rem;
+            padding: 10px 24px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'MedievalSharp', cursive;
+            text-decoration: none;
+            color: #f0d070;
+            border-radius: 4px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2a1a0a, #3d2b14);
+            border: 1px solid #8b6914;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+            box-shadow:
+                inset 0 1px 0 rgba(240,208,112,0.1),
+                0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .grimoire-button:hover {
+            background: linear-gradient(135deg, #3d2b14, #4d3520);
+            box-shadow:
+                0 0 15px rgba(200,162,78,0.3),
+                0 0 30px rgba(200,162,78,0.1),
+                inset 0 1px 0 rgba(240,208,112,0.2);
+            transform: translateY(-2px);
+            color: #ffe090;
+        }
+
+        /* ---- LINKEDIN ---- */
+        .linkedin-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .linkedin-link img {
+            height: 38px;
+            width: auto;
+            display: block;
+            border-radius: 4px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: sepia(60%) saturate(80%) brightness(0.8);
+        }
+
+        .linkedin-link:hover img {
+            transform: scale(1.1);
+            filter: sepia(30%) saturate(100%) brightness(1) drop-shadow(0 0 8px rgba(200,162,78,0.5));
+        }
+
+        /* ---- MAIN ---- */
+        #main-content {
+            max-width: 900px;
+            margin: 50px auto;
+            font-size: 1.15rem;
+            color: #d4c4a0;
+            line-height: 1.85;
+            padding: 0 24px;
+            text-align: left;
+        }
+
+        /* Section titles as chapter headings */
+        .section-title {
+            font-family: 'Uncial Antiqua', 'MedievalSharp', cursive;
+            font-weight: 400;
+            font-size: 2.2rem;
+            margin-top: 60px;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #f0d070;
+            text-shadow: 0 0 20px rgba(200,162,78,0.3);
+            letter-spacing: 0.05em;
+        }
+
+        /* Decorative divider under section titles */
+        .section-title::after {
+            content: '\2E3B';
+            display: block;
+            margin-top: 6px;
+            color: #8b6914;
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            opacity: 0.6;
+        }
+
+        /* Parchment-style content cards */
+        .content-card {
+            background:
+                linear-gradient(135deg,
+                    rgba(60,40,20,0.6) 0%,
+                    rgba(45,30,15,0.8) 50%,
+                    rgba(60,40,20,0.6) 100%
+                );
+            border: 1px solid #5a3d1a;
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            margin-top: 16px;
+            box-shadow:
+                0 4px 20px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(240,208,112,0.05);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(200,162,78,0.1);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .content-card:hover {
+            box-shadow:
+                0 4px 30px rgba(200,162,78,0.15),
+                0 0 60px rgba(200,162,78,0.05),
+                inset 0 1px 0 rgba(240,208,112,0.1);
+            transform: translateY(-2px);
+        }
+
+        .content-card p {
+            margin: 0;
+        }
+
+        .content-card p + p {
+            margin-top: 16px;
+        }
+
+        /* Highlighted text */
+        .gold-text {
+            color: #f0d070;
+            font-weight: 600;
+        }
+
+        .amber-text {
+            color: #e0a030;
+            font-weight: 600;
+        }
+
+        /* Decorative initial cap for first paragraph */
+        .drop-cap::first-letter {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 3.5rem;
+            float: left;
+            line-height: 0.8;
+            margin: 4px 10px 0 0;
+            color: #f0d070;
+            text-shadow: 0 0 10px rgba(200,162,78,0.3);
+        }
+
+        /* Page corner ornaments */
+        .page-ornament {
+            text-align: center;
+            font-size: 2rem;
+            color: #5a3d1a;
+            margin: 40px 0;
+            letter-spacing: 16px;
+            opacity: 0.5;
+        }
+
+        /* Candle flicker animation */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+            25% { opacity: 0.95; }
+            75% { opacity: 0.9; }
+        }
+
+        .candle-glow {
+            animation: flicker 3s ease-in-out infinite;
+        }
+
+        /* ---- FOOTER ---- */
+        .site-footer {
+            text-align: center;
+            padding: 30px 24px;
+            background: linear-gradient(180deg, transparent, rgba(15,8,2,0.8));
+            color: #6b5530;
+            margin-top: 80px;
+            font-size: 0.85rem;
+            border-top: 1px solid #3d2b14;
+            font-style: italic;
+        }
+
+        .site-footer::before {
+            content: '\2726 \2726 \2726 \2726 \2726';
+            display: block;
+            margin-bottom: 16px;
+            letter-spacing: 12px;
+            color: #5a3d1a;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+
+        /* ---- DRAFT BANNER ---- */
+        .draft-banner {
+            background: linear-gradient(90deg, transparent, rgba(200,162,78,0.15), transparent);
+            color: #c8a24e;
+            text-align: center;
+            padding: 8px;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #3d2b14;
+        }
+
+        /* ---- SCROLLBAR ---- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #1a0f05; }
+        ::-webkit-scrollbar-thumb {
+            background: #3d2b14;
+            border-radius: 4px;
+            border: 2px solid #1a0f05;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #5a3d1a; }
+
+        /* ---- MOBILE ---- */
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 12px;
+                gap: 14px;
+            }
+            .site-header {
+                width: 100%;
+                text-align: center;
+            }
+            .site-header p { text-align: center; }
+            .site-header h1 { font-size: 2.4rem; }
+            .navigation-bar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                width: 100%;
+            }
+            .grimoire-button {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+                width: 80%;
+                justify-content: center;
+            }
+            .linkedin-link {
+                width: 80%;
+                justify-content: center;
+            }
+            .linkedin-link img { height: 42px; }
+            #main-content {
+                font-size: 1.05rem;
+                padding: 0 14px;
+            }
+            .section-title { font-size: 1.8rem; }
+            .drop-cap::first-letter { font-size: 2.8rem; }
+            .content-card { padding: 20px 18px; }
+            .content-card::before {
+                top: 6px; left: 6px; right: 6px; bottom: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="draft-banner">~ Draft Preview ~ Grimoire Edition ~</div>
+
+<div class="grimoire-header">
+<div class="header-container">
+    <header class="site-header">
+        <h1 class="candle-glow">Robby Sawicki</h1>
+        <p>Scribe of Media &amp; Out-of-Home Arcana</p>
+    </header>
+
+    <nav class="navigation-bar">
+        <a href="projects.html" class="grimoire-button">Folio of Works</a>
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+        </a>
+    </nav>
+</div>
+</div>
+
+<main id="main-content">
+
+    <h2 class="section-title">Preface</h2>
+    <div class="content-card">
+        <p class="drop-cap">
+            Welcome, traveler. You have opened the grimoire of Robby Sawicki &mdash;
+            a Toronto-based practitioner of marketing and media, with a passion for bold brand work,
+            street-level campaigns, and connecting ideas to audiences. Peruse these pages to explore
+            my works, or seek me through the LinkedIn seal above.
+        </p>
+    </div>
+
+    <div class="page-ornament">&loz; &loz; &loz;</div>
+
+    <h2 class="section-title">Chronicle</h2>
+    <div class="content-card">
+        <p class="drop-cap">
+            I am a results-driven marketing professional based in Toronto with over 3 years of experience spanning media planning,
+            OOH advertising, and account management. Currently serving as <span class="gold-text">Account Executive at Grassroots Advertising Inc.</span>,
+            where I work with brands and agencies to execute high-impact Wildposting&reg; and out-of-home campaigns across Canada
+            &mdash; from street-level wildpostings and guerrilla sampling to murals, experiential activations, and scent marketing.
+        </p>
+        <p>
+            Prior to Grassroots, I spent over 2 years at <span class="amber-text">dentsu</span> as a Media Planner (and before that,
+            Assistant Media Planner), managing national media strategy and buying for <span class="gold-text">Kraft Heinz</span>
+            &mdash; one of the world's largest food &amp; beverage companies. There I developed deep expertise in competitive analysis,
+            media mix planning, and translating marketing objectives into measurable campaign results.
+        </p>
+        <p>
+            I hold a <span class="amber-text">Bachelor of Commerce in Marketing</span> from Toronto Metropolitan University,
+            where I also served as Co-Head of the Rugby Club. My skill set spans marketing strategy, OOH media sales,
+            project management, and social media measurement &mdash; and I thrive in fast-paced, creative environments
+            where big ideas meet real-world execution.
+        </p>
+    </div>
+
+    <div class="page-ornament">&loz; &loz; &loz;</div>
+
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Robby Sawicki. All Rights Reserved. (It really isn't, but it is my name)</p>
+</footer>
+
+</body>
+</html>
