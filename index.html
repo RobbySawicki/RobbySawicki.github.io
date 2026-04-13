@@ -14,7 +14,7 @@
         *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            background-color: #080412;
+            background-color: transparent;
             margin: 0;
             font-family: 'Inter', sans-serif;
             color: #e0e0e0;
@@ -37,11 +37,7 @@
         }
 
         /* ---- STICKY NAV ---- */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: #080412;
+        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(10, 4, 25, 0.85); backdrop-filter: blur(8px);
         }
 
         /* ---- HEADER ---- */
@@ -137,7 +133,7 @@
         }
 
         /* ---- MAIN ---- */
-        #main-content {
+        #main-content { position: relative; z-index: 1;
             max-width: 1050px;
             margin: 40px auto;
             font-size: 1.1rem;
@@ -230,6 +226,70 @@
     </style>
 </head>
 <body>
+<canvas id="starfield" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('starfield');
+  var ctx=c.getContext('2d');
+  var W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  // Create stars
+  for(var i=0;i<180;i++){
+    stars.push({
+      x:Math.random()*2,y:Math.random()*2,
+      r:Math.random()*1.4+0.3,
+      alpha:Math.random(),
+      delta:(Math.random()*0.004+0.001)*(Math.random()<0.5?1:-1),
+      speed:Math.random()*0.012+0.004
+    });
+  }
+  function draw(){
+    // Deep space purple gradient background
+    var grad=ctx.createLinearGradient(0,0,W*0.6,H);
+    grad.addColorStop(0,'#0d0520');
+    grad.addColorStop(0.4,'#1a0535');
+    grad.addColorStop(0.7,'#2a0a4a');
+    grad.addColorStop(1,'#0d0520');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+    // Subtle nebula glow patches
+    var neb1=ctx.createRadialGradient(W*0.2,H*0.35,0,W*0.2,H*0.35,W*0.32);
+    neb1.addColorStop(0,'rgba(120,20,160,0.18)');
+    neb1.addColorStop(1,'rgba(120,20,160,0)');
+    ctx.fillStyle=neb1;ctx.fillRect(0,0,W,H);
+    var neb2=ctx.createRadialGradient(W*0.75,H*0.6,0,W*0.75,H*0.6,W*0.28);
+    neb2.addColorStop(0,'rgba(180,30,120,0.14)');
+    neb2.addColorStop(1,'rgba(180,30,120,0)');
+    ctx.fillStyle=neb2;ctx.fillRect(0,0,W,H);
+    var neb3=ctx.createRadialGradient(W*0.5,H*0.1,0,W*0.5,H*0.1,W*0.22);
+    neb3.addColorStop(0,'rgba(80,10,140,0.12)');
+    neb3.addColorStop(1,'rgba(80,10,140,0)');
+    ctx.fillStyle=neb3;ctx.fillRect(0,0,W,H);
+    // Draw pulsing stars
+    stars.forEach(function(s){
+      s.alpha+=s.delta;
+      if(s.alpha>1){s.alpha=1;s.delta=-Math.abs(s.delta);}
+      if(s.alpha<0.05){s.alpha=0.05;s.delta=Math.abs(s.delta);}
+      s.x+=s.speed*0.001;
+      if(s.x>1){s.x=0;}
+      var px=s.x*W,py=s.y*H;
+      // Soft glow
+      var glow=ctx.createRadialGradient(px,py,0,px,py,s.r*3.5);
+      glow.addColorStop(0,'rgba(220,180,255,'+s.alpha+')');
+      glow.addColorStop(1,'rgba(220,180,255,0)');
+      ctx.fillStyle=glow;
+      ctx.beginPath();ctx.arc(px,py,s.r*3.5,0,Math.PI*2);ctx.fill();
+      // Star core
+      ctx.fillStyle='rgba(255,245,255,'+Math.min(s.alpha*1.4,1)+')';
+      ctx.beginPath();ctx.arc(px,py,s.r,0,Math.PI*2);ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 <div class="sticky-header">
 <div class="header-container">
