@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Grid | Robby</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📌%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0a0614;
+            color: #e0d7f5;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        /* Sticky Header */
+        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(10,6,20,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #2a2a40; }
+        .header-container { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+        header h1 { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 400; font-size: 1.5rem; background: linear-gradient(90deg, #00ff88, #bf5fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        header p { font-size: 0.78rem; color: #8a7aaa; }
+        .navigation-bar { display: flex; gap: 20px; align-items: center; }
+        .navigation-bar a { color: #e0d7f5; text-decoration: none; font-size: 0.9rem; opacity: 0.8; transition: opacity 0.2s; }
+        .navigation-bar a:hover { opacity: 1; color: #00ff88; }
+
+        /* Main content */
+        main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+        .page-title { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 400; font-size: 2.4rem; margin-bottom: 8px; background: linear-gradient(90deg, #00ff88, #bf5fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-subtitle { color: #8a7aaa; font-size: 0.9rem; margin-bottom: 36px; }
+        .page-subtitle a { color: #00ff88; text-decoration: none; }
+        .page-subtitle a:hover { text-decoration: underline; }
+
+        /* Grid */
+        .projects-thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Thumbnail Card */
+        .thumb-card {
+            background: #110d1f;
+            border-radius: 14px;
+            border: 1px solid #2a2a40;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .thumb-card:hover {
+            transform: translateY(-5px);
+            box-shadow: -5px -5px 20px rgba(0,255,136,0.15), 5px 5px 20px rgba(191,95,255,0.15);
+        }
+        .thumb-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #0f0a1e, #1a0f2e);
+        }
+        .thumb-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .thumb-image .thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        .thumb-label {
+            padding: 10px 12px 12px;
+        }
+        .thumb-label h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #e0d7f5;
+            line-height: 1.35;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .projects-thumbnail-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .projects-thumbnail-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="sticky-header">
+        <div class="header-container">
+            <header>
+                <h1>Robby Sawicki</h1>
+                <p>Marketing Strategy &amp; Cross-Functional Brand Work</p>
+            </header>
+            <nav class="navigation-bar">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Full Projects</a>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <h2 class="page-title">Projects</h2>
+        <p class="page-subtitle">Thumbnail grid view &mdash; <a href="projects.html">switch to full view</a></p>
+
+        <div class="projects-thumbnail-grid">
+
+            <!-- 1. Kraft Heinz x Deadpool & Wolverine -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #8b0000, #cc0000); color: #fff200;">DW</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Kraft Heinz x Deadpool &amp; Wolverine &mdash; &ldquo;Can&rsquo;t Unsee It&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 2. Canada Soccer -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #ce1126, #d80c2a); color: #fff;">&#x26BD;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Canada Soccer &mdash; &ldquo;Our Game Now&rdquo; Jersey Swap</h3>
+                </div>
+            </div>
+
+            <!-- 3. Tangerine Bike For Free Day -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <img src="images/tangerine-bike-day.jpg" alt="Tangerine Bike For Free Day">
+                </div>
+                <div class="thumb-label">
+                    <h3>Tangerine &mdash; Bike For Free Day</h3>
+                </div>
+            </div>
+
+            <!-- 4. KD Frozen Launch -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #003da5, #ffd100); color: #fff;">KD</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>KD &mdash; Frozen Launch</h3>
+                </div>
+            </div>
+
+            <!-- 5. Philadelphia Bonuts -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #4a2060); color: #bf5fff;">&#x1F369;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Philadelphia Cream Cheese &mdash; &ldquo;Bonuts&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 6. KD Spoon KD -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #003da5, #ffd100); color: #fff;">KD</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>KD &mdash; &ldquo;Spoon KD&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 7. Kraft Hockeyville -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <img src="https://img.youtube.com/vi/Rf-aH6Cel64/hqdefault.jpg" alt="Kraft Hockeyville 2024">
+                </div>
+                <div class="thumb-label">
+                    <h3>Kraft Hockeyville</h3>
+                </div>
+            </div>
+
+            <!-- 8. Heinz Smack For Heinz -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #8b0000, #cc0000); color: #fff;">&#x1F345;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Heinz Ketchup &mdash; &ldquo;Smack For Heinz&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 9. Philadelphia Irresistibly Fluffy -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #0f0a1e, #1a0f2e); color: #e0d7f5;">&#x2601;&#xFE0F;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Philadelphia Cream Cheese &mdash; &ldquo;Irresistibly Fluffy&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 10. Heinz The Wait -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #8b0000, #cc0000); color: #fff;">&#x23F3;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Heinz Ketchup &mdash; &ldquo;The Wait&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 11. KD Cancel Coverage -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #003da5, #ffd100); color: #fff;">KD</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>KD &mdash; &ldquo;Cancel Coverage&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 12. Philadelphia Schmear Socks -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #4a2060); color: #bf5fff;">&#x1F9E6;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Philadelphia Cream Cheese &mdash; &ldquo;Schmear Socks&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 13. Philadelphia A Little Taste of Hell -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #1a0000, #600000); color: #ff3300;">&#x1F608;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Philadelphia Cream Cheese &mdash; &ldquo;A Little Taste of Hell&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 14. KD Gotta Be KD -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #003da5, #ffd100); color: #fff;">KD</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>KD &mdash; &ldquo;Gotta Be KD&rdquo; Brand Refresh</h3>
+                </div>
+            </div>
+
+            <!-- 15. Heinz Ketchup Fraud -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #8b0000, #cc0000); color: #fff;">&#x1F534;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Heinz Ketchup &mdash; &ldquo;Ketchup Fraud&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 16. Lunchables Goodbye/Hello -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #1a3a1a, #2a5c2a); color: #00ff88;">&#x1F96A;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Lunchables &mdash; &ldquo;Goodbye/Hello&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 17. Tingly Ted's -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #2a1a00, #5c3a00); color: #ff9900;">&#x1F9F8;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Tingly Ted&rsquo;s &mdash; Ed Sheeran x Kraft Heinz</h3>
+                </div>
+            </div>
+
+            <!-- 18. Kraft Peanut Butter QJar Codes -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #3d2200, #7a4400); color: #ffcc66;">&#x1F95C;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>Kraft Peanut Butter &mdash; &ldquo;QJar Codes&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 19. MiO Energy Influencer Campaign -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #001a3d, #003080); color: #00aaff;">&#x26A1;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>MiO Energy &mdash; Influencer Campaign</h3>
+                </div>
+            </div>
+
+            <!-- 20. Kraft Peanut Butter Welcome Home Jars -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <img src="whj-hero.jpg" alt="Welcome Home Jars">
+                </div>
+                <div class="thumb-label">
+                    <h3>Kraft Peanut Butter &mdash; &ldquo;Welcome Home Jars&rdquo;</h3>
+                </div>
+            </div>
+
+            <!-- 21. HEINZ Mayo Launch -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <div class="thumb-placeholder" style="background: linear-gradient(135deg, #8b0000, #cc0000); color: #fff;">&#x1F9C2;</div>
+                </div>
+                <div class="thumb-label">
+                    <h3>HEINZ &mdash; &ldquo;Reintroducing Heinz&rdquo; Mayo Launch</h3>
+                </div>
+            </div>
+
+            <!-- 22. Elsa Hosk x UGG -->
+            <div class="thumb-card">
+                <div class="thumb-image">
+                    <img src="images/UGG 1.JPG" alt="Elsa Hosk x UGG - Iconic From the First Step">
+                </div>
+                <div class="thumb-label">
+                    <h3>Elsa Hosk &times; UGG &mdash; &ldquo;Iconic From the First Step&rdquo;</h3>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="text-align:center; padding: 24px; color: #4a3a6a; font-size: 0.8rem; border-top: 1px solid #2a2a40;">
+        &copy; 2026 Robby Sawicki. All Rights Reserved.
+    </footer>
+</body>
+</html>
