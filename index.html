@@ -14,7 +14,7 @@
         *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            background-color: #0a0a0f;
+            background-color: transparent;
             margin: 0;
             font-family: 'Inter', sans-serif;
             color: #e0e0e0;
@@ -234,6 +234,135 @@
     </style>
 </head>
 <body>
+<canvas id="starfield" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('starfield');
+  var ctx=c.getContext('2d');
+  var W,H;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  // Star layers: small/dim background, medium mid, large bright foreground
+  var layers=[
+    {count:220,rMin:0.2,rMax:0.7,speedMin:0.0002,speedMax:0.0006,alphaMin:0.1,alphaMax:0.5,color:'210,190,255'},
+    {count:120,rMin:0.5,rMax:1.2,speedMin:0.0005,speedMax:0.0012,alphaMin:0.3,alphaMax:0.9,color:'240,220,255'},
+    {count:40, rMin:1.0,rMax:2.2,speedMin:0.0008,speedMax:0.002, alphaMin:0.5,alphaMax:1.0,color:'255,245,255'}
+  ];
+  var stars=[];
+  layers.forEach(function(l){
+    for(var i=0;i<l.count;i++){
+      var baseAlpha=l.alphaMin+Math.random()*(l.alphaMax-l.alphaMin);
+      stars.push({
+        x:Math.random(),y:Math.random(),
+        r:l.rMin+Math.random()*(l.rMax-l.rMin),
+        alpha:baseAlpha,
+        baseAlpha:baseAlpha,
+        pulseSpeed:(Math.random()*0.006+0.001)*(Math.random()<0.5?1:-1),
+        speed:l.speedMin+Math.random()*(l.speedMax-l.speedMin),
+        color:l.color,
+        glowSize:l.rMin<0.5?2.5:l.rMin<1?3.5:5
+      });
+    }
+  });
+
+  // Shooting stars
+  var shooters=[];
+  function spawnShooter(){
+    if(shooters.length<2&&Math.random()<0.004){
+      shooters.push({
+        x:Math.random()*0.7,y:Math.random()*0.4,
+        len:0.08+Math.random()*0.12,
+        angle:Math.PI/5+Math.random()*0.3,
+        speed:0.006+Math.random()*0.008,
+        alpha:0,
+        phase:'in',life:0
+      });
+    }
+  }
+
+  function draw(){
+    // === BACKGROUND: deep layered purple space gradient ===
+    var grad=ctx.createLinearGradient(0,0,W*0.5,H);
+    grad.addColorStop(0,'#060211');
+    grad.addColorStop(0.25,'#0e0426');
+    grad.addColorStop(0.55,'#160838');
+    grad.addColorStop(0.8,'#1e0530');
+    grad.addColorStop(1,'#060211');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+
+    // === NEBULA CLOUDS: multiple overlapping soft glows ===
+    var nebulae=[
+      {x:0.15,y:0.3, rx:0.38,ry:0.45, r:'140,20,180',a:0.13},
+      {x:0.72,y:0.65,rx:0.32,ry:0.40, r:'180,25,130',a:0.10},
+      {x:0.5, y:0.15,rx:0.28,ry:0.30, r:'80,10,160', a:0.09},
+      {x:0.85,y:0.2, rx:0.22,ry:0.28, r:'100,15,200',a:0.08},
+      {x:0.3, y:0.8, rx:0.26,ry:0.22, r:'160,10,100',a:0.07},
+      {x:0.6, y:0.5, rx:0.18,ry:0.22, r:'60,5,140',  a:0.06}
+    ];
+    nebulae.forEach(function(n){
+      var gx=ctx.createRadialGradient(n.x*W,n.y*H,0,n.x*W,n.y*H,n.rx*W);
+      gx.addColorStop(0,'rgba('+n.r+','+n.a+')');
+      gx.addColorStop(0.5,'rgba('+n.r+','+(n.a*0.4)+')');
+      gx.addColorStop(1,'rgba('+n.r+',0)');
+      ctx.save();
+      ctx.scale(1,n.ry/n.rx);
+      ctx.fillStyle=gx;
+      ctx.beginPath();
+      ctx.arc(n.x*W,(n.y*H)*(n.rx/n.ry),n.rx*W,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // === STARS ===
+    stars.forEach(function(s){
+      s.alpha+=s.pulseSpeed;
+      if(s.alpha>s.baseAlpha*1.3){s.alpha=s.baseAlpha*1.3;s.pulseSpeed=-Math.abs(s.pulseSpeed);}
+      if(s.alpha<s.baseAlpha*0.2){s.alpha=s.baseAlpha*0.2;s.pulseSpeed=Math.abs(s.pulseSpeed);}
+      s.x+=s.speed;
+      if(s.x>1){s.x=0;s.y=Math.random();}
+      var px=s.x*W,py=s.y*H;
+      var a=Math.min(s.alpha,1);
+      // Soft outer glow
+      var glow=ctx.createRadialGradient(px,py,0,px,py,s.r*s.glowSize);
+      glow.addColorStop(0,'rgba('+s.color+','+a+')');
+      glow.addColorStop(0.4,'rgba('+s.color+','+(a*0.3)+')');
+      glow.addColorStop(1,'rgba('+s.color+',0)');
+      ctx.fillStyle=glow;
+      ctx.beginPath();ctx.arc(px,py,s.r*s.glowSize,0,Math.PI*2);ctx.fill();
+      // Bright core
+      ctx.fillStyle='rgba(255,250,255,'+Math.min(a*1.5,1)+')';
+      ctx.beginPath();ctx.arc(px,py,s.r,0,Math.PI*2);ctx.fill();
+    });
+
+    // === SHOOTING STARS ===
+    spawnShooter();
+    shooters=shooters.filter(function(s){
+      s.life+=1;
+      if(s.phase==='in'){s.alpha=Math.min(s.alpha+0.08,0.9);if(s.alpha>=0.9)s.phase='out';}
+      else{s.alpha=Math.max(s.alpha-0.04,0);}
+      if(s.alpha<=0)return false;
+      s.x+=s.speed;s.y+=s.speed*Math.tan(s.angle);
+      var x1=s.x*W,y1=s.y*H;
+      var x0=x1-Math.cos(s.angle)*s.len*W;
+      var y0=y1-Math.sin(s.angle)*s.len*H;
+      var trail=ctx.createLinearGradient(x0,y0,x1,y1);
+      trail.addColorStop(0,'rgba(200,180,255,0)');
+      trail.addColorStop(0.6,'rgba(220,200,255,'+(s.alpha*0.5)+')');
+      trail.addColorStop(1,'rgba(255,250,255,'+s.alpha+')');
+      ctx.strokeStyle=trail;
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();
+      return true;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 
 <div class="sticky-header">
