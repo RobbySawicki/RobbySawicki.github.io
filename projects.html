@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
-        body { background-color: #080412; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; }
+        body { background-color: transparent; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; }
         .sticky-header::before { content: ''; display: block; height: 4px; background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88); background-size: 200% 100%; animation: shimmer 3s linear infinite; }
         @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
         /* ---- STICKY NAV ---- */
-        .sticky-header { position: sticky; top: 0; z-index: 100; background: #080412; }h
+        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(10, 4, 25, 0.85); backdrop-filter: blur(8px); }h
         .header-container { max-width: 1050px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 20px 14px 20px; border-bottom: 1px solid #1e1e2e; }
         .site-header { text-align: left; padding: 0; }
         .site-header h1 { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 400 !imhportant; font-size: 4rem; margin: 0; line-height: 1.1; color: #fff; text-shadow: -2px -2px 0 #00ff88, -2px -2px 10px rgba(0,255,136,0.7), 2px 2px 0 #bf5fff, 2px 2px 10px rgba(191,95,255,0.7); }
@@ -24,7 +24,7 @@
         .linkedin-link { display: flex; align-items: center; }
         .linkedin-link img { height: 40px; width: auto; display: block; border-radius: 6px; transition: transform 0.3s ease, filter 0.3s ease; }
         .linkedin-link:hover img { transform: scale(1.1); filter: drop-shadow(0 0 8px #00ff88); }
-        #main-content { max-width: 1050px; margin: 40px auto; text-align: left; padding: 0 20px; }
+        #main-content { position: relative; z-index: 1; max-width: 1050px; margin: 40px auto; text-align: left; padding: 0 20px; }
         .section-title { font-family: 'Lobster Two', cursive; font-style: italic; font-size: 2.8rem; font-weight: 400 !important; text-align: center; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #bf5fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .projects-grid { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
         .project-card { background: #110d1f; border-radius: 16px; padding: 24px; border: 1px solid #2a2a40; box-shadow: -4px -4px 16px rgba(0,255,136,0.08), 4px 4px 16px rgba(191,95,255,0.08); transition: 0.3s ease; }
@@ -46,6 +46,64 @@
     </style>
 </head>
 <body>
+<canvas id="starfield" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('starfield');
+  var ctx=c.getContext('2d');
+  var W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  for(var i=0;i<180;i++){
+    stars.push({
+      x:Math.random(),y:Math.random(),
+      r:Math.random()*1.4+0.3,
+      alpha:Math.random(),
+      delta:(Math.random()*0.004+0.001)*(Math.random()<0.5?1:-1),
+      speed:Math.random()*0.012+0.004
+    });
+  }
+  function draw(){
+    var grad=ctx.createLinearGradient(0,0,W*0.6,H);
+    grad.addColorStop(0,'#0d0520');
+    grad.addColorStop(0.4,'#1a0535');
+    grad.addColorStop(0.7,'#2a0a4a');
+    grad.addColorStop(1,'#0d0520');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+    var neb1=ctx.createRadialGradient(W*0.2,H*0.35,0,W*0.2,H*0.35,W*0.32);
+    neb1.addColorStop(0,'rgba(120,20,160,0.18)');
+    neb1.addColorStop(1,'rgba(120,20,160,0)');
+    ctx.fillStyle=neb1;ctx.fillRect(0,0,W,H);
+    var neb2=ctx.createRadialGradient(W*0.75,H*0.6,0,W*0.75,H*0.6,W*0.28);
+    neb2.addColorStop(0,'rgba(180,30,120,0.14)');
+    neb2.addColorStop(1,'rgba(180,30,120,0)');
+    ctx.fillStyle=neb2;ctx.fillRect(0,0,W,H);
+    var neb3=ctx.createRadialGradient(W*0.5,H*0.1,0,W*0.5,H*0.1,W*0.22);
+    neb3.addColorStop(0,'rgba(80,10,140,0.12)');
+    neb3.addColorStop(1,'rgba(80,10,140,0)');
+    ctx.fillStyle=neb3;ctx.fillRect(0,0,W,H);
+    stars.forEach(function(s){
+      s.alpha+=s.delta;
+      if(s.alpha>1){s.alpha=1;s.delta=-Math.abs(s.delta);}
+      if(s.alpha<0.05){s.alpha=0.05;s.delta=Math.abs(s.delta);}
+      s.x+=s.speed*0.001;
+      if(s.x>1){s.x=0;}
+      var px=s.x*W,py=s.y*H;
+      var glow=ctx.createRadialGradient(px,py,0,px,py,s.r*3.5);
+      glow.addColorStop(0,'rgba(220,180,255,'+s.alpha+')');
+      glow.addColorStop(1,'rgba(220,180,255,0)');
+      ctx.fillStyle=glow;
+      ctx.beginPath();ctx.arc(px,py,s.r*3.5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(255,245,255,'+Math.min(s.alpha*1.4,1)+')';
+      ctx.beginPath();ctx.arc(px,py,s.r,0,Math.PI*2);ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 <!-- STICKY HEADER — correctly closed before main content -->
 <div class="sticky-header">
