@@ -235,14 +235,14 @@
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
   resize();
   window.addEventListener('resize',resize);
-  // Create stars
+  // Create stars - x and y both in 0-1 range for even spread
   for(var i=0;i<180;i++){
     stars.push({
-      x:Math.random()*2,y:Math.random()*2,
+      x:Math.random(),y:Math.random(),
       r:Math.random()*1.4+0.3,
       alpha:Math.random(),
       delta:(Math.random()*0.004+0.001)*(Math.random()<0.5?1:-1),
-      speed:Math.random()*0.012+0.004
+      speed:Math.random()*0.008+0.002
     });
   }
   function draw(){
@@ -273,7 +273,7 @@
       if(s.alpha>1){s.alpha=1;s.delta=-Math.abs(s.delta);}
       if(s.alpha<0.05){s.alpha=0.05;s.delta=Math.abs(s.delta);}
       s.x+=s.speed*0.001;
-      if(s.x>1){s.x=0;}
+      if(s.x>1){s.x=0;s.y=Math.random();}
       var px=s.x*W,py=s.y*H;
       // Soft glow
       var glow=ctx.createRadialGradient(px,py,0,px,py,s.r*3.5);
