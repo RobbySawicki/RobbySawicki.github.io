@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
-        body { background-color: #0a0a0f; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; }
+        body { background-color: #080412; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; }
         .sticky-header::before { content: ''; display: block; height: 4px; background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88); background-size: 200% 100%; animation: shimmer 3s linear infinite; }
         @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
         /* ---- STICKY NAV ---- */
-        .sticky-header { position: sticky; top: 0; z-index: 100; background: #0a0a0f; }h
+        .sticky-header { position: sticky; top: 0; z-index: 100; background: #080412; }h
         .header-container { max-width: 1050px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 20px 14px 20px; border-bottom: 1px solid #1e1e2e; }
         .site-header { text-align: left; padding: 0; }
         .site-header h1 { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 400 !imhportant; font-size: 4rem; margin: 0; line-height: 1.1; color: #fff; text-shadow: -2px -2px 0 #00ff88, -2px -2px 10px rgba(0,255,136,0.7), 2px 2px 0 #bf5fff, 2px 2px 10px rgba(191,95,255,0.7); }
@@ -27,9 +27,9 @@
         #main-content { max-width: 1050px; margin: 40px auto; text-align: left; padding: 0 20px; }
         .section-title { font-family: 'Lobster Two', cursive; font-style: italic; font-size: 2.8rem; font-weight: 400 !important; text-align: center; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #bf5fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .projects-grid { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
-        .project-card { background: #12121c; border-radius: 16px; padding: 24px; border: 1px solid #2a2a40; box-shadow: -4px -4px 16px rgba(0,255,136,0.08), 4px 4px 16px rgba(191,95,255,0.08); transition: 0.3s ease; }
+        .project-card { background: #110d1f; border-radius: 16px; padding: 24px; border: 1px solid #2a2a40; box-shadow: -4px -4px 16px rgba(0,255,136,0.08), 4px 4px 16px rgba(191,95,255,0.08); transition: 0.3s ease; }
         .project-card:hover { transform: translateY(-6px); box-shadow: -6px -6px 24px rgba(0,255,136,0.18), 6px 6px 24px rgba(191,95,255,0.18); }
-        .project-image { width: 100%; height: 220px; border: 1px solid #2a2a40; border-radius: 12px; background: linear-gradient(135deg, #0f1f17, #1a0f2e); margin-bottom: 18px; }
+        .project-image { width: 100%; height: 220px; border: 1px solid #2a2a40; border-radius: 12px; background: linear-gradient(135deg, #0f0a1e, #1a0f2e); margin-bottom: 18px; }
         .project-card h3 { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 400 !important; font-size: 1.9rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #bf5fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .project-card p { font-size: 1rem; line-height: 1.6; color: #aaa; }
         .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid #2a2a40; margin-bottom: 18px; }
@@ -37,11 +37,11 @@
         .awards-list { list-style: none; padding: 0; margin: 12px 0 18px 0; }
         .awards-list li { font-size: 0.9rem; line-height: 1.8; color: #ccc; padding-left: 24px; position: relative; }
         .awards-list li::before { content: '\1F3C6'; position: absolute; left: 0; top: 0; }
-        .site-footer { text-align: center; padding: 24px; background: #0d0d18; color: #555; margin-top: 60px; font-size: 0.85rem; border-top: 1px solid #1e1e2e; }
+        .site-footer { text-align: center; padding: 24px; background: #0b0918; color: #555; margin-top: 60px; font-size: 0.85rem; border-top: 1px solid #1e1e2e; }
         @media (max-width: 600px) { .header-container { flex-direction: column; text-align: center; justify-content: center; gap: 12px; } .site-header { text-align: center; } .navigation-bar { flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 12px; } .neon-button { width: 80%; max-width: 260px; font-size: 1.7rem; padding: 12px 20px; } .linkedin-link img { margin: 0 auto; } #main-content { text-align: center; padding: 0 20px; } .projects-grid { align-items: center; } .project-card { width: 100%; max-width: 420px; margin: 0 auto; text-align: center; } }
     
         .card-badge { position: absolute; top: 12px; right: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; z-index: 10; letter-spacing: 0.5px; }
-        .pinned-badge { background: linear-gradient(135deg, #00ff88, #00cc6a); color: #0a0a0f; }
+        .pinned-badge { background: linear-gradient(135deg, #00ff88, #00cc6a); color: #080412; }
         .recent-badge { background: linear-gradient(135deg, #bf5fff, #9b3fd4); color: white; }
     </style>
 </head>
@@ -178,7 +178,7 @@
         </div>
 
         <div class="project-card">
-            <div class="project-image" style="background: linear-gradient(135deg, #0f1f2e, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x2601;&#xFE0F;</span></div>
+            <div class="project-image" style="background: linear-gradient(135deg, #0f0a1e, #1a0f2e); display:flex; align-items:center; justify-content:center;"><span style="font-size:3rem;">&#x2601;&#xFE0F;</span></div>
             <h3>Philadelphia Cream Cheese &mdash; &ldquo;Irresistibly Fluffy&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
                 <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Media Planning</span>
