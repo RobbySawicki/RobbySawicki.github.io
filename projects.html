@@ -570,9 +570,26 @@
 
         <!-- Monday Girl Hide & Seek -->
         <div class="project-card">
-            <div class="video-container">
-                <iframe src="https://www.instagram.com/joinmondaygirl/reel/DNqWF67twOM/embed" title="Monday Girl — Hide & Seek Campaign" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div style="position:relative; width:100%; border-radius:12px; overflow:hidden; border:1px solid #2a2a40; margin-bottom:18px; background:#0a0818;">
+                <div id="mg-carousel" style="display:flex; width:500%; transition:transform 0.6s ease;">
+                    <img src="images/Good MG Pic.jpg" alt="Monday Girl — Hide & Seek decal" style="width:20%;display:block;object-fit:contain;">
+                    <img src="images/MG 1.jpeg" alt="Monday Girl — Hide & Seek placement 1" style="width:20%;display:block;object-fit:contain;">
+                    <img src="images/MG 2.jpeg" alt="Monday Girl — Hide & Seek placement 2" style="width:20%;display:block;object-fit:contain;">
+                    <img src="images/MG 3.jpeg" alt="Monday Girl — Hide & Seek placement 3" style="width:20%;display:block;object-fit:contain;">
+                    <img src="images/MG 4.jpeg" alt="Monday Girl — Hide & Seek placement 4" style="width:20%;display:block;object-fit:contain;">
+                </div>
+                <button onclick="mgSlide(-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&lsaquo;</button>
+                <button onclick="mgSlide(1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&rsaquo;</button>
+                <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;" id="mg-dots"></div>
             </div>
+            <script>
+            (function(){
+              var idx=0,total=5,el=document.getElementById('mg-carousel'),dots=document.getElementById('mg-dots');
+              for(var i=0;i<total;i++){var d=document.createElement('span');d.style.cssText='width:8px;height:8px;border-radius:50%;display:inline-block;background:rgba(255,255,255,'+(i===0?'1':'0.4')+');transition:background 0.3s;cursor:pointer;';d.onclick=(function(j){return function(){idx=j;update()}})(i);dots.appendChild(d);}
+              window.mgSlide=function(dir){idx=(idx+dir+total)%total;update()};
+              function update(){el.style.transform='translateX(-'+(idx*20)+'%)';for(var i=0;i<dots.children.length;i++)dots.children[i].style.background='rgba(255,255,255,'+(i===idx?'1':'0.4')+')';}
+            })();
+            </script>
             <h3>Monday Girl &mdash; &ldquo;Hide &amp; Seek&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
                 <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Street-Level / Decals</span>
