@@ -235,110 +235,125 @@
     </style>
 </head>
 <body>
-<!-- Space Background -->
-<div id="space-bg">
-  <div id="stars1"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
-  <div id="stars4"></div>
-  <div class="nebula n1"></div>
-  <div class="nebula n2"></div>
-  <div class="nebula n3"></div>
-  <div class="nebula n4"></div>
-  <div class="nebula n5"></div>
-  <div class="shooting-star ss1"></div>
-  <div class="shooting-star ss2"></div>
-  <div class="shooting-star ss3"></div>
-</div>
-<style>
-  #space-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;
-    background:
-      radial-gradient(ellipse at 15% 50%, rgba(90,20,140,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 25%, rgba(60,10,160,0.14) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 85%, rgba(100,15,120,0.10) 0%, transparent 55%),
-      radial-gradient(ellipse at 70% 60%, rgba(40,5,100,0.08) 0%, transparent 45%),
-      linear-gradient(180deg, #020010 0%, #08021e 15%, #0e0430 35%, #140638 50%, #10042e 70%, #08021a 88%, #020010 100%);
-  }
-
-  /* Stars — static position, no drift */
-  #stars1,#stars2,#stars3,#stars4{position:absolute;top:0;left:0;}
-
-  /* Twinkling — each layer pulses at a different rate */
-  @keyframes twinkle1{0%,100%{opacity:.9}50%{opacity:.6}}
-  @keyframes twinkle2{0%,100%{opacity:.85}50%{opacity:.65}}
-  @keyframes twinkle3{0%,100%{opacity:1}50%{opacity:.7}}
-  @keyframes twinkle4{0%,100%{opacity:1}35%{opacity:.75}70%{opacity:.95}}
-
-  #stars1{animation:twinkle1 6s ease-in-out infinite;}
-  #stars2{animation:twinkle2 9s ease-in-out infinite;}
-  #stars3{animation:twinkle3 7s ease-in-out infinite;}
-  #stars4{animation:twinkle4 5s ease-in-out infinite;}
-
-  /* Nebula clouds — very subtle breathing */
-  .nebula{position:absolute;border-radius:50%;pointer-events:none;}
-  .n1{width:45vw;height:40vw;top:10%;left:5%;background:radial-gradient(ellipse,rgba(120,20,180,0.13) 0%,rgba(120,20,180,0.03) 50%,transparent 70%);filter:blur(60px);animation:nebPulse1 25s ease-in-out infinite alternate;}
-  .n2{width:35vw;height:45vw;top:55%;right:2%;background:radial-gradient(ellipse,rgba(180,25,120,0.10) 0%,rgba(180,25,120,0.02) 50%,transparent 70%);filter:blur(70px);animation:nebPulse2 30s ease-in-out infinite alternate;}
-  .n3{width:30vw;height:28vw;top:5%;right:15%;background:radial-gradient(ellipse,rgba(50,15,200,0.09) 0%,rgba(50,15,200,0.02) 50%,transparent 70%);filter:blur(50px);animation:nebPulse3 22s ease-in-out infinite alternate;}
-  .n4{width:25vw;height:30vw;bottom:8%;left:20%;background:radial-gradient(ellipse,rgba(0,80,60,0.07) 0%,rgba(0,80,60,0.015) 50%,transparent 70%);filter:blur(55px);animation:nebPulse1 28s ease-in-out infinite alternate-reverse;}
-  .n5{width:50vw;height:20vw;top:40%;left:25%;background:radial-gradient(ellipse,rgba(80,10,130,0.05) 0%,rgba(80,10,130,0.01) 50%,transparent 70%);filter:blur(80px);animation:nebPulse2 35s ease-in-out infinite alternate;}
-
-  @keyframes nebPulse1{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.06)}}
-  @keyframes nebPulse2{0%{opacity:.6;transform:scale(1)}100%{opacity:.85;transform:scale(1.04)}}
-  @keyframes nebPulse3{0%{opacity:.75;transform:scale(1)}100%{opacity:1;transform:scale(1.07)}}
-
-  /* Shooting stars */
-  .shooting-star{position:absolute;height:1px;opacity:0;
-    background:linear-gradient(to right, transparent 0%, rgba(200,190,255,0.1) 20%, rgba(230,220,255,0.5) 60%, rgba(255,255,255,0.9) 90%, #fff 100%);
-  }
-  .shooting-star::after{content:'';position:absolute;right:-2px;top:-2px;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(200,200,255,0.8);}
-  .ss1{width:180px;top:12%;left:15%;transform:rotate(-35deg);animation:shoot1 14s ease-in-out infinite;}
-  .ss2{width:140px;top:28%;left:55%;transform:rotate(-30deg);animation:shoot2 20s ease-in-out 6s infinite;}
-  .ss3{width:200px;top:8%;left:40%;transform:rotate(-40deg);animation:shoot3 25s ease-in-out 13s infinite;}
-
-  @keyframes shoot1{0%,100%{opacity:0;transform:rotate(-35deg) translateX(-100px)}3%{opacity:1}6%{opacity:0;transform:rotate(-35deg) translateX(75vw)}6.1%,100%{opacity:0}}
-  @keyframes shoot2{0%,100%{opacity:0;transform:rotate(-30deg) translateX(-100px)}2%{opacity:.9}5%{opacity:0;transform:rotate(-30deg) translateX(60vw)}5.1%,100%{opacity:0}}
-  @keyframes shoot3{0%,100%{opacity:0;transform:rotate(-40deg) translateX(-100px)}2.5%{opacity:1}5.5%{opacity:0;transform:rotate(-40deg) translateX(70vw)}5.6%,100%{opacity:0}}
-</style>
+<!-- Aurora Borealis Background -->
+<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 <script>
 (function(){
-  // Use viewport dimensions so stars cover the visible area
-  var W=Math.max(window.innerWidth,1920);
-  var H=Math.max(window.innerHeight,1080);
+  var c=document.getElementById('aurora-bg');
+  var ctx=c.getContext('2d');
+  var W,H,t=0;
 
-  var palette=[
-    '#fff','#fff','#fff','#fff','#fff',
-    '#cad7ff','#cad7ff','#cad7ff','#d4dfff',
-    '#b8c9ff','#b8c9ff',
-    '#fff5e6','#fff5e6',
-    '#ffe4b5',
-    '#ffd2a1',
-    '#ffbf8a'
+  function resize(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  // Stars — generate once
+  var stars=[];
+  for(var i=0;i<800;i++){
+    stars.push({
+      x:Math.random(),y:Math.random(),
+      r:Math.random()*1.2+0.3,
+      a:Math.random()*0.6+0.2,
+      tw:Math.random()*0.02+0.005,
+      tp:Math.random()*Math.PI*2
+    });
+  }
+
+  // Aurora band parameters — each band is a flowing curtain
+  var bands=[
+    {yBase:0.18, amp:0.06, freq:0.8,  speed:0.12, color1:[0,255,136],  color2:[0,180,100],  alpha:0.25, width:0.18, phase:0},
+    {yBase:0.28, amp:0.05, freq:1.1,  speed:0.09, color1:[80,220,160], color2:[0,255,136],   alpha:0.18, width:0.22, phase:2},
+    {yBase:0.22, amp:0.07, freq:0.6,  speed:0.15, color1:[100,140,255],color2:[191,95,255],  alpha:0.15, width:0.20, phase:4},
+    {yBase:0.35, amp:0.04, freq:1.4,  speed:0.08, color1:[0,200,120],  color2:[60,255,160],  alpha:0.12, width:0.15, phase:1},
+    {yBase:0.15, amp:0.08, freq:0.5,  speed:0.18, color1:[150,80,255], color2:[191,95,255],  alpha:0.10, width:0.25, phase:3},
+    {yBase:0.30, amp:0.03, freq:1.8,  speed:0.06, color1:[0,255,180],  color2:[0,200,136],   alpha:0.08, width:0.12, phase:5}
   ];
 
-  function genStars(n){
-    for(var s=[],i=0;i<n;i++){
-      s.push(Math.round(Math.random()*W)+'px '+Math.round(Math.random()*H)+'px '+palette[Math.floor(Math.random()*palette.length)]);
-    }
-    return s.join(',');
-  }
+  function draw(){
+    t+=0.016;
+    ctx.clearRect(0,0,W,H);
 
-  function genGlowStars(n){
-    for(var s=[],i=0;i<n;i++){
-      var x=Math.round(Math.random()*W),y=Math.round(Math.random()*H);
-      var c=palette[Math.floor(Math.random()*palette.length)];
-      s.push(x+'px '+y+'px 0 1px '+c);
-      s.push(x+'px '+y+'px 4px 1px '+c);
-    }
-    return s.join(',');
-  }
+    // === Dark sky gradient ===
+    var sky=ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#020012');
+    sky.addColorStop(0.3,'#06021a');
+    sky.addColorStop(0.6,'#0a0420');
+    sky.addColorStop(0.85,'#08031a');
+    sky.addColorStop(1,'#020010');
+    ctx.fillStyle=sky;
+    ctx.fillRect(0,0,W,H);
 
-  var st=document.createElement('style');
-  st.textContent=
-    '#stars1{width:1px;height:1px;background:transparent;box-shadow:'+genStars(1800)+';}'+
-    '#stars2{width:1.5px;height:1.5px;background:transparent;box-shadow:'+genStars(600)+';}'+
-    '#stars3{width:2px;height:2px;background:transparent;border-radius:50%;box-shadow:'+genStars(200)+';}'+
-    '#stars4{width:3px;height:3px;background:transparent;border-radius:50%;box-shadow:'+genGlowStars(60)+';}';
-  document.head.appendChild(st);
+    // === Stars ===
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      s.tp+=s.tw;
+      var a=s.a*(0.6+0.4*Math.sin(s.tp));
+      ctx.fillStyle='rgba(220,230,255,'+a+')';
+      ctx.beginPath();
+      ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    // === Aurora curtains ===
+    var sliceW=4; // px per vertical slice
+    var slices=Math.ceil(W/sliceW)+1;
+
+    for(var b=0;b<bands.length;b++){
+      var band=bands[b];
+      // Breathing intensity
+      var breathe=0.7+0.3*Math.sin(t*0.3+band.phase);
+      var ba=band.alpha*breathe;
+
+      for(var i=0;i<slices;i++){
+        var x=i*sliceW;
+        var nx=x/W; // normalized x
+
+        // Curtain wave — layered sine waves for organic shape
+        var wave=Math.sin(nx*Math.PI*2*band.freq + t*band.speed + band.phase)
+                +Math.sin(nx*Math.PI*3.7*band.freq + t*band.speed*0.7 + band.phase*1.3)*0.4
+                +Math.sin(nx*Math.PI*7*band.freq + t*band.speed*1.3)*0.15;
+        wave/=1.55;
+
+        var yCenter=(band.yBase + wave*band.amp)*H;
+        var curtainH=band.width*H*(0.8+0.2*Math.sin(nx*5+t*0.4));
+
+        // Vertical ray intensity — creates the curtain "folds"
+        var rayIntensity=0.5+0.5*Math.sin(nx*30+t*0.8+band.phase)
+                        *Math.sin(nx*17-t*0.5);
+        rayIntensity=Math.max(0.15, rayIntensity);
+
+        var localAlpha=ba*rayIntensity;
+
+        // Vertical gradient for each slice — bright at bottom, fading up
+        var grad=ctx.createLinearGradient(x,yCenter-curtainH*0.3,x,yCenter+curtainH*0.7);
+        var c1=band.color1, c2=band.color2;
+        grad.addColorStop(0,'rgba('+c1[0]+','+c1[1]+','+c1[2]+',0)');
+        grad.addColorStop(0.2,'rgba('+c1[0]+','+c1[1]+','+c1[2]+','+(localAlpha*0.3)+')');
+        grad.addColorStop(0.45,'rgba('+c1[0]+','+c1[1]+','+c1[2]+','+(localAlpha*0.8)+')');
+        grad.addColorStop(0.6,'rgba('+c2[0]+','+c2[1]+','+c2[2]+','+(localAlpha)+')');
+        grad.addColorStop(0.8,'rgba('+c2[0]+','+c2[1]+','+c2[2]+','+(localAlpha*0.4)+')');
+        grad.addColorStop(1,'rgba('+c2[0]+','+c2[1]+','+c2[2]+',0)');
+
+        ctx.fillStyle=grad;
+        ctx.fillRect(x,yCenter-curtainH*0.3,sliceW+1,curtainH);
+      }
+    }
+
+    // === Soft top glow — ambient aurora light ===
+    var glow=ctx.createRadialGradient(W*0.5,0,0,W*0.5,0,W*0.6);
+    var glowAlpha=0.04+0.02*Math.sin(t*0.2);
+    glow.addColorStop(0,'rgba(0,255,136,'+glowAlpha+')');
+    glow.addColorStop(0.5,'rgba(100,80,200,'+(glowAlpha*0.5)+')');
+    glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=glow;
+    ctx.fillRect(0,0,W,H*0.5);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 </script>
 
