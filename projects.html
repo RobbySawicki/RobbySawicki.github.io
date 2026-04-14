@@ -58,40 +58,43 @@
 
   var oc=document.createElement('canvas');
   var ox=oc.getContext('2d');
+  var rc=document.createElement('canvas');
+  var rx=rc.getContext('2d');
 
   function resize(){
     W=c.width=window.innerWidth;
     H=c.height=window.innerHeight;
-    oc.width=W; oc.height=H;
+    oc.width=rc.width=W; oc.height=rc.height=H;
   }
   resize();
   window.addEventListener('resize',resize);
 
   var stars=[];
   for(var i=0;i<900;i++){
-    stars.push({
-      x:Math.random(),y:Math.random(),
-      r:Math.random()*1.3+0.2,
-      a:Math.random()*0.5+0.25,
-      tw:Math.random()*0.015+0.003,
-      tp:Math.random()*Math.PI*2
-    });
+    stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+0.2,
+      a:Math.random()*0.5+0.25,tw:Math.random()*0.015+0.003,tp:Math.random()*Math.PI*2});
   }
 
-  function noise(x,t,seeds){
-    return Math.sin(x*seeds[0]+t*seeds[1]+seeds[2])*seeds[3]
-          +Math.sin(x*seeds[4]+t*seeds[5]+seeds[6])*seeds[7]
-          +Math.sin(x*seeds[8]+t*seeds[9]+seeds[10])*seeds[11];
+  function noise(x,t,s){
+    return Math.sin(x*s[0]+t*s[1]+s[2])*s[3]+Math.sin(x*s[4]+t*s[5]+s[6])*s[7]+Math.sin(x*s[8]+t*s[9]+s[10])*s[11];
   }
 
   var bands=[
-    {y:0.05, seeds:[1.2,0.04,0,    0.40, 2.8,0.07,1.2, 0.20, 5.5,0.12,0.5, 0.08], h:0.55, color:[0,255,136],   alpha:0.35, drift:0.00},
-    {y:0.10, seeds:[1.0,0.03,2.0,  0.35, 2.2,0.06,3.5, 0.25, 4.5,0.10,2.1, 0.10], h:0.50, color:[40,240,160],  alpha:0.28, drift:0.015},
-    {y:0.00, seeds:[1.5,0.035,4.0, 0.38, 3.0,0.08,0.8, 0.18, 6.0,0.11,4.5, 0.07], h:0.60, color:[100,160,255], alpha:0.20, drift:-0.01},
-    {y:0.15, seeds:[0.8,0.025,1.0, 0.45, 1.8,0.05,5.2, 0.22, 3.5,0.09,1.8, 0.09], h:0.45, color:[0,220,110],   alpha:0.25, drift:0.01},
-    {y:0.02, seeds:[1.8,0.05,3.0,  0.30, 3.5,0.09,2.5, 0.15, 7.0,0.13,3.2, 0.06], h:0.55, color:[140,80,255],  alpha:0.18, drift:-0.012},
-    {y:0.12, seeds:[1.1,0.035,5.0, 0.42, 2.5,0.07,4.0, 0.20, 5.0,0.11,5.5, 0.08], h:0.48, color:[0,255,180],   alpha:0.20, drift:0.008}
+    {y:0.25,seeds:[1.2,0.04,0,0.40,2.8,0.07,1.2,0.20,5.5,0.12,0.5,0.08],   h:0.45,cBot:[0,255,120],  cTop:[180,60,255], alpha:0.40,drift:0.00},
+    {y:0.15,seeds:[1.0,0.03,2.0,0.35,2.2,0.06,3.5,0.25,4.5,0.10,2.1,0.10], h:0.50,cBot:[40,240,140],  cTop:[200,80,220], alpha:0.30,drift:0.015},
+    {y:0.10,seeds:[1.5,0.035,4.0,0.38,3.0,0.08,0.8,0.18,6.0,0.11,4.5,0.07],h:0.55,cBot:[80,200,160],  cTop:[160,50,240], alpha:0.22,drift:-0.01},
+    {y:0.20,seeds:[0.8,0.025,1.0,0.45,1.8,0.05,5.2,0.22,3.5,0.09,1.8,0.09],h:0.40,cBot:[0,220,100],   cTop:[220,100,255],alpha:0.28,drift:0.01},
+    {y:0.05,seeds:[1.8,0.05,3.0,0.30,3.5,0.09,2.5,0.15,7.0,0.13,3.2,0.06], h:0.50,cBot:[100,140,255], cTop:[180,40,200], alpha:0.18,drift:-0.012},
+    {y:0.18,seeds:[1.1,0.035,5.0,0.42,2.5,0.07,4.0,0.20,5.0,0.11,5.5,0.08],h:0.42,cBot:[0,255,160],   cTop:[140,60,220], alpha:0.22,drift:0.008}
   ];
+
+  var rays=[];
+  for(var i=0;i<60;i++){
+    rays.push({x:Math.random(),w:Math.random()*0.015+0.005,h:Math.random()*0.35+0.25,
+      phase:Math.random()*Math.PI*2,speed:Math.random()*0.02+0.008,
+      drift:Math.random()*0.03+0.01,driftPhase:Math.random()*Math.PI*2,
+      type:Math.floor(Math.random()*4)});
+  }
 
   var pts=32;
 
@@ -100,9 +103,9 @@
 
     var sky=ctx.createLinearGradient(0,0,0,H);
     sky.addColorStop(0,'#010010');
-    sky.addColorStop(0.25,'#050118');
-    sky.addColorStop(0.5,'#0a0325');
-    sky.addColorStop(0.75,'#07021a');
+    sky.addColorStop(0.2,'#050118');
+    sky.addColorStop(0.45,'#0a0328');
+    sky.addColorStop(0.7,'#07021a');
     sky.addColorStop(1,'#010010');
     ctx.fillStyle=sky;
     ctx.fillRect(0,0,W,H);
@@ -112,9 +115,7 @@
       s.tp+=s.tw;
       var a=s.a*(0.65+0.35*Math.sin(s.tp));
       ctx.fillStyle='rgba(210,220,255,'+a+')';
-      ctx.beginPath();
-      ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      ctx.fill();
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();
     }
 
     ox.clearRect(0,0,W,H);
@@ -123,72 +124,115 @@
       var band=bands[b];
       var breathe=0.5+0.5*Math.sin(t*0.12+b*1.5);
       var ba=band.alpha*breathe;
-      var cr=band.color[0],cg=band.color[1],cb=band.color[2];
 
-      var topPts=[], botPts=[];
+      var topPts=[],botPts=[];
       for(var i=0;i<=pts;i++){
-        var nx=i/pts;
-        var xp=nx*W;
+        var nx=i/pts, xp=nx*W;
         var waveY=noise(nx,t,band.seeds);
         var yTop=(band.y+waveY+band.drift*Math.sin(t*0.08+b))*H;
         var curtainH=band.h*H*(0.9+0.1*Math.sin(nx*2+t*0.15+b));
-        topPts.push({x:xp, y:yTop});
-        botPts.push({x:xp, y:yTop+curtainH});
+        topPts.push({x:xp,y:yTop});
+        botPts.push({x:xp,y:yTop+curtainH});
       }
 
       ox.save();
       ox.beginPath();
-      ox.moveTo(topPts[0].x, topPts[0].y);
+      ox.moveTo(topPts[0].x,topPts[0].y);
       for(var i=1;i<topPts.length-1;i++){
-        var xc=(topPts[i].x+topPts[i+1].x)/2;
-        var yc=(topPts[i].y+topPts[i+1].y)/2;
-        ox.quadraticCurveTo(topPts[i].x, topPts[i].y, xc, yc);
+        ox.quadraticCurveTo(topPts[i].x,topPts[i].y,(topPts[i].x+topPts[i+1].x)/2,(topPts[i].y+topPts[i+1].y)/2);
       }
-      ox.lineTo(topPts[topPts.length-1].x, topPts[topPts.length-1].y);
-      ox.lineTo(botPts[botPts.length-1].x, botPts[botPts.length-1].y);
+      ox.lineTo(topPts[topPts.length-1].x,topPts[topPts.length-1].y);
+      ox.lineTo(botPts[botPts.length-1].x,botPts[botPts.length-1].y);
       for(var i=botPts.length-2;i>0;i--){
-        var xc=(botPts[i].x+botPts[i-1].x)/2;
-        var yc=(botPts[i].y+botPts[i-1].y)/2;
-        ox.quadraticCurveTo(botPts[i].x, botPts[i].y, xc, yc);
+        ox.quadraticCurveTo(botPts[i].x,botPts[i].y,(botPts[i].x+botPts[i-1].x)/2,(botPts[i].y+botPts[i-1].y)/2);
       }
-      ox.lineTo(botPts[0].x, botPts[0].y);
+      ox.lineTo(botPts[0].x,botPts[0].y);
       ox.closePath();
 
-      var avgTop=0, avgBot=0;
+      var avgTop=0,avgBot=0;
       for(var i=0;i<topPts.length;i++){avgTop+=topPts[i].y;avgBot+=botPts[i].y;}
       avgTop/=topPts.length; avgBot/=botPts.length;
 
+      var cB=band.cBot, cT=band.cTop;
       var grad=ox.createLinearGradient(0,avgTop-H*0.05,0,avgBot+H*0.05);
-      grad.addColorStop(0,   'rgba('+cr+','+cg+','+cb+',0)');
-      grad.addColorStop(0.2, 'rgba('+cr+','+cg+','+cb+','+(ba*0.3)+')');
-      grad.addColorStop(0.4, 'rgba('+cr+','+cg+','+cb+','+(ba*0.7)+')');
-      grad.addColorStop(0.5, 'rgba('+cr+','+cg+','+cb+','+(ba)+')');
-      grad.addColorStop(0.6, 'rgba('+cr+','+cg+','+cb+','+(ba*0.7)+')');
-      grad.addColorStop(0.8, 'rgba('+cr+','+cg+','+cb+','+(ba*0.3)+')');
-      grad.addColorStop(1,   'rgba('+cr+','+cg+','+cb+',0)');
+      grad.addColorStop(0,   'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+      grad.addColorStop(0.15,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(ba*0.4)+')');
+      grad.addColorStop(0.35,'rgba('+Math.round((cT[0]+cB[0])/2)+','+Math.round((cT[1]+cB[1])/2)+','+Math.round((cT[2]+cB[2])/2)+','+(ba*0.7)+')');
+      grad.addColorStop(0.55,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(ba)+')');
+      grad.addColorStop(0.75,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(ba*0.5)+')');
+      grad.addColorStop(1,   'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
       ox.fillStyle=grad;
       ox.fill();
       ox.restore();
     }
 
     ctx.save();
-    ctx.filter='blur(50px)';
+    ctx.filter='blur(45px)';
     ctx.drawImage(oc,0,0);
-    ctx.filter='blur(25px)';
-    ctx.globalAlpha=0.5;
+    ctx.filter='blur(20px)';
+    ctx.globalAlpha=0.4;
     ctx.drawImage(oc,0,0);
-    ctx.filter='none';
-    ctx.globalAlpha=1;
+    ctx.filter='none';ctx.globalAlpha=1;
     ctx.restore();
 
-    var glow=ctx.createRadialGradient(W*0.45,H*0.12,0,W*0.45,H*0.12,W*0.6);
-    var ga=0.08+0.04*Math.sin(t*0.12);
-    glow.addColorStop(0,'rgba(0,255,136,'+ga+')');
-    glow.addColorStop(0.35,'rgba(60,200,140,'+(ga*0.5)+')');
-    glow.addColorStop(0.6,'rgba(100,80,200,'+(ga*0.25)+')');
-    glow.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=glow;
+    rx.clearRect(0,0,W,H);
+
+    for(var i=0;i<rays.length;i++){
+      var r=rays[i];
+      var intensity=Math.max(0,(Math.sin(t*r.speed+r.phase)*0.5+0.5));
+      intensity*=intensity;
+      if(intensity<0.05) continue;
+
+      var xPos=(r.x+Math.sin(t*0.03+r.driftPhase)*r.drift)*W;
+      var rw=r.w*W;
+      var yBot=H*0.65;
+      var yTop=yBot-r.h*H;
+
+      var cr,cg,cb;
+      if(r.type===0){cr=0;cg=255;cb=120;}
+      else if(r.type===1){cr=180;cg=60;cb=255;}
+      else if(r.type===2){cr=220;cg=80;cb=200;}
+      else{cr=100;cg=200;cb=255;}
+
+      var alpha=intensity*0.25;
+
+      var grad=rx.createLinearGradient(xPos,yBot,xPos,yTop);
+      grad.addColorStop(0,'rgba('+cr+','+cg+','+cb+',0)');
+      grad.addColorStop(0.1,'rgba('+cr+','+cg+','+cb+','+(alpha*0.6)+')');
+      grad.addColorStop(0.3,'rgba('+cr+','+cg+','+cb+','+(alpha)+')');
+      grad.addColorStop(0.6,'rgba('+Math.min(cr+40,255)+','+Math.min(cg+20,255)+','+Math.min(cb+20,255)+','+(alpha*0.7)+')');
+      grad.addColorStop(0.85,'rgba('+cr+','+cg+','+cb+','+(alpha*0.2)+')');
+      grad.addColorStop(1,'rgba('+cr+','+cg+','+cb+',0)');
+
+      rx.fillStyle=grad;
+      rx.fillRect(xPos-rw/2,yTop,rw,yBot-yTop);
+    }
+
+    ctx.save();
+    ctx.filter='blur(8px)';
+    ctx.globalAlpha=0.9;
+    ctx.drawImage(rc,0,0);
+    ctx.filter='blur(20px)';
+    ctx.globalAlpha=0.4;
+    ctx.drawImage(rc,0,0);
+    ctx.filter='none';ctx.globalAlpha=1;
+    ctx.restore();
+
+    var ga=0.07+0.04*Math.sin(t*0.12);
+    var glow1=ctx.createRadialGradient(W*0.4,H*0.35,0,W*0.4,H*0.35,W*0.5);
+    glow1.addColorStop(0,'rgba(0,255,120,'+(ga)+')');
+    glow1.addColorStop(0.4,'rgba(40,200,120,'+(ga*0.4)+')');
+    glow1.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=glow1;
     ctx.fillRect(0,0,W,H*0.7);
+
+    var glow2=ctx.createRadialGradient(W*0.55,H*0.15,0,W*0.55,H*0.15,W*0.45);
+    var ga2=0.05+0.03*Math.sin(t*0.15+1);
+    glow2.addColorStop(0,'rgba(180,60,255,'+(ga2)+')');
+    glow2.addColorStop(0.4,'rgba(140,40,200,'+(ga2*0.4)+')');
+    glow2.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=glow2;
+    ctx.fillRect(0,0,W,H*0.5);
 
     requestAnimationFrame(draw);
   }
