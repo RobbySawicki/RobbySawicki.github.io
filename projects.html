@@ -570,9 +570,26 @@
 
         <!-- AGLC Raise a Glass -->
         <div class="project-card">
-            <div class="project-image" style="overflow:hidden; padding:0; background:linear-gradient(135deg, #7B2D8E, #F5A623); display:flex; align-items:center; justify-content:center;">
-                <span style="font-size:2.4rem; font-weight:bold; color:#fff; text-shadow:2px 2px 6px rgba(0,0,0,0.5); text-align:center; padding:0 20px; line-height:1.3; font-family:'Inter',sans-serif;">RAISE A GLASS<br><span style="font-size:1.4rem; font-weight:400;">Support Alberta Made</span></span>
+            <div style="position:relative; width:100%; height:260px; border-radius:12px; overflow:hidden; border:1px solid #2a2a40; margin-bottom:18px;">
+                <div id="aglc-carousel" style="display:flex; width:400%; height:100%; transition:transform 0.6s ease;">
+                    <img src="images/AGLC 1.jpg" alt="AGLC Raise a Glass — mechanical bull activation" style="width:25%;height:100%;object-fit:cover;">
+                    <img src="images/AGLC 2.jpg" alt="AGLC Raise a Glass — sampling tent at rodeo" style="width:25%;height:100%;object-fit:cover;">
+                    <img src="images/AGLC 3.jpg" alt="AGLC Raise a Glass — crowd engagement" style="width:25%;height:100%;object-fit:cover;">
+                    <img src="images/AGLC 4.jpg" alt="AGLC Raise a Glass — bull ride crowd" style="width:25%;height:100%;object-fit:cover;">
+                </div>
+                <button onclick="aglcSlide(-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&lsaquo;</button>
+                <button onclick="aglcSlide(1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&rsaquo;</button>
+                <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;" id="aglc-dots"></div>
             </div>
+            <script>
+            (function(){
+              var idx=0,total=4,el=document.getElementById('aglc-carousel'),dots=document.getElementById('aglc-dots');
+              for(var i=0;i<total;i++){var d=document.createElement('span');d.style.cssText='width:8px;height:8px;border-radius:50%;display:inline-block;background:rgba(255,255,255,'+(i===0?'1':'0.4')+');transition:background 0.3s;cursor:pointer;';d.onclick=(function(j){return function(){idx=j;update()}})(i);dots.appendChild(d);}
+              window.aglcSlide=function(dir){idx=(idx+dir+total)%total;update()};
+              function update(){el.style.transform='translateX(-'+(idx*25)+'%)';for(var i=0;i<dots.children.length;i++)dots.children[i].style.background='rgba(255,255,255,'+(i===idx?'1':'0.4')+')';}
+              setInterval(function(){idx=(idx+1)%total;update()},4500);
+            })();
+            </script>
             <h3>AGLC &times; Travel Alberta &mdash; &ldquo;Raise a Glass to Alberta&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
                 <span style="background:#0f2a1a; color:#00ff88; border:1px solid #00ff88; border-radius:20px; padding:3px 12px; font-size:0.75rem; font-family:'Inter',sans-serif; letter-spacing:0.04em;">Experiential / OOH</span>
