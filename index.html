@@ -274,21 +274,20 @@
           +Math.sin(x*seeds[8]+t*seeds[9]+seeds[10])*seeds[11];
   }
 
-  // Aurora curtain bands — more prominent alphas, wider coverage
+  // Aurora haze bands — wide, diffuse, overlapping
   var bands=[
-    {y:0.15, seeds:[2.1,0.07,0,    0.55, 4.8,0.13,1.2, 0.25, 11.0,0.22,0.5, 0.10], h:0.35, color:[0,255,136],   alpha:0.45, drift:0.00},
-    {y:0.22, seeds:[1.7,0.05,2.0,  0.50, 3.9,0.09,3.5, 0.30, 8.5,0.18,2.1,  0.12], h:0.30, color:[40,240,160],  alpha:0.35, drift:0.02},
-    {y:0.12, seeds:[2.8,0.06,4.0,  0.45, 5.5,0.11,0.8, 0.20, 13.0,0.20,4.5, 0.08], h:0.40, color:[120,180,255], alpha:0.25, drift:-0.01},
-    {y:0.28, seeds:[1.3,0.04,1.0,  0.60, 3.2,0.08,5.2, 0.25, 7.0,0.15,1.8,  0.10], h:0.25, color:[0,220,110],   alpha:0.30, drift:0.01},
-    {y:0.18, seeds:[3.2,0.08,3.0,  0.40, 6.1,0.14,2.5, 0.18, 15.0,0.25,3.2, 0.07], h:0.32, color:[160,100,255], alpha:0.20, drift:-0.02},
-    {y:0.25, seeds:[1.9,0.06,5.0,  0.48, 4.3,0.10,4.0, 0.22, 9.5,0.19,5.5,  0.09], h:0.28, color:[0,255,180],   alpha:0.22, drift:0.015}
+    {y:0.05, seeds:[1.2,0.04,0,    0.40, 2.8,0.07,1.2, 0.20, 5.5,0.12,0.5, 0.08], h:0.55, color:[0,255,136],   alpha:0.35, drift:0.00},
+    {y:0.10, seeds:[1.0,0.03,2.0,  0.35, 2.2,0.06,3.5, 0.25, 4.5,0.10,2.1, 0.10], h:0.50, color:[40,240,160],  alpha:0.28, drift:0.015},
+    {y:0.00, seeds:[1.5,0.035,4.0, 0.38, 3.0,0.08,0.8, 0.18, 6.0,0.11,4.5, 0.07], h:0.60, color:[100,160,255], alpha:0.20, drift:-0.01},
+    {y:0.15, seeds:[0.8,0.025,1.0, 0.45, 1.8,0.05,5.2, 0.22, 3.5,0.09,1.8, 0.09], h:0.45, color:[0,220,110],   alpha:0.25, drift:0.01},
+    {y:0.02, seeds:[1.8,0.05,3.0,  0.30, 3.5,0.09,2.5, 0.15, 7.0,0.13,3.2, 0.06], h:0.55, color:[140,80,255],  alpha:0.18, drift:-0.012},
+    {y:0.12, seeds:[1.1,0.035,5.0, 0.42, 2.5,0.07,4.0, 0.20, 5.0,0.11,5.5, 0.08], h:0.48, color:[0,255,180],   alpha:0.20, drift:0.008}
   ];
 
-  // Number of sample points for smooth bezier curves
-  var pts=48;
+  var pts=32;
 
   function draw(){
-    t+=0.012;
+    t+=0.01;
 
     // === Dark sky ===
     var sky=ctx.createLinearGradient(0,0,0,H);
@@ -311,42 +310,36 @@
       ctx.fill();
     }
 
-    // === Aurora — draw to offscreen then blur-composite ===
+    // === Aurora haze — draw to offscreen then heavy blur ===
     ox.clearRect(0,0,W,H);
 
     for(var b=0;b<bands.length;b++){
       var band=bands[b];
-      var breathe=0.6+0.4*Math.sin(t*0.15+b*1.8);
+      var breathe=0.5+0.5*Math.sin(t*0.12+b*1.5);
       var ba=band.alpha*breathe;
       var cr=band.color[0],cg=band.color[1],cb=band.color[2];
 
-      // Build smooth top edge curve points
+      // Build smooth shape points
       var topPts=[], botPts=[];
       for(var i=0;i<=pts;i++){
         var nx=i/pts;
         var xp=nx*W;
         var waveY=noise(nx,t,band.seeds);
-        var yTop=(band.y+waveY+band.drift*Math.sin(t*0.1+b))*H;
-        var curtainH=band.h*H*(0.85+0.15*Math.sin(nx*3.5+t*0.2+b));
+        var yTop=(band.y+waveY+band.drift*Math.sin(t*0.08+b))*H;
+        var curtainH=band.h*H*(0.9+0.1*Math.sin(nx*2+t*0.15+b));
         topPts.push({x:xp, y:yTop});
         botPts.push({x:xp, y:yTop+curtainH});
       }
 
-      // Draw as a filled shape with vertical gradient
-      // Top edge → bottom edge → close
       ox.save();
       ox.beginPath();
       ox.moveTo(topPts[0].x, topPts[0].y);
-
-      // Smooth bezier through top points
       for(var i=1;i<topPts.length-1;i++){
         var xc=(topPts[i].x+topPts[i+1].x)/2;
         var yc=(topPts[i].y+topPts[i+1].y)/2;
         ox.quadraticCurveTo(topPts[i].x, topPts[i].y, xc, yc);
       }
       ox.lineTo(topPts[topPts.length-1].x, topPts[topPts.length-1].y);
-
-      // Bottom edge in reverse
       ox.lineTo(botPts[botPts.length-1].x, botPts[botPts.length-1].y);
       for(var i=botPts.length-2;i>0;i--){
         var xc=(botPts[i].x+botPts[i-1].x)/2;
@@ -356,56 +349,45 @@
       ox.lineTo(botPts[0].x, botPts[0].y);
       ox.closePath();
 
-      // Vertical gradient fill — bright core fading to edges
       var avgTop=0, avgBot=0;
       for(var i=0;i<topPts.length;i++){avgTop+=topPts[i].y;avgBot+=botPts[i].y;}
       avgTop/=topPts.length; avgBot/=botPts.length;
 
-      var grad=ox.createLinearGradient(0,avgTop,0,avgBot);
-      grad.addColorStop(0,  'rgba('+cr+','+cg+','+cb+',0)');
-      grad.addColorStop(0.15,'rgba('+cr+','+cg+','+cb+','+(ba*0.2)+')');
-      grad.addColorStop(0.35,'rgba('+cr+','+cg+','+cb+','+(ba*0.7)+')');
+      // Very soft gradient — long fade on both edges
+      var grad=ox.createLinearGradient(0,avgTop-H*0.05,0,avgBot+H*0.05);
+      grad.addColorStop(0,   'rgba('+cr+','+cg+','+cb+',0)');
+      grad.addColorStop(0.2, 'rgba('+cr+','+cg+','+cb+','+(ba*0.3)+')');
+      grad.addColorStop(0.4, 'rgba('+cr+','+cg+','+cb+','+(ba*0.7)+')');
       grad.addColorStop(0.5, 'rgba('+cr+','+cg+','+cb+','+(ba)+')');
-      grad.addColorStop(0.65,'rgba('+cr+','+cg+','+cb+','+(ba*0.8)+')');
-      grad.addColorStop(0.85,'rgba('+cr+','+cg+','+cb+','+(ba*0.2)+')');
-      grad.addColorStop(1,  'rgba('+cr+','+cg+','+cb+',0)');
+      grad.addColorStop(0.6, 'rgba('+cr+','+cg+','+cb+','+(ba*0.7)+')');
+      grad.addColorStop(0.8, 'rgba('+cr+','+cg+','+cb+','+(ba*0.3)+')');
+      grad.addColorStop(1,   'rgba('+cr+','+cg+','+cb+',0)');
 
       ox.fillStyle=grad;
       ox.fill();
-
-      // Inner glow — narrower, brighter core
-      ox.globalCompositeOperation='lighter';
-      var innerGrad=ox.createLinearGradient(0,avgTop,0,avgBot);
-      innerGrad.addColorStop(0,   'rgba('+cr+','+cg+','+cb+',0)');
-      innerGrad.addColorStop(0.3, 'rgba('+Math.min(cr+60,255)+','+Math.min(cg+40,255)+','+Math.min(cb+30,255)+','+(ba*0.15)+')');
-      innerGrad.addColorStop(0.5, 'rgba('+Math.min(cr+80,255)+','+Math.min(cg+60,255)+','+Math.min(cb+40,255)+','+(ba*0.3)+')');
-      innerGrad.addColorStop(0.7, 'rgba('+Math.min(cr+60,255)+','+Math.min(cg+40,255)+','+Math.min(cb+30,255)+','+(ba*0.15)+')');
-      innerGrad.addColorStop(1,   'rgba('+cr+','+cg+','+cb+',0)');
-      ox.fillStyle=innerGrad;
-      ox.fill();
-      ox.globalCompositeOperation='source-over';
       ox.restore();
     }
 
-    // Composite aurora with blur for soft glow
+    // Heavy blur — makes it haze, not ribbons
     ctx.save();
-    ctx.filter='blur(12px)';
-    ctx.globalAlpha=0.7;
+    ctx.filter='blur(50px)';
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(25px)';
+    ctx.globalAlpha=0.5;
     ctx.drawImage(oc,0,0);
     ctx.filter='none';
-    ctx.globalAlpha=1.0;
-    ctx.drawImage(oc,0,0);
+    ctx.globalAlpha=1;
     ctx.restore();
 
     // === Ambient sky glow ===
-    var glow=ctx.createRadialGradient(W*0.45,H*0.08,0,W*0.45,H*0.08,W*0.55);
-    var ga=0.06+0.03*Math.sin(t*0.15);
+    var glow=ctx.createRadialGradient(W*0.45,H*0.12,0,W*0.45,H*0.12,W*0.6);
+    var ga=0.08+0.04*Math.sin(t*0.12);
     glow.addColorStop(0,'rgba(0,255,136,'+ga+')');
-    glow.addColorStop(0.4,'rgba(80,180,130,'+(ga*0.4)+')');
-    glow.addColorStop(0.7,'rgba(120,80,200,'+(ga*0.2)+')');
+    glow.addColorStop(0.35,'rgba(60,200,140,'+(ga*0.5)+')');
+    glow.addColorStop(0.6,'rgba(100,80,200,'+(ga*0.25)+')');
     glow.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=glow;
-    ctx.fillRect(0,0,W,H*0.6);
+    ctx.fillRect(0,0,W,H*0.7);
 
     requestAnimationFrame(draw);
   }
