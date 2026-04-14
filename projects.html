@@ -587,7 +587,6 @@
               for(var i=0;i<total;i++){var d=document.createElement('span');d.style.cssText='width:8px;height:8px;border-radius:50%;display:inline-block;background:rgba(255,255,255,'+(i===0?'1':'0.4')+');transition:background 0.3s;cursor:pointer;';d.onclick=(function(j){return function(){idx=j;update()}})(i);dots.appendChild(d);}
               window.aglcSlide=function(dir){idx=(idx+dir+total)%total;update()};
               function update(){el.style.transform='translateX(-'+(idx*25)+'%)';for(var i=0;i<dots.children.length;i++)dots.children[i].style.background='rgba(255,255,255,'+(i===idx?'1':'0.4')+')';}
-              setInterval(function(){idx=(idx+1)%total;update()},4500);
             })();
             </script>
             <h3>AGLC &times; Travel Alberta &mdash; &ldquo;Raise a Glass to Alberta&rdquo;</h3>
