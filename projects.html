@@ -47,7 +47,7 @@
                 </style>
 </head>
 <body>
-<!-- Space Background — pure CSS animation, GPU-accelerated -->
+<!-- Space Background -->
 <div id="space-bg">
   <div id="stars1"></div>
   <div id="stars2"></div>
@@ -71,35 +71,37 @@
       radial-gradient(ellipse at 70% 60%, rgba(40,5,100,0.08) 0%, transparent 45%),
       linear-gradient(180deg, #020010 0%, #08021e 15%, #0e0430 35%, #140638 50%, #10042e 70%, #08021a 88%, #020010 100%);
   }
-  #stars1,#stars2,#stars3,#stars4{position:absolute;top:0;left:0;will-change:transform;}
-  #stars1::after,#stars2::after,#stars3::after,#stars4::after{content:'';position:absolute;left:0;display:block;}
 
-  .nebula{position:absolute;border-radius:50%;pointer-events:none;will-change:transform,opacity;}
-  .n1{width:45vw;height:40vw;top:10%;left:5%;background:radial-gradient(ellipse,rgba(120,20,180,0.15) 0%,rgba(120,20,180,0.04) 50%,transparent 70%);filter:blur(60px);animation:nebPulse1 20s ease-in-out infinite alternate;}
-  .n2{width:35vw;height:45vw;top:55%;right:2%;background:radial-gradient(ellipse,rgba(180,25,120,0.12) 0%,rgba(180,25,120,0.03) 50%,transparent 70%);filter:blur(70px);animation:nebPulse2 25s ease-in-out infinite alternate;}
-  .n3{width:30vw;height:28vw;top:5%;right:15%;background:radial-gradient(ellipse,rgba(50,15,200,0.10) 0%,rgba(50,15,200,0.02) 50%,transparent 70%);filter:blur(50px);animation:nebPulse3 18s ease-in-out infinite alternate;}
-  .n4{width:25vw;height:30vw;bottom:8%;left:20%;background:radial-gradient(ellipse,rgba(0,80,60,0.08) 0%,rgba(0,80,60,0.02) 50%,transparent 70%);filter:blur(55px);animation:nebPulse1 22s ease-in-out infinite alternate-reverse;}
-  .n5{width:50vw;height:20vw;top:40%;left:25%;background:radial-gradient(ellipse,rgba(80,10,130,0.06) 0%,rgba(80,10,130,0.015) 50%,transparent 70%);filter:blur(80px);animation:nebPulse2 30s ease-in-out infinite alternate;}
+  #stars1,#stars2,#stars3,#stars4{position:absolute;top:0;left:0;}
 
-  @keyframes nebPulse1{0%{opacity:.6;transform:scale(1) translate(0,0)}100%{opacity:1;transform:scale(1.12) translate(10px,-8px)}}
-  @keyframes nebPulse2{0%{opacity:.5;transform:scale(1) translate(0,0)}100%{opacity:.9;transform:scale(1.08) translate(-12px,6px)}}
-  @keyframes nebPulse3{0%{opacity:.7;transform:scale(1) translate(0,0)}100%{opacity:1;transform:scale(1.15) translate(8px,10px)}}
+  @keyframes twinkle1{0%,100%{opacity:.9}50%{opacity:.6}}
+  @keyframes twinkle2{0%,100%{opacity:.85}50%{opacity:.65}}
+  @keyframes twinkle3{0%,100%{opacity:1}50%{opacity:.7}}
+  @keyframes twinkle4{0%,100%{opacity:1}35%{opacity:.75}70%{opacity:.95}}
 
-  @keyframes starDrift{from{transform:translateY(0)}to{transform:translateY(-2560px)}}
+  #stars1{animation:twinkle1 6s ease-in-out infinite;}
+  #stars2{animation:twinkle2 9s ease-in-out infinite;}
+  #stars3{animation:twinkle3 7s ease-in-out infinite;}
+  #stars4{animation:twinkle4 5s ease-in-out infinite;}
 
-  @keyframes twinkle{0%,100%{opacity:.85}25%{opacity:1}50%{opacity:.7}75%{opacity:.95}}
-  #stars1{animation:starDrift 200s linear infinite, twinkle 8s ease-in-out infinite;}
-  #stars2{animation:starDrift 140s linear infinite;}
-  #stars3{animation:starDrift 90s linear infinite;}
-  #stars4{animation:starDrift 60s linear infinite;}
+  .nebula{position:absolute;border-radius:50%;pointer-events:none;}
+  .n1{width:45vw;height:40vw;top:10%;left:5%;background:radial-gradient(ellipse,rgba(120,20,180,0.13) 0%,rgba(120,20,180,0.03) 50%,transparent 70%);filter:blur(60px);animation:nebPulse1 25s ease-in-out infinite alternate;}
+  .n2{width:35vw;height:45vw;top:55%;right:2%;background:radial-gradient(ellipse,rgba(180,25,120,0.10) 0%,rgba(180,25,120,0.02) 50%,transparent 70%);filter:blur(70px);animation:nebPulse2 30s ease-in-out infinite alternate;}
+  .n3{width:30vw;height:28vw;top:5%;right:15%;background:radial-gradient(ellipse,rgba(50,15,200,0.09) 0%,rgba(50,15,200,0.02) 50%,transparent 70%);filter:blur(50px);animation:nebPulse3 22s ease-in-out infinite alternate;}
+  .n4{width:25vw;height:30vw;bottom:8%;left:20%;background:radial-gradient(ellipse,rgba(0,80,60,0.07) 0%,rgba(0,80,60,0.015) 50%,transparent 70%);filter:blur(55px);animation:nebPulse1 28s ease-in-out infinite alternate-reverse;}
+  .n5{width:50vw;height:20vw;top:40%;left:25%;background:radial-gradient(ellipse,rgba(80,10,130,0.05) 0%,rgba(80,10,130,0.01) 50%,transparent 70%);filter:blur(80px);animation:nebPulse2 35s ease-in-out infinite alternate;}
 
-  .shooting-star{position:absolute;height:1px;border-radius:50%;opacity:0;will-change:transform,opacity;
+  @keyframes nebPulse1{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.06)}}
+  @keyframes nebPulse2{0%{opacity:.6;transform:scale(1)}100%{opacity:.85;transform:scale(1.04)}}
+  @keyframes nebPulse3{0%{opacity:.75;transform:scale(1)}100%{opacity:1;transform:scale(1.07)}}
+
+  .shooting-star{position:absolute;height:1px;opacity:0;
     background:linear-gradient(to right, transparent 0%, rgba(200,190,255,0.1) 20%, rgba(230,220,255,0.5) 60%, rgba(255,255,255,0.9) 90%, #fff 100%);
   }
   .shooting-star::after{content:'';position:absolute;right:-2px;top:-2px;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(200,200,255,0.8);}
-  .ss1{width:180px;top:12%;left:15%;transform:rotate(-35deg);animation:shoot1 12s ease-in-out infinite;}
-  .ss2{width:140px;top:28%;left:55%;transform:rotate(-30deg);animation:shoot2 18s ease-in-out 5s infinite;}
-  .ss3{width:200px;top:8%;left:40%;transform:rotate(-40deg);animation:shoot3 22s ease-in-out 11s infinite;}
+  .ss1{width:180px;top:12%;left:15%;transform:rotate(-35deg);animation:shoot1 14s ease-in-out infinite;}
+  .ss2{width:140px;top:28%;left:55%;transform:rotate(-30deg);animation:shoot2 20s ease-in-out 6s infinite;}
+  .ss3{width:200px;top:8%;left:40%;transform:rotate(-40deg);animation:shoot3 25s ease-in-out 13s infinite;}
 
   @keyframes shoot1{0%,100%{opacity:0;transform:rotate(-35deg) translateX(-100px)}3%{opacity:1}6%{opacity:0;transform:rotate(-35deg) translateX(75vw)}6.1%,100%{opacity:0}}
   @keyframes shoot2{0%,100%{opacity:0;transform:rotate(-30deg) translateX(-100px)}2%{opacity:.9}5%{opacity:0;transform:rotate(-30deg) translateX(60vw)}5.1%,100%{opacity:0}}
@@ -107,7 +109,9 @@
 </style>
 <script>
 (function(){
-  var S=2560;
+  var W=Math.max(window.innerWidth,1920);
+  var H=Math.max(window.innerHeight,1080);
+
   var palette=[
     '#fff','#fff','#fff','#fff','#fff',
     '#cad7ff','#cad7ff','#cad7ff','#d4dfff',
@@ -120,40 +124,27 @@
 
   function genStars(n){
     for(var s=[],i=0;i<n;i++){
-      var x=Math.round(Math.random()*S);
-      var y=Math.round(Math.random()*S);
-      var c=palette[Math.floor(Math.random()*palette.length)];
-      s.push(x+'px '+y+'px '+c);
+      s.push(Math.round(Math.random()*W)+'px '+Math.round(Math.random()*H)+'px '+palette[Math.floor(Math.random()*palette.length)]);
     }
     return s.join(',');
   }
 
   function genGlowStars(n){
     for(var s=[],i=0;i<n;i++){
-      var x=Math.round(Math.random()*S);
-      var y=Math.round(Math.random()*S);
+      var x=Math.round(Math.random()*W),y=Math.round(Math.random()*H);
       var c=palette[Math.floor(Math.random()*palette.length)];
       s.push(x+'px '+y+'px 0 1px '+c);
-      s.push(x+'px '+y+'px 3px 1px '+c);
+      s.push(x+'px '+y+'px 4px 1px '+c);
     }
     return s.join(',');
   }
 
-  var s1=genStars(1800);
-  var s2=genStars(600);
-  var s3=genStars(150);
-  var s4=genGlowStars(50);
-
   var st=document.createElement('style');
   st.textContent=
-    '#stars1{width:1px;height:1px;background:transparent;box-shadow:'+s1+';}'+
-    '#stars1::after{top:'+S+'px;width:1px;height:1px;box-shadow:'+s1+';}'+
-    '#stars2{width:1.5px;height:1.5px;background:transparent;box-shadow:'+s2+';}'+
-    '#stars2::after{top:'+S+'px;width:1.5px;height:1.5px;box-shadow:'+s2+';}'+
-    '#stars3{width:2px;height:2px;background:transparent;border-radius:50%;box-shadow:'+s3+';}'+
-    '#stars3::after{top:'+S+'px;width:2px;height:2px;border-radius:50%;box-shadow:'+s3+';}'+
-    '#stars4{width:2.5px;height:2.5px;background:transparent;border-radius:50%;box-shadow:'+s4+';}'+
-    '#stars4::after{top:'+S+'px;width:2.5px;height:2.5px;border-radius:50%;box-shadow:'+s4+';}';
+    '#stars1{width:1px;height:1px;background:transparent;box-shadow:'+genStars(1800)+';}'+
+    '#stars2{width:1.5px;height:1.5px;background:transparent;box-shadow:'+genStars(600)+';}'+
+    '#stars3{width:2px;height:2px;background:transparent;border-radius:50%;box-shadow:'+genStars(200)+';}'+
+    '#stars4{width:3px;height:3px;background:transparent;border-radius:50%;box-shadow:'+genGlowStars(60)+';}';
   document.head.appendChild(st);
 })();
 </script>
