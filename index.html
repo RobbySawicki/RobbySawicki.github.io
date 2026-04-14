@@ -277,7 +277,7 @@
   ];
 
   // Num rays per curtain
-  var numRays=120;
+  var numRays=80;
 
   function draw(){
     t+=0.008;
@@ -349,13 +349,16 @@
       }
     }
 
-    // Composite: blurred haze + sharper streaks
+    // Composite: blurred haze + visible streaks + crisp top
     ctx.save();
-    ctx.filter='blur(35px)';
-    ctx.globalAlpha=0.8;
-    ctx.drawImage(oc,0,0);
-    ctx.filter='blur(6px)';
+    ctx.filter='blur(40px)';
     ctx.globalAlpha=0.6;
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(10px)';
+    ctx.globalAlpha=0.5;
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(2px)';
+    ctx.globalAlpha=0.35;
     ctx.drawImage(oc,0,0);
     ctx.filter='none';ctx.globalAlpha=1;
     ctx.restore();

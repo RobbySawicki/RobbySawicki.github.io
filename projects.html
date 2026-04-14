@@ -87,7 +87,7 @@
      cBot:[0,255,180], cMid:[100,180,200], cTop:[140,60,220], alpha:0.25}
   ];
 
-  var numRays=120;
+  var numRays=80;
 
   function draw(){
     t+=0.008;
@@ -152,11 +152,14 @@
     }
 
     ctx.save();
-    ctx.filter='blur(35px)';
-    ctx.globalAlpha=0.8;
-    ctx.drawImage(oc,0,0);
-    ctx.filter='blur(6px)';
+    ctx.filter='blur(40px)';
     ctx.globalAlpha=0.6;
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(10px)';
+    ctx.globalAlpha=0.5;
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(2px)';
+    ctx.globalAlpha=0.35;
     ctx.drawImage(oc,0,0);
     ctx.filter='none';ctx.globalAlpha=1;
     ctx.restore();
