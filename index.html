@@ -15,7 +15,8 @@
         *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            background-color: transparent;
+            background: linear-gradient(180deg, #020818 0%, #041028 15%, #061830 35%, #081a2e 55%, #0a1e28 75%, #061418 100%);
+            background-attachment: fixed;
             margin: 0;
             font-family: 'Inter', sans-serif;
             color: #e0e0e0;
@@ -252,49 +253,54 @@
   resize();
   window.addEventListener('resize',resize);
 
-  // Stars
+  // Stars — more visible in the dark upper sky
   var stars=[];
-  for(var i=0;i<800;i++) stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+0.2,
-    a:Math.random()*0.5+0.2,tw:Math.random()*0.012+0.003,tp:Math.random()*Math.PI*2});
+  for(var i=0;i<900;i++) stars.push({x:Math.random(),y:Math.random()*0.7,r:Math.random()*1.4+0.2,
+    a:Math.random()*0.6+0.3,tw:Math.random()*0.012+0.003,tp:Math.random()*Math.PI*2});
 
-  // Each curtain: a wavy ridge line with rays hanging down
+  // Trees rendered as SVG overlay (see below)
+
+  // Aurora curtains — tuned to match the reference photo
+  // Bright green at horizon, pink/magenta in middle, deep purple fading upward
   var curtains=[
-    {yBase:0.15, waveA:0.10, waveF:1.3, waveS:0.20, rayLen:0.55,
-     brightS:0.4, brightF:1.8, brightOff:0,
-     cBot:[0,255,120], cMid:[0,200,140], cTop:[170,60,255], alpha:0.55},
-    {yBase:0.10, waveA:0.12, waveF:0.9, waveS:0.15, rayLen:0.60,
-     brightS:0.30, brightF:1.4, brightOff:2.0,
-     cBot:[40,255,140], cMid:[80,180,200], cTop:[200,80,220], alpha:0.40},
-    {yBase:0.22, waveA:0.08, waveF:1.6, waveS:0.25, rayLen:0.48,
-     brightS:0.35, brightF:2.2, brightOff:4.0,
-     cBot:[0,220,100], cMid:[60,160,180], cTop:[180,50,240], alpha:0.35},
-    {yBase:0.05, waveA:0.14, waveF:0.7, waveS:0.12, rayLen:0.65,
-     brightS:0.25, brightF:1.2, brightOff:1.0,
-     cBot:[80,200,160], cMid:[120,140,220], cTop:[160,40,200], alpha:0.30},
-    {yBase:0.28, waveA:0.06, waveF:2.0, waveS:0.30, rayLen:0.40,
-     brightS:0.50, brightF:2.8, brightOff:3.0,
-     cBot:[0,255,180], cMid:[100,180,200], cTop:[140,60,220], alpha:0.25}
+    // Bright green horizon band — dominant, vivid
+    {yBase:0.55, waveA:0.08, waveF:1.2, waveS:0.18, rayLen:0.50,
+     brightS:0.35, brightF:1.6, brightOff:0,
+     cBot:[0,255,100], cMid:[0,230,120], cTop:[80,200,160], alpha:0.90},
+    // Green-to-pink transition band
+    {yBase:0.45, waveA:0.10, waveF:0.9, waveS:0.14, rayLen:0.55,
+     brightS:0.28, brightF:1.3, brightOff:1.8,
+     cBot:[30,255,130], cMid:[160,100,200], cTop:[200,60,180], alpha:0.70},
+    // Pink/magenta mid-sky band
+    {yBase:0.35, waveA:0.12, waveF:0.8, waveS:0.12, rayLen:0.50,
+     brightS:0.22, brightF:1.1, brightOff:3.5,
+     cBot:[180,80,180], cMid:[200,50,200], cTop:[160,40,220], alpha:0.65},
+    // Deep purple upper streaks
+    {yBase:0.20, waveA:0.14, waveF:0.6, waveS:0.10, rayLen:0.45,
+     brightS:0.18, brightF:0.9, brightOff:1.2,
+     cBot:[140,60,200], cMid:[120,40,180], cTop:[80,20,140], alpha:0.30},
+    // Teal/cyan accent near horizon
+    {yBase:0.60, waveA:0.06, waveF:1.8, waveS:0.22, rayLen:0.35,
+     brightS:0.40, brightF:2.0, brightOff:2.5,
+     cBot:[0,220,180], cMid:[0,200,160], cTop:[0,180,140], alpha:0.35},
+    // Subtle high green wisps
+    {yBase:0.25, waveA:0.10, waveF:1.4, waveS:0.16, rayLen:0.40,
+     brightS:0.30, brightF:1.5, brightOff:4.2,
+     cBot:[0,200,100], cMid:[60,160,140], cTop:[120,80,180], alpha:0.25}
   ];
 
-  var numRays=80;
+  var numRays=250;
 
   function draw(){
-    t+=0.006;
+    t+=0.005;
 
-    // Sky
-    var sky=ctx.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,'#010010');
-    sky.addColorStop(0.2,'#04011a');
-    sky.addColorStop(0.5,'#080328');
-    sky.addColorStop(0.75,'#06021c');
-    sky.addColorStop(1,'#010010');
-    ctx.fillStyle=sky;
-    ctx.fillRect(0,0,W,H);
+    // Clear canvas — sky is rendered via CSS background
+    ctx.clearRect(0,0,W,H);
 
-    // Stars
+    // Stars — only in upper sky
     for(var i=0;i<stars.length;i++){
       var s=stars[i]; s.tp+=s.tw;
-      ctx.fillStyle='rgba(210,220,255,'+(s.a*(0.6+0.4*Math.sin(s.tp)))+')';
+      ctx.fillStyle='rgba(220,230,255,'+(s.a*(0.5+0.5*Math.sin(s.tp)))+')';
       ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();
     }
 
@@ -308,7 +314,7 @@
         var nx=i/numRays;
         var x=nx*W;
 
-        // Ridge line — 4 layers of sine for organic, less mathematical feel
+        // Ridge line — organic multi-sine wave
         var ridge=cu.yBase
           +Math.sin(nx*Math.PI*2*cu.waveF + t*cu.waveS)*cu.waveA
           +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.5
@@ -317,70 +323,85 @@
 
         var ridgeY=ridge*H;
 
-        // Ray height varies organically along the curtain
-        var rayH=cu.rayLen*H*(0.7+0.3*Math.sin(nx*Math.PI*3.3+t*0.18+ci*2.1));
+        // Ray height varies organically
+        var rayH=cu.rayLen*H*(0.7+0.3*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1));
 
-        // Brightness wave traveling along the curtain
+        // Brightness waves
         var bright=Math.sin(nx*Math.PI*2*cu.brightF - t*cu.brightS + cu.brightOff);
         bright=bright*0.5+0.5;
-        // Slower secondary wave
         bright*=(0.5+0.5*Math.sin(nx*Math.PI*3.3 - t*cu.brightS*0.5 + cu.brightOff*1.7));
-        // Very slow tertiary
         bright*=(0.6+0.4*Math.sin(nx*Math.PI*0.8 + t*0.08 + ci*1.5));
         bright=Math.max(0,Math.min(bright,1));
-        // Global pulse
-        bright*=(0.65+0.35*Math.sin(t*0.1+ci*1.2));
+        bright*=(0.60+0.40*Math.sin(t*0.08+ci*1.2));
 
         var a=cu.alpha*bright;
         if(a<0.01) continue;
 
         var rayW=W/numRays+1;
 
-        // Vertical gradient: green at bottom → mid blend → purple at top
-        var grad=ox.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.35);
+        // Vertical gradient for each ray
+        var grad=ox.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.4);
         var cB=cu.cBot,cM=cu.cMid,cT=cu.cTop;
         grad.addColorStop(0,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
-        grad.addColorStop(0.12,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.3)+')');
-        grad.addColorStop(0.30,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.85)+')');
-        grad.addColorStop(0.45,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
-        grad.addColorStop(0.60,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.8)+')');
-        grad.addColorStop(0.75,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.55)+')');
-        grad.addColorStop(0.90,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.2)+')');
+        grad.addColorStop(0.10,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.4)+')');
+        grad.addColorStop(0.28,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.9)+')');
+        grad.addColorStop(0.42,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
+        grad.addColorStop(0.58,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.75)+')');
+        grad.addColorStop(0.72,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.5)+')');
+        grad.addColorStop(0.88,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.15)+')');
         grad.addColorStop(1,  'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
 
         ox.fillStyle=grad;
-        ox.fillRect(x,ridgeY-rayH*0.35,rayW,rayH*1.35);
+        ox.fillRect(x,ridgeY-rayH*0.4,rayW,rayH*1.4);
       }
     }
 
-    // Composite: blurred haze + visible streaks + crisp top
+    // Composite: layered blur for soft glow effect
     ctx.save();
-    ctx.filter='blur(45px)';
+    ctx.filter='blur(30px)';
+    ctx.globalAlpha=0.80;
+    ctx.drawImage(oc,0,0);
+    ctx.filter='blur(14px)';
     ctx.globalAlpha=0.65;
     ctx.drawImage(oc,0,0);
-    ctx.filter='blur(12px)';
-    ctx.globalAlpha=0.5;
-    ctx.drawImage(oc,0,0);
-    ctx.filter='blur(2px)';
-    ctx.globalAlpha=0.3;
+    ctx.filter='blur(3px)';
+    ctx.globalAlpha=0.45;
     ctx.drawImage(oc,0,0);
     ctx.filter='none';ctx.globalAlpha=1;
     ctx.restore();
 
-    // Ambient glow
-    var ga=0.07+0.04*Math.sin(t*0.10);
-    var g1=ctx.createRadialGradient(W*0.4,H*0.35,0,W*0.4,H*0.35,W*0.55);
-    g1.addColorStop(0,'rgba(0,255,120,'+ga+')');
-    g1.addColorStop(0.5,'rgba(0,180,100,'+(ga*0.3)+')');
-    g1.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g1;ctx.fillRect(0,0,W,H*0.8);
+    // Bright green horizon glow — like the reference photo
+    var hga=0.12+0.06*Math.sin(t*0.09);
+    var hg=ctx.createRadialGradient(W*0.5,H*0.85,0,W*0.5,H*0.85,W*0.7);
+    hg.addColorStop(0,'rgba(0,255,100,'+hga+')');
+    hg.addColorStop(0.3,'rgba(0,220,80,'+(hga*0.5)+')');
+    hg.addColorStop(0.6,'rgba(0,150,60,'+(hga*0.15)+')');
+    hg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
 
-    var g2=ctx.createRadialGradient(W*0.55,H*0.10,0,W*0.55,H*0.10,W*0.50);
-    var ga2=0.05+0.03*Math.sin(t*0.12+1);
-    g2.addColorStop(0,'rgba(180,60,255,'+ga2+')');
-    g2.addColorStop(0.5,'rgba(120,40,180,'+(ga2*0.3)+')');
-    g2.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g2;ctx.fillRect(0,0,W,H*0.6);
+    // Pink/magenta ambient glow in mid-sky
+    var mga=0.06+0.04*Math.sin(t*0.11+1.5);
+    var mg=ctx.createRadialGradient(W*0.45,H*0.40,0,W*0.45,H*0.40,W*0.5);
+    mg.addColorStop(0,'rgba(200,60,200,'+mga+')');
+    mg.addColorStop(0.4,'rgba(160,40,180,'+(mga*0.4)+')');
+    mg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=mg;ctx.fillRect(0,0,W,H);
+
+    // Purple upper glow
+    var pga=0.04+0.03*Math.sin(t*0.13+3);
+    var pg=ctx.createRadialGradient(W*0.55,H*0.15,0,W*0.55,H*0.15,W*0.45);
+    pg.addColorStop(0,'rgba(120,30,180,'+pga+')');
+    pg.addColorStop(0.5,'rgba(80,20,140,'+(pga*0.3)+')');
+    pg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=pg;ctx.fillRect(0,0,W,H);
+
+    // Green glow behind treeline
+    var tga=0.18+0.08*Math.sin(t*0.12);
+    var tg=ctx.createRadialGradient(W*0.5,H*0.88,0,W*0.5,H*0.88,W*0.5);
+    tg.addColorStop(0,'rgba(0,255,100,'+(tga*0.4)+')');
+    tg.addColorStop(0.5,'rgba(0,200,80,'+(tga*0.15)+')');
+    tg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=tg;ctx.fillRect(0,0,W,H);
 
     requestAnimationFrame(draw);
   }
@@ -388,6 +409,24 @@
 })();
 </script>
 
+<!-- Realistic SVG treeline silhouette -->
+<svg id="treeline-svg" style="position:fixed;bottom:0;left:0;width:100%;height:32vh;z-index:1;pointer-events:none;" preserveAspectRatio="none"></svg>
+<script src="treeline.js"></script>
+<script>
+(function(){
+  var svg=document.getElementById('treeline-svg');
+  function onScroll(){
+    var scrollY=window.scrollY||window.pageYOffset;
+    var maxScroll=document.body.scrollHeight-window.innerHeight;
+    var pct=maxScroll>0?scrollY/maxScroll:0;
+    // At top: trees pushed 80% off-screen below. At bottom: fully in view.
+    var offset=(1-Math.min(1,pct*2.5))*80;
+    svg.style.transform='translateY('+offset+'%)';
+  }
+  window.addEventListener('scroll',onScroll);
+  onScroll();
+})();
+</script>
 
 <div class="sticky-header">
 <div class="header-container">
