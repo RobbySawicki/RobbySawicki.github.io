@@ -49,18 +49,22 @@
 </head>
 <body>
 <!-- Aurora Borealis Background -->
-<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<canvas id="aurora-stars" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:blur(12px);"></canvas>
 <script>
 (function(){
+  var sc=document.getElementById('aurora-stars');
+  var sctx=sc.getContext('2d');
   var c=document.getElementById('aurora-bg');
   var ctx=c.getContext('2d');
-  var W,H,t=0;
-  var oc=document.createElement('canvas');
-  var ox=oc.getContext('2d');
+  var W,H,sW,sH,t=0;
+  var SCALE=0.35;
 
   function resize(){
-    W=c.width=window.innerWidth; H=c.height=window.innerHeight;
-    oc.width=W; oc.height=H;
+    W=window.innerWidth; H=window.innerHeight;
+    sc.width=W; sc.height=H;
+    sW=Math.round(W*SCALE); sH=Math.round(H*SCALE);
+    c.width=sW; c.height=sH;
   }
   resize();
   window.addEventListener('resize',resize);
@@ -90,31 +94,36 @@
      cBot:[0,200,100], cMid:[60,160,140], cTop:[120,80,180], alpha:0.25}
   ];
 
-  var numRays=80;
+  var numRays=60;
+  var lastFrame=0;
+  var FPS_INTERVAL=1000/24;
 
-  function draw(){
+  function draw(now){
+    requestAnimationFrame(draw);
+    var elapsed=now-lastFrame;
+    if(elapsed<FPS_INTERVAL) return;
+    lastFrame=now-(elapsed%FPS_INTERVAL);
     t+=0.005;
-    ctx.clearRect(0,0,W,H);
 
+    sctx.clearRect(0,0,W,H);
     for(var i=0;i<stars.length;i++){
       var s=stars[i]; s.tp+=s.tw;
-      ctx.fillStyle='rgba(220,230,255,'+(s.a*(0.5+0.5*Math.sin(s.tp)))+')';
-      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fill();
+      sctx.fillStyle='rgba(220,230,255,'+(s.a*(0.5+0.5*Math.sin(s.tp)))+')';
+      sctx.beginPath();sctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);sctx.fill();
     }
 
-    ox.clearRect(0,0,W,H);
-
+    ctx.clearRect(0,0,sW,sH);
     for(var ci=0;ci<curtains.length;ci++){
       var cu=curtains[ci];
       for(var i=0;i<numRays;i++){
-        var nx=i/numRays;var x=nx*W;
+        var nx=i/numRays;
+        var x=nx*sW;
         var ridge=cu.yBase
           +Math.sin(nx*Math.PI*2*cu.waveF + t*cu.waveS)*cu.waveA
           +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.5
-          +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.25
-          +Math.sin(nx*Math.PI*13*cu.waveF + t*cu.waveS*1.1 + 5.2)*cu.waveA*0.1;
-        var ridgeY=ridge*H;
-        var rayH=cu.rayLen*H*(0.7+0.3*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1));
+          +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.25;
+        var ridgeY=ridge*sH;
+        var rayH=cu.rayLen*sH*(0.7+0.3*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1));
         var bright=Math.sin(nx*Math.PI*2*cu.brightF - t*cu.brightS + cu.brightOff);
         bright=bright*0.5+0.5;
         bright*=(0.5+0.5*Math.sin(nx*Math.PI*3.3 - t*cu.brightS*0.5 + cu.brightOff*1.7));
@@ -122,55 +131,50 @@
         bright=Math.max(0,Math.min(bright,1));
         bright*=(0.60+0.40*Math.sin(t*0.08+ci*1.2));
         var a=cu.alpha*bright;
-        if(a<0.01) continue;
-        var rayW=W/numRays+1;
-        var grad=ox.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.4);
+        if(a<0.02) continue;
+        var rayW=sW/numRays+1;
+        var grad=ctx.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.4);
         var cB=cu.cBot,cM=cu.cMid,cT=cu.cTop;
         grad.addColorStop(0,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
-        grad.addColorStop(0.10,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.4)+')');
-        grad.addColorStop(0.28,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.9)+')');
+        grad.addColorStop(0.15,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.6)+')');
         grad.addColorStop(0.42,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
-        grad.addColorStop(0.58,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.75)+')');
-        grad.addColorStop(0.72,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.5)+')');
-        grad.addColorStop(0.88,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.15)+')');
+        grad.addColorStop(0.72,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.4)+')');
         grad.addColorStop(1,  'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
-        ox.fillStyle=grad;
-        ox.fillRect(x,ridgeY-rayH*0.4,rayW,rayH*1.4);
+        ctx.fillStyle=grad;
+        ctx.fillRect(x,ridgeY-rayH*0.4,rayW,rayH*1.4);
       }
     }
 
-    ctx.save();
-    ctx.filter='blur(16px)';ctx.globalAlpha=0.78;ctx.drawImage(oc,0,0);
-    ctx.filter='blur(4px)';ctx.globalAlpha=0.50;ctx.drawImage(oc,0,0);
-    ctx.filter='none';ctx.globalAlpha=1;ctx.restore();
-
     var hga=0.12+0.06*Math.sin(t*0.09);
-    var hg=ctx.createRadialGradient(W*0.5,H*0.85,0,W*0.5,H*0.85,W*0.7);
-    hg.addColorStop(0,'rgba(0,255,100,'+hga+')');hg.addColorStop(0.3,'rgba(0,220,80,'+(hga*0.5)+')');
-    hg.addColorStop(0.6,'rgba(0,150,60,'+(hga*0.15)+')');hg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
+    var hg=ctx.createRadialGradient(sW*0.5,sH*0.85,0,sW*0.5,sH*0.85,sW*0.7);
+    hg.addColorStop(0,'rgba(0,255,100,'+hga+')');
+    hg.addColorStop(0.3,'rgba(0,220,80,'+(hga*0.5)+')');
+    hg.addColorStop(0.6,'rgba(0,150,60,'+(hga*0.15)+')');
+    hg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=hg;ctx.fillRect(0,0,sW,sH);
 
     var mga=0.06+0.04*Math.sin(t*0.11+1.5);
-    var mg=ctx.createRadialGradient(W*0.45,H*0.40,0,W*0.45,H*0.40,W*0.5);
-    mg.addColorStop(0,'rgba(200,60,200,'+mga+')');mg.addColorStop(0.4,'rgba(160,40,180,'+(mga*0.4)+')');
+    var mg=ctx.createRadialGradient(sW*0.45,sH*0.40,0,sW*0.45,sH*0.40,sW*0.5);
+    mg.addColorStop(0,'rgba(200,60,200,'+mga+')');
+    mg.addColorStop(0.4,'rgba(160,40,180,'+(mga*0.4)+')');
     mg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=mg;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=mg;ctx.fillRect(0,0,sW,sH);
 
     var pga=0.04+0.03*Math.sin(t*0.13+3);
-    var pg=ctx.createRadialGradient(W*0.55,H*0.15,0,W*0.55,H*0.15,W*0.45);
-    pg.addColorStop(0,'rgba(120,30,180,'+pga+')');pg.addColorStop(0.5,'rgba(80,20,140,'+(pga*0.3)+')');
+    var pg=ctx.createRadialGradient(sW*0.55,sH*0.15,0,sW*0.55,sH*0.15,sW*0.45);
+    pg.addColorStop(0,'rgba(120,30,180,'+pga+')');
+    pg.addColorStop(0.5,'rgba(80,20,140,'+(pga*0.3)+')');
     pg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=pg;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=pg;ctx.fillRect(0,0,sW,sH);
 
     var tga=0.18+0.08*Math.sin(t*0.12);
-    var tg=ctx.createRadialGradient(W*0.5,H*0.88,0,W*0.5,H*0.88,W*0.5);
-    tg.addColorStop(0,'rgba(0,255,100,'+(tga*0.4)+')');tg.addColorStop(0.5,'rgba(0,200,80,'+(tga*0.15)+')');
+    var tg=ctx.createRadialGradient(sW*0.5,sH*0.88,0,sW*0.5,sH*0.88,sW*0.5);
+    tg.addColorStop(0,'rgba(0,255,100,'+(tga*0.4)+')');
+    tg.addColorStop(0.5,'rgba(0,200,80,'+(tga*0.15)+')');
     tg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=tg;ctx.fillRect(0,0,W,H);
-
-    requestAnimationFrame(draw);
+    ctx.fillStyle=tg;ctx.fillRect(0,0,sW,sH);
   }
-  draw();
+  requestAnimationFrame(draw);
 })();
 </script>
 
