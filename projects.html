@@ -181,15 +181,23 @@
 <script>
 (function(){
   var svg=document.getElementById('treeline-svg');
+  var current=100,target=100;
   function onScroll(){
     var scrollY=window.scrollY||window.pageYOffset;
     var maxScroll=document.body.scrollHeight-window.innerHeight;
     var pct=maxScroll>0?scrollY/maxScroll:0;
-    var offset=(1-Math.min(1,pct*2.5))*80;
-    svg.style.transform='translateY('+offset+'%)';
+    // Trees stay hidden until 60% scrolled, then emerge near bottom
+    var t=Math.max(0,(pct-0.6)/0.4);
+    target=(1-t)*100;
+  }
+  function animate(){
+    current+=(target-current)*0.06;
+    svg.style.transform='translateY('+current+'%)';
+    requestAnimationFrame(animate);
   }
   window.addEventListener('scroll',onScroll);
   onScroll();
+  animate();
 })();
 </script>
 

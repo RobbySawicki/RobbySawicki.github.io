@@ -415,16 +415,21 @@
 <script>
 (function(){
   var svg=document.getElementById('treeline-svg');
+  var current=80,target=80;
   function onScroll(){
     var scrollY=window.scrollY||window.pageYOffset;
     var maxScroll=document.body.scrollHeight-window.innerHeight;
     var pct=maxScroll>0?scrollY/maxScroll:0;
-    // At top: trees pushed 80% off-screen below. At bottom: fully in view.
-    var offset=(1-Math.min(1,pct*2.5))*80;
-    svg.style.transform='translateY('+offset+'%)';
+    target=(1-Math.min(1,pct*2))*80;
+  }
+  function animate(){
+    current+=(target-current)*0.06;
+    svg.style.transform='translateY('+current+'%)';
+    requestAnimationFrame(animate);
   }
   window.addEventListener('scroll',onScroll);
   onScroll();
+  animate();
 })();
 </script>
 
