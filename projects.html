@@ -66,7 +66,7 @@
   window.addEventListener('resize',resize);
 
   var stars=[];
-  for(var i=0;i<900;i++) stars.push({x:Math.random(),y:Math.random()*0.7,r:Math.random()*1.4+0.2,
+  for(var i=0;i<400;i++) stars.push({x:Math.random(),y:Math.random()*0.7,r:Math.random()*1.4+0.2,
     a:Math.random()*0.6+0.3,tw:Math.random()*0.012+0.003,tp:Math.random()*Math.PI*2});
 
   var curtains=[
@@ -90,7 +90,7 @@
      cBot:[0,200,100], cMid:[60,160,140], cTop:[120,80,180], alpha:0.25}
   ];
 
-  var numRays=250;
+  var numRays=80;
 
   function draw(){
     t+=0.005;
@@ -140,9 +140,8 @@
     }
 
     ctx.save();
-    ctx.filter='blur(30px)';ctx.globalAlpha=0.80;ctx.drawImage(oc,0,0);
-    ctx.filter='blur(14px)';ctx.globalAlpha=0.65;ctx.drawImage(oc,0,0);
-    ctx.filter='blur(3px)';ctx.globalAlpha=0.45;ctx.drawImage(oc,0,0);
+    ctx.filter='blur(16px)';ctx.globalAlpha=0.78;ctx.drawImage(oc,0,0);
+    ctx.filter='blur(4px)';ctx.globalAlpha=0.50;ctx.drawImage(oc,0,0);
     ctx.filter='none';ctx.globalAlpha=1;ctx.restore();
 
     var hga=0.12+0.06*Math.sin(t*0.09);
@@ -181,23 +180,23 @@
 <script>
 (function(){
   var svg=document.getElementById('treeline-svg');
-  var current=100,target=100;
+  var current=100,target=100,animating=false;
   function onScroll(){
     var scrollY=window.scrollY||window.pageYOffset;
     var maxScroll=document.body.scrollHeight-window.innerHeight;
     var pct=maxScroll>0?scrollY/maxScroll:0;
-    // Trees stay hidden until 60% scrolled, then emerge near bottom
     var t=Math.max(0,(pct-0.6)/0.4);
     target=(1-t)*100;
+    if(!animating){animating=true;requestAnimationFrame(animate);}
   }
   function animate(){
     current+=(target-current)*0.06;
     svg.style.transform='translateY('+current+'%)';
-    requestAnimationFrame(animate);
+    if(Math.abs(target-current)>0.1){requestAnimationFrame(animate);}
+    else{animating=false;}
   }
-  window.addEventListener('scroll',onScroll);
+  window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
-  animate();
 })();
 </script>
 
@@ -248,7 +247,7 @@
 
         <div class="project-card" style="position: relative;"><span class="card-badge recent-badge" title="Most Recent">🆕 Recent</span>
             <div class="video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/95c8gQzsLA0" title="Canada Soccer Jersey Swap - Little Italy Toronto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/95c8gQzsLA0" title="Canada Soccer Jersey Swap - Little Italy Toronto" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="project-content">
                 <h3>Canada Soccer — "Our Game Now" Jersey Swap</h3>
@@ -258,7 +257,7 @@
 
         <div class="project-card">
             <div class="project-image" style="overflow:hidden; padding:0;">
-                <img src="images/tangerine-bike-day.jpg" alt="Tangerine Bike For Free Day - orange duvet on car" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                <img src="images/tangerine-bike-day.jpg" alt="Tangerine Bike For Free Day - orange duvet on car" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
             </div>
             <h3>Tangerine &mdash; Bike For Free Day</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
@@ -275,7 +274,7 @@
 
         <div class="project-card">
     <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/AIw0Ck1Ywlk" title="KD Frozen Launch" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/AIw0Ck1Ywlk" title="KD Frozen Launch" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
     </div>
     <h3>KD — Frozen Launch</h3>
     <p class="project-category">Media Planning | Kraft Heinz</p>
@@ -284,7 +283,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
+                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
                     <source src="videos/Bonuts%20Video" type="video/mp4">
                 </video>
             </div>
@@ -303,7 +302,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
+                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
                     <source src="videos/KD%20Spoon%20(1).mp4" type="video/mp4">
                 </video>
             </div>
@@ -314,7 +313,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTPchTpqNHU" title="Smack For Heinz - Chicago Billboards" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTPchTpqNHU" title="Smack For Heinz - Chicago Billboards" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="project-content">
                 <h3>Heinz Ketchup — "Smack For Heinz"</h3>
@@ -343,7 +342,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/YeFD2CVDijE" title="Heinz - The Wait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/YeFD2CVDijE" title="Heinz - The Wait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="project-content">
                 <h3>Heinz Ketchup — "The Wait"</h3>
@@ -363,7 +362,7 @@
 
         <div class="project-card">
 <div class="video-container">
-                <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
+                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
                     <source src="videos/Schmear%20Socks%20(1).mp4" type="video/mp4">
                 </video>
             </div>
@@ -380,7 +379,7 @@
 
         <div class="project-card">
             <div class="video-container">
-        <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
+        <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
           <source src="videos/Little%20Taste%20of%20Hell%20Philly.mp4" type="video/mp4">
         </video>
       </div>
@@ -397,7 +396,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/8LmaGGBSdLw" title="Heinz Ketchup Fraud" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/8LmaGGBSdLw" title="Heinz Ketchup Fraud" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="project-content">
                 <h3>Heinz Ketchup — "Ketchup Fraud"</h3>
@@ -416,7 +415,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Y578soo5BVs?start=2" title="Lunchables Goodbye/Hello" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Y578soo5BVs?start=2" title="Lunchables Goodbye/Hello" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
             </div>
             <h3>Lunchables &mdash; &ldquo;Goodbye/Hello&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
@@ -431,7 +430,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/s5rKHbyFcVM" title="Never Mind | Tingly Ted's" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/s5rKHbyFcVM" title="Never Mind | Tingly Ted's" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
             <h3>Tingly Ted's — Ed Sheeran x Kraft Heinz</h3>
             <p class="project-category">Media Planning | Kraft Heinz</p>
@@ -440,7 +439,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
+                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
                     <source src="videos/KPB%20QR%20Code.mp4" type="video/mp4">
                 </video>
             </div>
@@ -481,22 +480,22 @@
                 <div class="mio-carousel-track" style="display:flex;transition:transform 0.35s ease;will-change:transform;">
                 <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                     <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:12px;overflow:hidden;">
-                        <iframe src="https://www.youtube.com/embed/o-n_GmEu4OA" title="Kraft Peanut Butter Welcome Home Jars" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;border:0;"></iframe>
+                        <iframe src="https://www.youtube.com/embed/o-n_GmEu4OA" title="Kraft Peanut Butter Welcome Home Jars" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;border:0;"></iframe>
                     </div>
                 </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                     <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;">
-                        <img src="images/whj-hero.jpg" alt="Welcome Home Jars — Hero" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        <img src="images/whj-hero.jpg" alt="Welcome Home Jars — Hero" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
                     </div>
                     </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                     <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;">
-                        <img src="images/whj-airport.jpg" alt="Welcome Home Jars — Airport OOH" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        <img src="images/whj-airport.jpg" alt="Welcome Home Jars — Airport OOH" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
                     </div>
                     </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                     <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;">
-                        <img src="images/whj-social.jpg" alt="Welcome Home Jars — Social" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        <img src="images/whj-social.jpg" alt="Welcome Home Jars — Social" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
                     </div>
                     </div>
                 </div>
@@ -514,7 +513,7 @@
 
         <div class="project-card">
             <div class="video-container">
-                <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;">
+                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;">
                     <source src="videos/Heinz%20Mayo.mp4" type="video/mp4">
                 </video>
             </div>
@@ -527,22 +526,22 @@
                 <div class="mio-carousel-track" style="display:flex;transition:transform 0.35s ease;will-change:transform;">
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                         <div class="video-container">
-                            <iframe src="https://www.instagram.com/reel/DNoh0SDyMcc/embed/" title="Elsa Hosk x UGG - Iconic From the First Step" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe src="https://www.instagram.com/reel/DNoh0SDyMcc/embed/" title="Elsa Hosk x UGG - Iconic From the First Step" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
                         </div>
                     </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                         <div style="position:relative;width:100%;padding-bottom:75%;overflow:hidden;border-radius:12px;">
-                            <img src="images/UGG 1.JPG" alt="Elsa Hosk x UGG - Campaign Image 1" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                            <img src="images/UGG 1.JPG" alt="Elsa Hosk x UGG - Campaign Image 1" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
                         </div>
                     </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                         <div style="position:relative;width:100%;padding-bottom:75%;overflow:hidden;border-radius:12px;">
-                            <img src="images/UGG 2.JPG" alt="Elsa Hosk x UGG - Campaign Image 2" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                            <img src="images/UGG 2.JPG" alt="Elsa Hosk x UGG - Campaign Image 2" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
                         </div>
                     </div>
                     <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
                         <div style="position:relative;width:100%;padding-bottom:75%;overflow:hidden;border-radius:12px;">
-                            <img src="images/UGG 3.jpeg" alt="Elsa Hosk x UGG - Campaign Image 3" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                            <img src="images/UGG 3.jpeg" alt="Elsa Hosk x UGG - Campaign Image 3" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
                         </div>
                     </div>
                 </div>
@@ -575,11 +574,11 @@
                     <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;padding:8px;">
                         <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DNqWF67twOM/" data-instgrm-version="14" style="background:#0a0818; border:1px solid #2a2a40; border-radius:12px; max-width:100%; width:100%; margin:0; padding:0;"></blockquote>
                     </div>
-                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/Good MG Pic.jpg" alt="Monday Girl — Hide & Seek decal" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;"></div>
-                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 1.jpeg" alt="Monday Girl — Hide & Seek placement 1" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;"></div>
-                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 2.jpeg" alt="Monday Girl — Hide & Seek placement 2" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;"></div>
-                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 3.jpeg" alt="Monday Girl — Hide & Seek placement 3" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;"></div>
-                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 4.jpeg" alt="Monday Girl — Hide & Seek placement 4" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;"></div>
+                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/Good MG Pic.jpg" alt="Monday Girl — Hide & Seek decal" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;" loading="lazy"></div>
+                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 1.jpeg" alt="Monday Girl — Hide & Seek placement 1" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;" loading="lazy"></div>
+                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 2.jpeg" alt="Monday Girl — Hide & Seek placement 2" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;" loading="lazy"></div>
+                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 3.jpeg" alt="Monday Girl — Hide & Seek placement 3" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;" loading="lazy"></div>
+                    <div style="width:16.6667%;flex-shrink:0;display:flex;justify-content:center;align-items:center;"><img src="images/MG 4.jpeg" alt="Monday Girl — Hide & Seek placement 4" style="max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto;" loading="lazy"></div>
                 </div>
                 <button onclick="mgSlide(-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&lsaquo;</button>
                 <button onclick="mgSlide(1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&rsaquo;</button>
@@ -609,10 +608,10 @@
         <div class="project-card">
             <div style="position:relative; width:100%; border-radius:12px; overflow:hidden; border:1px solid #2a2a40; margin-bottom:18px; background:#0a0818;">
                 <div id="aglc-carousel" style="display:flex; width:400%; transition:transform 0.6s ease;">
-                    <img src="images/AGLC 1.jpg" alt="AGLC Raise a Glass — mechanical bull activation" style="width:25%;display:block;object-fit:contain;">
-                    <img src="images/AGLC 2.jpg" alt="AGLC Raise a Glass — sampling tent at rodeo" style="width:25%;display:block;object-fit:contain;">
-                    <img src="images/AGLC 3.jpg" alt="AGLC Raise a Glass — crowd engagement" style="width:25%;display:block;object-fit:contain;">
-                    <img src="images/AGLC 4.jpg" alt="AGLC Raise a Glass — bull ride crowd" style="width:25%;display:block;object-fit:contain;">
+                    <img src="images/AGLC 1.jpg" alt="AGLC Raise a Glass — mechanical bull activation" loading="lazy" style="width:25%;display:block;object-fit:contain;">
+                    <img src="images/AGLC 2.jpg" alt="AGLC Raise a Glass — sampling tent at rodeo" loading="lazy" style="width:25%;display:block;object-fit:contain;">
+                    <img src="images/AGLC 3.jpg" alt="AGLC Raise a Glass — crowd engagement" loading="lazy" style="width:25%;display:block;object-fit:contain;">
+                    <img src="images/AGLC 4.jpg" alt="AGLC Raise a Glass — bull ride crowd" loading="lazy" style="width:25%;display:block;object-fit:contain;">
                 </div>
                 <button onclick="aglcSlide(-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&lsaquo;</button>
                 <button onclick="aglcSlide(1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;">&rsaquo;</button>
