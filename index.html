@@ -339,7 +339,7 @@
     hg.addColorStop(0.3,'rgba(0,220,80,'+(hga*0.5)+')');
     hg.addColorStop(0.6,'rgba(0,150,60,'+(hga*0.15)+')');
     hg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=hg;ctx.fillRect(0,0,sW,sH);
+    ctx.fillStyle=hg;ctx.fillRect(0,0,sW,sH*0.75);
 
     var mga=0.06+0.04*Math.sin(t*0.11+1.5);
     var mg=ctx.createRadialGradient(sW*0.45,sH*0.40,0,sW*0.45,sH*0.40,sW*0.5);
@@ -354,13 +354,6 @@
     pg.addColorStop(0.5,'rgba(80,20,140,'+(pga*0.3)+')');
     pg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=pg;ctx.fillRect(0,0,sW,sH);
-
-    var tga=0.18+0.08*Math.sin(t*0.12);
-    var tg=ctx.createRadialGradient(sW*0.5,sH*0.88,0,sW*0.5,sH*0.88,sW*0.5);
-    tg.addColorStop(0,'rgba(0,255,100,'+(tga*0.4)+')');
-    tg.addColorStop(0.5,'rgba(0,200,80,'+(tga*0.15)+')');
-    tg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=tg;ctx.fillRect(0,0,sW,sH);
   }
   requestAnimationFrame(draw);
 })();
