@@ -123,7 +123,7 @@
   x=-10;while(x<VW+30){var k=r();if(k<0.75)P+=spruce(x,rr(200,320),rr(0.95,1.2),rr(-3.5,3.5));else if(k<0.88)P+=birch(x,rr(140,240));else P+=snag(x,rr(120,220));x+=rr(20,36);}
   x=rr(0,25);while(x<VW+30){var k=r();if(k<0.55)P+=spruce(x,rr(280,460),rr(1.0,1.3),rr(-5,5));else if(k<0.70)P+=birch(x,rr(180,320));else if(k<0.80)P+=snag(x,rr(140,260));else if(k<0.90)P+=sapling(x,rr(20,50));else P+=shrub(x,rr(12,30));x+=rr(25,45);}
   x=0;while(x<VW+20){if(r()<0.35)P+=shrub(x,rr(8,25));else if(r()<0.3)P+=sapling(x,rr(15,40));x+=rr(12,45);}
-  P+=' M-1 '+(VH+2)+' L'+(VW+1)+' '+(VH+2)+' L'+(VW+1)+' '+(VH-4)+' L-1 '+(VH-4)+' Z';
+  P+=' M-1 '+(VH+2)+' L'+(VW+1)+' '+(VH+2)+' L'+(VW+1)+' '+(VH-100)+' L-1 '+(VH-100)+' Z';
   var path=document.createElementNS(ns,'path');
   path.setAttribute('d',P);
   path.setAttribute('fill','#040810');
