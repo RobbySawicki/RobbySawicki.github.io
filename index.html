@@ -238,7 +238,7 @@
 <body>
 <!-- Aurora Borealis Background -->
 <canvas id="aurora-stars" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:70vh;z-index:0;pointer-events:none;filter:blur(12px);"></canvas>
+<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:70vh;z-index:0;pointer-events:none;filter:blur(16px);"></canvas>
 <script>
 (function(){
   var sc=document.getElementById('aurora-stars');
@@ -306,22 +306,29 @@
       var cu=curtains[ci];
       for(var i=0;i<numRays;i++){
         var nx=i/numRays;
-        var x=nx*sW;
+        var jitter=Math.sin(i*12.9898+ci*78.233)*0.5;
+        var x=(nx+jitter/numRays*0.6)*sW;
         var ridge=cu.yBase
           +Math.sin(nx*Math.PI*2*cu.waveF + t*cu.waveS)*cu.waveA
-          +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.5
-          +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.25;
+          +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.55
+          +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.30
+          +Math.sin(nx*Math.PI*13.7*cu.waveF + t*cu.waveS*0.25 + ci*2.3)*cu.waveA*0.18
+          +Math.sin(i*4.7+ci*9.1+t*0.2)*cu.waveA*0.12;
         var ridgeY=ridge*sH;
-        var rayH=cu.rayLen*sH*(0.7+0.3*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1));
+        var rayH=cu.rayLen*sH
+          *(0.55+0.45*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1))
+          *(0.75+0.35*Math.sin(i*2.3+ci*5.7+t*0.22));
         var bright=Math.sin(nx*Math.PI*2*cu.brightF - t*cu.brightS + cu.brightOff);
         bright=bright*0.5+0.5;
-        bright*=(0.5+0.5*Math.sin(nx*Math.PI*3.3 - t*cu.brightS*0.5 + cu.brightOff*1.7));
-        bright*=(0.6+0.4*Math.sin(nx*Math.PI*0.8 + t*0.08 + ci*1.5));
+        bright*=(0.4+0.6*Math.sin(nx*Math.PI*3.3 - t*cu.brightS*0.5 + cu.brightOff*1.7));
+        bright*=(0.5+0.5*Math.sin(nx*Math.PI*0.8 + t*0.08 + ci*1.5));
+        bright*=(0.55+0.45*Math.sin(i*1.8+ci*3.3+t*0.13));
         bright=Math.max(0,Math.min(bright,1));
-        bright*=(0.60+0.40*Math.sin(t*0.08+ci*1.2));
+        bright*=(0.55+0.45*Math.sin(t*0.08+ci*1.2));
         var a=cu.alpha*bright;
         if(a<0.02) continue;
-        var rayW=sW/numRays+1;
+        var widthJit=0.7+0.8*Math.abs(Math.sin(i*5.1+ci*3.7+t*0.05));
+        var rayW=(sW/numRays+1)*widthJit;
         var grad=ctx.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.4);
         var cB=cu.cBot,cM=cu.cMid,cT=cu.cTop;
         grad.addColorStop(0,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
