@@ -1,8 +1,8 @@
 (function(){
   var ns='http://www.w3.org/2000/svg';
   var svg=document.getElementById('treeline-svg');
-  var VW=1920,VH=580;
-  svg.setAttribute('viewBox','0 0 '+VW+' '+VH);
+  var VW=1920,VH=580,PAD=300;
+  svg.setAttribute('viewBox','0 '+(-PAD)+' '+VW+' '+(VH+PAD));
   var sd=42;
   function r(){sd=(sd*16807)%2147483647;return(sd-1)/2147483646;}
   function rr(a,b){return a+r()*(b-a);}
