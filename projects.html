@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
-        body { background: linear-gradient(180deg, #020818 0%, #041028 15%, #061830 35%, #081a2e 55%, #0a1e28 75%, #061418 100%); background-attachment: fixed; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; }
+        body { background: linear-gradient(180deg, #020818 0%, #041028 15%, #061830 35%, #081a2e 55%, #0a1e28 75%, #061418 100%); background-attachment: fixed; margin: 0; font-family: 'Inter', sans-serif; color: #e0e0e0; text-align: center; position: relative; overflow-x: hidden; }
         .sticky-header::before { content: ''; display: block; height: 4px; background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88); background-size: 200% 100%; animation: shimmer 3s linear infinite; }
         @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
         /* ---- STICKY NAV ---- */
@@ -189,7 +189,7 @@
 </script>
 
 <!-- Realistic SVG treeline silhouette -->
-<svg id="treeline-svg" style="position:fixed;bottom:0;left:0;width:100%;height:50vh;z-index:1;pointer-events:none;overflow:visible;display:block;" preserveAspectRatio="none"></svg>
+<svg id="treeline-svg" style="position:absolute;bottom:0;left:0;width:100%;height:50vh;z-index:1;pointer-events:none;overflow:visible;display:block;" preserveAspectRatio="none"></svg>
 <script src="treeline.js"></script>
 
 <!-- STICKY HEADER — correctly closed before main content -->
