@@ -1187,13 +1187,15 @@
         .tt-badge svg { filter: drop-shadow(1px 0 0 #25F4EE) drop-shadow(-1px 0 0 #FE2C55); }
         .social-embed-frame.live { cursor: default; }
         .social-embed-frame iframe,
-        .social-embed-frame blockquote.instagram-media {
+        .social-embed-frame blockquote.instagram-media,
+        .social-embed-frame blockquote.tiktok-embed {
           width: 100% !important;
           min-width: 0 !important;
           max-width: none !important;
           margin: 0 !important;
         }
         .social-embed-frame.live { aspect-ratio: auto; height: auto; min-height: 500px; background:#fff; padding:0; }
+        .social-embed-frame.live[data-embed="tiktok"] { background: #000; }
 
         /* CTA band */
         .cta-band {
@@ -1915,21 +1917,21 @@
       </article>
 
       <article class="proj-card" data-tags="heinz">
-        <a href="https://www.tiktok.com/@miodrnk" target="_blank" rel="noopener" class="proj-media proj-media-img social-embed-frame" style="text-decoration:none;">
-          <div class="poster-placeholder social-poster" style="background: linear-gradient(135deg, #4a7c59, #1f3a29); cursor:pointer;">
+        <div class="proj-media proj-media-img social-embed-frame" data-embed="tiktok" data-video-id="7359667797011549445" data-url="https://www.tiktok.com/@bomanizer/video/7359667797011549445" style="cursor:pointer;">
+          <div class="poster-placeholder social-poster" style="background: linear-gradient(135deg, #4a7c59, #1f3a29);">
             <div class="poster-eyebrow">MiO · TikTok · 2023–24</div>
             <div class="poster-title">MiO<br>Energy</div>
-            <div class="poster-sub">▶ Tap to watch on TikTok</div>
+            <div class="poster-sub">▶ Tap to play</div>
             <div class="social-badge tt-badge" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 01-1.04-2.82h-3.07v12.13a2.6 2.6 0 01-2.6 2.6 2.6 2.6 0 01-2.6-2.6 2.6 2.6 0 012.6-2.6c.25 0 .5.04.73.11v-3.13a5.73 5.73 0 00-.73-.05A5.73 5.73 0 003.18 15.2a5.73 5.73 0 005.7 5.7 5.73 5.73 0 005.7-5.7V9.16a7.34 7.34 0 004.27 1.37V7.47a4.26 4.26 0 01-2.25-1.65z"/></svg>
             </div>
           </div>
-        </a>
+        </div>
         <div class="proj-body">
           <div class="proj-meta">Kraft Heinz · dentsu · 2023–24</div>
           <h3 class="proj-title">MiO Energy<br><span class="tt">Influencer Campaign</span></h3>
           <p class="proj-copy">Creator-led TikTok and Instagram activations targeting a younger, digitally-native audience. Series included <strong class="hi-g">"Another Busy Morning"</strong> and <strong class="hi-p">"Squeeze"</strong> productivity content.</p>
-          <p class="proj-sources"><a href="https://www.tiktok.com/@miodrnk" target="_blank" rel="noopener">▶ MiO on TikTok</a> · <a href="https://www.instagram.com/miodrnk/" target="_blank" rel="noopener">Instagram</a></p>
+          <p class="proj-sources"><a href="https://www.tiktok.com/@bomanizer/video/7359667797011549445" target="_blank" rel="noopener">▶ Watch on TikTok</a> · <a href="https://www.instagram.com/miodrnk/" target="_blank" rel="noopener">Instagram</a></p>
         </div>
       </article>
 
@@ -2000,6 +2002,26 @@
         document.body.appendChild(s);
       } else if (window.instgrm && window.instgrm.Embeds) {
         window.instgrm.Embeds.process();
+      }
+    });
+  });
+
+  /* TikTok click-to-embed: swap poster for the TikTok blockquote embed on first tap */
+  document.querySelectorAll('.social-embed-frame[data-embed="tiktok"]').forEach(frame => {
+    const videoId = frame.dataset.videoId;
+    const url = frame.dataset.url;
+    if (!videoId || !url) return;
+    frame.addEventListener('click', (e) => {
+      if (frame.classList.contains('live')) return;
+      e.preventDefault();
+      frame.classList.add('live');
+      frame.innerHTML = '<blockquote class="tiktok-embed" cite="' + url + '" data-video-id="' + videoId + '" style="max-width:100%;min-width:100%;margin:0;border:none;"><section></section></blockquote>';
+      if (!window.__ttLoaded) {
+        window.__ttLoaded = true;
+        const s = document.createElement('script');
+        s.src = 'https://www.tiktok.com/embed.js';
+        s.async = true;
+        document.body.appendChild(s);
       }
     });
   });
