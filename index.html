@@ -3,32 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Robby</title>
+    <title>Robby Sawicki — Marketing Strategy & Brand Work</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='g' x='-50%25' y='-50%25' width='200%25' height='200%25'><feDropShadow dx='3' dy='-3' stdDeviation='3' flood-color='%2300ff88' flood-opacity='0.95'/><feDropShadow dx='-3' dy='3' stdDeviation='3' flood-color='%23bf5fff' flood-opacity='0.95'/></filter></defs><circle cx='64' cy='64' r='64' fill='%230a0a0f'/><path d='M59.86 39.29L69.94 37.94L65.44 58.91L67.78 58.91Q70.93 58.91 73.59 57.43Q76.24 55.94 78.22 53.60Q80.20 51.26 81.28 48.38Q82.36 45.50 82.36 42.80L82.36 42.80Q82.36 40.82 81.73 39.02Q81.10 37.22 79.62 35.83Q78.13 34.43 75.61 33.58Q73.09 32.72 69.22 32.72L69.22 32.72Q64.36 32.72 60.04 34.30Q55.72 35.87 52.48 38.80Q49.24 41.72 47.35 45.95Q45.46 50.18 45.46 55.49L45.46 55.49Q45.46 58.64 45.78 59.81Q46.09 60.98 46.54 61.61L46.54 61.61Q44.92 61.61 43.39 61.16Q41.86 60.71 40.65 59.72Q39.43 58.73 38.71 57.16Q37.99 55.58 37.99 53.33L37.99 53.33Q37.99 48.65 40.69 44.38Q43.39 40.10 47.94 36.77Q52.48 33.44 58.33 31.46Q64.18 29.48 70.39 29.48L70.39 29.48Q75.16 29.48 78.85 30.65Q82.54 31.82 85.02 33.80Q87.49 35.78 88.75 38.44Q90.01 41.09 90.01 43.97L90.01 43.97Q90.01 48.20 87.36 52.39Q84.70 56.57 79.66 59.18L79.66 59.18Q83.62 60.08 85.06 62.51Q86.50 64.94 86.50 68.36L86.50 68.36Q86.50 71.06 85.83 74.17Q85.15 77.27 84.30 80.28Q83.44 83.30 82.77 86.05Q82.09 88.79 82.09 90.86L82.09 90.86Q82.09 93.11 83.03 94.73Q83.98 96.35 85.60 96.98L85.60 96.98Q82.72 97.79 80.97 98.15Q79.21 98.51 77.59 98.51L77.59 98.51Q74.17 98.51 72.69 96.62Q71.20 94.73 71.20 92.66L71.20 92.66Q71.20 90.32 72.01 87.31Q72.82 84.29 73.81 81.09Q74.80 77.90 75.61 74.84Q76.42 71.78 76.42 69.35L76.42 69.35Q76.42 65.12 74.58 63.59Q72.73 62.06 69.85 62.06L69.85 62.06Q68.86 62.06 67.33 62.24Q65.80 62.42 64.63 62.69L64.63 62.69L57.34 96.98L47.44 96.98L59.86 39.29Z' fill='white' filter='url(%23g)'/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
 
+        :root {
+            --green: #00ff88;
+            --purple: #bf5fff;
+            --ink-0: #020818;
+            --ink-1: #0a1128;
+            --ink-2: #110d1f;
+            --ink-3: #1a1430;
+            --line: #2a2a40;
+            --text: #ffffff;
+            --text-soft: #ededf5;
+            --text-dim: #d8d8e5;
+            --outdoor-shadow: 0 1px 2px rgba(0,0,0,0.6), 0 0 12px rgba(2,8,24,0.7);
+        }
+
+        /* Floating text — anywhere NOT inside .about-card / .skill / .project-card / .cta-band / .sticky-header / .site-footer gets a shadow for legibility against the aurora */
+        .hero .lede, .eyebrow, .stat-num, .stat-label,
+        .section-num, .section-meta, .portrait-caption,
+        .hero h1, .ghost-btn {
+            text-shadow: var(--outdoor-shadow);
+        }
+
+        html, body { margin: 0; padding: 0; }
+
         body {
             background: linear-gradient(180deg, #020818 0%, #041028 15%, #061830 35%, #081a2e 55%, #0a1e28 75%, #061418 100%);
             background-attachment: fixed;
-            margin: 0;
             font-family: 'Inter', sans-serif;
-            color: #e0e0e0;
-            text-align: center;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
         }
 
-        /* TikTok-style animated top bar */
+        a { color: inherit; }
+
+        /* Canvas + SVG backgrounds stay identical to original */
+        .bg-layer { position: fixed; left: 0; top: 0; pointer-events: none; }
+
+        /* ====== STICKY HEADER ====== */
         .sticky-header::before {
             content: '';
             display: block;
-            height: 4px;
-            background: linear-gradient(to right, #00ff88, #bf5fff, #00ff88);
+            height: 3px;
+            background: linear-gradient(to right, var(--green), var(--purple), var(--green));
             background-size: 200% 100%;
             animation: shimmer 3s linear infinite;
         }
@@ -38,207 +66,681 @@
             100% { background-position: 200% 0%; }
         }
 
-        /* ---- STICKY NAV ---- */
-        .sticky-header { position: sticky; top: 0; z-index: 100; background: rgba(10, 4, 25, 0.85); backdrop-filter: blur(8px);
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(6, 8, 20, 0.72);
+            backdrop-filter: blur(14px) saturate(1.2);
+            -webkit-backdrop-filter: blur(14px) saturate(1.2);
         }
 
-        /* ---- HEADER ---- */
         .header-container {
-            max-width: 1050px;
+            max-width: 1180px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px 8px 20px;
-            border-bottom: 1px solid #1e1e2e;
+            padding: 14px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        .site-header {
+        .brand {
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 0;
-            padding: 0;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .site-header h1 {
-            font-family: 'Lobster Two', sans-serif;
+        .brand-name {
+            font-family: 'Lobster Two', serif;
             font-style: italic;
-            font-weight: 400 !important;
-            font-size: 2.2rem;
-            margin: 0;
-            line-height: 1.1;
+            font-weight: 400;
+            font-size: 1.9rem;
+            line-height: 1;
             color: #fff;
-            /* TikTok dual-glow split effect */
             text-shadow:
-                -2px -2px 0   #00ff88,
-                -2px -2px 10px rgba(0,255,136,0.7),
-                 2px  2px 0   #bf5fff,
-                 2px  2px 10px rgba(191,95,255,0.7);
+                -1.5px -1.5px 0 var(--green),
+                -1.5px -1.5px 8px rgba(0,255,136,0.55),
+                 1.5px  1.5px 0 var(--purple),
+                 1.5px  1.5px 8px rgba(191,95,255,0.55);
         }
 
-        .site-header p {
-            margin: 0 0 0 14px;
-            padding-left: 14px;
-            border-left: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.8rem;
-            color: #888;
-            letter-spacing: 0.03em;
-            line-height: 1.3;
+        .brand-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ffffff;
         }
 
-        /* ---- NAV ---- */
-        .navigation-bar {
+        .nav {
             display: flex;
-            justify-content: flex-end;
             align-items: center;
-            gap: 15px;
-            flex-wrap: nowrap;
-            margin: 0;
+            gap: 8px;
         }
 
-        .neon-button {
-            font-size: 1.1rem;
-            padding: 6px 14px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Lobster Two', sans-serif;
-            font-weight: 400 !important;
+        .nav-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: color 0.25s ease, background 0.25s ease;
+        }
+
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+
+        .neon-btn {
+            font-family: 'Lobster Two', serif;
             font-style: italic;
+            font-size: 1rem;
+            padding: 8px 18px;
             text-decoration: none;
             color: #fff;
             border-radius: 10px;
-            cursor: pointer;
             background: linear-gradient(135deg, #00c966, #8a2be2);
             border: 1px solid rgba(0,255,136,0.3);
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .neon-button:hover {
-            filter: brightness(1.25);
-            box-shadow: 0 0 18px #00ff88, 0 0 18px #bf5fff;
+        .neon-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 18px rgba(0,255,136,0.6), 0 0 18px rgba(191,95,255,0.6);
             transform: translateY(-2px);
         }
 
-        /* ---- LINKEDIN ---- */
-        .linkedin-link {
-            display: flex;
+        .linkedin-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(10,10,20,0.35);
+            backdrop-filter: blur(6px);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.25s ease;
+        }
+        .linkedin-pill:hover {
+            color: #fff;
+            border-color: rgba(0,255,136,0.45);
+            box-shadow: 0 0 14px rgba(0,255,136,0.25);
+        }
+        .linkedin-pill svg { width: 14px; height: 14px; }
+
+        /* ====== LAYOUT ====== */
+        main { position: relative; z-index: 2; }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ====== HERO ====== */
+        .hero {
+            padding: 90px 0 80px;
+            display: grid;
+            grid-template-columns: 1.35fr 0.9fr;
+            gap: 72px;
             align-items: center;
         }
 
-        .linkedin-link img {
-            height: 30px;
-            width: auto;
-            display: block;
-            border-radius: 6px;
-            transition: transform 0.3s ease, filter 0.3s ease;
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 22px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
         }
 
-        .linkedin-link:hover img {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 8px #00ff88);
-        }
-
-        /* ---- MAIN ---- */
-        #main-content { position: relative; z-index: 2;
-            max-width: 1050px;
-            margin: 40px auto;
-            font-size: 1.1rem;
-            color: #ccc;
-            line-height: 1.7;
-            padding: 0 20px;
-            text-align: left;
-        }
-
-        .section-title {
-            font-family: 'Lobster Two', sans-serif;
+        .hero h1 {
+            font-family: 'Lobster Two', serif;
             font-style: italic;
-            font-weight: 400 !important;
-            font-size: 2.8rem;
-            margin-top: 50px;
-            margin-bottom: 14px;
-            text-align: center;
-            background: linear-gradient(90deg, #00ff88, #bf5fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 400;
+            font-size: clamp(2.6rem, 5vw, 4.4rem);
+            line-height: 1.05;
+            margin: 0 0 24px;
+            color: #fff;
+            letter-spacing: -0.01em;
+            text-wrap: balance;
         }
 
-        .content-card {
-            background: #110d1f;
-            border: 1px solid #2a2a40;
-            border-radius: 16px;
-            padding: 24px 28px;
-            margin-bottom: 20px;
-            box-shadow:
-                0 0 20px rgba(0,255,136,0.06),
-                0 0 20px rgba(191,95,255,0.06);
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        .hero h1 .accent-g {
+            color: #00ff88;
+            text-shadow:
+              0 0 14px rgba(0,255,136,0.9),
+              0 0 32px rgba(0,255,136,0.55),
+              0 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero h1 .accent-p {
+            color: #bf5fff;
+            text-shadow:
+              0 0 14px rgba(191,95,255,0.9),
+              0 0 32px rgba(191,95,255,0.55),
+              0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .content-card:hover {
+        .hero .lede {
+            font-size: 1.18rem;
+            line-height: 1.65;
+            color: #ffffff;
+            max-width: 560px;
+            margin: 0 0 36px;
+            text-wrap: pretty;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .ghost-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            text-decoration: none;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(10,10,20,0.3);
+            backdrop-filter: blur(6px);
+            border-radius: 10px;
+            transition: all 0.25s ease;
+        }
+        .ghost-btn:hover {
+            color: #fff;
+            border-color: rgba(191,95,255,0.45);
+            box-shadow: 0 0 14px rgba(191,95,255,0.2);
+        }
+
+        /* ====== PORTRAIT ====== */
+        .portrait-wrap {
+            position: relative;
+            aspect-ratio: 3/4;
+            max-width: 380px;
+            justify-self: center;
+            width: 100%;
+        }
+        .portrait-frame {
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0a0a14;
             box-shadow:
-                0 0 30px rgba(0,255,136,0.15),
-                0 0 30px rgba(191,95,255,0.15);
+                0 0 0 1px rgba(255,255,255,0.06),
+                0 30px 80px rgba(0,0,0,0.55),
+                0 0 40px rgba(0,255,136,0.08),
+                0 0 40px rgba(191,95,255,0.08);
+        }
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 22%;
+            filter: saturate(1.05) contrast(1.03);
+        }
+        .portrait-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(2,8,24,0.65) 100%);
+            pointer-events: none;
+        }
+        /* corner ticks (disabled) */
+        .portrait-wrap::before,
+        .portrait-wrap::after {
+            content: none;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--green);
+            box-shadow: 0 0 10px rgba(0,255,136,0.35);
+        }
+        .portrait-wrap::before {
+            top: -8px; left: -8px;
+            border-right: none; border-bottom: none;
+        }
+        .portrait-wrap::after {
+            bottom: -8px; right: -8px;
+            border-left: none; border-top: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 10px rgba(191,95,255,0.35);
+        }
+
+        .portrait-caption {
+            position: absolute;
+            left: -8px;
+            bottom: -40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+        .portrait-caption .dot {
+            display: inline-block;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+            margin-right: 8px;
+            vertical-align: middle;
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* ====== STATS STRIP ====== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding: 32px 0;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            margin-top: 20px;
+        }
+        .stat {
+            padding: 4px 24px;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat:last-child { border-right: none; }
+        .stat-num {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 2.6rem;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .stat-num.g { color: var(--green); text-shadow: 0 0 18px rgba(0,255,136,0.35); }
+        .stat-num.p { color: var(--purple); text-shadow: 0 0 18px rgba(191,95,255,0.35); }
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* ====== SECTION HEADINGS ====== */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            color: #ffffff;
+        }
+        .section-title {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+            line-height: 1;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0 2px 18px rgba(0,0,0,0.55), 0 0 30px rgba(0,0,0,0.35);
+        }
+        .section-meta {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        /* ====== ABOUT ====== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+        .about-card {
+            background: linear-gradient(180deg, rgba(17,13,31,0.7), rgba(12,10,24,0.55));
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            padding: 32px;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .about-card:hover {
+            border-color: rgba(0,255,136,0.22);
+            box-shadow: 0 0 28px rgba(0,255,136,0.08), 0 0 28px rgba(191,95,255,0.08);
             transform: translateY(-3px);
         }
+        .about-card.wide { grid-column: 1 / -1; }
 
-        /* ---- FOOTER ---- */
-        .site-footer {
-            text-align: center;
-            padding: 24px;
-            background: #0b0918;
-            color: #555;
-            margin-top: 60px;
-            font-size: 0.85rem;
-            border-top: 1px solid #1e1e2e;
+        .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-label.p { color: var(--purple); }
+        .card-label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 8px currentColor;
         }
 
-        /* ---- MOBILE ---- */
-        @media (max-width: 600px) {
-            .header-container {
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 10px;
-                gap: 12px;
+        .card-title {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 1.7rem;
+            color: #fff;
+            margin: 0 0 14px;
+            line-height: 1.1;
+        }
+
+        .card-body {
+            color: #ededf5;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .card-body strong { color: #fff; font-weight: 500; }
+        .card-body em { font-style: normal; color: var(--green); }
+
+        /* ====== PROJECTS TEASER ====== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #0a0a14;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
+        }
+        .project-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease, filter 0.4s ease;
+            filter: saturate(0.9) brightness(0.75);
+        }
+        .project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(2,8,24,0.92) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+            filter: saturate(1.1) brightness(0.95);
+        }
+        .project-card:hover {
+            border-color: rgba(0,255,136,0.3);
+            box-shadow: 0 0 30px rgba(0,255,136,0.12), 0 0 30px rgba(191,95,255,0.12);
+            transform: translateY(-4px);
+        }
+
+        .project-meta {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            right: 20px;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .project-meta .tag {
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            backdrop-filter: blur(6px);
+            background: rgba(10,10,20,0.4);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 22px;
+            left: 22px;
+            right: 22px;
+            z-index: 2;
+        }
+        .project-brand {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 1.9rem;
+            color: #fff;
+            margin: 0 0 6px;
+            line-height: 1;
+        }
+        .project-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: #ededf5;
+            margin: 0;
+            line-height: 1.45;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .project-arrow {
+            position: absolute;
+            bottom: 22px;
+            right: 22px;
+            z-index: 2;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-6px);
+        }
+        .project-card:hover .project-arrow {
+            opacity: 1;
+            transform: translateX(0);
+            border-color: var(--green);
+            background: rgba(0,255,136,0.12);
+            box-shadow: 0 0 14px rgba(0,255,136,0.35);
+        }
+
+        .projects-all {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        /* ====== SKILLS ROW ====== */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .skill {
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            background: rgba(17,13,31,0.35);
+            transition: all 0.3s ease;
+        }
+        .skill:hover {
+            border-color: rgba(191,95,255,0.3);
+            background: rgba(17,13,31,0.6);
+        }
+        .skill-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .skill-desc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #ededf5;
+            line-height: 1.5;
+        }
+
+        /* ====== CONTACT CTA ====== */
+        .cta-band {
+            margin: 60px 0 80px;
+            padding: 60px 48px;
+            border-radius: 22px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(0,255,136,0.1), transparent 55%),
+                radial-gradient(ellipse at 80% 80%, rgba(191,95,255,0.12), transparent 55%),
+                rgba(6,8,20,0.5);
+            backdrop-filter: blur(10px);
+        }
+        .cta-band h3 {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0 0 14px;
+            color: #fff;
+            line-height: 1.05;
+        }
+        .cta-band p {
+            font-size: 1.05rem;
+            color: #ffffff;
+            max-width: 520px;
+            margin: 0 auto 28px;
+        }
+        .cta-actions {
+            display: inline-flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ====== FOOTER ====== */
+        .site-footer {
+            position: relative;
+            z-index: 2;
+            padding: 32px 0 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(6,8,20,0.7);
+            backdrop-filter: blur(10px);
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #ffffff;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { text-decoration: none; color: #ffffff; transition: color 0.25s; }
+        .footer-links a:hover { color: var(--green); }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                padding: 60px 0 50px;
             }
-            .site-header {
-                width: 100%;
-                text-align: center;
-                flex-direction: column;
-                align-items: center;
-            }
-            .site-header p { text-align: center; margin: 4px 0 0 0; padding-left: 0; border-left: none; }
-            .site-header h1 { font-size: 1.7rem; }
-            .navigation-bar {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-                width: 100%;
-            }
-            .neon-button {
-                font-size: 1.7rem;
-                padding: 10px 20px;
-                width: 80%;
-                justify-content: center;
-            }
-            .linkedin-link {
-                width: 80%;
-                justify-content: center;
-            }
-            .linkedin-link img { height: 45px; }
-            #main-content {
-                font-size: 1rem;
-                padding: 0 12px;
-            }
+            .portrait-wrap { max-width: 300px; }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+            .stat { border-right: none; }
+            .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.05); }
+            .about-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            .skills { grid-template-columns: repeat(2, 1fr); }
+            .section { padding: 64px 0; }
+            .header-container { padding: 12px 18px; }
+            .brand-name { font-size: 1.5rem; }
+            .brand-tag { display: none; }
+            .nav-link { display: none; }
+            .wrap { padding: 0 20px; }
+        }
+        @media (max-width: 560px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills { grid-template-columns: 1fr; }
+            .section-head { flex-wrap: wrap; }
+            .section-meta { margin-left: 0; width: 100%; }
+            .cta-band { padding: 40px 24px; }
         }
     </style>
 </head>
 <body>
-<!-- Aurora Borealis Background -->
-<canvas id="aurora-stars" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-<canvas id="aurora-bg" style="position:fixed;top:0;left:0;width:100%;height:70vh;z-index:0;pointer-events:none;filter:blur(22px) saturate(1.15);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);"></canvas>
+<!-- Aurora Borealis Background (identical to original) -->
+<canvas id="aurora-stars" class="bg-layer" style="width:100%;height:100%;z-index:0;"></canvas>
+<canvas id="aurora-bg" class="bg-layer" style="width:100%;height:70vh;z-index:0;filter:blur(22px) saturate(1.15);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);"></canvas>
 <script>
 (function(){
   var sc=document.getElementById('aurora-stars');
@@ -259,33 +761,117 @@
   window.addEventListener('resize',resize);
 
   var stars=[];
-  for(var i=0;i<3000;i++) stars.push({x:Math.random(),y:Math.random()*0.85,r:Math.random()*0.7+0.15,
-    a:Math.random()*0.55+0.3,tw:Math.random()*0.012+0.003,tp:Math.random()*Math.PI*2});
-  for(var i=0;i<120;i++) stars.push({x:Math.random(),y:Math.random()*0.75,r:Math.random()*0.6+0.9,
-    a:Math.random()*0.3+0.6,tw:Math.random()*0.015+0.004,tp:Math.random()*Math.PI*2});
+  // Celestial pole BELOW the horizon (southern-sky effect): stars sweep
+  // in arcs that cross the sky from one side to the other.
+  var POLE = { x: 0.5, y: 1.35 };  // center-bottom, well below viewport
+  var ROT_SPEED = 0.0000045;       // very slow, realistic drift
 
+  // Pre-compute a generous max radius so annulus fully covers the visible sky
+  // (furthest corner from pole). We'll use normalized-x units scaled by W.
+  function maxVisibleRadius(){
+    var aspect = (typeof W !== 'undefined' && W) ? (H/W) : 0.6;
+    var corners = [[0,0],[1,0],[0,0.9],[1,0.9]];
+    var max=0;
+    for(var k=0;k<corners.length;k++){
+      var dx=corners[k][0]-POLE.x;
+      var dy=(corners[k][1]-POLE.y)/aspect; // convert screen y back to "x-units"
+      var r=Math.sqrt(dx*dx+dy*dy);
+      if(r>max) max=r;
+    }
+    return max;
+  }
+
+  // Twinkler array (declared before reseedAll references it)
+  var twinklers=[];
+
+  // Seed stars UNIFORMLY in polar space so rotational density is constant.
+  // Uniform area: r = maxR * sqrt(rand). Angle: full 0..2π (we cull offscreen at draw time).
+  var MAX_R = 1.8; // generous; recalc at first resize
+  function seedStars(count, sizeMin, sizeMax, alphaMin, alphaMax, twMin, twRange){
+    var out=[];
+    for(var i=0;i<count;i++){
+      var r0 = MAX_R * Math.sqrt(Math.random());
+      var a0 = Math.random() * Math.PI*2;
+      out.push({
+        r0:r0, a0:a0,
+        size: Math.random()*(sizeMax-sizeMin)+sizeMin,
+        a: Math.random()*(alphaMax-alphaMin)+alphaMin,
+        tw: Math.random()*twRange+twMin,
+        tp: Math.random()*Math.PI*2
+      });
+    }
+    return out;
+  }
+  // We'll reseed after first resize so MAX_R is correct:
+  function reseedAll(){
+    MAX_R = maxVisibleRadius();
+    stars.length=0;
+    var base = seedStars(3000, 0.15, 0.85, 0.3, 0.85, 0.003, 0.012);
+    var bright = seedStars(120, 0.9, 1.5, 0.6, 0.9, 0.004, 0.015);
+    for(var k=0;k<base.length;k++) stars.push(base[k]);
+    for(var k=0;k<bright.length;k++) stars.push(bright[k]);
+    // twinklers
+    twinklers.length=0;
+    for(var i=0;i<14;i++){
+      var r0 = MAX_R * Math.sqrt(Math.random());
+      var a0 = Math.random() * Math.PI*2;
+      twinklers.push({
+        r0:r0, a0:a0,
+        size:Math.random()*0.4+0.8,
+        period: Math.random()*8000+7000,
+        phase: Math.random()*Math.PI*2,
+        burst: Math.random()*0.25+0.55,
+        hue: 'w'
+      });
+    }
+  }
+
+  // Initial seed + reseed on resize so MAX_R matches current viewport
+  reseedAll();
+  window.addEventListener('resize', reseedAll);
+
+  // --- Shooting stars (rare, faint meteors) ---
+  var meteors=[];
+  var nextMeteorAt = performance.now() + 8000 + Math.random()*10000;
+  function spawnMeteor(){
+    var angle = (Math.PI/180) * (15 + Math.random()*35);
+    var speed = 0.0011 + Math.random()*0.0006;
+    var startX = Math.random()*0.6 - 0.1;
+    var startY = Math.random()*0.35 - 0.05;
+    meteors.push({
+      x: startX, y: startY,
+      vx: Math.cos(angle)*speed,
+      vy: Math.sin(angle)*speed,
+      life: 0,
+      maxLife: 700 + Math.random()*500,
+      len: 0.08 + Math.random()*0.08,
+      width: 0.7 + Math.random()*0.5,
+      bornAt: performance.now()
+    });
+    nextMeteorAt = performance.now() + 18000 + Math.random()*30000;  // 18–48s between — rare
+  }
+
+  // ============================================================
+  // REALISTIC AURORA — 60/30/10 palette (60% green, 30% purple
+  // fringe at curtain tops, 10% pink hotspots). Strong vertical
+  // rays with fold clusters, very slow drift.
+  // ============================================================
   var curtains=[
-    {yBase:0.35, waveA:0.14, waveF:0.7, waveS:0.14, rayLen:0.80,
-     brightS:0.28, brightF:1.1, brightOff:0,
-     cBot:[170,255,110], cMid:[70,230,140], cTop:[190,90,230], alpha:1.10},
-    {yBase:0.30, waveA:0.16, waveF:1.0, waveS:0.12, rayLen:0.85,
-     brightS:0.24, brightF:0.9, brightOff:1.8,
-     cBot:[150,255,130], cMid:[90,240,160], cTop:[170,70,210], alpha:1.00},
-    {yBase:0.40, waveA:0.12, waveF:0.8, waveS:0.18, rayLen:0.75,
-     brightS:0.22, brightF:1.3, brightOff:3.5,
-     cBot:[130,255,150], cMid:[110,200,200], cTop:[200,80,220], alpha:0.95},
-    {yBase:0.18, waveA:0.10, waveF:0.5, waveS:0.08, rayLen:0.55,
-     brightS:0.18, brightF:0.7, brightOff:1.2,
-     cBot:[180,140,230], cMid:[180,90,220], cTop:[140,50,190], alpha:0.75},
-    {yBase:0.72, waveA:0.05, waveF:2.0, waveS:0.25, rayLen:0.25,
-     brightS:0.40, brightF:2.2, brightOff:2.5,
-     cBot:[210,255,160], cMid:[120,255,160], cTop:[60,220,140], alpha:0.90},
-    {yBase:0.25, waveA:0.14, waveF:1.5, waveS:0.20, rayLen:0.60,
-     brightS:0.30, brightF:1.6, brightOff:4.2,
-     cBot:[100,230,160], cMid:[180,100,220], cTop:[150,60,200], alpha:0.70}
+    // PRIMARY green curtain (main display, bright green core, purple top fringe)
+    {yBase:0.38, waveA:0.10, waveF:0.55, waveS:0.035, rayLen:0.82, brightS:0.05, brightF:0.9, brightOff:0,
+     cBot:[120,255,150], cMid:[45,220,110], cTop:[140,80,200], alpha:1.30, kind:'green'},
+    // SECONDARY green curtain (slightly higher, offset folds)
+    {yBase:0.32, waveA:0.09, waveF:0.40, waveS:0.028, rayLen:0.88, brightS:0.04, brightF:0.7, brightOff:1.8,
+     cBot:[90,240,130], cMid:[40,200,100], cTop:[160,90,210], alpha:1.00, kind:'green'},
+    // TERTIARY lower green glow (diffuse, near horizon)
+    {yBase:0.52, waveA:0.06, waveF:0.70, waveS:0.045, rayLen:0.42, brightS:0.06, brightF:1.1, brightOff:3.2,
+     cBot:[150,255,170], cMid:[70,230,140], cTop:[80,200,130], alpha:0.70, kind:'green'},
+    // RARE pink hotspot curtain — thin, only occasionally bright (10% of the palette)
+    {yBase:0.28, waveA:0.07, waveF:0.80, waveS:0.050, rayLen:0.35, brightS:0.08, brightF:1.4, brightOff:2.3,
+     cBot:[255,140,180], cMid:[240,110,180], cTop:[200,90,190], alpha:0.45, kind:'pink'}
   ];
 
-  var numRays=60;
+  var numRays=90;
   var lastFrame=0;
   var FPS_INTERVAL=1000/24;
 
@@ -294,76 +880,173 @@
     var elapsed=now-lastFrame;
     if(elapsed<FPS_INTERVAL) return;
     lastFrame=now-(elapsed%FPS_INTERVAL);
-    t+=0.005;
+    t+=0.0012;  // much slower drift — curtains hold shape for a long time
 
     sctx.clearRect(0,0,W,H);
+    // rotation angle for celestial pole effect
+    var rot = now * ROT_SPEED;
+    var poleX = POLE.x * W;
+    var poleY = POLE.y * H;
     for(var i=0;i<stars.length;i++){
       var s=stars[i]; s.tp+=s.tw;
+      var ang = s.a0 + rot;
+      var rx = poleX + Math.cos(ang) * s.r0 * W;
+      var ry = poleY + Math.sin(ang) * s.r0 * W * (H/W); // preserve original y-scale
+      // skip stars that rotate off the visible sky
+      if(ry > H*0.88) continue;
       sctx.fillStyle='rgba(220,230,255,'+(s.a*(0.5+0.5*Math.sin(s.tp)))+')';
-      sctx.beginPath();sctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);sctx.fill();
+      sctx.beginPath();sctx.arc(rx,ry,s.size,0,Math.PI*2);sctx.fill();
+    }
+
+    // --- Subtle twinklers: gentle brightness scintillation, no sparkle cross ---
+    for(var i=0;i<twinklers.length;i++){
+      var tw=twinklers[i];
+      var p=((now+tw.phase*1000)%tw.period)/tw.period;
+      var intensity;
+      if(p<tw.burst) { intensity = 0.25; }
+      else {
+        var q=(p-tw.burst)/(1-tw.burst);
+        intensity = 0.25 + Math.pow(Math.sin(q*Math.PI),2.0) * 0.55;
+      }
+      var ang = tw.a0 + rot;
+      var px = poleX + Math.cos(ang) * tw.r0 * W;
+      var py = poleY + Math.sin(ang) * tw.r0 * W * (H/W);
+      if(py > H*0.88) continue;
+      var col='235,240,255';
+      if(intensity>0.55){
+        var g=sctx.createRadialGradient(px,py,0,px,py,tw.size*6);
+        g.addColorStop(0,'rgba('+col+','+((intensity-0.5)*0.35)+')');
+        g.addColorStop(1,'rgba('+col+',0)');
+        sctx.fillStyle=g;
+        sctx.beginPath();sctx.arc(px,py,tw.size*6,0,Math.PI*2);sctx.fill();
+      }
+      sctx.fillStyle='rgba('+col+','+Math.min(1,intensity)+')';
+      sctx.beginPath();sctx.arc(px,py,tw.size,0,Math.PI*2);sctx.fill();
+    }
+
+    // --- Shooting stars (subtle) ---
+    if(now >= nextMeteorAt) spawnMeteor();
+    for(var i=meteors.length-1;i>=0;i--){
+      var m=meteors[i];
+      var age = now - m.bornAt;
+      if(age > m.maxLife){ meteors.splice(i,1); continue; }
+      var dt = elapsed;
+      m.x += m.vx * dt;
+      m.y += m.vy * dt;
+      var t01 = age/m.maxLife;
+      var fade = Math.sin(t01*Math.PI) * 0.55;  // max 0.55 opacity
+      var hx=m.x*W, hy=m.y*H;
+      var tx=(m.x - m.vx*1000*m.len)*W;
+      var ty=(m.y - m.vy*1000*m.len)*H;
+      var grad=sctx.createLinearGradient(hx,hy,tx,ty);
+      grad.addColorStop(0,'rgba(235,240,255,'+fade+')');
+      grad.addColorStop(0.3,'rgba(210,220,240,'+(fade*0.4)+')');
+      grad.addColorStop(1,'rgba(210,220,240,0)');
+      sctx.strokeStyle=grad;
+      sctx.lineWidth=m.width;
+      sctx.lineCap='round';
+      sctx.beginPath(); sctx.moveTo(hx,hy); sctx.lineTo(tx,ty); sctx.stroke();
     }
 
     ctx.clearRect(0,0,sW,sH);
     for(var ci=0;ci<curtains.length;ci++){
       var cu=curtains[ci];
+      // Cluster phase for this curtain — controls where bright ray-folds appear.
+      // Folds shift very slowly across the curtain over time.
+      var foldShift = t*cu.brightS*0.6 + cu.brightOff;
       for(var i=0;i<numRays;i++){
         var nx=i/numRays;
-        var jitter=Math.sin(i*12.9898+ci*78.233)*0.25;
-        var x=(nx+jitter/numRays*0.35)*sW;
+        var jitter=Math.sin(i*12.9898+ci*78.233)*0.35;
+        var x=(nx+jitter/numRays*0.45)*sW;
+        // Ridge: the curtain's bottom edge — gently folded
         var ridge=cu.yBase
           +Math.sin(nx*Math.PI*2*cu.waveF + t*cu.waveS)*cu.waveA
           +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.55
           +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.22
-          +Math.sin(nx*Math.PI*13.7*cu.waveF + t*cu.waveS*0.25 + ci*2.3)*cu.waveA*0.10
-          +Math.sin(i*4.7+ci*9.1+t*0.2)*cu.waveA*0.06;
+          +Math.sin(nx*Math.PI*13.7*cu.waveF + t*cu.waveS*0.25 + ci*2.3)*cu.waveA*0.10;
         var ridgeY=ridge*sH;
+        // Ray height varies per-ray (natural fold structure)
         var rayH=cu.rayLen*sH
-          *(0.72+0.28*Math.sin(nx*Math.PI*3.3+t*0.15+ci*2.1))
-          *(0.88+0.18*Math.sin(i*2.3+ci*5.7+t*0.22));
-        var bright=Math.sin(nx*Math.PI*2*cu.brightF - t*cu.brightS + cu.brightOff);
-        bright=bright*0.5+0.5;
-        bright*=(0.78+0.32*Math.sin(nx*Math.PI*3.3 - t*cu.brightS*0.5 + cu.brightOff*1.7));
-        bright*=(0.82+0.28*Math.sin(nx*Math.PI*0.8 + t*0.08 + ci*1.5));
-        bright*=(0.88+0.18*Math.sin(i*1.8+ci*3.3+t*0.13));
-        bright=Math.max(0,Math.min(bright,1.1));
-        bright*=(0.82+0.22*Math.sin(t*0.08+ci*1.2));
-        var a=cu.alpha*bright*1.35;
-        if(a<0.02) continue;
-        var widthJit=1.6+0.6*Math.abs(Math.sin(i*5.1+ci*3.7+t*0.05));
+          *(0.78+0.22*Math.sin(nx*Math.PI*3.3+t*0.08+ci*2.1))
+          *(0.90+0.16*Math.sin(i*2.7+ci*5.7+t*0.10));
+
+        // === Cluster/fold brightness ===
+        // Real aurora has clusters of bright rays every 10-20° of sky, with
+        // dark gaps between. We use a multi-scale noise to create 4-8 clusters
+        // per curtain that slowly drift.
+        var clusterLarge = Math.sin(nx*Math.PI*2.2 - foldShift)*0.5+0.5;  // 2-3 big clusters
+        var clusterMed   = Math.sin(nx*Math.PI*5.5 - foldShift*1.4 + 1.7)*0.5+0.5; // finer
+        var clusterFine  = Math.sin(nx*Math.PI*13.0 - foldShift*0.8 + 3.1)*0.5+0.5; // per-ray
+        // Combine — rays are ONLY bright where clusters align (sharp peaks)
+        var fold = Math.pow(clusterLarge, 1.8) * (0.4 + 0.6*clusterMed) * (0.55 + 0.45*clusterFine);
+        // Per-ray jitter for natural variation
+        fold *= (0.75 + 0.35*Math.sin(i*1.8+ci*3.3+t*0.06));
+        // Global slow breathing of the whole curtain
+        fold *= (0.72+0.32*Math.sin(t*0.04+ci*1.2));
+        var bright = Math.max(0, Math.min(fold, 1.15));
+
+        var a=cu.alpha*bright*1.15;
+        if(a<0.025) continue;
+        // Ray width — slightly varied for organic look
+        var widthJit=1.4+0.5*Math.abs(Math.sin(i*5.1+ci*3.7+t*0.03));
         var rayW=(sW/numRays+1)*widthJit;
-        var grad=ctx.createLinearGradient(x,ridgeY+rayH,x,ridgeY-rayH*0.4);
+        var grad=ctx.createLinearGradient(x,ridgeY+rayH*0.25,x,ridgeY-rayH);
         var cB=cu.cBot,cM=cu.cMid,cT=cu.cTop;
-        grad.addColorStop(0,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
-        grad.addColorStop(0.15,'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.6)+')');
-        grad.addColorStop(0.42,'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
-        grad.addColorStop(0.72,'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.4)+')');
-        grad.addColorStop(1,  'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+        if(cu.kind==='green'){
+          // Green curtain: bright green core, fade to teal, then purple fringe ONLY at top 20%
+          grad.addColorStop(0,    'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
+          grad.addColorStop(0.08, 'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.75)+')');
+          grad.addColorStop(0.28, 'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
+          grad.addColorStop(0.60, 'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.6)+')');
+          grad.addColorStop(0.82, 'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.28)+')');
+          grad.addColorStop(1,    'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+        } else {
+          // Pink hotspot: smooth falloff, mostly concentrated mid-ray
+          grad.addColorStop(0,    'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
+          grad.addColorStop(0.2,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.5)+')');
+          grad.addColorStop(0.5,  'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.75)+')');
+          grad.addColorStop(0.85, 'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.2)+')');
+          grad.addColorStop(1,    'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+        }
         ctx.fillStyle=grad;
-        ctx.fillRect(x,ridgeY-rayH*0.4,rayW,rayH*1.4);
+        ctx.fillRect(x,ridgeY-rayH,rayW,rayH*1.25);
       }
     }
 
-    var hga=0.30+0.12*Math.sin(t*0.09);
-    var hg=ctx.createRadialGradient(sW*0.5,sH*0.82,0,sW*0.5,sH*0.82,sW*0.7);
-    hg.addColorStop(0,'rgba(200,255,160,'+hga+')');
-    hg.addColorStop(0.3,'rgba(120,240,140,'+(hga*0.65)+')');
-    hg.addColorStop(0.6,'rgba(50,200,110,'+(hga*0.25)+')');
+    // ============ HORIZON GREEN GLOW (main atmospheric wash — 60%) ============
+    var hga=0.38+0.10*Math.sin(t*0.03);
+    var hg=ctx.createRadialGradient(sW*0.5,sH*0.88,0,sW*0.5,sH*0.88,sW*0.75);
+    hg.addColorStop(0,'rgba(140,255,160,'+hga+')');
+    hg.addColorStop(0.25,'rgba(80,230,130,'+(hga*0.75)+')');
+    hg.addColorStop(0.55,'rgba(40,180,100,'+(hga*0.32)+')');
     hg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=hg;ctx.fillRect(0,0,sW,sH);
 
-    var mga=0.24+0.12*Math.sin(t*0.11+1.5);
-    var mg=ctx.createRadialGradient(sW*0.45,sH*0.40,0,sW*0.45,sH*0.40,sW*0.6);
-    mg.addColorStop(0,'rgba(225,100,230,'+mga+')');
-    mg.addColorStop(0.4,'rgba(185,70,215,'+(mga*0.6)+')');
+    // Mid-sky secondary green wash (low and wide)
+    var mga=0.22+0.08*Math.sin(t*0.025+1.2);
+    var mg=ctx.createRadialGradient(sW*0.35,sH*0.55,0,sW*0.35,sH*0.55,sW*0.55);
+    mg.addColorStop(0,'rgba(90,230,140,'+mga+')');
+    mg.addColorStop(0.5,'rgba(60,200,120,'+(mga*0.45)+')');
     mg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=mg;ctx.fillRect(0,0,sW,sH);
 
-    var pga=0.16+0.08*Math.sin(t*0.13+3);
-    var pg=ctx.createRadialGradient(sW*0.55,sH*0.15,0,sW*0.55,sH*0.15,sW*0.55);
-    pg.addColorStop(0,'rgba(170,70,225,'+pga+')');
-    pg.addColorStop(0.5,'rgba(115,40,185,'+(pga*0.5)+')');
+    // ============ PURPLE FRINGE (30% — top of curtains only) ============
+    var pga=0.16+0.06*Math.sin(t*0.028+2.4);
+    var pg=ctx.createRadialGradient(sW*0.55,sH*0.18,0,sW*0.55,sH*0.18,sW*0.55);
+    pg.addColorStop(0,'rgba(150,75,210,'+pga+')');
+    pg.addColorStop(0.5,'rgba(110,55,180,'+(pga*0.5)+')');
     pg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=pg;ctx.fillRect(0,0,sW,sH);
+
+    // ============ PINK HOTSPOT (10% — rare warm accent) ============
+    var rga=0.08+0.05*Math.sin(t*0.038+4.1);
+    if(rga>0.04){
+      var rg=ctx.createRadialGradient(sW*0.68,sH*0.32,0,sW*0.68,sH*0.32,sW*0.35);
+      rg.addColorStop(0,'rgba(255,130,180,'+rga+')');
+      rg.addColorStop(0.6,'rgba(220,100,170,'+(rga*0.4)+')');
+      rg.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=rg;ctx.fillRect(0,0,sW,sH);
+    }
   }
   requestAnimationFrame(draw);
 })();
@@ -373,52 +1056,232 @@
 <svg id="treeline-svg" style="position:fixed;bottom:0;left:0;width:100%;height:50vh;z-index:1;pointer-events:none;overflow:visible;display:block;" preserveAspectRatio="none"></svg>
 <script src="treeline.js"></script>
 
+<!-- ======================== HEADER ======================== -->
 <div class="sticky-header">
-<div class="header-container">
-    <header class="site-header">
-        <h1>Robby Sawicki</h1>
-        <p>Marketing Strategy &amp; Cross-Functional Brand Work</p>
-    </header>
-
-    <nav class="navigation-bar">
-        <a href="projects.html" class="neon-button">Projects</a>
-        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
-        </a>
+  <div class="header-container">
+    <div class="brand">
+      <span class="brand-name">Robby Sawicki</span>
+      <span class="brand-tag">Marketing · Media · Brand</span>
+    </div>
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="projects.html" class="neon-btn">Projects</a>
+      <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+        LinkedIn
+      </a>
     </nav>
+  </div>
 </div>
-</div>
 
-<main id="main-content">
+<main>
+  <div class="wrap">
 
-    <h2 class="section-title">Welcome</h2>
-    <div class="content-card">
-        <p>
-            Welcome to my website. I'm a Toronto-based marketing and media professional with a track record of leading cross-functional campaigns — from national media strategy and brand planning to experiential and out-of-home. Explore my work or connect with me on LinkedIn.
+    <!-- ======================== HERO ======================== -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Toronto · Est. 2023</div>
+        <h1>
+          From <span class="accent-g">international media</span> plans<br>
+          to <span class="accent-p">guerilla marketing</span><br>
+          activations.
+        </h1>
+        <p class="lede">
+          I'm Robby — a Toronto-based media &amp; marketing professional. I manage the relationship between client objectives and campaign execution: planning across channels, keeping timelines on track, and turning strategy into results stakeholders can see.
         </p>
-    </div>
+        <div class="hero-cta">
+          <a href="projects.html" class="neon-btn">See the work →</a>
+          <a href="#about" class="ghost-btn">About Me</a>
+          <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener" class="ghost-btn">LinkedIn ↗</a>
+        </div>
+      </div>
 
-    <h2 class="section-title">About Me</h2>
-    <div class="content-card">
-        <p>
-            I'm a results-driven marketing professional based in Toronto with over 3 years of experience across brand strategy, media planning, and cross-functional campaign execution. Currently an <strong style="color:#00ff88;">Account Executive at Grassroots Advertising Inc.</strong>,
-            where I work with brands and agencies to execute high-impact Wildposting&reg; and out-of-home campaigns across Canada
-            &mdash; from street-level wildpostings and guerrilla sampling to murals, experiential activations, and scent marketing.
-        </p>
-        <p style="margin-top:16px;">
-            Prior to Grassroots, I spent over 2 years at <strong style="color:#bf5fff;">dentsu</strong> as a Media Planner (and before that,
-            Assistant Media Planner), managing national media strategy and buying for <strong style="color:#00ff88;">Kraft Heinz</strong>
-            &mdash; one of the world's largest food &amp; beverage companies. There I developed deep expertise in competitive analysis,
-            media mix planning, and translating marketing objectives into measurable campaign results.
-        </p>
-        <p style="margin-top:16px;">
-            I hold a <strong style="color:#bf5fff;">Bachelor of Commerce in Marketing</strong> from Toronto Metropolitan University,
-            where I also served as Co-Head of the Rugby Club. My skill set spans marketing strategy, media planning, project management, and integrated campaign execution &mdash; and I thrive in fast-paced, creative environments where big ideas meet real-world results.
-        </p>
-    </div>
+      <div class="portrait-wrap">
+        <div class="portrait-frame">
+          <img src="robby.jpg" alt="Robby Sawicki portrait">
+        </div>
+      </div>
+    </section>
 
+    <!-- ======================== STATS ======================== -->
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-num g">3+</div>
+        <div class="stat-label">Years in<br>Marketing</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Agencies<br>dentsu · Grassroots</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num p">Global</div>
+        <div class="stat-label">Media Strategy<br>Kraft Heinz</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num g">OOH</div>
+        <div class="stat-label">Guerilla · Murals<br>Experiential</div>
+      </div>
+    </section>
+
+    <!-- ======================== ABOUT ======================== -->
+    <section id="about" class="section">
+      <div class="section-head">
+        <span class="section-num">01 /</span>
+        <h2 class="section-title">About</h2>
+        <span class="section-meta">Toronto, ON</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-label">Now</div>
+          <h3 class="card-title">Account Executive — Grassroots Advertising Inc.</h3>
+          <p class="card-body">
+            Day-to-day client lead on <strong>guerilla marketing activations</strong> and out-of-home campaigns across Canada. Managing briefs, timelines, and budgets — coordinating creative, production, and media vendors to keep campaigns on strategy, on schedule, and on spend.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="card-label p">Then</div>
+          <h3 class="card-title">Media Planner — dentsu</h3>
+          <p class="card-body">
+            Two-plus years on the <strong>Kraft Heinz</strong> business, one of the world's largest CPG advertisers. Built international media plans across TV, digital, and OOH; led competitive analysis, vendor negotiations, and post-campaign reporting for 10+ brands.
+          </p>
+        </div>
+        <div class="about-card wide">
+          <div class="card-label">Education</div>
+          <h3 class="card-title">Bachelor of Commerce, Marketing — Toronto Metropolitan University</h3>
+          <p class="card-body">
+            Co-Head of the Rugby Club. I move fluently between the strategic and the tactical — comfortable in a client meeting, a media review, or a production walkthrough — and thrive when the campaign, the team, and the deadline all need something different.
+          </p>
+        </div>
+      </div>
+
+      <div class="skills">
+        <div class="skill"><div class="skill-name">Client Management</div><div class="skill-desc">Briefs · Timelines · Reporting</div></div>
+        <div class="skill"><div class="skill-name">Media Planning</div><div class="skill-desc">International · Cross-Channel</div></div>
+        <div class="skill"><div class="skill-name">Campaign Execution</div><div class="skill-desc">Cross-Functional · Integrated</div></div>
+        <div class="skill"><div class="skill-name">OOH &amp; Experiential</div><div class="skill-desc">Guerilla · Murals · Sampling</div></div>
+      </div>
+    </section>
+
+    <!-- ======================== WORK ======================== -->
+    <section id="work" class="section">
+      <div class="section-head">
+        <span class="section-num">02 /</span>
+        <h2 class="section-title">Selected Work</h2>
+        <span class="section-meta">2023 — Present</span>
+      </div>
+
+      <div class="projects-grid">
+        <a href="projects.html" class="project-card">
+          <img src="images/Oreo 1.jpg" alt="Oreo campaign">
+          <div class="project-meta">
+            <span>CPG</span>
+            <span class="tag">Guerilla</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">Oreo</h4>
+            <p class="project-desc">Street-level OOH rollout across urban cores.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="projects.html" class="project-card">
+          <img src="images/UGG 1.JPG" alt="UGG campaign">
+          <div class="project-meta">
+            <span>Fashion</span>
+            <span class="tag">Experiential</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">UGG</h4>
+            <p class="project-desc">Seasonal brand activation &amp; OOH.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="projects.html" class="project-card">
+          <img src="images/aglc-1.jpg" alt="AGLC campaign">
+          <div class="project-meta">
+            <span>Public</span>
+            <span class="tag">OOH</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">AGLC</h4>
+            <p class="project-desc">Provincial support at local Alberta festivals.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="projects.html" class="project-card">
+          <img src="images/Good MG Pic.jpg" alt="Monday Girl campaign">
+          <div class="project-meta">
+            <span>Beverage</span>
+            <span class="tag">Brand</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">Monday Girl</h4>
+            <p class="project-desc">Integrated campaign execution.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="projects.html" class="project-card">
+          <img src="images/tangerine-bike-day.jpg" alt="Tangerine Bike Day">
+          <div class="project-meta">
+            <span>Finance</span>
+            <span class="tag">Experiential</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">Tangerine</h4>
+            <p class="project-desc">Bike Day sampling &amp; on-street moments.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="projects.html" class="project-card">
+          <img src="https://i.ytimg.com/vi/eN2rNIgy9JQ/hqdefault.jpg" alt="Heinz x Deadpool &amp; Wolverine — Can't Unsee It">
+          <div class="project-meta">
+            <span>CPG</span>
+            <span class="tag">Award-Winning</span>
+          </div>
+          <div class="project-info">
+            <h4 class="project-brand">Heinz × Deadpool</h4>
+            <p class="project-desc">Cannes Gold &amp; D&amp;AD Graphite. Can't Unsee It.</p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+      </div>
+
+      <div class="projects-all">
+        <a href="projects.html" class="neon-btn">View all projects →</a>
+      </div>
+    </section>
+
+    <!-- ======================== CONTACT ======================== -->
+    <section id="contact" class="cta-band">
+      <h3>Let's connect.</h3>
+      <p>Always up for a conversation about media, campaigns, or what you're working on.</p>
+      <div class="cta-actions">
+        <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener" class="neon-btn">Connect on LinkedIn</a>
+        <a href="projects.html" class="ghost-btn">Browse Projects</a>
+      </div>
+    </section>
+
+  </div>
 </main>
 
+<footer class="site-footer">
+  <div class="footer-row">
+    <div>© 2026 Robby Sawicki</div>
+    <div class="footer-links">
+      <a href="projects.html">Projects</a>
+      <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#about">About</a>
+    </div>
+    <div>Toronto · ON · Canada</div>
+  </div>
+</footer>
 
 </body>
 </html>
