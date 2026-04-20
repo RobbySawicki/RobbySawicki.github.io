@@ -248,10 +248,63 @@
         </div>
 
         <div class="project-card">
-            <div class="video-container">
-                <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;object-fit:cover;">
-                    <source src="videos/Oreo%20x%20Marvel.mp4" type="video/mp4">
-                </video>
+            <div class="mio-carousel" style="position:relative;overflow:hidden;border-radius:12px;border:1px solid #2a2a40;margin-bottom:18px;">
+                <div class="mio-carousel-track" style="display:flex;transition:transform 0.35s ease;will-change:transform;">
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;">
+                            <video controls preload="none" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                                <source src="videos/Oreo%20x%20Marvel.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%201.jpg" alt="OREO x Marvel — Stuf of Legends 1" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%202.jpg" alt="OREO x Marvel — Stuf of Legends 2" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%203.jpg" alt="OREO x Marvel — Stuf of Legends 3" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%205.jpg" alt="OREO x Marvel — Stuf of Legends 5" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%206.jpg" alt="OREO x Marvel — Stuf of Legends 6" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%207.jpg" alt="OREO x Marvel — Stuf of Legends 7" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                    <div class="mio-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+                        <div style="position:relative;width:100%;padding-bottom:56.25%;overflow:hidden;border-radius:12px;background:#000;">
+                            <img src="images/Oreo%208.jpg" alt="OREO x Marvel — Stuf of Legends 8" loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:12px;">
+                        </div>
+                    </div>
+                </div>
+                <button onclick="(function(btn){var t=btn.closest('.mio-carousel').querySelector('.mio-carousel-track');var slides=t.querySelectorAll('.mio-carousel-slide');var cur=parseInt(t.getAttribute('data-index')||'0');var next=Math.max(0,cur-1);t.style.transform='translateX(-'+next+'00%)';t.setAttribute('data-index',next);btn.closest('.mio-carousel').querySelector('.mio-next-btn').style.opacity='1';if(next===0)btn.style.opacity='0.3';})(this)" class="mio-prev-btn" style="position:absolute;top:50%;left:10px;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;z-index:10;opacity:0.3;display:flex;align-items:center;justify-content:center;">&#8249;</button>
+                <button onclick="(function(btn){var t=btn.closest('.mio-carousel').querySelector('.mio-carousel-track');var slides=t.querySelectorAll('.mio-carousel-slide');var cur=parseInt(t.getAttribute('data-index')||'0');var next=Math.min(slides.length-1,cur+1);t.style.transform='translateX(-'+next+'00%)';t.setAttribute('data-index',next);btn.closest('.mio-carousel').querySelector('.mio-prev-btn').style.opacity='1';if(next===slides.length-1)btn.style.opacity='0.3';})(this)" class="mio-next-btn" style="position:absolute;top:50%;right:10px;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">&#8250;</button>
+                <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:#00ff88;display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                    <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+                </div>
             </div>
             <h3>OREO &times; Marvel &mdash; &ldquo;Stuf of Legends&rdquo;</h3>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
