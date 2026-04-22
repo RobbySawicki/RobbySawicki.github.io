@@ -1293,12 +1293,12 @@
   function reseedAll(){
     MAX_R = maxVisibleRadius();
     stars.length=0;
-    var base = seedStars(3000, 0.15, 0.85, 0.3, 0.85, 0.003, 0.012);
-    var bright = seedStars(120, 0.9, 1.5, 0.6, 0.9, 0.004, 0.015);
+    var base = seedStars(6000, 0.15, 0.85, 0.3, 0.85, 0.003, 0.012);
+    var bright = seedStars(240, 0.9, 1.5, 0.6, 0.9, 0.004, 0.015);
     for(var k=0;k<base.length;k++) stars.push(base[k]);
     for(var k=0;k<bright.length;k++) stars.push(bright[k]);
     twinklers.length=0;
-    for(var i=0;i<14;i++){
+    for(var i=0;i<28;i++){
       var r0 = MAX_R * Math.sqrt(Math.random());
       var a0 = Math.random() * Math.PI*2;
       twinklers.push({
