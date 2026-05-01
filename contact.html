@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact · Robby Sawicki</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'><defs><filter id='g' x='-50%25' y='-50%25' width='200%25' height='200%25'><feDropShadow dx='3' dy='-3' stdDeviation='3' flood-color='%2300ff88' flood-opacity='0.95'/><feDropShadow dx='-3' dy='3' stdDeviation='3' flood-color='%23bf5fff' flood-opacity='0.95'/></filter></defs><circle cx='64' cy='64' r='64' fill='%230a0a0f'/><path d='M59.86 39.29L69.94 37.94L65.44 58.91L67.78 58.91Q70.93 58.91 73.59 57.43Q76.24 55.94 78.22 53.60Q80.20 51.26 81.28 48.38Q82.36 45.50 82.36 42.80L82.36 42.80Q82.36 40.82 81.73 39.02Q81.10 37.22 79.62 35.83Q78.13 34.43 75.61 33.58Q73.09 32.72 69.22 32.72L69.22 32.72Q64.36 32.72 60.04 34.30Q55.72 35.87 52.48 38.80Q49.24 41.72 47.35 45.95Q45.46 50.18 45.46 55.49L45.46 55.49Q45.46 58.64 45.78 59.81Q46.09 60.98 46.54 61.61L46.54 61.61Q44.92 61.61 43.39 61.16Q41.86 60.71 40.65 59.72Q39.43 58.73 38.71 57.16Q37.99 55.58 37.99 53.33L37.99 53.33Q37.99 48.65 40.69 44.38Q43.39 40.10 47.94 36.77Q52.48 33.44 58.33 31.46Q64.18 29.48 70.39 29.48L70.39 29.48Q75.16 29.48 78.85 30.65Q82.54 31.82 85.02 33.80Q87.49 35.78 88.75 38.44Q90.01 41.09 90.01 43.97L90.01 43.97Q90.01 48.20 87.36 52.39Q84.70 56.57 79.66 59.18L79.66 59.18Q83.62 60.08 85.06 62.51Q86.50 64.94 86.50 68.36L86.50 68.36Q86.50 71.06 85.83 74.17Q85.15 77.27 84.30 80.28Q83.44 83.30 82.77 86.05Q82.09 88.79 82.09 90.86L82.09 90.86Q82.09 93.11 83.03 94.73Q83.98 96.35 85.60 96.98L85.60 96.98Q82.72 97.79 80.97 98.15Q79.21 98.51 77.59 98.51L77.59 98.51Q74.17 98.51 72.69 96.62Q71.20 94.73 71.20 92.66L71.20 92.66Q71.20 90.32 72.01 87.31Q72.82 84.29 73.81 81.09Q74.80 77.90 75.61 74.84Q76.42 71.78 76.42 69.35L76.42 69.35Q76.42 65.12 74.58 63.59Q72.73 62.06 69.85 62.06L69.85 62.06Q68.86 62.06 67.33 62.24Q65.80 62.42 64.63 62.69L64.63 62.69L57.34 96.98L47.44 96.98L59.86 39.29Z' fill='white' filter='url(%23g)'/></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --green: #00ff88;
+            --purple: #bf5fff;
+            --ink-0: #020818;
+            --ink-1: #0a1128;
+            --ink-2: #110d1f;
+            --ink-3: #1a1430;
+            --line: #2a2a40;
+            --text: #ffffff;
+            --text-soft: #ededf5;
+            --text-dim: #d8d8e5;
+            --outdoor-shadow: 0 1px 2px rgba(0,0,0,0.6), 0 0 12px rgba(2,8,24,0.7);
+        }
+
+        .eyebrow, .section-num, .section-meta, .ghost-btn,
+        .contact-hero h1, .contact-hero .lede, .contact-info-label, .contact-info-value {
+            text-shadow: var(--outdoor-shadow);
+        }
+
+        html, body { margin: 0; padding: 0; }
+
+        body {
+            background: linear-gradient(180deg, #020818 0%, #041028 15%, #061830 35%, #081a2e 55%, #0a1e28 75%, #061418 100%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .bg-layer { position: fixed; left: 0; top: 0; pointer-events: none; }
+
+        /* ====== STICKY HEADER ====== */
+        .sticky-header::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(to right, var(--green), var(--purple), var(--green));
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0%   { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(6, 8, 20, 0.72);
+            backdrop-filter: blur(14px) saturate(1.2);
+            -webkit-backdrop-filter: blur(14px) saturate(1.2);
+        }
+
+        .header-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-decoration: none;
+        }
+
+        .brand-name {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.9rem;
+            line-height: 1;
+            color: #fff;
+            text-shadow:
+                -1.5px -1.5px 0 var(--green),
+                -1.5px -1.5px 8px rgba(0,255,136,0.55),
+                 1.5px  1.5px 0 var(--purple),
+                 1.5px  1.5px 8px rgba(191,95,255,0.55);
+        }
+
+        .brand-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: color 0.25s ease, background 0.25s ease;
+        }
+
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+        .nav-link.active { color: var(--green); }
+
+        .neon-btn {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 1rem;
+            padding: 8px 18px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #00c966, #8a2be2);
+            border: 1px solid rgba(0,255,136,0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .neon-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 18px rgba(0,255,136,0.6), 0 0 18px rgba(191,95,255,0.6);
+            transform: translateY(-2px);
+        }
+
+        .linkedin-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(10,10,20,0.35);
+            backdrop-filter: blur(6px);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.25s ease;
+        }
+        .linkedin-pill:hover {
+            color: #fff;
+            border-color: rgba(0,255,136,0.45);
+            box-shadow: 0 0 14px rgba(0,255,136,0.25);
+        }
+        .linkedin-pill svg { width: 14px; height: 14px; }
+
+        /* ====== LAYOUT ====== */
+        main { position: relative; z-index: 2; }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ====== CONTACT HERO ====== */
+        .contact-hero {
+            padding: 72px 0 36px;
+            text-align: left;
+            max-width: 720px;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 22px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+        }
+        .contact-hero h1 {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(2.6rem, 5vw, 4.4rem);
+            line-height: 1.05;
+            margin: 0 0 18px;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+        .contact-hero h1 .accent-g {
+            color: #00ff88;
+            text-shadow:
+              0 0 14px rgba(0,255,136,0.9),
+              0 0 32px rgba(0,255,136,0.55),
+              0 2px 4px rgba(0,0,0,0.5);
+        }
+        .contact-hero .lede {
+            font-size: 1.18rem;
+            line-height: 1.65;
+            color: #ffffff;
+            margin: 0;
+            text-wrap: pretty;
+        }
+
+        /* ====== CONTACT GRID ====== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 36px;
+            padding-bottom: 90px;
+            align-items: start;
+        }
+
+        /* ====== FORM CARD ====== */
+        .form-card {
+            background: linear-gradient(180deg, rgba(17,13,31,0.78), rgba(12,10,24,0.62));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45),
+                0 0 40px rgba(0,255,136,0.05),
+                0 0 40px rgba(191,95,255,0.05);
+        }
+
+        .form-head {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .form-head .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            color: #ffffff;
+        }
+        .form-head h2 {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.9rem;
+            line-height: 1;
+            margin: 0;
+            color: #fff;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 22px;
+        }
+        .field label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .field label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .field.purple label { color: var(--purple); }
+
+        .input, .textarea {
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(2,8,24,0.55);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .input::placeholder, .textarea::placeholder {
+            color: rgba(216,216,229,0.5);
+        }
+        .input:hover, .textarea:hover {
+            border-color: rgba(255,255,255,0.22);
+        }
+        .input:focus, .textarea:focus {
+            border-color: rgba(0,255,136,0.55);
+            box-shadow: 0 0 0 3px rgba(0,255,136,0.12), 0 0 18px rgba(0,255,136,0.18);
+            background: rgba(2,8,24,0.75);
+        }
+        .field.purple .input:focus, .field.purple .textarea:focus {
+            border-color: rgba(191,95,255,0.55);
+            box-shadow: 0 0 0 3px rgba(191,95,255,0.12), 0 0 18px rgba(191,95,255,0.18);
+        }
+        .textarea {
+            resize: vertical;
+            min-height: 160px;
+            line-height: 1.55;
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+        .submit-btn {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            padding: 12px 26px;
+            border: 1px solid rgba(0,255,136,0.3);
+            background: linear-gradient(135deg, #00c966, #8a2be2);
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .submit-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 18px rgba(0,255,136,0.6), 0 0 18px rgba(191,95,255,0.6);
+            transform: translateY(-2px);
+        }
+        .submit-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .form-note {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #d8d8e5;
+            line-height: 1.5;
+        }
+
+        .form-status {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            display: none;
+        }
+        .form-status.show { display: block; }
+        .form-status.success {
+            color: var(--green);
+            background: rgba(0,255,136,0.08);
+            border: 1px solid rgba(0,255,136,0.35);
+            box-shadow: 0 0 18px rgba(0,255,136,0.15);
+        }
+        .form-status.error {
+            color: #ffb4b4;
+            background: rgba(255,80,80,0.08);
+            border: 1px solid rgba(255,80,80,0.35);
+        }
+
+        /* ====== SIDE INFO ====== */
+        .side {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: sticky;
+            top: 88px;
+        }
+        .info-card {
+            background: linear-gradient(180deg, rgba(17,13,31,0.7), rgba(12,10,24,0.55));
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            padding: 26px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.35s ease;
+        }
+        .info-card:hover {
+            border-color: rgba(191,95,255,0.22);
+            box-shadow: 0 0 28px rgba(191,95,255,0.08), 0 0 28px rgba(0,255,136,0.06);
+        }
+        .info-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-label.g { color: var(--green); }
+        .info-label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .info-value {
+            font-family: 'Lobster Two', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 0 6px;
+            line-height: 1.15;
+            word-break: break-word;
+        }
+        .info-value a { text-decoration: none; transition: color 0.25s; }
+        .info-value a:hover { color: var(--green); }
+        .info-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #d8d8e5;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .side-linkedin {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(10,10,20,0.4);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.25s ease;
+            justify-content: center;
+        }
+        .side-linkedin:hover {
+            border-color: rgba(0,255,136,0.45);
+            box-shadow: 0 0 14px rgba(0,255,136,0.25);
+        }
+        .side-linkedin svg { width: 16px; height: 16px; }
+
+        /* ====== FOOTER ====== */
+        .site-footer {
+            position: relative;
+            z-index: 2;
+            padding: 32px 0 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(6,8,20,0.7);
+            backdrop-filter: blur(10px);
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #ffffff;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { text-decoration: none; color: #ffffff; transition: color 0.25s; }
+        .footer-links a:hover { color: var(--green); }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            .contact-hero { padding: 56px 0 28px; }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding-bottom: 64px;
+            }
+            .side { position: static; }
+            .form-card { padding: 28px; }
+            .header-container { padding: 12px 18px; }
+            .brand-name { font-size: 1.5rem; }
+            .brand-tag { display: none; }
+            .nav-link { display: none; }
+            .wrap { padding: 0 20px; }
+        }
+        @media (max-width: 560px) {
+            .form-card { padding: 22px; }
+            .form-actions { flex-direction: column; align-items: stretch; }
+            .submit-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body id="top">
+
+<!-- Aurora Borealis Background (identical to index.html) -->
+<canvas id="aurora-stars" class="bg-layer" style="width:100%;height:100%;z-index:0;"></canvas>
+<canvas id="aurora-bg" class="bg-layer" style="width:100%;height:70vh;z-index:0;filter:blur(22px) saturate(1.15);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 55%,transparent 100%);"></canvas>
+<script>
+(function(){
+  var sc=document.getElementById('aurora-stars');
+  var sctx=sc.getContext('2d');
+  var c=document.getElementById('aurora-bg');
+  var ctx=c.getContext('2d');
+  var W,H,sW,sH,t=0;
+  var SCALE=0.35;
+
+  function resize(){
+    W=window.innerWidth; H=window.innerHeight;
+    sc.width=W; sc.height=H;
+    var bgH=H*0.7;
+    sW=Math.round(W*SCALE); sH=Math.round(bgH*SCALE);
+    c.width=sW; c.height=sH;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  var stars=[];
+  var POLE = { x: 0.5, y: 1.35 };
+  var ROT_SPEED = 0.0000045;
+
+  function maxVisibleRadius(){
+    var aspect = (typeof W !== 'undefined' && W) ? (H/W) : 0.6;
+    var corners = [[0,0],[1,0],[0,0.9],[1,0.9]];
+    var max=0;
+    for(var k=0;k<corners.length;k++){
+      var dx=corners[k][0]-POLE.x;
+      var dy=(corners[k][1]-POLE.y)/aspect;
+      var r=Math.sqrt(dx*dx+dy*dy);
+      if(r>max) max=r;
+    }
+    return max;
+  }
+
+  var twinklers=[];
+  var MAX_R = 1.8;
+  function seedStars(count, sizeMin, sizeMax, alphaMin, alphaMax, twMin, twRange){
+    var out=[];
+    for(var i=0;i<count;i++){
+      var r0 = MAX_R * Math.sqrt(Math.random());
+      var a0 = Math.random() * Math.PI*2;
+      out.push({
+        r0:r0, a0:a0,
+        size: Math.random()*(sizeMax-sizeMin)+sizeMin,
+        a: Math.random()*(alphaMax-alphaMin)+alphaMin,
+        tw: Math.random()*twRange+twMin,
+        tp: Math.random()*Math.PI*2
+      });
+    }
+    return out;
+  }
+  function reseedAll(){
+    MAX_R = maxVisibleRadius();
+    stars.length=0;
+    var base = seedStars(6000, 0.15, 0.85, 0.3, 0.85, 0.003, 0.012);
+    var bright = seedStars(240, 0.9, 1.5, 0.6, 0.9, 0.004, 0.015);
+    for(var k=0;k<base.length;k++) stars.push(base[k]);
+    for(var k=0;k<bright.length;k++) stars.push(bright[k]);
+    twinklers.length=0;
+    for(var i=0;i<28;i++){
+      var r0 = MAX_R * Math.sqrt(Math.random());
+      var a0 = Math.random() * Math.PI*2;
+      twinklers.push({
+        r0:r0, a0:a0,
+        size:Math.random()*0.4+0.8,
+        period: Math.random()*8000+7000,
+        phase: Math.random()*Math.PI*2,
+        burst: Math.random()*0.25+0.55,
+        hue: 'w'
+      });
+    }
+  }
+
+  reseedAll();
+  window.addEventListener('resize', reseedAll);
+
+  var meteors=[];
+  var nextMeteorAt = performance.now() + 8000 + Math.random()*10000;
+  function spawnMeteor(){
+    var angle = (Math.PI/180) * (15 + Math.random()*35);
+    var speed = 0.0011 + Math.random()*0.0006;
+    var startX = Math.random()*0.6 - 0.1;
+    var startY = Math.random()*0.35 - 0.05;
+    meteors.push({
+      x: startX, y: startY,
+      vx: Math.cos(angle)*speed,
+      vy: Math.sin(angle)*speed,
+      life: 0,
+      maxLife: 700 + Math.random()*500,
+      len: 0.08 + Math.random()*0.08,
+      width: 0.7 + Math.random()*0.5,
+      bornAt: performance.now()
+    });
+    nextMeteorAt = performance.now() + 18000 + Math.random()*30000;
+  }
+
+  var curtains=[
+    {yBase:0.38, waveA:0.10, waveF:0.55, waveS:0.035, rayLen:0.82, brightS:0.05, brightF:0.9, brightOff:0,
+     cBot:[120,255,150], cMid:[45,220,110], cTop:[140,80,200], alpha:1.30, kind:'green'},
+    {yBase:0.32, waveA:0.09, waveF:0.40, waveS:0.028, rayLen:0.88, brightS:0.04, brightF:0.7, brightOff:1.8,
+     cBot:[90,240,130], cMid:[40,200,100], cTop:[160,90,210], alpha:1.00, kind:'green'},
+    {yBase:0.52, waveA:0.06, waveF:0.70, waveS:0.045, rayLen:0.42, brightS:0.06, brightF:1.1, brightOff:3.2,
+     cBot:[150,255,170], cMid:[70,230,140], cTop:[80,200,130], alpha:0.70, kind:'green'},
+    {yBase:0.28, waveA:0.07, waveF:0.80, waveS:0.050, rayLen:0.35, brightS:0.08, brightF:1.4, brightOff:2.3,
+     cBot:[255,140,180], cMid:[240,110,180], cTop:[200,90,190], alpha:0.45, kind:'pink'}
+  ];
+
+  var numRays=90;
+  var lastFrame=0;
+  var FPS_INTERVAL=1000/24;
+
+  function draw(now){
+    requestAnimationFrame(draw);
+    var elapsed=now-lastFrame;
+    if(elapsed<FPS_INTERVAL) return;
+    lastFrame=now-(elapsed%FPS_INTERVAL);
+    t+=0.0012;
+
+    sctx.clearRect(0,0,W,H);
+    var rot = now * ROT_SPEED;
+    var poleX = POLE.x * W;
+    var poleY = POLE.y * H;
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i]; s.tp+=s.tw;
+      var ang = s.a0 + rot;
+      var rx = poleX + Math.cos(ang) * s.r0 * W;
+      var ry = poleY + Math.sin(ang) * s.r0 * W * (H/W);
+      if(ry > H*0.88) continue;
+      sctx.fillStyle='rgba(220,230,255,'+(s.a*(0.5+0.5*Math.sin(s.tp)))+')';
+      sctx.beginPath();sctx.arc(rx,ry,s.size,0,Math.PI*2);sctx.fill();
+    }
+
+    for(var i=0;i<twinklers.length;i++){
+      var tw=twinklers[i];
+      var p=((now+tw.phase*1000)%tw.period)/tw.period;
+      var intensity;
+      if(p<tw.burst) { intensity = 0.25; }
+      else {
+        var q=(p-tw.burst)/(1-tw.burst);
+        intensity = 0.25 + Math.pow(Math.sin(q*Math.PI),2.0) * 0.55;
+      }
+      var ang = tw.a0 + rot;
+      var px = poleX + Math.cos(ang) * tw.r0 * W;
+      var py = poleY + Math.sin(ang) * tw.r0 * W * (H/W);
+      if(py > H*0.88) continue;
+      var col='235,240,255';
+      if(intensity>0.55){
+        var g=sctx.createRadialGradient(px,py,0,px,py,tw.size*6);
+        g.addColorStop(0,'rgba('+col+','+((intensity-0.5)*0.35)+')');
+        g.addColorStop(1,'rgba('+col+',0)');
+        sctx.fillStyle=g;
+        sctx.beginPath();sctx.arc(px,py,tw.size*6,0,Math.PI*2);sctx.fill();
+      }
+      sctx.fillStyle='rgba('+col+','+Math.min(1,intensity)+')';
+      sctx.beginPath();sctx.arc(px,py,tw.size,0,Math.PI*2);sctx.fill();
+    }
+
+    if(now >= nextMeteorAt) spawnMeteor();
+    for(var i=meteors.length-1;i>=0;i--){
+      var m=meteors[i];
+      var age = now - m.bornAt;
+      if(age > m.maxLife){ meteors.splice(i,1); continue; }
+      var dt = elapsed;
+      m.x += m.vx * dt;
+      m.y += m.vy * dt;
+      var t01 = age/m.maxLife;
+      var fade = Math.sin(t01*Math.PI) * 0.55;
+      var hx=m.x*W, hy=m.y*H;
+      var tx=(m.x - m.vx*1000*m.len)*W;
+      var ty=(m.y - m.vy*1000*m.len)*H;
+      var grad=sctx.createLinearGradient(hx,hy,tx,ty);
+      grad.addColorStop(0,'rgba(235,240,255,'+fade+')');
+      grad.addColorStop(0.3,'rgba(210,220,240,'+(fade*0.4)+')');
+      grad.addColorStop(1,'rgba(210,220,240,0)');
+      sctx.strokeStyle=grad;
+      sctx.lineWidth=m.width;
+      sctx.lineCap='round';
+      sctx.beginPath(); sctx.moveTo(hx,hy); sctx.lineTo(tx,ty); sctx.stroke();
+    }
+
+    ctx.clearRect(0,0,sW,sH);
+    for(var ci=0;ci<curtains.length;ci++){
+      var cu=curtains[ci];
+      var foldShift = t*cu.brightS*0.6 + cu.brightOff;
+      for(var i=0;i<numRays;i++){
+        var nx=i/numRays;
+        var jitter=Math.sin(i*12.9898+ci*78.233)*0.35;
+        var x=(nx+jitter/numRays*0.45)*sW;
+        var ridge=cu.yBase
+          +Math.sin(nx*Math.PI*2*cu.waveF + t*cu.waveS)*cu.waveA
+          +Math.sin(nx*Math.PI*3.1*cu.waveF + t*cu.waveS*0.7 + 1.5)*cu.waveA*0.55
+          +Math.sin(nx*Math.PI*7.3*cu.waveF + t*cu.waveS*0.4 + 3.8)*cu.waveA*0.22
+          +Math.sin(nx*Math.PI*13.7*cu.waveF + t*cu.waveS*0.25 + ci*2.3)*cu.waveA*0.10;
+        var ridgeY=ridge*sH;
+        var rayH=cu.rayLen*sH
+          *(0.78+0.22*Math.sin(nx*Math.PI*3.3+t*0.08+ci*2.1))
+          *(0.90+0.16*Math.sin(i*2.7+ci*5.7+t*0.10));
+
+        var clusterLarge = Math.sin(nx*Math.PI*2.2 - foldShift)*0.5+0.5;
+        var clusterMed   = Math.sin(nx*Math.PI*5.5 - foldShift*1.4 + 1.7)*0.5+0.5;
+        var clusterFine  = Math.sin(nx*Math.PI*13.0 - foldShift*0.8 + 3.1)*0.5+0.5;
+        var fold = Math.pow(clusterLarge, 1.8) * (0.4 + 0.6*clusterMed) * (0.55 + 0.45*clusterFine);
+        fold *= (0.75 + 0.35*Math.sin(i*1.8+ci*3.3+t*0.06));
+        fold *= (0.72+0.32*Math.sin(t*0.04+ci*1.2));
+        var bright = Math.max(0, Math.min(fold, 1.15));
+
+        var a=cu.alpha*bright*1.15;
+        if(a<0.025) continue;
+        var widthJit=1.4+0.5*Math.abs(Math.sin(i*5.1+ci*3.7+t*0.03));
+        var rayW=(sW/numRays+1)*widthJit;
+        var grad=ctx.createLinearGradient(x,ridgeY+rayH*0.25,x,ridgeY-rayH);
+        var cB=cu.cBot,cM=cu.cMid,cT=cu.cTop;
+        if(cu.kind==='green'){
+          grad.addColorStop(0,    'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
+          grad.addColorStop(0.08, 'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.75)+')');
+          grad.addColorStop(0.28, 'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a)+')');
+          grad.addColorStop(0.60, 'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.6)+')');
+          grad.addColorStop(0.82, 'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.28)+')');
+          grad.addColorStop(1,    'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+        } else {
+          grad.addColorStop(0,    'rgba('+cB[0]+','+cB[1]+','+cB[2]+',0)');
+          grad.addColorStop(0.2,  'rgba('+cB[0]+','+cB[1]+','+cB[2]+','+(a*0.5)+')');
+          grad.addColorStop(0.5,  'rgba('+cM[0]+','+cM[1]+','+cM[2]+','+(a*0.75)+')');
+          grad.addColorStop(0.85, 'rgba('+cT[0]+','+cT[1]+','+cT[2]+','+(a*0.2)+')');
+          grad.addColorStop(1,    'rgba('+cT[0]+','+cT[1]+','+cT[2]+',0)');
+        }
+        ctx.fillStyle=grad;
+        ctx.fillRect(x,ridgeY-rayH,rayW,rayH*1.25);
+      }
+    }
+
+    var hga=0.38+0.10*Math.sin(t*0.03);
+    var hg=ctx.createRadialGradient(sW*0.5,sH*0.88,0,sW*0.5,sH*0.88,sW*0.75);
+    hg.addColorStop(0,'rgba(140,255,160,'+hga+')');
+    hg.addColorStop(0.25,'rgba(80,230,130,'+(hga*0.75)+')');
+    hg.addColorStop(0.55,'rgba(40,180,100,'+(hga*0.32)+')');
+    hg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=hg;ctx.fillRect(0,0,sW,sH);
+
+    var mga=0.22+0.08*Math.sin(t*0.025+1.2);
+    var mg=ctx.createRadialGradient(sW*0.35,sH*0.55,0,sW*0.35,sH*0.55,sW*0.55);
+    mg.addColorStop(0,'rgba(90,230,140,'+mga+')');
+    mg.addColorStop(0.5,'rgba(60,200,120,'+(mga*0.45)+')');
+    mg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=mg;ctx.fillRect(0,0,sW,sH);
+
+    var pga=0.16+0.06*Math.sin(t*0.028+2.4);
+    var pg=ctx.createRadialGradient(sW*0.55,sH*0.18,0,sW*0.55,sH*0.18,sW*0.55);
+    pg.addColorStop(0,'rgba(150,75,210,'+pga+')');
+    pg.addColorStop(0.5,'rgba(110,55,180,'+(pga*0.5)+')');
+    pg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=pg;ctx.fillRect(0,0,sW,sH);
+
+    var rga=0.08+0.05*Math.sin(t*0.038+4.1);
+    if(rga>0.04){
+      var rg=ctx.createRadialGradient(sW*0.68,sH*0.32,0,sW*0.68,sH*0.32,sW*0.35);
+      rg.addColorStop(0,'rgba(255,130,180,'+rga+')');
+      rg.addColorStop(0.6,'rgba(220,100,170,'+(rga*0.4)+')');
+      rg.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=rg;ctx.fillRect(0,0,sW,sH);
+    }
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+<!-- Realistic SVG treeline silhouette -->
+<svg id="treeline-svg" style="position:fixed;bottom:0;left:0;width:100%;height:50vh;z-index:1;pointer-events:none;overflow:visible;display:block;" preserveAspectRatio="none"></svg>
+<script src="treeline.js"></script>
+
+<!-- ======================== HEADER ======================== -->
+<div class="sticky-header">
+  <div class="header-container">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Robby Sawicki</span>
+      <span class="brand-tag" id="brand-tag">Marketing · Media · Brand</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#work" class="nav-link">Work</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <a href="projects.html" class="neon-btn">Projects</a>
+      <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener noreferrer" class="linkedin-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+        LinkedIn
+      </a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <!-- ======================== HERO ======================== -->
+    <section class="contact-hero">
+      <div class="eyebrow" id="eyebrow-text">03 / Get in touch</div>
+      <h1 id="hero-title">Send me a <span class="accent-g" id="hero-accent">note</span>.</h1>
+      <p class="lede" id="hero-lede">
+        Pitches, partnerships, brand work, or just hello. Drop a message below and it'll land in my inbox.
+      </p>
+    </section>
+
+    <!-- ======================== CONTACT GRID ======================== -->
+    <section class="contact-grid">
+
+      <!-- FORM -->
+      <div class="form-card">
+        <div class="form-head">
+          <span class="num">→</span>
+          <h2>Message</h2>
+        </div>
+
+        <!--
+          FORM SUBMISSION
+          ─────────────────────────────────────────────────────────
+          This page is static (GitHub Pages), so it can't send mail
+          on its own. Two options are wired up:
+
+          1. DEFAULT (works right now): the submit button opens the
+             user's mail client with the message pre-filled,
+             addressed to robbysawicki@gmail.com.
+
+          2. UPGRADE (recommended): sign up for Formspree at
+             https://formspree.io — free tier covers 50 msgs/month.
+             Replace the FORMSPREE_ENDPOINT constant in the script
+             below with your endpoint URL (looks like
+             https://formspree.io/f/xxxxxxxx). The page will then
+             POST submissions in-place, no mail client needed, with
+             a "Thanks, I'll get back to you" success message.
+        -->
+        <form id="contact-form" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input class="input" type="text" id="name" name="name" placeholder="First &amp; last" required autocomplete="name">
+          </div>
+
+          <div class="field purple">
+            <label for="email">Email</label>
+            <input class="input" type="email" id="email" name="email" placeholder="you@domain.com" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input class="input" type="text" id="subject" name="subject" placeholder="What's this about?" autocomplete="off">
+          </div>
+
+          <div class="field purple">
+            <label for="message">Message</label>
+            <textarea class="textarea" id="message" name="message" placeholder="Tell me what you're working on…" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">Send message →</button>
+            <span class="form-note" id="form-note">Direct to my inbox</span>
+          </div>
+
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </div>
+
+      <!-- SIDE INFO -->
+      <aside class="side">
+        <div class="info-card">
+          <div class="info-label">Based in</div>
+          <p class="info-value">Toronto, ON</p>
+          <p class="info-sub">Eastern Time</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label g">Elsewhere</div>
+          <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener" class="side-linkedin">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </aside>
+
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-row">
+    <div>© 2026 Robby Sawicki</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://www.linkedin.com/in/robbysawicki/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>Toronto · ON · Canada</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ─── CONFIG ──────────────────────────────────────────────
+  // Leave empty to use the mailto fallback (opens user's mail client).
+  // Or paste your Formspree endpoint, e.g. 'https://formspree.io/f/xxxxxxxx'
+  var FORMSPREE_ENDPOINT = '';
+  var TARGET_EMAIL = 'robbysawicki@gmail.com';
+  // ─────────────────────────────────────────────────────────
+
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+  var btn = form.querySelector('.submit-btn');
+
+  function showStatus(kind, msg){
+    status.className = 'form-status show ' + kind;
+    status.textContent = msg;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = '';
+
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var subject = form.subject.value.trim();
+    var message = form.message.value.trim();
+
+    if(!name || !email || !message){
+      showStatus('error', 'Please fill in your name, email, and message.');
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      showStatus('error', 'That email address doesn\u2019t look right.');
+      return;
+    }
+
+    if(FORMSPREE_ENDPOINT){
+      // POST to Formspree — submission stays on the page
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, subject: subject, message: message, _replyto: email })
+      }).then(function(r){
+        if(r.ok){
+          form.reset();
+          showStatus('success', 'Message sent. I\u2019ll get back to you soon.');
+        } else {
+          showStatus('error', 'Something went wrong. Please try again later.');
+        }
+      }).catch(function(){
+        showStatus('error', 'Network error. Please try again in a moment.');
+      }).finally(function(){
+        btn.disabled = false;
+        btn.innerHTML = 'Send message \u2192';
+      });
+    } else {
+      // Mailto fallback — opens user's mail client with body pre-filled
+      var subj = subject ? subject : 'New message from ' + name;
+      var body = 'From: ' + name + ' <' + email + '>\n\n' + message;
+      var href = 'mailto:' + TARGET_EMAIL + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+      window.location.href = href;
+      showStatus('success', 'Opening your mail app\u2026 your message is ready to send.');
+    }
+  });
+})();
+</script>
+
+<!-- ============================================================
+     TWEAKS PANEL
+     Lets you fine-tune copy, accents, and density without editing
+     code. Toggle "Tweaks" in the toolbar above to open.
+============================================================ -->
+<style>
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:300px;
+    max-height:calc(100vh - 32px);display:none;flex-direction:column;
+    background:rgba(10,10,20,0.85);color:#fff;
+    -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+    border:1px solid rgba(255,255,255,0.12);border-radius:14px;
+    box-shadow:0 0 0 1px rgba(0,255,136,0.15) inset, 0 20px 60px rgba(0,0,0,0.5),
+      0 0 30px rgba(0,255,136,0.08), 0 0 30px rgba(191,95,255,0.08);
+    font-family:'JetBrains Mono', monospace;font-size:11px;overflow:hidden;}
+  .twk-panel.open{display:flex;}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:12px 10px 12px 16px;cursor:move;user-select:none;
+    border-bottom:1px solid rgba(255,255,255,0.08);}
+  .twk-hd b{font-family:'Lobster Two', serif;font-style:italic;font-weight:400;
+    font-size:16px;letter-spacing:0;
+    background:linear-gradient(135deg, #00ff88, #bf5fff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(255,255,255,0.55);
+    width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:14px;line-height:1;}
+  .twk-x:hover{background:rgba(255,255,255,0.08);color:#fff;}
+  .twk-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:14px;
+    overflow-y:auto;}
+  .twk-sect{font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--green);padding-top:4px;display:flex;align-items:center;gap:8px;}
+  .twk-sect.p{color:var(--purple);}
+  .twk-sect::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;
+    box-shadow:0 0 8px currentColor;}
+  .twk-row{display:flex;flex-direction:column;gap:6px;}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(255,255,255,0.85);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;}
+  .twk-val{color:rgba(255,255,255,0.5);font-variant-numeric:tabular-nums;}
+  .twk-input{width:100%;font:inherit;font-size:11px;color:#fff;
+    background:rgba(2,8,24,0.6);border:1px solid rgba(255,255,255,0.12);border-radius:7px;
+    padding:8px 10px;outline:none;transition:border-color 0.2s, box-shadow 0.2s;}
+  .twk-input:focus{border-color:rgba(0,255,136,0.5);box-shadow:0 0 0 2px rgba(0,255,136,0.12);}
+  textarea.twk-input{resize:vertical;min-height:60px;font-family:'Inter', sans-serif;font-size:12px;line-height:1.4;}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:3px;
+    border-radius:999px;background:rgba(255,255,255,0.15);outline:none;}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;
+    background:linear-gradient(135deg, #00ff88, #bf5fff);
+    box-shadow:0 0 8px rgba(0,255,136,0.5);cursor:pointer;border:0;}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:linear-gradient(135deg, #00ff88, #bf5fff);
+    box-shadow:0 0 8px rgba(0,255,136,0.5);cursor:pointer;border:0;}
+  .twk-seg{display:flex;padding:2px;border-radius:8px;
+    background:rgba(2,8,24,0.6);border:1px solid rgba(255,255,255,0.08);gap:2px;}
+  .twk-seg button{appearance:none;flex:1;border:0;background:transparent;
+    color:rgba(255,255,255,0.55);font:inherit;font-size:10px;letter-spacing:0.08em;
+    text-transform:uppercase;padding:7px 4px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+  .twk-seg button.on{background:linear-gradient(135deg, rgba(0,255,136,0.18), rgba(191,95,255,0.18));
+    color:#fff;box-shadow:0 0 0 1px rgba(0,255,136,0.3) inset;}
+  .twk-seg button:not(.on):hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.04);}
+</style>
+
+<div class="twk-panel" id="twk-panel">
+  <div class="twk-hd" id="twk-hd">
+    <b>Tweaks</b>
+    <button class="twk-x" id="twk-close" aria-label="Close">✕</button>
+  </div>
+  <div class="twk-body">
+    <div class="twk-sect">Hero copy</div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Eyebrow</span></div>
+      <input class="twk-input" id="t-eyebrow" type="text">
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Headline</span></div>
+      <input class="twk-input" id="t-headline" type="text">
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Accent word</span></div>
+      <input class="twk-input" id="t-accent" type="text">
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Lede</span></div>
+      <textarea class="twk-input" id="t-lede" rows="3"></textarea>
+    </div>
+
+    <div class="twk-sect p">Form</div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Submit label</span></div>
+      <input class="twk-input" id="t-submit" type="text">
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Note next to button</span></div>
+      <input class="twk-input" id="t-note" type="text">
+    </div>
+
+    <div class="twk-sect">Style</div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Accent intensity</span><span class="twk-val" id="t-glow-val">100%</span></div>
+      <input class="twk-slider" id="t-glow" type="range" min="0" max="200" step="5">
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Card density</span></div>
+      <div class="twk-seg" id="t-density">
+        <button data-v="compact">Compact</button>
+        <button data-v="regular">Regular</button>
+        <button data-v="airy">Airy</button>
+      </div>
+    </div>
+    <div class="twk-row">
+      <div class="twk-lbl"><span>Side info</span></div>
+      <div class="twk-seg" id="t-side">
+        <button data-v="show">Show</button>
+        <button data-v="hide">Hide</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // EDITMODE persistence: host rewrites this JSON block on disk when tweaks change
+  var TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "eyebrow": "03 / Get in touch",
+    "headline": "Send me a",
+    "accent": "note",
+    "lede": "Pitches, partnerships, brand work, or just hello. Drop a message below and it'll land in my inbox.",
+    "submitLabel": "Send message →",
+    "formNote": "Direct to my inbox",
+    "glow": 100,
+    "density": "regular",
+    "sideInfo": "show"
+  }/*EDITMODE-END*/;
+
+  var values = Object.assign({}, TWEAK_DEFAULTS);
+
+  // ── Apply tweaks to the DOM ────────────────────────────
+  function apply(){
+    document.getElementById('eyebrow-text').textContent = values.eyebrow;
+    // Headline: text + accent span
+    var h1 = document.getElementById('hero-title');
+    var accent = document.getElementById('hero-accent');
+    h1.childNodes[0].nodeValue = values.headline + ' ';
+    accent.textContent = values.accent;
+    // After accent span there may be a trailing "."
+    if(h1.childNodes.length >= 3){
+      h1.childNodes[2].nodeValue = '.';
+    }
+    document.getElementById('hero-lede').textContent = values.lede;
+    document.querySelector('.submit-btn').innerHTML = values.submitLabel.replace(/->/g,'→');
+    document.getElementById('form-note').textContent = values.formNote;
+
+    // Glow intensity scales accent shadows + button glow
+    var g = values.glow / 100;
+    document.documentElement.style.setProperty('--glow-mult', g);
+    var styleEl = document.getElementById('twk-dyn-style');
+    if(!styleEl){
+      styleEl = document.createElement('style');
+      styleEl.id = 'twk-dyn-style';
+      document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = `
+      .contact-hero h1 .accent-g {
+        text-shadow:
+          0 0 ${14*g}px rgba(0,255,136,${0.9*g}),
+          0 0 ${32*g}px rgba(0,255,136,${0.55*g}),
+          0 2px 4px rgba(0,0,0,0.5) !important;
+      }
+      .form-card {
+        box-shadow:
+          0 30px 80px rgba(0,0,0,0.45),
+          0 0 ${40*g}px rgba(0,255,136,${0.05*g+0.02}),
+          0 0 ${40*g}px rgba(191,95,255,${0.05*g+0.02}) !important;
+      }
+      .submit-btn:hover, .neon-btn:hover {
+        box-shadow: 0 0 ${18*g}px rgba(0,255,136,${0.6*g}),
+                    0 0 ${18*g}px rgba(191,95,255,${0.6*g}) !important;
+      }
+      .field label, .info-label.g, .twk-sect:not(.p) { color: ${g < 0.5 ? '#7fffba' : '#00ff88'}; }
+    `;
+
+    // Density
+    var pad = values.density === 'compact' ? '24px' :
+              values.density === 'airy'    ? '52px' : '40px';
+    var sidePad = values.density === 'compact' ? '18px' :
+                  values.density === 'airy'    ? '32px' : '26px';
+    var fc = document.querySelector('.form-card');
+    if(fc) fc.style.padding = pad;
+    document.querySelectorAll('.info-card').forEach(function(el){ el.style.padding = sidePad; });
+
+    // Side info visibility
+    var side = document.querySelector('.side');
+    var grid = document.querySelector('.contact-grid');
+    if(values.sideInfo === 'hide'){
+      side.style.display = 'none';
+      grid.style.gridTemplateColumns = '1fr';
+      grid.style.maxWidth = '760px';
+    } else {
+      side.style.display = '';
+      grid.style.gridTemplateColumns = '';
+      grid.style.maxWidth = '';
+    }
+
+    // Reflect into controls
+    document.getElementById('t-eyebrow').value = values.eyebrow;
+    document.getElementById('t-headline').value = values.headline;
+    document.getElementById('t-accent').value = values.accent;
+    document.getElementById('t-lede').value = values.lede;
+    document.getElementById('t-submit').value = values.submitLabel;
+    document.getElementById('t-note').value = values.formNote;
+    document.getElementById('t-glow').value = values.glow;
+    document.getElementById('t-glow-val').textContent = values.glow + '%';
+    document.querySelectorAll('#t-density button').forEach(function(b){
+      b.classList.toggle('on', b.dataset.v === values.density);
+    });
+    document.querySelectorAll('#t-side button').forEach(function(b){
+      b.classList.toggle('on', b.dataset.v === values.sideInfo);
+    });
+  }
+
+  function setTweak(key, val){
+    values[key] = val;
+    apply();
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+  }
+
+  // ── Wire controls ──────────────────────────────────────
+  function bindText(id, key){
+    var el = document.getElementById(id);
+    el.addEventListener('input', function(){ setTweak(key, el.value); });
+  }
+  bindText('t-eyebrow', 'eyebrow');
+  bindText('t-headline', 'headline');
+  bindText('t-accent', 'accent');
+  bindText('t-lede', 'lede');
+  bindText('t-submit', 'submitLabel');
+  bindText('t-note', 'formNote');
+
+  var glow = document.getElementById('t-glow');
+  glow.addEventListener('input', function(){ setTweak('glow', Number(glow.value)); });
+
+  document.querySelectorAll('#t-density button').forEach(function(b){
+    b.addEventListener('click', function(){ setTweak('density', b.dataset.v); });
+  });
+  document.querySelectorAll('#t-side button').forEach(function(b){
+    b.addEventListener('click', function(){ setTweak('sideInfo', b.dataset.v); });
+  });
+
+  // ── Host protocol ──────────────────────────────────────
+  var panel = document.getElementById('twk-panel');
+  function activate(){ panel.classList.add('open'); }
+  function deactivate(){ panel.classList.remove('open'); }
+
+  window.addEventListener('message', function(e){
+    var t = e && e.data && e.data.type;
+    if(t === '__activate_edit_mode') activate();
+    else if(t === '__deactivate_edit_mode') deactivate();
+  });
+
+  document.getElementById('twk-close').addEventListener('click', function(){
+    deactivate();
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  });
+
+  // Drag the panel by its header
+  (function(){
+    var hd = document.getElementById('twk-hd');
+    var startX, startY, startR, startB;
+    hd.addEventListener('mousedown', function(e){
+      if(e.target.id === 'twk-close') return;
+      var r = panel.getBoundingClientRect();
+      startX = e.clientX; startY = e.clientY;
+      startR = window.innerWidth - r.right;
+      startB = window.innerHeight - r.bottom;
+      function move(ev){
+        var nx = Math.max(8, startR - (ev.clientX - startX));
+        var ny = Math.max(8, startB - (ev.clientY - startY));
+        panel.style.right = nx + 'px';
+        panel.style.bottom = ny + 'px';
+      }
+      function up(){
+        window.removeEventListener('mousemove', move);
+        window.removeEventListener('mouseup', up);
+      }
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', up);
+    });
+  })();
+
+  // Initial apply, then announce availability
+  apply();
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+})();
+</script>
+
+</body>
+</html>
