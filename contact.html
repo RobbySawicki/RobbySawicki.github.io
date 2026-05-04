@@ -950,7 +950,8 @@
   // ─── CONFIG ──────────────────────────────────────────────
   // Leave empty to use the mailto fallback (opens user's mail client).
   // Or paste your Formspree endpoint, e.g. 'https://formspree.io/f/xxxxxxxx'
-  var FORMSPREE_ENDPOINT = '';
+  var FORMSPREE_ENDPOINT = 'https://api.web3forms.com/submit';
+  var ACCESS_KEY = '644bc640-7a7c-4609-8e50-e5cc88627456';
   var TARGET_EMAIL = 'robbysawicki@gmail.com';
   // ─────────────────────────────────────────────────────────
 
@@ -989,7 +990,7 @@
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, subject: subject, message: message, _replyto: email })
+        body: JSON.stringify({ access_key: ACCESS_KEY, name: name, email: email, subject: subject, message: message, from_name: name, replyto: email })
       }).then(function(r){
         if(r.ok){
           form.reset();
