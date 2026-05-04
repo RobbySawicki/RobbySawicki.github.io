@@ -882,6 +882,7 @@
              a "Thanks, I'll get back to you" success message.
         -->
         <form id="contact-form" novalidate>
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
           <div class="field">
             <label for="name">Your name</label>
             <input class="input" type="text" id="name" name="name" placeholder="First &amp; last" required autocomplete="name">
@@ -990,7 +991,7 @@
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: ACCESS_KEY, name: name, email: email, subject: subject, message: message, from_name: name, replyto: email })
+        body: JSON.stringify({ access_key: ACCESS_KEY, name: name, email: email, subject: subject, message: message, from_name: name, replyto: email, botcheck: form.botcheck.checked })
       }).then(function(r){
         if(r.ok){
           form.reset();
